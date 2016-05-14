@@ -24,6 +24,8 @@ public class LoginState implements Serializable {
 
 	private String depName;
 
+	private String pageTitle;
+
 	public ArrayList<Long> orgIdList;
 
 	/*
@@ -123,5 +125,13 @@ public class LoginState implements Serializable {
 
 	public void setActiveMenu(String activeMenu) {
 		this.activeMenu = activeMenu;
+	}
+
+	public String getPageTitle() {
+		return this.pageTitle;
+	}
+
+	public void setPageTitle(String pageTitle) {
+		this.pageTitle = pageTitle;
 	}
 }

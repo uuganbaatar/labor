@@ -38,6 +38,7 @@ public class Index {
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("hyanah");
+		loginState.setPageTitle(message.get("dashboard"));
 	}
 
 	public String getUserName() {

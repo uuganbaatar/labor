@@ -135,4 +135,11 @@ public class Layout {
 	public Object onActionFromHyanahTab() {
 		return indexpage;
 	}
+
+	public String getPageTitle() {
+		if (loginState.getPageTitle() != null)
+			return loginState.getPageTitle();
+		else
+			return "";
+	}
 }
