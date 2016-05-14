@@ -1,0 +1,112 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+	xmlns:p="tapestry:parameter">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>${message:title}</title>
+	</head>
+	<body class="fixed-left">
+		<!-- Begin page -->
+		<div id="wrapper">
+
+			<!-- Top Bar Start -->
+			<div class="topbar">
+
+				<!-- LOGO -->
+				<div class="topbar-left">
+					<div class="text-center">
+
+						<a href="index.html">
+							<div class="logo"></div>
+						</a>
+
+					</div>
+				</div>
+
+				<!-- Button mobile view to collapse sidebar menu -->
+				<div class="navbar navbar-default" role="navigation">
+					<div class="container">
+						<div class="pull-right top-profile">
+							<a href="#">${user?.fullName}</a>
+							<t:actionlink t:id="logout">${message:logout}</t:actionlink>
+						</div>
+						<!--/.nav-collapse -->
+					</div>
+				</div>
+			</div>
+			<!-- Top Bar End -->
+
+
+			<!-- ========== Left Sidebar Start ========== -->
+
+			<div class="left side-menu">
+				<div class="sidebar-inner slimscrollleft">
+					<!--- Divider -->
+					<div id="sidebar-menu">
+						<ul>
+							<li>
+								<t:actionlink t:id="hyanahTab" class="${selectedTabHyanah}">
+									<i class="ti-home"></i>
+									<span>${message:dashboard}</span>
+								</t:actionlink>
+							</li>
+							<li>
+								<t:actionlink t:id="jobTab" class="${selectedTabJob}">
+									<i class="fa fa-building-o"></i>
+									<span>${message:job}</span>
+								</t:actionlink>
+							</li>
+							<li>
+								<t:actionlink t:id="employerTab" class="${selectedTabEmployer}">
+									<i class="ti-user"></i>
+									<span>${message:employer}</span>
+								</t:actionlink>
+							</li>
+							<li>
+								<t:actionlink t:id="reportTab" class="${selectedTabreport}">
+									<i class="ti-file"></i>
+									<span>${message:report}</span>
+								</t:actionlink>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<!-- Left Sidebar End -->
+
+			<!-- ============================================================== -->
+			<!-- Start right Content here -->
+			<!-- ============================================================== -->
+			<div class="content-page">
+				<!-- Start content -->
+				<div class="content">
+					<div class="container">
+
+						<!-- Page-Title -->
+						<div class="row">
+							<div class="col-sm-12">
+								<h4 class="page-title">Хянах самбар</h4>
+							</div>
+						</div>
+
+					</div> <!-- container -->
+
+				</div> <!-- content -->
+				<!-- /wrapper -->
+				<t:body />
+				<footer class="footer">
+					${message:footertext}
+				</footer>
+			</div>
+			<!-- ============================================================== -->
+			<!-- End Right content here -->
+			<!-- ============================================================== -->
+		</div>
+		<!-- END wrapper -->
+	</body>
+
+</html>
+
+
+

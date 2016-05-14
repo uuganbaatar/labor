@@ -1,0 +1,40 @@
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+	xmlns:p="tapestry:parameter" id="tynamoLoginFormContainer">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>${message:title}</title>
+	</head>
+
+	<body>
+
+		<section class="container" id="container">
+			<div class="login">
+				<div class="logo" id="logo">
+					<img src="${context:images/logo1.png}" />
+				</div>
+				<h1>${message:systemNameE}</h1>
+				<form action="/labor/j_spring_security_check" method="POST">
+					<t:if test="failed">
+						<div class="row">
+							<span class="error">${message:wrongUsernamePassword}</span>
+						</div>
+					</t:if>
+					<!-- <p>${message:userName}</p> -->
+					<p>
+						<input id="j_username" type="text" name="j_username" class="login-input"
+							placeholder="${message:userNameE}" />
+					</p>
+					<p>
+						<input id="j_password" type="password" name="j_password"
+							class="login-input" placeholder="${message:passE}" />
+					</p>
+
+					<p class="submit">
+						<input type="submit" name="commit" value="${message:loginSubmitE}" />
+					</p>
+
+				</form>
+			</div>
+		</section><!--wrapper -->
+	</body>
+</html>

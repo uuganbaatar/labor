@@ -1,0 +1,5 @@
+// Windows
+ mvn install:install-file -Dfile=C:\Users\uugaa\Desktop\eclipse_java_mars\workspace\labor\src\main\webapp\config\ojdbc5.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar
+
+// Linux
+mvn install:install-file -Dfile=C:/Users/uugaa/Desktop/eclipse_java_mars/workspace/labor/src/main/webapp/config/ojdbc6.jar -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0 -Dpackaging=jar

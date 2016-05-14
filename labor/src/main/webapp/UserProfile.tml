@@ -1,0 +1,93 @@
+<html t:type="layout" t:title="Garchig"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+	xmlns:p="tapestry:parameter">
+
+<body>
+<div class="main">
+	<div class="block" id="block">
+		<div><h3 class="head head_b">${message:userProfile}</h3></div>
+		<div class="new_reg">
+			
+			<table width="100%">
+						<tr class="reg_title">
+							<td colspan="4"><div class="reg_title_div">${message:personal}</div>
+							</td>
+						</tr>
+						<tr>
+						<td class="profile"  rowspan="3" style="width: 170px !important;">
+							<t:form t:id="">
+							<t:zone t:id="uploadResult">
+									<div class="picture">				
+										<img src="${context:images/Users-Add-user-icon.png}" />
+									</div>
+							</t:zone>
+					
+							<div>
+								<t:jquery.ajaxUpload t:id="uploadImage" 
+						    		  t:multiple="false" 
+						      		  t:allowedExtensions="[jpg, png, gif]" 
+						      		  t:sizeLimit="1M"> 
+										<!-- The units K, M and G are valid for size limits. Anything else will be treated as 0 -->
+						  		  	<noscript>
+						        			<p>enable the JavaScript</p>
+						  		    </noscript>
+						        </t:jquery.ajaxUpload>
+					       </div>
+				           </t:form>
+						</td>
+						<td>${message:f_name1}<input placeholder="${message:f_name}"/></td>
+                        <td>${message:lastname}<input placeholder="${message:lastname1}"/></td>
+                        <td>${message:firstname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input placeholder="${message:firstname1}"/></td>
+						</tr>
+						
+						 <tr>
+                        	<td>${message:birth}<input type="date" placeholder="${message:date}"/></td>
+                        	<td>${message:gender1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select><option>${message:gender}</option><option>${message:male}</option><option>${message:female}</option></select></td>
+                        	<td>${message:mail1}<input type="email" placeholder="${message:mail}"/></td>
+                        </tr>
+                        
+                         <tr>
+                            <td>${message:pass}<input type="password" placeholder="${message:pass}"/></td>
+                        	<td>${message:re_pass}<input type="password" placeholder="${message:re_pass}"/></td>
+                        </tr>
+                        
+                        <tr class="reg_title">
+                        	<td colspan="4"><div class="reg_title_div">${message:address}</div></td>                         
+                        </tr>
+                        <tr>
+                        	<td>${message:aimag}<select><option>${message:choose}</option><option>${message:UB}</option><option>${message:Arkhangai}</option><option>${message:Bulgan}</option><option>${message:Darkhan_uul}</option><option>${message:Orkhon}</option><option>${message:Dornogobi}</option><option>${message:Uvurkhangai}</option></select></td>
+                            <td>${message:district1}<input placeholder="${message:district}"/></td>
+                            <td>${message:committee1}<input placeholder="${message:committee}"/></td>
+                            <td>${message:block1}<input placeholder="${message:block}"/></td>
+                        </tr>
+                        <tr>
+                        	<td>${message:house1}<input placeholder="${message:house}"/></td>
+                            <td>${message:number1} <input type="number" placeholder="${message:number}"/></td>
+                         
+                        </tr>
+                         <tr class="reg_title">
+                        	<td colspan="4"><div class="reg_title_div">${message:inf_company} </div></td>                         
+                        </tr>
+                        <tr>
+                        	
+                        	<td>${message:company}<select><option>${message:choose}</option><option>НХҮМС</option><option>Архангай</option><option>Булган</option><option>Дархан-Уул</option><option>Орхон</option><option>Дорноговь</option><option>Өвөрхангай</option></select></td>
+                            <td>${message:dep}<input placeholder="${message:dep}"/></td>
+                            <td>${message:job1} <input placeholder="${message:job}"/></td>
+                            <td>${message:phoneNumber1}<input placeholder="${message:phoneNumber}"/></td>
+                        </tr>
+                        <tr>
+                        	<td>${message:fax1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input placeholder="${message:dep}"/></td>
+                            <td>${message:h_phone1}<input placeholder="${message:h_phone}"/></td>
+                        	<td>${message:mail}<input type="email" placeholder="${message:mail}"/></td>
+                        </tr>
+			</table>
+			   <input class="reg_button" type="submit" value="${message:savebtn}"/>
+                    <div class="clear"></div>
+			</div>
+				
+		
+	</div><!-- /box -->
+</div><!-- /main -->
+
+</body>
+</html>

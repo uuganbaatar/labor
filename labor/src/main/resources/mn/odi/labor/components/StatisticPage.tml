@@ -1,0 +1,234 @@
+<!--
+/*
+*	Module name:    StatisticPage.tml
+*	Function name:  Statistic Component.
+*	Description: Moduliudin statistic huudas deer ashiglagdana.
+*
+* Created By: Tserentogtokh.D
+* Created Date: 2014/04/14
+* 
+* History
+* ------------------------------------------------------------------------------
+* Date							Programmer						Description
+* ------------------------------------------------------------------------------
+* 2014/04/14 1.0.0 			Tserentogtokh.D				    Шинээр үүсгэв.
+* ------------------------------------------------------------------------------
+* 
+* ALL RIGHTS RESERVED COPYRIGHT (C) 2014 Od Innovation CO.,LTD SOFTWARE DIVSION
+*/
+-->
+<t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+<head>
+<t:if t:test="statisticTab">
+<script>
+	$(function() {
+		var chart;
+		$(document).ready(
+			function() {
+				chart = new Highcharts.Chart(
+					{
+						chart : {
+							renderTo : 'barChart',
+							type : 'column',
+							height : 240
+						},
+						title : {
+							text : ''
+						},
+						subtitle : {
+							text : ''
+						},
+						exporting : {
+							buttons : {
+								printButton : {
+									enabled : false
+								}
+							}
+						},
+						xAxis : {
+							categories : [ ${graphCategories} ]
+						},
+						yAxis : {
+							min : 0,
+							title : {
+								text : 'Тоо'
+							}
+						},
+						legend : {
+							enabled : true,
+							margin : 0,
+							layout : 'horizontal',
+							backgroundColor : '#FFFFFF',
+							align : 'left',
+							verticalAlign : 'bottom',
+							x : 80,
+							y : 70,
+							floating : true,
+							shadow : true,
+						},
+						tooltip : {
+							formatter : function() {
+								return '' + this.x + ': '
+										+ this.y + ' хүн';
+							}
+						},
+						plotOptions : {
+							column : {
+								pointPadding : 0.2,
+								borderWidth : 0
+							}
+						},
+						series : [ ${graphSeries} ]
+					}
+				);
+			}
+		);
+	});
+
+	$(document).ready(function() {
+		$('#dataTable').dataTable({
+			"sScrollX" : "100%",
+			"sScrollY" : 500,
+			"bScrollCollapse" : true,
+			"bPaginate" : false,
+			"bSort" : false,
+			"bFilter" : false,
+			"bInfo" : false,
+			"asStripeClasses" : [ 'strip1', 'strip2', 'strip3' ]
+		});
+	});
+</script>
+
+<style>
+.highcharts-container {
+	height: 300px !important;
+}
+
+rect {
+	height: 300px !important;
+}
+
+svg {
+	height: 300px !important;
+}
+
+text {
+	font-size: 12px !important;
+}
+</style>
+</t:if>
+</head>
+<body>
+
+	<div class="statisticConfig">
+		<t:form>
+			<table>
+			<tr style="font-size: 12px !important;">
+			<td><t:datefield t:value="dateFrom" t:validate="required" class="datepicker" /> ${message:from}</td>
+			<td><t:datefield t:value="dateTo" t:validate="required" class="datepicker" /> ${message:to}</td>
+			<td><t:submit t:id="show" t:value="message:show" style="font-size: 12px !important;"/></td>
+			</tr>
+			</table>
+		</t:form>
+	</div>
+	
+	<div class="box-tab">
+		<div class="tabs">
+    		<ul>
+			<li t:type="loop" t:source="tabs" t:value="tab" class="${tabClass}">
+				<t:if t:test="tab.disable">
+					<span>${tab.title}</span>
+					<p:else>
+						<t:actionlink t:id="selectTab" t:context="tab.identifier">${tab.title}</t:actionlink>
+					</p:else>
+				</t:if>
+			</li>
+    		</ul>
+	    </div>
+		    
+		<div class="tabContent statistic">
+			<t:delegate to="activeTab"/>
+		</div>
+	</div>
+
+<t:block id="statisticBlock">
+	<table class="statistic" style="font-size: 12px !important;">
+	<thead>
+		<tr>
+		<th></th>
+		<t:loop t:source="statisticCols" t:value="statisticCol">
+		<th>${statisticCol}</th>
+		</t:loop>
+		</tr>
+	</thead>
+	<tbody>
+		<t:loop t:source="statisticRows" t:value="statisticRow">
+		<tr>
+			<td>${statisticRow}</td>
+			<t:loop t:source="statisticCols" t:value="statisticCol">
+			<td>${statisticValue}</td>
+			</t:loop>
+		</tr>
+		</t:loop>
+	</tbody>
+	</table>
+
+	<table class="chartTable">
+		<tr>
+			<td>
+				<div id="barChart"></div>
+			</td>
+		</tr>
+	</table>
+</t:block>
+
+<t:block id="arithmographBlock">
+	<table width="100%" style="font-size: 12px !important;">
+	<tr>
+	<td>
+		<t:form>
+		<table>
+		<tr>
+			<td>
+				<t:select t:model="showTypeSM" t:value="showType" t:validate="required" onChange="this.form.submit();" />
+			</td>
+			<td t:type="if" t:test="profssnSelected">
+				<t:select t:model="bOUserSM" t:value="showBOUser" t:blankLabel="message:all" onChange="this.form.submit();"/>
+			</td>
+		</tr>
+		</table>
+		</t:form>
+	</td>
+	<td style="text-align:right">
+		<t:actionlink t:id="exportToExcel" class="button">Excel рүү гаргах</t:actionlink>
+	</td>
+	</tr>
+	</table>
+	
+	<div class="dataTables_wrapper">
+	<table class="display dataTables_wrapper" width="100%" style="font-size: 12px !important; ">
+	<thead>
+		<tr>
+		<th>${message:number-label}</th>
+		<th></th>
+		<t:loop t:source="statisticCols" t:value="statisticCol">
+		<th>${statisticCol}</th>
+		</t:loop>
+		</tr>
+	</thead>
+	<tbody>
+		<t:loop t:source="statisticRows" t:value="statisticRow">
+		<tr>
+			<td>${rowNumber}</td>
+			<td>${statisticRow}</td>
+			<t:loop t:source="statisticCols" t:value="statisticCol">
+			<td>${statisticValue}</td>
+			</t:loop>
+		</tr>
+		</t:loop>
+	</tbody>
+	</table>
+	</div>
+</t:block>
+</body>
+</t:container>

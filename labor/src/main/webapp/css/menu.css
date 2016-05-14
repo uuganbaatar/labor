@@ -1,0 +1,185 @@
+@charset "utf-8";
+/* CSS Document */
+#navmenu {
+	background: -webkit-linear-gradient(#f6f6f6, #e9eaea) repeat scroll 0 0
+		transparent;
+	background: -moz-linear-gradient(#f6f6f6, #e9eaea) repeat scroll 0 0
+		transparent;
+	background: linear-gradient(#f6f6f6, #e9eaea) repeat scroll 0 0
+		transparent;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f6f6',
+		endColorstr='#e9eaea', GradientType=0);
+	border-top: 1px solid #D1D1D1;
+	box-shadow: -1px 1px 0 rgba(255, 255, 255, 0.8) inset;
+	clear: both;
+	height: 45px;
+	padding-top: 1px;
+}
+
+#menu {
+	float: left;
+}
+
+#menu a {
+	text-decoration: none;
+}
+
+#menu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#menu>ul>li {
+	float: left;
+	padding-bottom: 12px;
+}
+
+#menu>ul>li .active {
+	background: -webkit-linear-gradient(#0e559b, #0e559b) repeat scroll 0 0
+		transparent;
+	background: -moz-linear-gradient(#0e559b, #0e559b) repeat scroll 0 0
+		transparent;
+	background: linear-gradient(#0e559b, #0e559b) repeat scroll 0 0
+		transparent;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0e559b',
+		endColorstr='#0e559b', GradientType=0);
+	color: #FFF;
+	text-shadow: 0 1px 0 #333;
+}
+
+#menu ul li a {
+	border-color: #D1D1D1;
+	border-image: none;
+	border-style: solid;
+	border-width: 0 1px 0 0;
+	color: #333333;
+	display: block;
+	font-size: 14px;
+	height: 31px;
+	line-height: 30px;
+	padding: 8px 15px 7px;
+	text-shadow: 0 1px 0 #FFFFFF;
+	margin-top: -1px;
+}
+#menu ul > li > a:hover {
+    background: -webkit-linear-gradient(#0e559b, #0e559b) repeat scroll 0 0 transparent;
+    background: -moz-linear-gradient(#0e559b, #0e559b) repeat scroll 0 0 transparent;
+    background: linear-gradient(#0e559b, #0e559b) repeat scroll 0 0 transparent;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0e559b', endColorstr='#0e559b',GradientType=0 );
+	color:#FFF;
+	text-shadow: 0 1px 0 #333;
+}
+
+#menu>ul>li.active>a {
+	background: -webkit-linear-gradient(#0e559b, #0e559b) repeat scroll 0 0
+		transparent;
+	background: -moz-linear-gradient(#0e559b, #0e559b) repeat scroll 0 0
+		transparent;
+	background: linear-gradient(#0e559b, #0e559b) repeat scroll 0 0
+		transparent;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0e559b',
+		endColorstr='#0e559b', GradientType=0);
+	box-shadow: -1px 0 0 #55A6F1 inset, 1px 0 0 #55A6F1 inset;
+	color: #FFFFFF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+#nav ul li .active {
+	border-bottom: 3px #FFF solid;
+}
+
+#menu ul li .active {
+	border-bottom: 3px #FFF solid;
+}
+
+#menu>ul>li.active>a:hover {
+	background: -webkit-linear-gradient(#499FEE, #3F96E5) repeat scroll 0 0
+		transparent;
+	background: -moz-linear-gradient(#499FEE, #3F96E5) repeat scroll 0 0
+		transparent;
+	background: linear-gradient(#499FEE, #3F96E5) repeat scroll 0 0
+		transparent;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#499FEE',
+		endColorstr='#3F96E5', GradientType=0);
+}
+
+/* dropdown menu */
+#menu ul ul {
+	background: -webkit-linear-gradient(#F7F7F7, #F4F4F4) repeat scroll 0 0
+		padding-box transparent;
+	background: -moz-linear-gradient(#F7F7F7, #F4F4F4) repeat scroll 0 0
+		padding-box transparent;
+	background: linear-gradient(#F7F7F7, #F4F4F4) repeat scroll 0 0
+		padding-box transparent;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F7F7F7',
+		endColorstr='#F4F4F4', GradientType=0);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 0 #FFFFFF inset;
+	margin-top: 1px;
+	opacity: 0;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	visibility: hidden;
+	min-width: 250px;
+	z-index: 1;
+}
+
+#menu ul  li:hover ul {
+	visibility: visible;
+	opacity: 1;
+}
+
+#menu ul ul a {
+	border-right-width: 0;
+	border-top: 1px solid #D1D1D1;
+	box-shadow: 0 1px 0 #FFFFFF inset;
+	color: #444444;
+	height: 24px;
+	line-height: 24px;
+	padding: 7px 12px;
+	text-shadow: 0 1px 0 #FFFFFF;
+}
+
+#menu ul ul li:first-child a {
+	border-top-width: 0;
+}
+
+#menu ul ul a .icon {
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	display: block;
+	float: left;
+	height: 24px;
+	margin-right: 10px;
+	width: 24px;
+}
+
+#menu ul ul a .icon.elem0 {
+	background-image: url("../images/elem.png");
+}
+
+#menu ul ul a .icon.elem1 {
+	background-image: url("../images/fb.png");
+}
+
+#menu ul ul a .icon.elem2 {
+	background-image: url("../images/re_pos.png");
+}
+
+#menu ul ul a .icon.elem3 {
+	background-image: url("../images/re.png");
+}
+
+#menu ul ul a:hover .icon.elem1 {
+	background-image: url("../images/fb1.png");
+}
+
+#menu ul ul a:hover .icon.elem2 {
+	background-image: url("../images/re_pos1.png");
+}
+
+#menu ul ul a:hover .icon.elem3 {
+	background-image: url("../images/re1.png");
+}

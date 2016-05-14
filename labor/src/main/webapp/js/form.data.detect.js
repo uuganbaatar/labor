@@ -1,0 +1,1 @@
+var supportsFormData = typeof(FormData) == "function" && typeof(FormData.prototype) == "object";

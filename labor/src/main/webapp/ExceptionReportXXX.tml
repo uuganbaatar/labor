@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+/*
+*	Module name:    ExceptionReport.tml
+*	Function name:  Exception report screen 
+*	Description: 	Ямар ч хуудас дээр алдаа гарвал энэ хуудас дуудагдаж харагдана.
+*					Анхаар: хуудасны нэрийг ExceptionReport-оос өөр нэр өгч болохгүй!!!
+*
+* Created By: Tserentogtokh.D
+* Created Date: 2014/04/14
+* 
+* History
+* ------------------------------------------------------------------------------
+* Date							Programmer						Description
+* ------------------------------------------------------------------------------
+* 2014/04/14 1.0.0 			Tserentogtokh.D				    Шинээр үүсгэв.
+* ------------------------------------------------------------------------------
+* 
+* ALL RIGHTS RESERVED COPYRIGHT (C) 2014 Od Innovation CO.,LTD SOFTWARE DIVSION
+*/
+-->
+<html t:type="layout" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+<body>
+
+<div id="menu"></div>
+
+<div class="main">
+	<div class="box" style="padding: 10px;">
+	
+ 	<p>An exception has occurred: <strong>${exceptionMessage}</strong></p>
+    
+    <!--<p>Системд алдаа гарсан тул та системийн админтай холбогдоно уу!</p>
+    
+    <p>Та <t:pagelink page="index">энд дарж</t:pagelink> эхлэл хэсэгт очно уу.</p>-->
+    
+   	</div>
+</div>
+</body>
+</html>
