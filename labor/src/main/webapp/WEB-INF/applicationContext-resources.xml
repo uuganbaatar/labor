@@ -10,20 +10,21 @@
 
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<beans:property name="driverClassName">
-			<!-- <beans:value>oracle.jdbc.driver.OracleDriver</beans:value> -->
-			<beans:value>com.mysql.jdbc.Driver</beans:value>
+			<beans:value>oracle.jdbc.driver.OracleDriver</beans:value>
+			<!-- <beans:value>com.mysql.jdbc.Driver</beans:value> -->
 		</beans:property>
 
 		<beans:property name="url">
-			<!-- <beans:value>jdbc:oracle:thin:@localhost:1521:labor</beans:value> -->
-			<beans:value>jdbc:mysql://localhost:3306/labor?autoReconnect=true&amp; </beans:value>
+			<beans:value>jdbc:oracle:thin:@192.168.0.60:1521:labor</beans:value>
+			<!-- <beans:value>jdbc:mysql://localhost:3306/labor?autoReconnect=true&amp; 
+				</beans:value> -->
 		</beans:property>
 
 		<beans:property name="username">
-			<beans:value>root</beans:value>
+			<beans:value>labor</beans:value>
 		</beans:property>
 		<beans:property name="password">
-			<beans:value>root</beans:value>
+			<beans:value>labor</beans:value>
 		</beans:property>
 
 	</beans:bean>
