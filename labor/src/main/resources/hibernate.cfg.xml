@@ -4,19 +4,19 @@
 <hibernate-configuration>
 	<session-factory>
 		<!-- oracle connection configuration -->
-		<!-- <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property> -->
-		<!-- <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:labor</property> -->
-		<!-- <property name="hibernate.connection.username">labor</property> -->
-		<!-- <property name="hibernate.connection.password">labor</property> -->
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@192.168.0.60:1521:labor</property>
+		<property name="hibernate.connection.username">labor</property>
+		<property name="hibernate.connection.password">labor</property>
 
 		<!-- Mysql Connection - Begin -->
-		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/labor?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8</property>
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">root</property>
+		<!-- <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property> -->
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/labor?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8</property> -->
+		<!-- <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property> -->
+		<!-- <property name="hibernate.connection.username">root</property> -->
+		<!-- <property name="hibernate.connection.password">root</property> -->
 
-		<!-- <property name="hbm2ddl.auto">update</property> -->
+	<!-- <property name="hbm2ddl.auto">update</property> -->
 		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.format_sql">false</property>
 
