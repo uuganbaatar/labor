@@ -95,7 +95,9 @@
 								<h4 class="page-title">${pageTitle}</h4>
 							</div>
 						</div>
+						
 						<t:body />
+
 					</div> <!-- container -->
 
 				</div> <!-- content -->

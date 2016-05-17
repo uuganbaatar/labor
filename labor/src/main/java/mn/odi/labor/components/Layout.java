@@ -25,6 +25,8 @@ import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.common.User;
 import mn.odi.labor.pages.Index;
+import mn.odi.labor.pages.emp.EmpListPage;
+import mn.odi.labor.pages.job.JobPage;
 import mn.odi.labor.pages.admin.UserList;
 
 @Import(stylesheet = { "context:assets/css/bootstrap.min.css", "context:assets/css/core.css",
@@ -63,6 +65,12 @@ public class Layout {
 
 	@InjectPage
 	private Index indexpage;
+
+	@InjectPage
+	private JobPage jobpage;
+
+	@InjectPage
+	private EmpListPage emppage;
 
 	@InjectPage
 	private UserList userListpage;
@@ -113,15 +121,15 @@ public class Layout {
 	}
 
 	public Object onActionFromJobTab() {
-		return indexpage;
+		return jobpage;
 	}
 
 	public String getSelectedTabEmployer() {
-		return (loginState.getActiveMenu() == "employer") ? "waves-effect subdrop" : "waves-effect";
+		return (loginState.getActiveMenu() == "emp") ? "waves-effect subdrop" : "waves-effect";
 	}
 
 	public Object onActionFromemployerTab() {
-		return indexpage;
+		return emppage;
 	}
 
 	public String getSelectedTabReport() {
