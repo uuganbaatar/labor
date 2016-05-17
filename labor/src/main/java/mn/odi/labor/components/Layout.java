@@ -27,6 +27,7 @@ import mn.odi.labor.entities.common.User;
 import mn.odi.labor.pages.Index;
 import mn.odi.labor.pages.emp.EmpListPage;
 import mn.odi.labor.pages.job.JobPage;
+import mn.odi.labor.pages.admin.UserList;
 
 @Import(stylesheet = { "context:assets/css/bootstrap.min.css", "context:assets/css/core.css",
 		"context:assets/css/components.css", "context:assets/css/icons.css", "context:assets/css/pages.css",
@@ -70,6 +71,9 @@ public class Layout {
 
 	@InjectPage
 	private EmpListPage emppage;
+
+	@InjectPage
+	private UserList userListpage;
 
 	void beginRender() {
 		if (loginState.getUser() == null) {
@@ -142,6 +146,14 @@ public class Layout {
 
 	public Object onActionFromHyanahTab() {
 		return indexpage;
+	}
+
+	public String getSelectedTabUser() {
+		return (loginState.getActiveMenu() == "user") ? "waves-effect subdrop" : "waves-effect";
+	}
+
+	public Object onActionFromUserTab() {
+		return userListpage;
 	}
 
 	public String getPageTitle() {

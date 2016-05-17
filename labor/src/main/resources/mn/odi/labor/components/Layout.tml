@@ -67,6 +67,12 @@
 									<span>${message:report}</span>
 								</t:actionlink>
 							</li>
+							<li>
+								<t:actionlink t:id="userTab" class="${selectedTabUser}">
+									<i class="ti-file"></i>
+									<span>${message:user}</span>
+								</t:actionlink>
+							</li>
 						</ul>
 						<div class="clearfix"></div>
 					</div>

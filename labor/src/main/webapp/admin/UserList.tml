@@ -1,0 +1,99 @@
+<html t:type="layout" title=""
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<div class="row main-contents">
+		<div class="col-md-12">
+			<div class="card-box">
+				<h4 class="text-dark header-title m-t-0">${message:userList}</h4>
+				<div class="add-button">
+					<button type="button" class="btn btn-success waves-effect waves-light"
+						data-toggle="modal" data-keyboard="false" data-backdrop="static"
+						data-target="#myModal">
+						<!-- <t:ActionLink t:id="userCreate"> -->
+						<span class="btn-label">
+							<i class="ti-user"></i>
+						</span>
+						${message:userCreate}
+						<!-- </t:ActionLink> -->
+					</button>
+				</div>
+				<t:Grid
+					class="table table-striped table-bordered dataTable no-footer table-actions-bar"
+					t:source="userList" t:row="userRow"
+					t:exclude="uuid,regNum,password,telephone,pictureName,AccountNonExpired,AccountNonLocked,CredentialsNonExpired,ConfirmPassword,Firstname,Lastname,Enabled"
+					t:add="org" t:reorder="fullname,username,currentrole,org,mobilephone">
+					<p:OrgCell>
+						${userRow?.org?.name}
+					</p:OrgCell>
+				</t:Grid>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;
+					</button>
+					<h4 class="modal-title">${message:userCreate}</h4>
+				</div>
+				<t:Form>
+					<div class="modal-body">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>${message:lastname-label}</label>
+									<t:TextField class="form-control" value="lastname" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>${message:firstname-label}</label>
+									<t:TextField class="form-control" value="firstname" />
+								</div>
+							</div>
+							<!-- <div class="col-md-6"> -->
+							<!-- <div class="form-group"> -->
+							<!-- <label>${message:lastname-label}</label> -->
+							<!-- <t:TextField class="form-control" value="org" /> -->
+							<!-- </div> -->
+							<!-- </div> -->
+							<!-- <div class="col-md-6"> -->
+							<!-- <div class="form-group"> -->
+							<!-- <label>${message:firstname-label}</label> -->
+							<!-- <t:TextField class="form-control" value="role" /> -->
+							<!-- </div> -->
+							<!-- </div> -->
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>${message:lastname-label}</label>
+									<t:TextField class="form-control" value="phone" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>${message:firstname-label}</label>
+									<t:TextField class="form-control" value="email" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="modal-footer">
+						<div class="col-md-12 text-center">
+							<button type="button"
+								class="btn btn-padding btn-grey waves-effect waves-light"
+								data-dismiss="modal">${message:cancel}</button>
+							<t:Submit class="btn btn-padding btn-success" value="${message:save}" />
+						</div>
+					</div>
+				</t:Form>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+
+
+</html>
