@@ -1,13 +1,12 @@
 package mn.odi.labor.services;
 
 import java.io.IOException;
-
-import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.dao.hibernate.SccDAOHibernate;
+import java.util.Date;
 
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
 import org.apache.tapestry5.hibernate.HibernateTransactionDecorator;
+import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.OrderedConfiguration;
@@ -15,6 +14,9 @@ import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Match;
+import org.apache.tapestry5.ioc.services.Coercion;
+import org.apache.tapestry5.ioc.services.CoercionTuple;
+import org.apache.tapestry5.ioc.services.TypeCoercer;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
@@ -23,6 +25,10 @@ import org.apache.tapestry5.validator.ValidatorMacro;
 import org.got5.tapestry5.jquery.JQuerySymbolConstants;
 import org.slf4j.Logger;
 
+import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.dao.hibernate.SccDAOHibernate;
+import mn.odi.labor.util.Constants;
+import mn.odi.labor.util.DateUtil;
 import se.unbound.tapestry.breadcrumbs.BreadCrumbSymbols;
 
 public class AppModule {
@@ -37,7 +43,7 @@ public class AppModule {
 
 		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "mn");
 
-		configuration.add(SymbolConstants.PRODUCTION_MODE, "false");
+		configuration.add(SymbolConstants.PRODUCTION_MODE, "true");
 
 		configuration.add(SymbolConstants.APPLICATION_VERSION, "0.0.1-SNAPSHOT");
 
@@ -95,4 +101,13 @@ public class AppModule {
 		configuration.add("date", "regexp=^(0[1-9]|[1-9]|1[0-2])/(0[1-9]|[1-9]|[1-2][0-9]|3[0-1])/(19|20)[0-9]{2}$");
 	}
 
+	@Contribute(TypeCoercer.class)
+	public static void provideTypeCoercers(Configuration<CoercionTuple<String, Date>> configuration) {
+		configuration.add(CoercionTuple.create(String.class, Date.class, new Coercion<String, Date>() {
+
+			public Date coerce(String input) {
+				return DateUtil.parse(input, Constants.DATE_TIME_FULL_FORMAT);
+			}
+		}));
+	}
 }

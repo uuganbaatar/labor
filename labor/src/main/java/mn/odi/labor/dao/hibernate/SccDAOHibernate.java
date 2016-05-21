@@ -13,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.User;
 
@@ -171,6 +172,26 @@ public class SccDAOHibernate implements SccDAO {
 	public List<User> getUserList() {
 		try {
 			Criteria crit = session.createCriteria(User.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	/**
+	 * @param -
+	 *            General type jagsaalt
+	 * @return List<GeneralType>
+	 */
+	public List<GeneralType> getGeneralTypeList() {
+		try {
+			Criteria crit = session.createCriteria(GeneralType.class);
 
 			if (crit.list().size() > 0)
 				return crit.list();

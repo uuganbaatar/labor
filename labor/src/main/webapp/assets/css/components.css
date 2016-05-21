@@ -98,8 +98,8 @@ File: Components
 .btn-primary:focus,
 .btn-primary:hover,
 .open > .dropdown-toggle.btn-primary {
-  background-color: #3876e5 !important;
-  border: 1px solid #3876e5 !important;
+  background-color: #0166ff !important;
+  border: 1px solid #0166ff !important;
 }
 .btn-success,
 .btn-success:hover,

@@ -3,6 +3,7 @@ package mn.odi.labor.dao;
 import java.util.Date;
 import java.util.List;
 
+import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.User;
 
@@ -56,4 +57,6 @@ public interface SccDAO {
 	public User getUserByUsername(String username);
 
 	public List<User> getUserList();
+
+	public List<GeneralType> getGeneralTypeList();
 }

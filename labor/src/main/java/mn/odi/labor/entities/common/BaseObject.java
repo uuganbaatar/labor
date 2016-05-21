@@ -41,12 +41,10 @@ public abstract class BaseObject implements Serializable {
 
 	public abstract int hashCode();
 
-	@NonVisual
 	@Column(name = "created_date", updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdDate = new Date();
 
-	@NonVisual
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "created_by_id")
 	private User createdBy;
