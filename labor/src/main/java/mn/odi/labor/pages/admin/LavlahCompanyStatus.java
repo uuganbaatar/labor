@@ -15,9 +15,9 @@ import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.entities.admin.GeneralType;
+import mn.odi.labor.entities.admin.CompanyStatus;
 
-public class LavlahGeneralType {
+public class LavlahCompanyStatus {
 
 	@SessionState
 	private LoginState loginState;
@@ -30,13 +30,10 @@ public class LavlahGeneralType {
 
 	@Property
 	@Persist
-	private List<GeneralType> typeList;
+	private List<CompanyStatus> list;
 
 	@Property
-	private GeneralType typeRow;
-
-	@Property
-	private GeneralType type;
+	private CompanyStatus row;
 
 	@Property
 	private String name;
@@ -53,9 +50,9 @@ public class LavlahGeneralType {
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("lavlah");
-		loginState.setActiveDedMenu("lavlahgeneral");
+		loginState.setActiveDedMenu("lavlahhelber");
 		loginState.setPageTitle(message.get("lavlah"));
-		typeList = dao.getGeneralTypeList();
+		list = dao.getLavlahStatusList();
 	}
 
 	public String getUserName() {
@@ -64,13 +61,13 @@ public class LavlahGeneralType {
 
 	@CommitAfter
 	public void onSuccess() {
-		type = new GeneralType();
-		type.setName(name);
-		dao.saveOrUpdateObject(type);
+		CompanyStatus obj = new CompanyStatus();
+		obj.setName(name);
+		dao.saveOrUpdateObject(obj);
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);
 		}
-		typeList = dao.getGeneralTypeList();
+		list = dao.getLavlahStatusList();
 	}
 
 }

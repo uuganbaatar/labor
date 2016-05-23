@@ -3,7 +3,12 @@ package mn.odi.labor.dao;
 import java.util.Date;
 import java.util.List;
 
+import mn.odi.labor.entities.admin.AjiliinBairHurungu;
+import mn.odi.labor.entities.admin.CompanyHelber;
+import mn.odi.labor.entities.admin.CompanyStatus;
+import mn.odi.labor.entities.admin.CompanyTrend;
 import mn.odi.labor.entities.admin.GeneralType;
+import mn.odi.labor.entities.admin.LavlahGarsan;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.User;
 
@@ -59,4 +64,15 @@ public interface SccDAO {
 	public List<User> getUserList();
 
 	public List<GeneralType> getGeneralTypeList();
+
+	public List<CompanyTrend> getCompanyTrendList();
+
+	public List<AjiliinBairHurungu> getLavlahHurunguList();
+
+	public List<CompanyHelber> getLavlahHelberList();
+
+	public List<CompanyStatus> getLavlahStatusList();
+	
+	public List<LavlahGarsan> getLavlahEmpGarsanList();
+
 }

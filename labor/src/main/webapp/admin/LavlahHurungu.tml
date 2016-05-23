@@ -2,7 +2,7 @@
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 	<div class="col-md-9">
 		<div class="card-box">
-			<h4 class="text-dark header-title m-t-0">${message:lavlahgeneraltype}</h4>
+			<h4 class="text-dark header-title m-t-0">${message:lavlahhurungu}</h4>
 			<t:Form>
 				<t:TextField t:value="name" style="width:50%;"></t:TextField>
 				<div class="add-button">
@@ -18,7 +18,7 @@
 			<t:zone t:id="listZone" id="listZone">
 				<t:Grid
 					class="table table-striped table-bordered dataTable no-footer table-actions-bar"
-					t:source="typeList" t:row="typeRow" t:exclude="uuid" t:reorder="name,createddate">
+					t:source="list" t:row="row" t:exclude="uuid" t:reorder="name,createddate">
 				</t:Grid>
 			</t:zone>
 		</div>

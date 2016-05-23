@@ -13,7 +13,12 @@ import org.hibernate.criterion.Restrictions;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.admin.AjiliinBairHurungu;
+import mn.odi.labor.entities.admin.CompanyHelber;
+import mn.odi.labor.entities.admin.CompanyStatus;
+import mn.odi.labor.entities.admin.CompanyTrend;
 import mn.odi.labor.entities.admin.GeneralType;
+import mn.odi.labor.entities.admin.LavlahGarsan;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.User;
 
@@ -204,4 +209,78 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
+	public List<CompanyTrend> getCompanyTrendList() {
+		try {
+			Criteria crit = session.createCriteria(CompanyTrend.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<AjiliinBairHurungu> getLavlahHurunguList() {
+		try {
+			Criteria crit = session.createCriteria(AjiliinBairHurungu.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<CompanyHelber> getLavlahHelberList() {
+		try {
+			Criteria crit = session.createCriteria(CompanyHelber.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<CompanyStatus> getLavlahStatusList() {
+		try {
+			Criteria crit = session.createCriteria(CompanyStatus.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<LavlahGarsan> getLavlahEmpGarsanList() {
+		try {
+			Criteria crit = session.createCriteria(LavlahGarsan.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
 }

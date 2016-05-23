@@ -25,10 +25,15 @@ import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.common.User;
 import mn.odi.labor.pages.Index;
+import mn.odi.labor.pages.admin.LavlahCompanyStatus;
+import mn.odi.labor.pages.admin.LavlahCompanyTrend;
+import mn.odi.labor.pages.admin.LavlahEmpGarsan;
+import mn.odi.labor.pages.admin.LavlahGeneralType;
+import mn.odi.labor.pages.admin.LavlahHelber;
+import mn.odi.labor.pages.admin.LavlahHurungu;
+import mn.odi.labor.pages.admin.UserList;
 import mn.odi.labor.pages.emp.EmpListPage;
 import mn.odi.labor.pages.job.JobPage;
-import mn.odi.labor.pages.admin.LavlahGeneralType;
-import mn.odi.labor.pages.admin.UserList;
 
 @Import(stylesheet = { "context:assets/css/bootstrap.min.css", "context:assets/css/core.css",
 		"context:assets/css/components.css", "context:assets/css/icons.css", "context:assets/css/pages.css",
@@ -78,6 +83,21 @@ public class LayoutLavlah {
 
 	@InjectPage
 	private LavlahGeneralType lavlahListpage;
+
+	@InjectPage
+	private LavlahCompanyTrend lavlahTrendpage;
+
+	@InjectPage
+	private LavlahHurungu lahlahhurunguPage;
+
+	@InjectPage
+	private LavlahHelber lahlahhelberPage;
+
+	@InjectPage
+	private LavlahCompanyStatus lahlahstatusPage;
+
+	@InjectPage
+	private LavlahEmpGarsan lahlahgarsanPage;
 
 	void beginRender() {
 		if (loginState.getUser() == null) {
@@ -174,4 +194,59 @@ public class LayoutLavlah {
 		else
 			return "";
 	}
+
+	public String getSelectedTabLavlahGeneral() {
+		return (loginState.getActiveDedMenu() == "lavlahgeneral") ? "btn text-left btn-white waves-effect selected"
+				: "btn text-left btn-white waves-effect";
+	}
+
+	public String getSelectedTabLavlahTrend() {
+		return (loginState.getActiveDedMenu() == "lavlahtrend") ? "btn text-left btn-white waves-effect selected"
+				: "btn text-left btn-white waves-effect";
+	}
+
+	public String getSelectedTabLavlahHurungu() {
+		return (loginState.getActiveDedMenu() == "lavlahhurungu") ? "btn text-left btn-white waves-effect selected"
+				: "btn text-left btn-white waves-effect";
+	}
+
+	public String getSelectedTabLavlahHelber() {
+		return (loginState.getActiveDedMenu() == "lavlahhelber") ? "btn text-left btn-white waves-effect selected"
+				: "btn text-left btn-white waves-effect";
+	}
+
+	public String getSelectedTabLavlahStatus() {
+		return (loginState.getActiveDedMenu() == "lavlahstatus") ? "btn text-left btn-white waves-effect selected"
+				: "btn text-left btn-white waves-effect";
+	}
+
+	public String getSelectedTabLavlahGarsan() {
+		return (loginState.getActiveDedMenu() == "lavlahgarsan") ? "btn text-left btn-white waves-effect selected"
+				: "btn text-left btn-white waves-effect";
+	}
+
+	public Object onActionFromLavlahGeneralTab() {
+		return lavlahListpage;
+	}
+
+	public Object onActionFromLavlahTrendTab() {
+		return lavlahTrendpage;
+	}
+
+	public Object onActionFromLavlahHurunguTab() {
+		return lahlahhurunguPage;
+	}
+
+	public Object onActionFromLavlahHelberTab() {
+		return lahlahhelberPage;
+	}
+
+	public Object onActionFromLavlahStatusTab() {
+		return lahlahstatusPage;
+	}
+
+	public Object onActionFromLavlahGarsanTab() {
+		return lahlahgarsanPage;
+	}
+
 }

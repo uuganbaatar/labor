@@ -103,15 +103,35 @@
 						</div>
 						<div class="row main-contents">
 							<div class="col-md-3 btn-group-vertical lavlah_cat">
-								<button type="button"
-									class="btn text-left btn-white waves-effect selected">Мэргэжил</button>
-								<button type="button" class="btn text-left btn-white waves-effect">Ерөнхий төрөл</button>
-								<button type="button" class="btn text-left btn-white waves-effect">Үйл ажиллагааны чиглэл
+								<button type="button" class="${SelectedTabLavlahGeneral}">
+									<t:actionlink t:id="lavlahGeneralTab">
+										${message:lavlahgeneral}
+									</t:actionlink>
 								</button>
-								<button type="button" class="btn text-left btn-white waves-effect">Хөрөнгийн эх үүсвэр</button>
-								<button type="button" class="btn text-left btn-white waves-effect">Ажлын байрны төрөл</button>
-								<button type="button" class="btn text-left btn-white waves-effect">Хариуцлагын хэлбэр</button>
-								<button type="button" class="btn text-left btn-white waves-effect">Хөдөлмөр эрхлэлтийн статус
+								<button type="button" class="${SelectedTabLavlahTrend}">
+									<t:actionlink t:id="lavlahTrendTab">
+										${message:lavlahtrend}
+									</t:actionlink>
+								</button>
+								<button type="button" class="${SelectedTabLavlahHurungu}">
+									<t:actionlink t:id="lavlahHurunguTab">
+										${message:lavlahhurungu}
+									</t:actionlink>
+								</button>
+								<button type="button" class="${SelectedTabLavlahHelber}">
+									<t:actionlink t:id="lavlahHelberTab">
+										${message:lavlahhelber}
+									</t:actionlink>
+								</button>
+								<button type="button" class="${SelectedTabLavlahStatus}">
+									<t:actionlink t:id="lavlahStatusTab" class="${selectedTabreport}">
+										${message:lavlahstatus}
+									</t:actionlink>
+								</button>
+								<button type="button" class="${SelectedTabLavlahGarsan}">
+									<t:actionlink t:id="lavlahGarsanTab">
+										${message:lavlahgarsan}
+									</t:actionlink>
 								</button>
 							</div>
 							<t:body />

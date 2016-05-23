@@ -7,34 +7,41 @@
 
 	<body>
 
-		<section class="container" id="container">
-			<div class="login">
-				<div class="logo" id="logo">
-					<img src="${context:images/logo1.png}" />
+		<div class="account-pages"></div>
+		<div class="clearfix"></div>
+		<div class="wrapper-page login-page">
+			<div class=" card-box">
+				<div class="panel-heading">
+					<div class="login-logo"></div>
 				</div>
 				<h1>${message:systemNameE}</h1>
-				<form action="/labor/j_spring_security_check" method="POST">
-					<t:if test="failed">
-						<div class="row">
-							<span class="error">${message:wrongUsernamePassword}</span>
-						</div>
-					</t:if>
-					<!-- <p>${message:userName}</p> -->
-					<p>
-						<input id="j_username" type="text" name="j_username" class="login-input"
-							placeholder="${message:userNameE}" />
-					</p>
-					<p>
-						<input id="j_password" type="password" name="j_password"
-							class="login-input" placeholder="${message:passE}" />
-					</p>
+				<div class="panel-body">
+					<form action="/labor/j_spring_security_check" method="POST">
+						<t:if test="failed">
+							<div class="row">
+								<span class="error">${message:wrongUsernamePassword}</span>
+							</div>
+						</t:if>
+						<!-- <p>${message:userName}</p> -->
+						<p>
+							<input id="j_username" type="text" name="j_username" class="form-control"
+								placeholder="${message:userNameE}" />
+						</p>
+						<p>
+							<input id="j_password" type="password" name="j_password"
+								class="form-control" placeholder="${message:passE}" />
+						</p>
 
-					<p class="submit">
-						<input type="submit" name="commit" value="${message:loginSubmitE}" />
-					</p>
+						<p>
+							<button
+								class="btn btn-primary btn-block text-uppercase waves-effect waves-light"
+								type="submit">${message:loginSubmitE}</button>
+						</p>
 
-				</form>
+					</form>
+				</div>
 			</div>
-		</section><!--wrapper -->
+		</div>
+		<!--wrapper -->
 	</body>
 </html>

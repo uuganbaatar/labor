@@ -17,8 +17,9 @@ import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.dao.hibernate.SecurityDAOHibernate;
 
-@Import(stylesheet = "context:css/login.css", library = { "context:/js/login.js",
-		"context:/js/jquery/jquery.validate.min.js" })
+@Import(stylesheet = { "context:assets/css/bootstrap.min.css", "context:assets/css/core.css",
+		"context:assets/css/components.css", "context:assets/css/pages.css", "context:assets/css/icons.css",
+		"context:assets/css/responsive.css" })
 public class Login {
 
 	public static final String SECURITY_LOGIN = "/j_spring_security_check";

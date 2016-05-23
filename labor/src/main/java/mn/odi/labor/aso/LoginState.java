@@ -14,6 +14,8 @@ public class LoginState implements Serializable {
 
 	private String activeMenu = "";
 
+	private String activeDedMenu = "";
+
 	private User user = null;
 
 	private String selectedModuleName;
@@ -134,4 +136,13 @@ public class LoginState implements Serializable {
 	public void setPageTitle(String pageTitle) {
 		this.pageTitle = pageTitle;
 	}
+
+	public String getActiveDedMenu() {
+		return activeDedMenu;
+	}
+
+	public void setActiveDedMenu(String activeDedMenu) {
+		this.activeDedMenu = activeDedMenu;
+	}
+
 }
