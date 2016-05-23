@@ -11,6 +11,7 @@ import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.admin.LavlahGarsan;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.User;
+import mn.odi.labor.entities.labor.Job;
 
 public interface SccDAO {
 
@@ -63,6 +64,8 @@ public interface SccDAO {
 
 	public List<User> getUserList();
 
+	public List<Job> getJobList();
+	
 	public List<GeneralType> getGeneralTypeList();
 
 	public List<CompanyTrend> getCompanyTrendList();

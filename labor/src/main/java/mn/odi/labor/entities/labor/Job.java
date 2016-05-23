@@ -1,5 +1,6 @@
 package mn.odi.labor.entities.labor;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -37,7 +38,7 @@ public class Job extends BaseObject {
 	private String uuid;
 
 	@Column(name = "name")
-	private String name;
+	private String jobName;
 	
 	@Column(name = "isNew")
 	private Boolean isNew;
@@ -72,12 +73,12 @@ public class Job extends BaseObject {
 		this.uuid = uuid;
 	}
 
-	public String getName() {
-		return name;
+	public String getJobName() {
+		return jobName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
 	}
 
 	public Boolean getIsNew() {
@@ -120,6 +121,9 @@ public class Job extends BaseObject {
 		this.jobType = jobType;
 	}
 	
+	public String getDateFormatted(){
+		return new SimpleDateFormat("yyyy-MM-dd").format(jobDate);
+	}
 	
 	// ********************** Common Methods ********************** //
 
