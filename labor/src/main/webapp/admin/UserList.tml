@@ -6,8 +6,8 @@
 				<h4 class="text-dark header-title m-t-0">${message:userList}</h4>
 				<div class="add-button">
 					<!-- <button type="button" class="btn btn-success waves-effect waves-light" -->
-					data-toggle="modal" data-keyboard="false" data-backdrop="static"
-					data-target="#myModal">
+					<!-- data-toggle="modal" data-keyboard="false" data-backdrop="static" -->
+					<!-- data-target="#myModal"> -->
 					<t:ActionLink t:id="userCreate"
 						class="btn btn-success waves-effect waves-light" data-toggle="modal"
 						data-keyboard="false" data-backdrop="static" data-target="#myModal">

@@ -27,6 +27,7 @@ import mn.odi.labor.entities.common.User;
 import mn.odi.labor.pages.Index;
 import mn.odi.labor.pages.emp.EmpListPage;
 import mn.odi.labor.pages.job.JobPage;
+import mn.odi.labor.pages.admin.LavlahGeneralType;
 import mn.odi.labor.pages.admin.UserList;
 
 @Import(stylesheet = { "context:assets/css/bootstrap.min.css", "context:assets/css/core.css",
@@ -74,6 +75,9 @@ public class Layout {
 
 	@InjectPage
 	private UserList userListpage;
+
+	@InjectPage
+	private LavlahGeneralType lavlahListpage;
 
 	void beginRender() {
 		if (loginState.getUser() == null) {
@@ -152,8 +156,16 @@ public class Layout {
 		return (loginState.getActiveMenu() == "user") ? "waves-effect subdrop" : "waves-effect";
 	}
 
+	public String getSelectedTabLavlah() {
+		return (loginState.getActiveMenu() == "lavlah") ? "waves-effect subdrop" : "waves-effect";
+	}
+
 	public Object onActionFromUserTab() {
 		return userListpage;
+	}
+
+	public Object onActionFromLavlahTab() {
+		return lavlahListpage;
 	}
 
 	public String getPageTitle() {

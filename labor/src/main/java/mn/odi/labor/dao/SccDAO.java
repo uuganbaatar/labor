@@ -60,6 +60,6 @@ public interface SccDAO {
 	public List<User> getUserList();
 
 	public List<Job> getJobList();
-
+	
 	public List<GeneralType> getGeneralTypeList();
 }

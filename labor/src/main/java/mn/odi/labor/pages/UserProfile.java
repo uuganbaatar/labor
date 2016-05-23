@@ -11,11 +11,6 @@ import java.util.Locale;
 
 import javax.imageio.ImageIO;
 
-import mn.odi.labor.aso.LoginState;
-import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.entities.common.User;
-import mn.odi.labor.util.Constants;
-
 import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.alerts.AlertManager;
@@ -39,13 +34,17 @@ import org.apache.tapestry5.upload.services.UploadedFile;
 import org.got5.tapestry5.jquery.JQueryEventConstants;
 import org.got5.tapestry5.jquery.components.AjaxUpload;
 
+import mn.odi.labor.aso.LoginState;
+import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.common.User;
+import mn.odi.labor.util.Constants;
 import se.unbound.tapestry.breadcrumbs.BreadCrumb;
 import se.unbound.tapestry.breadcrumbs.BreadCrumbReset;
 
 @BreadCrumb(titleKey = "userProfile")
 @BreadCrumbReset(ignorePages = { Object.class })
-@Import(stylesheet = { "context:css/home.css","context:css/menu.css",
-		"context:css/jquery-ui.css", }, library = { "context:js/custom.js" })
+@Import(stylesheet = { "context:css/home.css", "context:css/menu.css", "context:css/jquery-ui.css", }, library = {
+		"context:js/custom.js" })
 public class UserProfile {
 
 	@SessionState
@@ -97,23 +96,18 @@ public class UserProfile {
 	@Persist
 	private User _user;
 
-
-
 	/*
 	 * PAGE RENDER
 	 */
 	void setupRender() {
 		if (_user == null) {
-			_user = (User) sccDAO.getObject(User.class, loginState
-					.getUser().getId());
+			_user = (User) sccDAO.getObject(User.class, loginState.getUser().getId());
 		}
 	}
 
 	/*
 	 * EVENTS
 	 */
-
-
 
 	@OnEvent(component = "uploadImage", value = JQueryEventConstants.AJAX_UPLOAD)
 	void onImageUpload(UploadedFile uploadedFile) {
@@ -132,10 +126,9 @@ public class UserProfile {
 
 		final JSONObject result = new JSONObject();
 
-		final JSONObject params = new JSONObject().put(
-				"url",
-				resources.createEventLink("myCustomEvent", "NON_XHR_UPLOAD")
-						.toURI()).put("zoneId", "uploadResult");
+		final JSONObject params = new JSONObject()
+				.put("url", resources.createEventLink("myCustomEvent", "NON_XHR_UPLOAD").toURI())
+				.put("zoneId", "uploadResult");
 
 		result.put(AjaxUpload.UPDATE_ZONE_CALLBACK, params);
 
@@ -156,8 +149,7 @@ public class UserProfile {
 			byte[] bFile = new byte[(int) uploadedFile.getSize()];
 
 			try {
-				InputStream inputStream = (InputStream) uploadedFile
-						.getStream();
+				InputStream inputStream = (InputStream) uploadedFile.getStream();
 
 				inputStream.read(bFile);
 
@@ -166,8 +158,7 @@ public class UserProfile {
 				e.printStackTrace();
 			}
 
-			_user.setPictureName(_user.getUuid()
-					+ uploadedFile.getFileName());
+			_user.setPictureName(_user.getUuid() + uploadedFile.getFileName());
 
 			_user.setPictureSource(bFile);
 
@@ -188,8 +179,7 @@ public class UserProfile {
 	public String getLastAccessDate() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
 
-		return (_user.getLastAccessDate() == null) ? "----.--.-- --:--"
-				: dateFormat.format(_user.getLastAccessDate());
+		return (_user.getLastAccessDate() == null) ? "----.--.-- --:--" : dateFormat.format(_user.getLastAccessDate());
 	}
 
 	public String getPasswordChangeCss() {
@@ -212,8 +202,7 @@ public class UserProfile {
 			return imageUrl.getAsset(null, img, Locale.ENGLISH);
 		}
 
-		if (_user.getPictureSource() == null
-				|| _user.getPictureName() == null) {
+		if (_user.getPictureSource() == null || _user.getPictureName() == null) {
 
 			img = img.concat(unknownImg);
 
