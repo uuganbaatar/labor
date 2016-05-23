@@ -13,8 +13,10 @@ import org.hibernate.criterion.Restrictions;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.User;
+import mn.odi.labor.entities.labor.Job;
 
 public class SccDAOHibernate implements SccDAO {
 	private Session session;
@@ -183,4 +185,41 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
+	/**
+	 * @param - Ajliin bairnii jagsaalt
+	 * @return List<User>
+	 */
+	public List<Job> getJobList() {
+		try {
+			Criteria crit = session.createCriteria(Job.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	/**
+	 * @param -
+	 *            General type jagsaalt
+	 * @return List<GeneralType>
+	 */
+	public List<GeneralType> getGeneralTypeList() {
+		try {
+			Criteria crit = session.createCriteria(GeneralType.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
 }
