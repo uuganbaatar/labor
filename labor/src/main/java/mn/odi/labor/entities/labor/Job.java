@@ -17,6 +17,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.hibernate.envers.Audited;
 
+import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.enums.JobTypeEnum;
 
@@ -26,36 +27,36 @@ import mn.odi.labor.enums.JobTypeEnum;
 @Audited(auditParents = BaseObject.class)
 public class Job extends BaseObject {
 
-	private static final long serialVersionUID = 1L;
+	public static final long serialVersionUID = 1L;
 	
 	@Id
 	@NonVisual
 	@GeneratedValue
 	@Column(name = "id")
-	private Long id;
+	public Long id;
 
 	@Column(name = "uuid", length = 32, insertable = true, updatable = false)
-	private String uuid;
+	public String uuid;
 
 	@Column(name = "name")
-	private String jobName;
+	public String jobName;
 	
 	@Column(name = "isNew")
-	private Boolean isNew;
+	public Boolean isNew;
 	
 	@Column(name = "jobDate")
-	private Date jobDate;
+	public Date jobDate;
 	
 	@ManyToOne
 	@JoinColumn(name = "fundingsource_id", nullable = true)
-	private FundingSource fundingSource;
+	public FundingSource fundingSource;
 
 	@ManyToOne
-	@JoinColumn(name = "professiontype_id", nullable = true)
-	private ProfessionType professionType;
+	@JoinColumn(name = "generaltype_id", nullable = true)
+	public GeneralType generalType;
 	
 	@Column(name = "jobType")
-	private JobTypeEnum jobType;
+	public JobTypeEnum jobType;
 
 	public Long getId() {
 		return id;
@@ -105,12 +106,12 @@ public class Job extends BaseObject {
 		this.fundingSource = fundingSource;
 	}
 
-	public ProfessionType getProfessionType() {
-		return professionType;
+	public GeneralType getGeneralType() {
+		return generalType;
 	}
 
-	public void setProfessionType(ProfessionType professionType) {
-		this.professionType = professionType;
+	public void setProfessionType(GeneralType generalType) {
+		this.generalType = generalType;
 	}
 
 	public JobTypeEnum getJobType() {
@@ -121,7 +122,7 @@ public class Job extends BaseObject {
 		this.jobType = jobType;
 	}
 	
-	public String getDateFormatted(){
+	public String getDateFormated(){
 		return new SimpleDateFormat("yyyy-MM-dd").format(jobDate);
 	}
 	

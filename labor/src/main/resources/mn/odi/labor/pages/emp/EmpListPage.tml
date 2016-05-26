@@ -78,49 +78,29 @@
 
 			<div class="row">
 				<div class="col-sm-12">
-					<table id="datatable"
-						class="table table-striped table-bordered dataTable no-footer table-actions-bar">
-						<thead>
-							<tr role="row">
-								<th class="sorting_asc">${message:fullName}</th>
-								<th class="sorting">${message:jobType}</th>
-								<th class="sorting">${message:job}</th>
-								<th class="sorting">${message:company}</th>
-								<th class="sorting">${message:phone}</th>
-								<th class="sorting">${message:regDate}</th>
-								<th>${message:edit}</th>
-							</tr>
-						</thead>
 
-						<tbody>
-							<tr role="row" class="odd">
-								<td class="sorting_1"><a href="add_worker.html">Munkherdene</a></td>
-								<td>Mergejilten</td>
-								<td>System Shinjeech</td>
-								<td>Od Innovation LLC</td>
-								<td>9911-1199</td>
-								<td>2016-07-11</td>
-								<td class="text-center"><a href="#"
-									class="table-action-btn"><i class="md md-edit"></i></a> <a
-									href="#" class="table-action-btn"><i class="md md-close"></i></a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
-					<div class="col-md-12 text-right">
-
-						<ul class="pagination">
-							<li class="paginate_button previous"><a href="#">${message:prev}</a></li>
-							<li class="paginate_button active"><a href="#">1</a></li>
-							<li class="paginate_button"><a href="#">2</a></li>
-							<li class="paginate_button"><a href="#">3</a></li>
-							<li class="paginate_button"><a href="#">4</a></li>
-							<li class="paginate_button"><a href="#">5</a></li>
-							<li class="paginate_button"><a href="#">6</a></li>
-							<li class="paginate_button next"><a href="#">${message:next}</a></li>
-						</ul>
-					</div>
+					<t:Grid
+						class="table table-striped table-bordered dataTable no-footer table-actions-bar"
+						t:source="empList" t:row="empRow" t:add="job, org, edit"
+						t:exclude="uuid, regNumber, familyName, surName, empName, gender, eduLevel, profession, employment, newJob, currentJob, uamatCode, movement, firedReason"
+						t:reorder="fullName, job, org, phone, createddate">
+						<p:JobCell>
+								${empRow?.job?.jobName}
+						</p:JobCell>
+						<p:OrgCell>
+								${empRow?.org?.name}
+						</p:OrgCell>
+						<p:EditCell>
+							<t:pagelink t:page="emp/EmpAddPage" t:id="empEdit"
+								t:context="empRow" class="table-action-btn ">
+								<i class="md md-edit"></i>
+							</t:pagelink>
+							<t:actionlink t:id="empDelete" t:context="empRow"
+								class="table-action-btn ">
+								<i class="md md-close"></i>
+							</t:actionlink>
+						</p:EditCell>
+					</t:Grid>
 				</div>
 			</div>
 

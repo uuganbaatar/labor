@@ -21,6 +21,8 @@ import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.admin.LavlahGarsan;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.User;
+import mn.odi.labor.entities.labor.Employee;
+import mn.odi.labor.entities.labor.FundingSource;
 import mn.odi.labor.entities.labor.Job;
 
 public class SccDAOHibernate implements SccDAO {
@@ -192,7 +194,7 @@ public class SccDAOHibernate implements SccDAO {
 
 	/**
 	 * @param - Ajliin bairnii jagsaalt
-	 * @return List<User>
+	 * @return List<Job>
 	 */
 	public List<Job> getJobList() {
 		try {
@@ -298,6 +300,38 @@ public class SccDAOHibernate implements SccDAO {
 
 		} catch (HibernateException e) {
 			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+	
+	/**
+	 * @param - Ajiltnii jagsaalt
+	 * @return List<Employee>
+	 */
+	public List<Employee> getEmpList() {
+		try {
+			Criteria crit = session.createCriteria(Employee.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+	
+	public List<FundingSource> getFundingSourceList() {
+		try {
+			Criteria crit = session.createCriteria(FundingSource.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
 			return null;
 		}
 	}

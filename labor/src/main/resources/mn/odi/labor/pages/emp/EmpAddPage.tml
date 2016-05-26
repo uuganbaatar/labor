@@ -8,158 +8,164 @@
 			<h4 class="text-dark header-title m-t-0">${message:empDetail}</h4>
 
 			<div class="title-1">${message:personalInfo}</div>
-
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:RegNumber}</label> <input type="text"
-						class="form-control" placeholder="${message:RegNumber}"/>
+			<form t:type="form" t:id="validate" class="form">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:RegNumber}</label> <input t:type="textfield"
+							class="form-control" t:id="regNumber"
+							t:value="emp.regNumber" />
+					</div>
 				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group check-register-number">
+				<div class="col-md-4">
+					<div class="form-group check-register-number">
+						<button type="button"
+							class="btn btn-padding btn-primary waves-effect waves-light">${message:check}</button>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:familyName}</label> <input t:type="textfield"
+							class="form-control" t:id="familyName"
+							t:value="emp.familyName" />
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:surName}</label> <input t:type="textfield"
+							class="form-control" t:id="surName"
+							t:value="emp.surName" />
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:name}</label> <input t:type="textfield"
+							class="form-control" t:id="empName"
+							t:value="emp.empName" />
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:gender}</label> <select class="form-control">
+							<option>${message:select}</option>
+							<option>Er</option>
+							<option>Em</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="clearfix"></div>
+				<div class="title-1">${message:education}</div>
+
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:eduLevel}</label> <select class="form-control">
+							<option>${message:select}</option>
+							<option>Dund</option>
+							<option>Buren dund</option>
+							<option>Bachelor</option>
+							<option>Master</option>
+							<option>Phd</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:profession}</label> <input type="text"
+							class="form-control" placeholder="${message:profession}" />
+					</div>
+				</div>
+
+				<div class="clearfix"></div>
+				<div class="title-1">${message:employment}</div>
+
+
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:employmentStatus}</label> <select
+							class="form-control">
+							<option>${message:select}</option>
+							<option>Ajiltai</option>
+							<option>Ajilgui</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:jobType}</label> <select class="form-control">
+							<option>${message:select}</option>
+							<option>Mergejilten</option>
+							<option>Manager</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:workForNewJob}</label> <select
+							class="form-control">
+							<option>${message:workForNewJob}</option>
+							<option>Yes</option>
+							<option>No</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:newJobSource}</label> <select
+							class="form-control">
+							<option>${message:select}</option>
+							<option>Huviin</option>
+							<option>Tusviin hurungu oruulalt</option>
+							<option>Gadaadiin hurungu oruulalt</option>
+							<option>Busad</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:currentPosition}</label> <select
+							class="form-control">
+							<option>${message:select}</option>
+							<option>Boss</option>
+							<option>Manager</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:uamatCode}<span class="red-text">${message:onlyHEB}</span></label>
+						<input type="text" class="form-control" disabled=""
+							value="${message:uamatCode}" />
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:empMovement}</label> <select class="form-control">
+							<option>${message:select}</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:firedReason}</label> <select class="form-control">
+							<option>${message:select}</option>
+							<option>Tanhai</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="clearfix"></div>
+				<div class="hairly-line"></div>
+				<div class="col-md-12 text-center">
+					<a href="worker.html"><button type="button"
+							class="btn btn-padding btn-grey waves-effect waves-light">${message:back}</button></a>
 					<button type="button"
-						class="btn btn-padding btn-primary waves-effect waves-light">${message:select}</button>
+						class="btn btn-padding btn-success waves-effect waves-light">${message:save}</button>
 				</div>
-			</div>
-			<div class="clearfix"></div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:familyName}</label> <input type="text" class="form-control"
-						placeholder="${message:familyName}"/>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:surName}</label> <input type="text"
-						class="form-control" placeholder="${message:surName}"/>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:name}</label> <input type="text" class="form-control"
-						placeholder="${message:name}"/>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:gender}</label> <select class="form-control">
-						<option>${message:select}</option>
-						<option>Er</option>
-						<option>Em</option>
-					</select>
-				</div>
-			</div>
+				<div class="clearfix"></div>
 
-			<div class="clearfix"></div>
-			<div class="title-1">${message:education}</div>
-
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:eduLevel}</label> <select class="form-control">
-						<option>${message:select}</option>
-						<option>Dund</option>
-						<option>Buren dund</option>
-						<option>Bachelor</option>
-						<option>Master</option>
-						<option>Phd</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:profession}</label> <input type="text"
-						class="form-control" placeholder="${message:profession}"/>
-				</div>
-			</div>
-
-			<div class="clearfix"></div>
-			<div class="title-1">${message:employment}</div>
-
-
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:employmentStatus}</label> <select
-						class="form-control">
-						<option>${message:select}</option>
-						<option>Ajiltai</option>
-						<option>Ajilgui</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:jobType}</label> <select class="form-control">
-						<option>${message:select}</option>
-						<option>Mergejilten</option>
-						<option>Manager</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:workForNewJob}</label> <select
-						class="form-control">
-						<option>${message:workForNewJob}</option>
-						<option>Yes</option>
-						<option>No</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:newJobSource}</label> <select
-						class="form-control">
-						<option>${message:select}</option>
-						<option>Huviin</option>
-						<option>Tusviin hurungu oruulalt</option>
-						<option>Gadaadiin hurungu oruulalt</option>
-						<option>Busad</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:currentPosition}</label> <select
-						class="form-control">
-						<option>${message:select}</option>
-						<option>Boss</option>
-						<option>Manager</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:uamatCode}<span class="red-text">${message:onlyHEB}</span></label> <input type="text" class="form-control"
-						disabled="" value="${message:uamatCode}"/>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:empMovement}</label> <select class="form-control">
-						<option>${message:select}</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group">
-					<label>${message:firedReason}</label> <select
-						class="form-control">
-						<option>${message:select}</option>
-						<option>Tanhai</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="clearfix"></div>
-			<div class="hairly-line"></div>
-			<div class="col-md-12 text-center">
-				<a href="worker.html"><button type="button"
-						class="btn btn-padding btn-grey waves-effect waves-light">${message:back}</button></a>
-				<button type="button"
-					class="btn btn-padding btn-success waves-effect waves-light">${message:save}</button>
-			</div>
-			<div class="clearfix"></div>
+			</form>
 		</div>
 	</div>
 </div>
