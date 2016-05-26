@@ -17,6 +17,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.hibernate.envers.Audited;
 
+import mn.odi.labor.entities.admin.AjiliinBairHurungu;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.enums.JobTypeEnum;
 
@@ -27,7 +28,7 @@ import mn.odi.labor.enums.JobTypeEnum;
 public class Job extends BaseObject {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@NonVisual
 	@GeneratedValue
@@ -39,21 +40,21 @@ public class Job extends BaseObject {
 
 	@Column(name = "name")
 	private String jobName;
-	
+
 	@Column(name = "isNew")
 	private Boolean isNew;
-	
+
 	@Column(name = "jobDate")
 	private Date jobDate;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "fundingsource_id", nullable = true)
-	private FundingSource fundingSource;
+	private AjiliinBairHurungu fundingSource;
 
 	@ManyToOne
 	@JoinColumn(name = "professiontype_id", nullable = true)
 	private ProfessionType professionType;
-	
+
 	@Column(name = "jobType")
 	private JobTypeEnum jobType;
 
@@ -97,11 +98,11 @@ public class Job extends BaseObject {
 		this.jobDate = jobDate;
 	}
 
-	public FundingSource getFundingSource() {
+	public AjiliinBairHurungu getFundingSource() {
 		return fundingSource;
 	}
 
-	public void setFundingSource(FundingSource fundingSource) {
+	public void setFundingSource(AjiliinBairHurungu fundingSource) {
 		this.fundingSource = fundingSource;
 	}
 
@@ -120,11 +121,11 @@ public class Job extends BaseObject {
 	public void setJobType(JobTypeEnum jobType) {
 		this.jobType = jobType;
 	}
-	
-	public String getDateFormatted(){
+
+	public String getDateFormatted() {
 		return new SimpleDateFormat("yyyy-MM-dd").format(jobDate);
 	}
-	
+
 	// ********************** Common Methods ********************** //
 
 	@Override

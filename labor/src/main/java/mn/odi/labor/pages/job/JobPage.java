@@ -16,7 +16,7 @@ import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.entities.labor.FundingSource;
+import mn.odi.labor.entities.admin.AjiliinBairHurungu;
 import mn.odi.labor.entities.labor.Job;
 import mn.odi.labor.entities.labor.ProfessionType;
 import mn.odi.labor.enums.JobTypeEnum;
@@ -32,11 +32,11 @@ public class JobPage {
 	@Inject
 	private SccDAO dao;
 
-    @InjectComponent
-    private Zone jobFormZone, jobGridZone;
+	@InjectComponent
+	private Zone jobFormZone, jobGridZone;
 
-    @InjectComponent
-    private Form ajaxForm;
+	@InjectComponent
+	private Form ajaxForm;
 
 	@Property
 	@Persist
@@ -55,11 +55,11 @@ public class JobPage {
 
 	@Property
 	@Persist
-	private FundingSource fundSrc;
+	private AjiliinBairHurungu fundSrc;
 
 	@Inject
 	private Request request;
-	
+
 	@Inject
 	private AjaxResponseRenderer ajaxResponseRenderer;
 
@@ -69,18 +69,18 @@ public class JobPage {
 		loginState.setPageTitle(message.get("job"));
 		jobList = dao.getJobList();
 	}
-	
+
 	void onActionFromJobEdit(Job job) {
-        System.out.println("looool " + job.getJobName());
-    }
-	
+		System.out.println("looool " + job.getJobName());
+	}
+
 	Object onSubmit() {
 		dao.saveOrUpdateObject(jobRow);
-		
+
 		if (request.isXHR()) {
-	        return jobGridZone.getBody();
-	    } else {
-	        return this;
-	    }
+			return jobGridZone.getBody();
+		} else {
+			return this;
+		}
 	}
 }
