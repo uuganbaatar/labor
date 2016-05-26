@@ -22,7 +22,6 @@ import mn.odi.labor.entities.admin.LavlahGarsan;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.User;
 import mn.odi.labor.entities.labor.Employee;
-import mn.odi.labor.entities.labor.FundingSource;
 import mn.odi.labor.entities.labor.Job;
 
 public class SccDAOHibernate implements SccDAO {
@@ -193,7 +192,8 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param - Ajliin bairnii jagsaalt
+	 * @param -
+	 *            Ajliin bairnii jagsaalt
 	 * @return List<Job>
 	 */
 	public List<Job> getJobList() {
@@ -229,6 +229,7 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
+
 	public List<CompanyTrend> getCompanyTrendList() {
 		try {
 			Criteria crit = session.createCriteria(CompanyTrend.class);
@@ -303,9 +304,10 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
-	
+
 	/**
-	 * @param - Ajiltnii jagsaalt
+	 * @param -
+	 *            Ajiltnii jagsaalt
 	 * @return List<Employee>
 	 */
 	public List<Employee> getEmpList() {
@@ -321,10 +323,10 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
-	
-	public List<FundingSource> getFundingSourceList() {
+
+	public List<AjiliinBairHurungu> getFundingSourceList() {
 		try {
-			Criteria crit = session.createCriteria(FundingSource.class);
+			Criteria crit = session.createCriteria(AjiliinBairHurungu.class);
 
 			if (crit.list().size() > 0)
 				return crit.list();

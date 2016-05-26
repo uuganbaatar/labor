@@ -12,7 +12,6 @@ import mn.odi.labor.entities.admin.LavlahGarsan;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.User;
 import mn.odi.labor.entities.labor.Employee;
-import mn.odi.labor.entities.labor.FundingSource;
 import mn.odi.labor.entities.labor.Job;
 
 public interface SccDAO {
@@ -82,5 +81,5 @@ public interface SccDAO {
 
 	public List<Employee> getEmpList();
 
-	public List<FundingSource> getFundingSourceList();
+	public List<AjiliinBairHurungu> getFundingSourceList();
 }

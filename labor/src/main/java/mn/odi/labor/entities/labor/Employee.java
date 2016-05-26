@@ -14,6 +14,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.hibernate.envers.Audited;
 
+import mn.odi.labor.entities.admin.AjiliinBairHurungu;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.enums.EduLevelEnum;
@@ -74,7 +75,7 @@ public class Employee extends BaseObject {
 
 	@ManyToOne
 	@JoinColumn(name = "fundingsource_id", nullable = true)
-	private FundingSource fundingSource;
+	private AjiliinBairHurungu fundingSource;
 	
 	@Column(name = "currentJob")
 	private String currentJob;
@@ -197,11 +198,11 @@ public class Employee extends BaseObject {
 		this.newJob = newJob;
 	}
 
-	public FundingSource getFundingSource() {
+	public AjiliinBairHurungu getFundingSource() {
 		return fundingSource;
 	}
 
-	public void setFundingSource(FundingSource fundingSource) {
+	public void setFundingSource(AjiliinBairHurungu fundingSource) {
 		this.fundingSource = fundingSource;
 	}
 

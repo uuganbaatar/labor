@@ -17,8 +17,8 @@ import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.admin.AjiliinBairHurungu;
 import mn.odi.labor.entities.admin.GeneralType;
-import mn.odi.labor.entities.labor.FundingSource;
 import mn.odi.labor.entities.labor.Job;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.models.CommonSM;
@@ -54,6 +54,10 @@ public class JobPage {
 	@Persist
 	private JobTypeEnum jobType;
 
+	@Property
+	@Persist
+	private AjiliinBairHurungu fundSrc;
+
 	@Inject
 	private Request request;
 
@@ -69,27 +73,24 @@ public class JobPage {
 		loginState.setPageTitle(message.get("job"));
 		jobList = dao.getJobList();
 	}
-	
+
 	public SelectModel getGeneralTypeModel() {
-		return new CommonSM<GeneralType>(GeneralType.class, dao.getGeneralTypeList(),
-				"getName");
+		return new CommonSM<GeneralType>(GeneralType.class, dao.getGeneralTypeList(), "getName");
 	}
-	
+
 	public SelectModel getFundingSourceModel() {
-		return new CommonSM<FundingSource>(FundingSource.class, dao.getFundingSourceList(),
-				"getName");
+		return new CommonSM<AjiliinBairHurungu>(AjiliinBairHurungu.class, dao.getFundingSourceList(), "getName");
 	}
-	
+
 	public SelectModel getJobTypeModel() {
-		return new CommonSM<GeneralType>(GeneralType.class, dao.getGeneralTypeList(),
-				"getName");
+		return new CommonSM<GeneralType>(GeneralType.class, dao.getGeneralTypeList(), "getName");
 	}
 
 	void onActionFromJobEdit(Job job) {
 		this.job = job;
 		ajaxResponseRenderer.addRender(jobFormZone);
 	}
-	
+
 	void onActionFromJobCancel() {
 		job = new Job();
 		ajaxResponseRenderer.addRender(jobFormZone);

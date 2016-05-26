@@ -18,6 +18,7 @@ import org.apache.tapestry5.beaneditor.NonVisual;
 import org.hibernate.envers.Audited;
 
 import mn.odi.labor.entities.admin.GeneralType;
+import mn.odi.labor.entities.admin.AjiliinBairHurungu;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.enums.JobTypeEnum;
 
@@ -49,7 +50,7 @@ public class Job extends BaseObject {
 	
 	@ManyToOne
 	@JoinColumn(name = "fundingsource_id", nullable = true)
-	public FundingSource fundingSource;
+	public AjiliinBairHurungu fundingSource;
 
 	@ManyToOne
 	@JoinColumn(name = "generaltype_id", nullable = true)
@@ -98,11 +99,11 @@ public class Job extends BaseObject {
 		this.jobDate = jobDate;
 	}
 
-	public FundingSource getFundingSource() {
+	public AjiliinBairHurungu getFundingSource() {
 		return fundingSource;
 	}
 
-	public void setFundingSource(FundingSource fundingSource) {
+	public void setFundingSource(AjiliinBairHurungu fundingSource) {
 		this.fundingSource = fundingSource;
 	}
 
