@@ -105,14 +105,14 @@ a:focus {
 	color: #58666e;
 	text-align: left !important;
 	padding: 20px 30px;
-	position: absolute;
+	position: inherit;
 	right: 0px;
 	left: 240px;
 }
 
 #wrapper {
 	height: 100%;
-	overflow: hidden;
+	overflow: auto;
 	width: 100%;
 }
 
