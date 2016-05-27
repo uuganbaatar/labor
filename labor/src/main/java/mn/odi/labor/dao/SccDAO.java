@@ -13,6 +13,8 @@ import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.User;
 import mn.odi.labor.entities.labor.Employee;
 import mn.odi.labor.entities.labor.Job;
+import mn.odi.labor.entities.labor.Report;
+import mn.odi.labor.entities.labor.ReportStatus;
 
 public interface SccDAO {
 
@@ -66,7 +68,7 @@ public interface SccDAO {
 	public List<User> getUserList();
 
 	public List<Job> getJobList();
-	
+
 	public List<GeneralType> getGeneralTypeList();
 
 	public List<CompanyTrend> getCompanyTrendList();
@@ -76,10 +78,14 @@ public interface SccDAO {
 	public List<CompanyHelber> getLavlahHelberList();
 
 	public List<CompanyStatus> getLavlahStatusList();
-	
+
 	public List<LavlahGarsan> getLavlahEmpGarsanList();
 
 	public List<Employee> getEmpList();
 
 	public List<AjiliinBairHurungu> getFundingSourceList();
+
+	public List<Report> getReportList();
+
+	public ReportStatus getReportStatusList(Report report, Integer year, Integer month);
 }
