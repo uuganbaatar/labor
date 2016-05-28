@@ -35,4 +35,4 @@ encoding//src/main/resources/org/apache/tapestry5/internal/ValidationMessages_mn
 encoding//src/main/webapp/WEB-INF=UTF-8
 encoding//src/main/webapp/WEB-INF/app.properties=UTF-8
 encoding//src/main/webapp/WEB-INF/app_mn.properties=UTF-8
-encoding/<project>=UTF-8
+encoding//src/main/webapp/css/home.css=UTF-8

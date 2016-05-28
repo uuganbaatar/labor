@@ -25,6 +25,8 @@ import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.common.User;
 import mn.odi.labor.entities.labor.Employee;
 import mn.odi.labor.entities.labor.Job;
+import mn.odi.labor.entities.labor.Report;
+import mn.odi.labor.entities.labor.ReportStatus;
 
 public class SccDAOHibernate implements SccDAO {
 	private Session session;
@@ -392,6 +394,43 @@ public class SccDAOHibernate implements SccDAO {
 			query.addEntity(Employee.class);
 			List<Employee> list = query.list();
 			return list;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public List<Report> getReportList() {
+		try {
+			Criteria crit = session.createCriteria(Report.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public ReportStatus getReportStatusList(Report report, Integer year, Integer month) {
+		try {
+			Criteria crit = session.createCriteria(ReportStatus.class);
+
+			if (report != null)
+				crit.add(Restrictions.eq("reportId", report));
+
+			if (year != null)
+				crit.add(Restrictions.eq("year", year));
+
+			if (month != null)
+				crit.add(Restrictions.eq("month", month));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (ReportStatus) crit.list().get(0);
+			else
+				return null;
 
 		} catch (HibernateException e) {
 			return null;

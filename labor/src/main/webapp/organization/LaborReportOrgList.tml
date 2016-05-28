@@ -1,0 +1,75 @@
+<html t:type="layout" title=""
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<div class="row main-contents">
+		<div class="col-md-12">
+			<div class="card-box">
+				<h4 class="text-dark header-title m-t-0">${message:reportList}</h4>
+				<t:Grid
+					class="reporttable table table-striped table-bordered dataTable no-footer table-actions-bar"
+					t:source="list" t:row="row" t:exclude="uuid,createddate,month,year,reportStatus"
+					t:add="jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec">
+					<p:JanCell>
+						<button class="${january}">
+							<i class="${btnClass}"></i>
+						</button>
+					</p:JanCell>
+					<p:FebCell>
+						<button class="${february}">
+							<i class="${btnClass}"></i>
+						</button>
+					</p:FebCell>
+					<p:MarCell>
+						<button class="${march}">
+							<i class="${btnClass}"></i>
+						</button>
+					</p:MarCell>
+					<p:AprCell>
+						<button class="${april}">
+							<i class="${btnClass}"></i>
+						</button>
+					</p:AprCell>
+					<p:MayCell>
+						<button class="${may}">
+							<i class="${btnClass}"></i>
+						</button>
+					</p:MayCell>
+					<p:JunCell>
+						<button class="${june}">
+							<i class="${btnClass}"></i>
+						</button>
+					</p:JunCell>
+					<p:JulCell>
+						<button class="${july}">
+							<i class="${btnClass}"></i>
+						</button>
+					</p:JulCell>
+					<p:AugCell>
+						<button class="${august}">
+							<i class="${btnClass}"></i>
+						</button>
+					</p:AugCell>
+					<p:SepCell>
+						<button class="${september}">
+							<i class="${btnClass}"></i>
+						</button>
+					</p:SepCell>
+					<p:OctCell>
+						<button class="${october}">
+							<i class="${btnClass}"></i>
+						</button>
+					</p:OctCell>
+					<p:NovCell>
+						<button class="${november}">
+							<i class="${btnClass}"></i>
+						</button>
+					</p:NovCell>
+					<p:DecCell>
+						<button class="${december}">
+							<i class="${btnClass}"></i>
+						</button>
+					</p:DecCell>
+				</t:Grid>
+			</div>
+		</div>
+	</div>
+</html>
