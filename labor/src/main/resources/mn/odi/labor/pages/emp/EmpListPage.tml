@@ -14,49 +14,62 @@
 		<div class="slidingDiv row main-contents">
 			<div class="col-md-12">
 				<div class="card-box">
-					<div class="col-md-4">
-						<div class="form-group">
-							<label>${message:jobType}</label> <input type="text"
-								class="form-control" placeholder="${message:jobType}" />
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label>${message:job}</label> <input type="text"
-								class="form-control" placeholder="${message:job}" />
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label>${message:company}</label> <input type="text"
-								class="form-control" placeholder="${message:company}" />
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label>${message:phone}</label> <input type="text"
-								class="form-control" placeholder="${message:phone}" />
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label>${message:regDate}</label> <input type="text"
-								class="form-control" placeholder="${message:regDate}" />
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label>${message:fullName}</label> <input type="text"
-								class="form-control" placeholder="${message:fullName}" />
-						</div>
-					</div>
-					<div class="col-md-12 text-center">
-						<button type="button"
-							class="btn btn-padding btn-grey waves-effect waves-light">${message:clear}</button>
-						<button type="button"
-							class="btn btn-padding btn-success waves-effect waves-light">${message:seeFilter}</button>
-					</div>
+					
+					<t:zone t:id="empFilterZone">
+						<form t:id="empFilterForm" t:type="form" >
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>${message:job-label}</label> <input
+											t:type="select" class="form-control" t:id="job"
+											t:model="jobModel" t:value="emp.job" t:blankOption="always" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>${message:org-label}</label> <input
+											t:type="select" class="form-control" t:id="org"
+											t:model="orgModel" t:value="emp.org" t:blankOption="always" />
+								</div>
+							</div>
+							<!--
+								<div class="col-md-4">
+									<div class="form-group">
+										<label>${message:regDate}</label> 
+										<input t:type="datefield" t:id="date" t:value="emp.createdDate"
+												t:class="form-control" id="datepicker" /> 
+									</div>
+								</div>
+							-->
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>${message:surName-label}</label> <input t:type="textfield"
+										class="form-control" t:id="surName" t:value="emp.surName" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>${message:name-label}</label> <input t:type="textfield"
+										class="form-control" t:id="empName" t:value="emp.empName" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>${message:phone-label}</label> <input t:type="textfield"
+										class="form-control" t:id="phone" t:value="emp.phone" />
+								</div>
+							</div>
+							<div class="col-md-12 text-center">
+								<t:actionlink t:id="clearBtn" zone="empFilterZone"
+									class="btn btn-padding btn-grey waves-effect waves-light">
+											${message:clear}
+										</t:actionlink>
+								<t:Submit class="btn btn-padding btn-success"
+									value="${message:seeFilter}" />
+							</div>
+						</form>
+					</t:zone>
 					<div class="clearfix"></div>
+					
 				</div>
 			</div>
 		</div>
@@ -79,28 +92,30 @@
 			<div class="row">
 				<div class="col-sm-12">
 
-					<t:Grid
-						class="table table-striped table-bordered dataTable no-footer table-actions-bar"
-						t:source="empList" t:row="empRow" t:add="job, org, edit"
-						t:exclude="uuid, regNumber, familyName, surName, empName, gender, eduLevel, profession, employment, newJob, currentJob, uamatCode, movement, firedReason"
-						t:reorder="fullName, job, org, phone, createddate">
-						<p:JobCell>
-								${empRow?.job?.jobName}
-						</p:JobCell>
-						<p:OrgCell>
-								${empRow?.org?.name}
-						</p:OrgCell>
-						<p:EditCell>
-							<t:pagelink t:page="emp/EmpAddPage" t:id="empEdit"
-								t:context="empRow" class="table-action-btn ">
-								<i class="md md-edit"></i>
-							</t:pagelink>
-							<t:actionlink t:id="empDelete" t:context="empRow"
-								class="table-action-btn ">
-								<i class="md md-close"></i>
-							</t:actionlink>
-						</p:EditCell>
-					</t:Grid>
+					<t:zone t:id="empGridZone">
+						<t:Grid
+							class="table table-striped table-bordered dataTable no-footer table-actions-bar"
+							t:source="empList" t:row="empRow" t:add="job, org, edit"
+							t:exclude="uuid, regNumber, familyName, surName, empName, gender, eduLevel, profession, employment, uamatCode, movement, firedReason"
+							t:reorder="fullName, job, org, phone, createddate">
+							<p:JobCell>
+									${empRow?.job?.jobName}
+							</p:JobCell>
+							<p:OrgCell>
+									${empRow?.org?.name}
+							</p:OrgCell>
+							<p:EditCell>
+								<t:pagelink t:page="emp/EmpAddPage" t:id="empEdit"
+									t:context="empRow" class="table-action-btn">
+									<i class="md md-edit"></i>
+								</t:pagelink>
+								<t:actionlink t:id="empDelete" t:context="empRow"
+									class="table-action-btn">
+									<i class="md md-close"></i>
+								</t:actionlink>
+							</p:EditCell>
+						</t:Grid>
+					</t:zone>
 				</div>
 			</div>
 

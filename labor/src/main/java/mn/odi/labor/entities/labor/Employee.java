@@ -14,13 +14,14 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.hibernate.envers.Audited;
 
-import mn.odi.labor.entities.admin.AjiliinBairHurungu;
+import mn.odi.labor.entities.admin.LavlahGarsan;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.enums.EduLevelEnum;
+import mn.odi.labor.enums.EmpMovementEnum;
 import mn.odi.labor.enums.EmploymentEnum;
 import mn.odi.labor.enums.GenderEnum;
-import mn.odi.labor.enums.YesNoEnum;
+import mn.odi.labor.util.UUIDUtil;
 
 @Entity
 @Table(name = "employee")
@@ -29,7 +30,7 @@ import mn.odi.labor.enums.YesNoEnum;
 public class Employee extends BaseObject {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@NonVisual
 	@GeneratedValue
@@ -53,7 +54,7 @@ public class Employee extends BaseObject {
 
 	@Column(name = "gender")
 	private GenderEnum gender;
-	
+
 	@Column(name = "phone")
 	private String phone;
 
@@ -69,30 +70,28 @@ public class Employee extends BaseObject {
 	@ManyToOne
 	@JoinColumn(name = "job_id", nullable = true)
 	private Job job;
-	
-	@Column(name = "newJob")
-	private YesNoEnum newJob;
-
-	@ManyToOne
-	@JoinColumn(name = "fundingsource_id", nullable = true)
-	private AjiliinBairHurungu fundingSource;
-	
-	@Column(name = "currentJob")
-	private String currentJob;
 
 	@Column(name = "uamatCode")
 	private String uamatCode;
-	
+
 	@Column(name = "movement")
-	private String movement;
-	
-	@Column(name = "firedReason")
-	private String firedReason;
+	private EmpMovementEnum movement;
+
+	@ManyToOne
+	@JoinColumn(name = "firedreason_id", nullable = true)
+	private LavlahGarsan firedReason;
 
 	@ManyToOne
 	@JoinColumn(name = "org_id", nullable = true)
 	private Organization org;
-	
+
+	public Employee() {
+		this.uuid = UUIDUtil.getUUID();
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public Long getId() {
 		return id;
@@ -190,30 +189,6 @@ public class Employee extends BaseObject {
 		this.job = job;
 	}
 
-	public YesNoEnum getNewJob() {
-		return newJob;
-	}
-
-	public void setNewJob(YesNoEnum newJob) {
-		this.newJob = newJob;
-	}
-
-	public AjiliinBairHurungu getFundingSource() {
-		return fundingSource;
-	}
-
-	public void setFundingSource(AjiliinBairHurungu fundingSource) {
-		this.fundingSource = fundingSource;
-	}
-
-	public String getCurrentJob() {
-		return currentJob;
-	}
-
-	public void setCurrentJob(String currentJob) {
-		this.currentJob = currentJob;
-	}
-
 	public String getUamatCode() {
 		return uamatCode;
 	}
@@ -222,19 +197,19 @@ public class Employee extends BaseObject {
 		this.uamatCode = uamatCode;
 	}
 
-	public String getMovement() {
+	public EmpMovementEnum getMovement() {
 		return movement;
 	}
 
-	public void setMovement(String movement) {
+	public void setMovement(EmpMovementEnum movement) {
 		this.movement = movement;
 	}
 
-	public String getFiredReason() {
+	public LavlahGarsan getFiredReason() {
 		return firedReason;
 	}
 
-	public void setFiredReason(String firedReason) {
+	public void setFiredReason(LavlahGarsan firedReason) {
 		this.firedReason = firedReason;
 	}
 
@@ -246,14 +221,10 @@ public class Employee extends BaseObject {
 		this.org = org;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-	public String getFullName(){
+	public String getFullName() {
 		return this.surName + " " + this.empName;
 	}
-	
+
 	// ********************** Common Methods ********************** //
 
 	@Override

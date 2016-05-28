@@ -8,160 +8,140 @@
 			<h4 class="text-dark header-title m-t-0">${message:empDetail}</h4>
 
 			<div class="title-1">${message:personalInfo}</div>
-			<form t:type="form" t:id="validate" class="form">
+			<form t:type="form" t:id="empForm">
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:RegNumber}</label> <input t:type="textfield"
-							class="form-control" t:id="regNumber"
+						<label>${message:RegNumber-label}</label> <input t:type="textfield"
+							class="form-control" t:id="regNumber" t:validate="required"
 							t:value="emp.regNumber" />
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group check-register-number">
-						<button type="button"
-							class="btn btn-padding btn-primary waves-effect waves-light">${message:check}</button>
+						<t:actionlink t:id="checkReg"
+							class="btn btn-padding btn-primary waves-effect waves-light">
+									${message:check}
+						</t:actionlink>
 					</div>
 				</div>
 				<div class="clearfix"></div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:familyName}</label> <input t:type="textfield"
-							class="form-control" t:id="familyName"
+						<label>${message:familyName-label}</label> <input t:type="textfield"
+							class="form-control" t:id="familyName" t:validate="required"
 							t:value="emp.familyName" />
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:surName}</label> <input t:type="textfield"
-							class="form-control" t:id="surName"
+						<label>${message:surName-label}</label> <input t:type="textfield"
+							class="form-control" t:id="surName" t:validate="required"
 							t:value="emp.surName" />
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:name}</label> <input t:type="textfield"
-							class="form-control" t:id="empName"
+						<label>${message:name-label}</label> <input t:type="textfield"
+							class="form-control" t:id="empName" t:validate="required"
 							t:value="emp.empName" />
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:gender}</label> <select class="form-control">
-							<option>${message:select}</option>
-							<option>Er</option>
-							<option>Em</option>
-						</select>
+						<label>${message:gender-label}</label> <input
+								t:type="select" class="form-control" t:id="gender"
+								t:model="genderModel" t:value="emp.gender" t:validate="required"
+								t:blankOption="always" />
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>${message:phone-label}</label> <input t:type="textfield"
+							class="form-control" t:id="phone" t:validate="required"
+							t:value="emp.phone" />
 					</div>
 				</div>
 
 				<div class="clearfix"></div>
-				<div class="title-1">${message:education}</div>
+				<div class="title-1">${message:education-label}</div>
 
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:eduLevel}</label> <select class="form-control">
-							<option>${message:select}</option>
-							<option>Dund</option>
-							<option>Buren dund</option>
-							<option>Bachelor</option>
-							<option>Master</option>
-							<option>Phd</option>
-						</select>
+						<label>${message:eduLevel-label}</label> <input
+								t:type="select" class="form-control" t:id="eduLevel"
+								t:model="eduLevelModel" t:value="emp.eduLevel" t:validate="required"
+								t:blankOption="always" />
 					</div>
 				</div>
 
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:profession}</label> <input type="text"
-							class="form-control" placeholder="${message:profession}" />
+						<label>${message:profession-label}</label> <input t:type="textfield"
+							class="form-control" t:id="profession" t:validate="required"
+							t:value="emp.profession" />
 					</div>
 				</div>
 
 				<div class="clearfix"></div>
-				<div class="title-1">${message:employment}</div>
+				<div class="title-1">${message:employment-label}</div>
 
 
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:employmentStatus}</label> <select
-							class="form-control">
-							<option>${message:select}</option>
-							<option>Ajiltai</option>
-							<option>Ajilgui</option>
-						</select>
+						<label>${message:employmentStatus-label}</label> <input
+								t:type="select" class="form-control" t:id="employment"
+								t:model="employmentModel" t:value="emp.employment" t:validate="required"
+								t:blankOption="always" />
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:jobType}</label> <select class="form-control">
-							<option>${message:select}</option>
-							<option>Mergejilten</option>
-							<option>Manager</option>
-						</select>
+						<label>${message:job-label}</label> <input
+								t:type="select" class="form-control" t:id="job"
+								t:model="jobModel" t:value="emp.job" t:validate="required"
+								t:blankOption="always" />
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:workForNewJob}</label> <select
-							class="form-control">
-							<option>${message:workForNewJob}</option>
-							<option>Yes</option>
-							<option>No</option>
-						</select>
+						<label>${message:org-label}</label> <input
+								t:type="select" class="form-control" t:id="org"
+								t:model="orgModel" t:value="emp.org" t:validate="required"
+								t:blankOption="always" />
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:newJobSource}</label> <select
-							class="form-control">
-							<option>${message:select}</option>
-							<option>Huviin</option>
-							<option>Tusviin hurungu oruulalt</option>
-							<option>Gadaadiin hurungu oruulalt</option>
-							<option>Busad</option>
-						</select>
+						<label>${message:uamatCode-label} &nbsp; <span class="red-text">${message:onlyHEB}</span></label>
+						<input t:type="textfield"
+							class="form-control" t:id="uamatCode" disabled="disabled"
+							t:value="emp.uamatCode" />
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:currentPosition}</label> <select
-							class="form-control">
-							<option>${message:select}</option>
-							<option>Boss</option>
-							<option>Manager</option>
-						</select>
+						<label>${message:empMovement-label}</label> <input
+								t:type="select" class="form-control" t:id="movement"
+								t:model="movementModel" t:value="emp.movement" t:validate="required"
+								t:blankOption="always" />
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:uamatCode}<span class="red-text">${message:onlyHEB}</span></label>
-						<input type="text" class="form-control" disabled=""
-							value="${message:uamatCode}" />
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>${message:empMovement}</label> <select class="form-control">
-							<option>${message:select}</option>
-						</select>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="form-group">
-						<label>${message:firedReason}</label> <select class="form-control">
-							<option>${message:select}</option>
-							<option>Tanhai</option>
-						</select>
+						<label>${message:firedReason-label}</label>  <input
+								t:type="select" class="form-control" t:id="firedReason"
+								t:model="firedReasonModel" t:value="emp.firedReason"
+								t:blankOption="always" />
 					</div>
 				</div>
 
 				<div class="clearfix"></div>
 				<div class="hairly-line"></div>
 				<div class="col-md-12 text-center">
-					<a href="worker.html"><button type="button"
+					<a t:type="eventlink" t:event="cancel"><button type="button"
 							class="btn btn-padding btn-grey waves-effect waves-light">${message:back}</button></a>
-					<button type="button"
-						class="btn btn-padding btn-success waves-effect waves-light">${message:save}</button>
+					<t:Submit class="btn btn-padding btn-success"
+							value="${message:save}" />
 				</div>
 				<div class="clearfix"></div>
 
