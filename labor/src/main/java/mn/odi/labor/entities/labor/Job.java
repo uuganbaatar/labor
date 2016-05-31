@@ -21,6 +21,7 @@ import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.admin.AjiliinBairHurungu;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.enums.JobTypeEnum;
+import mn.odi.labor.util.UUIDUtil;
 
 @Entity
 @Table(name = "job")
@@ -29,7 +30,7 @@ import mn.odi.labor.enums.JobTypeEnum;
 public class Job extends BaseObject {
 
 	public static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@NonVisual
 	@GeneratedValue
@@ -41,13 +42,13 @@ public class Job extends BaseObject {
 
 	@Column(name = "name")
 	public String jobName;
-	
+
 	@Column(name = "isNew")
 	public Boolean isNew;
-	
+
 	@Column(name = "jobDate")
 	public Date jobDate;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "fundingsource_id", nullable = true)
 	public AjiliinBairHurungu fundingSource;
@@ -55,9 +56,13 @@ public class Job extends BaseObject {
 	@ManyToOne
 	@JoinColumn(name = "generaltype_id", nullable = true)
 	public GeneralType generalType;
-	
+
 	@Column(name = "jobType")
 	public JobTypeEnum jobType;
+
+	public Job() {
+		this.uuid = UUIDUtil.getUUID();
+	}
 
 	public Long getId() {
 		return id;
@@ -111,7 +116,7 @@ public class Job extends BaseObject {
 		return generalType;
 	}
 
-	public void setProfessionType(GeneralType generalType) {
+	public void setGeneralType(GeneralType generalType) {
 		this.generalType = generalType;
 	}
 
@@ -122,11 +127,11 @@ public class Job extends BaseObject {
 	public void setJobType(JobTypeEnum jobType) {
 		this.jobType = jobType;
 	}
-	
-	public String getDateFormated(){
+
+	public String getDateFormated() {
 		return new SimpleDateFormat("yyyy-MM-dd").format(jobDate);
 	}
-	
+
 	// ********************** Common Methods ********************** //
 
 	@Override
@@ -163,7 +168,8 @@ public class Job extends BaseObject {
 
 	@Override
 	public int hashCode() {
-		return getUuid().hashCode();
+		return 0;
 	}
 
+	
 }

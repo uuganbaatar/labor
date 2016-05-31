@@ -220,7 +220,7 @@ public class Organization extends BaseObject {
 
 	@Override
 	public int hashCode() {
-		return getUuid().hashCode();
+		return 0;
 	}
 
 	@Override

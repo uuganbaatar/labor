@@ -8,6 +8,7 @@ import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
@@ -22,6 +23,7 @@ import mn.odi.labor.entities.admin.CompanyTrend;
 import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.admin.LavlahGarsan;
 import mn.odi.labor.entities.common.BaseObject;
+import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.common.User;
 import mn.odi.labor.entities.labor.Employee;
 import mn.odi.labor.entities.labor.Job;
@@ -339,6 +341,64 @@ public class SccDAOHibernate implements SccDAO {
 				return crit.list();
 			else
 				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+	
+	public List<Organization> getOrgList(){
+		try {
+			Criteria crit = session.createCriteria(Organization.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+	
+	public List<Employee> getEmpFilter(Employee emp){
+		
+		try {
+			String sql = "SELECT employee.* FROM employee WHERE employee.deleted_by_id IS NULL";
+
+			if(emp != null) {
+
+				if(emp.getJob() != null){
+					sql += " AND employee.job_id = " + emp.getJob().getId();
+				}
+
+				if(emp.getOrg() != null){
+					sql += " AND employee.org_id = " + emp.getOrg().getId();
+				}
+
+				if(emp.getCreatedDate() != null){
+					sql += " AND employee.created_date = " + emp.getCreatedDate();
+				}
+
+				if(emp.getPhone() != null){
+					sql += " AND employee.phone = " + emp.getPhone();
+				}
+
+				if(emp.getSurName() != null){
+					sql += " AND employee.surname LIKE " + emp.getSurName();
+				}
+
+				if(emp.getEmpName() != null){
+					sql += " AND employee.empname LIKE " + emp.getEmpName();
+				}
+			}
+			
+			sql += " ORDER BY employee.empname";
+			
+			SQLQuery query = session.createSQLQuery(sql);
+			query.addEntity(Employee.class);
+			List<Employee> list = query.list();
+			return list;
 
 		} catch (HibernateException e) {
 			return null;

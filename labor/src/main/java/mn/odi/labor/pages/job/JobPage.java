@@ -2,11 +2,14 @@ package mn.odi.labor.pages.job;
 
 import java.util.List;
 
+import org.apache.tapestry5.ComponentResources;
+import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.beaneditor.Validate;
 import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
@@ -14,6 +17,7 @@ import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
+import org.apache.tapestry5.util.EnumSelectModel;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
@@ -38,12 +42,13 @@ public class JobPage {
 	private Zone jobFormZone, jobGridZone;
 
 	@InjectComponent
-	private Form ajaxForm;
+	private Form jobAddForm;
 
 	@Property
 	private List<Job> jobList;
 
 	@Property
+	@Persist
 	private Job jobRow;
 
 	@Property
@@ -51,12 +56,9 @@ public class JobPage {
 	private Job job;
 
 	@Property
-	@Persist
+	@Persist(PersistenceConstants.FLASH)
+	@Validate("required")
 	private JobTypeEnum jobType;
-
-	@Property
-	@Persist
-	private AjiliinBairHurungu fundSrc;
 
 	@Inject
 	private Request request;
@@ -64,10 +66,16 @@ public class JobPage {
 	@Inject
 	private AjaxResponseRenderer ajaxResponseRenderer;
 
-	@CommitAfter
-	void beginRender() {
-		if (job == null)
+	@Inject
+	private ComponentResources resources;
+
+	@Property
+	private boolean newCheck;
+
+	void onActivate() {
+		if (job == null) {
 			job = new Job();
+		}
 
 		loginState.setActiveMenu("job");
 		loginState.setPageTitle(message.get("job"));
@@ -83,7 +91,7 @@ public class JobPage {
 	}
 
 	public SelectModel getJobTypeModel() {
-		return new CommonSM<GeneralType>(GeneralType.class, dao.getGeneralTypeList(), "getName");
+		return new EnumSelectModel(JobTypeEnum.class, resources.getMessages());
 	}
 
 	void onActionFromJobEdit(Job job) {
@@ -96,10 +104,32 @@ public class JobPage {
 		ajaxResponseRenderer.addRender(jobFormZone);
 	}
 
-	Object onSubmit() {
+	@CommitAfter
+	Object onActionFromJobDelete(Job job) {
+		dao.deleteObject(job);
+		job = new Job();
+		jobList = dao.getJobList();
+		
+		if (request.isXHR()) {
+			return jobGridZone.getBody();
+		} else {
+			return this;
+		}
+	}
+
+	@CommitAfter
+	Object onSuccessFromJobAddForm() {
+
+		if (newCheck) {
+			job.setIsNew(true);
+		} else {
+			job.setIsNew(false);
+		}
+
 		dao.saveOrUpdateObject(job);
 		job = new Job();
 		jobList = dao.getJobList();
+		
 		if (request.isXHR()) {
 			return jobGridZone.getBody();
 		} else {

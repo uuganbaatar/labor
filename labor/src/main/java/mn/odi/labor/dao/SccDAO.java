@@ -10,6 +10,7 @@ import mn.odi.labor.entities.admin.CompanyTrend;
 import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.admin.LavlahGarsan;
 import mn.odi.labor.entities.common.BaseObject;
+import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.common.User;
 import mn.odi.labor.entities.labor.Employee;
 import mn.odi.labor.entities.labor.Job;
@@ -87,6 +88,10 @@ public interface SccDAO {
 	public List<Employee> getEmpList();
 
 	public List<AjiliinBairHurungu> getFundingSourceList();
+
+	public List<Organization> getOrgList();
+	
+	public List<Employee> getEmpFilter(Employee emp);
 
 	public List<Report> getReportList();
 

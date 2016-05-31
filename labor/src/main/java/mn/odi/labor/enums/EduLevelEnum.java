@@ -1,7 +1,7 @@
 package mn.odi.labor.enums;
 
 public enum EduLevelEnum {
-	DUND(0), BURENDUND(1), BACHELOR(2), MASTER(3), PHD(4);
+	BOLOVSROLGUI(0), BAGA(1), SUURI(2), BURENDUND(3), TECHNICAL(4), SPECIAL(5), BACHELOR(6), MASTER(7), PHD(8);
 
 	private final int val;
 
