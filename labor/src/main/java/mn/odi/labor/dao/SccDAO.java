@@ -14,7 +14,10 @@ import mn.odi.labor.entities.common.User;
 import mn.odi.labor.entities.labor.Employee;
 import mn.odi.labor.entities.labor.Job;
 import mn.odi.labor.entities.labor.Report;
+import mn.odi.labor.entities.labor.ReportDetail;
 import mn.odi.labor.entities.labor.ReportStatus;
+import mn.odi.labor.enums.JobTypeEnum;
+import mn.odi.labor.enums.ReportDetailType;
 
 public interface SccDAO {
 
@@ -88,4 +91,12 @@ public interface SccDAO {
 	public List<Report> getReportList();
 
 	public ReportStatus getReportStatusList(Report report, Integer year, Integer month);
+
+	public List<ReportDetail> getReportDetailList();
+
+	public ReportDetail getReportDetailListWithParameter(GeneralType generalType, ReportDetailType detailType,
+			JobTypeEnum jobType, Integer year, Integer month);
+
+	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
+			Integer month);
 }

@@ -17,6 +17,7 @@ import org.hibernate.envers.Audited;
 import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.enums.JobTypeEnum;
+import mn.odi.labor.enums.ReportDetailType;
 
 @Entity
 @Table(name = "report_detail")
@@ -49,6 +50,12 @@ public class ReportDetail extends BaseObject {
 	@ManyToOne
 	@JoinColumn(name = "report_status_id")
 	public ReportStatus reportStatusId;
+
+	@Column(name = "detail_type")
+	public ReportDetailType detailType;
+
+	@Column(name = "value")
+	public Integer value;
 
 	public Long getId() {
 		return id;
@@ -95,8 +102,6 @@ public class ReportDetail extends BaseObject {
 	public void setGeneralType(GeneralType generalType) {
 		this.generalType = generalType;
 	}
-	
-	
 
 	public ReportStatus getReportStatusId() {
 		return reportStatusId;
@@ -109,6 +114,22 @@ public class ReportDetail extends BaseObject {
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("id", this.id).append("uuid", this.uuid).toString();
+	}
+
+	public ReportDetailType getDetailType() {
+		return detailType;
+	}
+
+	public void setDetailType(ReportDetailType detailType) {
+		this.detailType = detailType;
+	}
+
+	public Integer getValue() {
+		return value;
+	}
+
+	public void setValue(Integer value) {
+		this.value = value;
 	}
 
 	@Override

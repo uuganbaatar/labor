@@ -1,0 +1,131 @@
+<html t:type="layout" title=""
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<div class="row main-contents">
+		<div class="col-md-12">
+			<div class="card-box">
+				<h4 class="text-dark header-title m-t-0">${message:lavlahgeneraltype}</h4>
+				<t:Form>
+					<div class="insert-report">
+						<div style="width:18%;float:left;margin-right:10px;">
+							<div class="form-group">
+								<label>${message:mergejil}</label>
+								<t:select class="form-control" model="generalTypeSM"
+									value="reportDetail.generalType" />
+							</div>
+						</div>
+						<div style="width:18%;float:left;margin-right:10px;">
+							<div class="form-group">
+								<label>${message:jobType-label}</label>
+								<t:select class="form-control" model="reportTypeEnum"
+									value="reportDetail.detailType" />
+							</div>
+						</div>
+						<div style="width:18%;float:left;margin-right:10px;">
+							<div class="form-group">
+								<label>${message:hugatsaa}</label>
+								<t:select class="form-control" model="jobTypeEnum"
+									value="reportDetail.jobType" />
+							</div>
+						</div>
+						<div style="width:18%;float:left;margin-right:10px;">
+							<div class="form-group">
+								<label>${message:orontoo}</label>
+								<t:TextField class="form-control" t:value="reportDetail.value" />
+							</div>
+						</div>
+						<div style="float:left;margin-top:28px;">
+							<button type="submit" class="btn btn-success waves-effect waves-light"
+								style="float:left;margin-right:10px;">
+								<span class="btn-label">
+									<i class="glyphicon glyphicon-plus"></i>
+								</span>
+								${message:insert}
+							</button>
+							<button class="btn btn-primary waves-effect waves-light"
+								style="float:right">${message:nochange}</button>
+							<!-- </button> -->
+						</div>
+					</div>
+				</t:Form>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="row main-contents">
+			<div class="col-md-12">
+				<div class="card-box">
+					<t:zone t:id="listZone" id="listZone">
+						<table class="table-bordered table table-report table-striped">
+							<thead>
+								<tr>
+									<th rowspan="2"></th>
+									<th rowspan="2"></th>
+									<th colspan="4" class="text-center">
+										${message:ajliinBairniiToo}
+										<br></br>
+										${message:hugatsaaniiEhend}
+									</th>
+									<th colspan="4" class="text-center">
+										${message:NEMEGDSEN}
+										<br></br>
+										${message:tailantHugatsaand}
+									</th>
+									<th colspan="4" class="text-center">
+										${message:HASAGDSAN}
+										<br></br>
+										${message:tailantHugatsaand}
+									</th>
+									<th colspan="4" class="text-center">
+										${message:ajliinBairniiToo}
+										<br></br>
+										${message:hugatsaaniiEtstest}
+									</th>
+								</tr>
+								<tr>
+									<th class="text-center">${message:NIIT}</th>
+									<th class="text-center">${message:PERMANENT}</th>
+									<th class="text-center">${message:QUARTERLY}</th>
+									<th class="text-center">${message:TEMPORARAY}</th>
+									<th class="text-center">${message:NIIT}</th>
+									<th class="text-center">${message:PERMANENT}</th>
+									<th class="text-center">${message:QUARTERLY}</th>
+									<th class="text-center">${message:TEMPORARAY}</th>
+									<th class="text-center">${message:NIIT}</th>
+									<th class="text-center">${message:PERMANENT}</th>
+									<th class="text-center">${message:QUARTERLY}</th>
+									<th class="text-center">${message:TEMPORARAY}</th>
+									<th class="text-center">${message:NIIT}</th>
+									<th class="text-center">${message:PERMANENT}</th>
+									<th class="text-center">${message:QUARTERLY}</th>
+									<th class="text-center">${message:TEMPORARAY}</th>
+								</tr>
+							</thead>
+							<t:Loop t:source="list" t:value="row">
+								<tr>
+									<td>${row?.name}</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>${addedTotal}</td>
+									<td>${addedPer}</td>
+									<td>${addedQua}</td>
+									<td>${addedTemp}</td>
+									<td>${removedTotal}</td>
+									<td>${removedPer}</td>
+									<td>${removedQua}</td>
+									<td>${removedTemp}</td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+								</tr>
+							</t:Loop>
+						</table>
+					</t:zone>
+				</div>
+			</div>
+		</div>
+	</div>
+</html>

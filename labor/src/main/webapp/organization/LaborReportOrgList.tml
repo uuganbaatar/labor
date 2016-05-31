@@ -10,62 +10,98 @@
 					t:add="jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec">
 					<p:JanCell>
 						<button class="${january}">
-							<i class="${btnClass}"></i>
+							<t:ActionLink t:id="janAction" style="color:white;"
+								t:context="row" disabled="${isaction}">
+								<i class="${btnClass}"></i>
+							</t:ActionLink>
 						</button>
 					</p:JanCell>
 					<p:FebCell>
 						<button class="${february}">
-							<i class="${btnClass}"></i>
+							<t:ActionLink t:id="febAction" style="color:white;"
+								t:context="row" disabled="${isaction}">
+								<i class="${btnClass}"></i>
+							</t:ActionLink>
 						</button>
 					</p:FebCell>
 					<p:MarCell>
 						<button class="${march}">
-							<i class="${btnClass}"></i>
+							<t:ActionLink t:id="marAction" style="color:white;"
+								t:context="row" disabled="${isaction}">
+								<i class="${btnClass}"></i>
+							</t:ActionLink>
 						</button>
 					</p:MarCell>
 					<p:AprCell>
 						<button class="${april}">
-							<i class="${btnClass}"></i>
+							<t:ActionLink t:id="aprAction" style="color:white;"
+								t:context="row" disabled="${isaction}">
+								<i class="${btnClass}"></i>
+							</t:ActionLink>
 						</button>
 					</p:AprCell>
 					<p:MayCell>
 						<button class="${may}">
-							<i class="${btnClass}"></i>
+							<t:ActionLink t:id="mayAction" style="color:white;"
+								t:context="row" disabled="${isaction}">
+								<i class="${btnClass}"></i>
+							</t:ActionLink>
 						</button>
 					</p:MayCell>
 					<p:JunCell>
 						<button class="${june}">
-							<i class="${btnClass}"></i>
+							<t:ActionLink t:id="junAction" style="color:white;"
+								t:context="row" disabled="${isaction}">
+								<i class="${btnClass}"></i>
+							</t:ActionLink>
 						</button>
 					</p:JunCell>
 					<p:JulCell>
 						<button class="${july}">
-							<i class="${btnClass}"></i>
+							<t:ActionLink t:id="julAction" style="color:white;"
+								t:context="row" disabled="${isaction}">
+								<i class="${btnClass}"></i>
+							</t:ActionLink>
 						</button>
 					</p:JulCell>
 					<p:AugCell>
 						<button class="${august}">
-							<i class="${btnClass}"></i>
+							<t:ActionLink t:id="augAction" style="color:white;"
+								t:context="row" disabled="${isaction}">
+								<i class="${btnClass}"></i>
+							</t:ActionLink>
 						</button>
 					</p:AugCell>
 					<p:SepCell>
 						<button class="${september}">
-							<i class="${btnClass}"></i>
+							<t:ActionLink t:id="sepAction" style="color:white;"
+								t:context="row" disabled="${isaction}">
+								<i class="${btnClass}"></i>
+							</t:ActionLink>
 						</button>
 					</p:SepCell>
 					<p:OctCell>
 						<button class="${october}">
-							<i class="${btnClass}"></i>
+							<t:ActionLink t:id="octAction" style="color:white;"
+								t:context="row" disabled="${isaction}">
+								<i class="${btnClass}"></i>
+							</t:ActionLink>
 						</button>
 					</p:OctCell>
 					<p:NovCell>
 						<button class="${november}">
-							<i class="${btnClass}"></i>
+							<t:ActionLink t:id="novAction" style="color:white;"
+								t:context="row" disabled="${isaction}">
+								<i class="${btnClass}"></i>
+							</t:ActionLink>
 						</button>
 					</p:NovCell>
 					<p:DecCell>
 						<button class="${december}">
-							<i class="${btnClass}"></i>
+							<t:ActionLink t:id="decAction" style="color:white;"
+								t:context="row" disabled="${isaction}">
+								<i class="${btnClass}"></i>
+							</t:ActionLink>
 						</button>
 					</p:DecCell>
 				</t:Grid>

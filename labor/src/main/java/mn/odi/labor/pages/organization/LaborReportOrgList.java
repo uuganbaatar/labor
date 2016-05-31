@@ -3,6 +3,7 @@ package mn.odi.labor.pages.organization;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
@@ -59,6 +60,12 @@ public class LaborReportOrgList {
 
 	private final String lockButton = "btn btn-icon waves-effect waves-light btn-inverse report-button disabled";
 
+	@Property
+	private boolean isaction = false;
+
+	@InjectPage
+	private LaborReportInsert insertPage;
+
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("report");
@@ -98,6 +105,7 @@ public class LaborReportOrgList {
 			}
 		} else {
 			btnClass = lock;
+			isaction = true;
 			return lockButton;
 		}
 	}
@@ -148,6 +156,150 @@ public class LaborReportOrgList {
 
 	public String getDecember() {
 		return this.getStatus(12);
+	}
+
+	public Object onActionFromJanAction(Report r) {
+		if (dao.getReportStatusList(r, year, 1) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 1));
+		else {
+			ReportStatus t = new ReportStatus();
+			t.setYear(year);
+			t.setMonth(1);
+			insertPage.onActivate(t);
+		}
+		return insertPage;
+	}
+
+	public Object onActionFromFebAction(Report r) {
+		if (dao.getReportStatusList(r, year, 2) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 2));
+		else {
+			ReportStatus t = new ReportStatus();
+			t.setYear(year);
+			t.setMonth(2);
+			insertPage.onActivate(t);
+		}
+		return insertPage;
+	}
+
+	public Object onActionFromMarAction(Report r) {
+		if (dao.getReportStatusList(r, year, 3) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 3));
+		else {
+			ReportStatus t = new ReportStatus();
+			t.setYear(year);
+			t.setMonth(3);
+			insertPage.onActivate(t);
+		}
+		return insertPage;
+	}
+
+	public Object onActionFromAprAction(Report r) {
+		if (dao.getReportStatusList(r, year, 4) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 4));
+		else {
+			ReportStatus t = new ReportStatus();
+			t.setYear(year);
+			t.setMonth(4);
+			insertPage.onActivate(t);
+		}
+		return insertPage;
+	}
+
+	public Object onActionFromMayAction(Report r) {
+		if (dao.getReportStatusList(r, year, 5) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 5));
+		else {
+			ReportStatus t = new ReportStatus();
+			t.setYear(year);
+			t.setMonth(5);
+			insertPage.onActivate(t);
+		}
+		return insertPage;
+	}
+
+	public Object onActionFromJunAction(Report r) {
+		if (dao.getReportStatusList(r, year, 6) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 6));
+		else {
+			ReportStatus t = new ReportStatus();
+			t.setYear(year);
+			t.setMonth(6);
+			insertPage.onActivate(t);
+		}
+		return insertPage;
+	}
+
+	public Object onActionFromJulAction(Report r) {
+		if (dao.getReportStatusList(r, year, 7) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 7));
+		else {
+			ReportStatus t = new ReportStatus();
+			t.setYear(year);
+			t.setMonth(7);
+			insertPage.onActivate(t);
+		}
+		return insertPage;
+	}
+
+	public Object onActionFromAugAction(Report r) {
+		if (dao.getReportStatusList(r, year, 8) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 8));
+		else {
+			ReportStatus t = new ReportStatus();
+			t.setYear(year);
+			t.setMonth(8);
+			insertPage.onActivate(t);
+		}
+		return insertPage;
+	}
+
+	public Object onActionFromSepAction(Report r) {
+		if (dao.getReportStatusList(r, year, 9) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 9));
+		else {
+			ReportStatus t = new ReportStatus();
+			t.setYear(year);
+			t.setMonth(9);
+			insertPage.onActivate(t);
+		}
+		return insertPage;
+	}
+
+	public Object onActionFromOctAction(Report r) {
+		if (dao.getReportStatusList(r, year, 10) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 10));
+		else {
+			ReportStatus t = new ReportStatus();
+			t.setYear(year);
+			t.setMonth(10);
+			insertPage.onActivate(t);
+		}
+		return insertPage;
+	}
+
+	public Object onActionFromNovAction(Report r) {
+		if (dao.getReportStatusList(r, year, 11) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 11));
+		else {
+			ReportStatus t = new ReportStatus();
+			t.setYear(year);
+			t.setMonth(11);
+			insertPage.onActivate(t);
+		}
+		return insertPage;
+	}
+
+	public Object onActionFromDecAction(Report r) {
+		if (dao.getReportStatusList(r, year, 12) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 12));
+		else {
+			ReportStatus t = new ReportStatus();
+			t.setYear(year);
+			t.setMonth(12);
+			insertPage.onActivate(t);
+		}
+		return insertPage;
 	}
 
 }

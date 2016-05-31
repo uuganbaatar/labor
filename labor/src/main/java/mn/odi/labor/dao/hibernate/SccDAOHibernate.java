@@ -9,6 +9,8 @@ import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import mn.odi.labor.aso.LoginState;
@@ -24,7 +26,10 @@ import mn.odi.labor.entities.common.User;
 import mn.odi.labor.entities.labor.Employee;
 import mn.odi.labor.entities.labor.Job;
 import mn.odi.labor.entities.labor.Report;
+import mn.odi.labor.entities.labor.ReportDetail;
 import mn.odi.labor.entities.labor.ReportStatus;
+import mn.odi.labor.enums.JobTypeEnum;
+import mn.odi.labor.enums.ReportDetailType;
 
 public class SccDAOHibernate implements SccDAO {
 	private Session session;
@@ -369,6 +374,78 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (crit.list() != null && !crit.list().isEmpty())
 				return (ReportStatus) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public List<ReportDetail> getReportDetailList() {
+		try {
+			Criteria crit = session.createCriteria(ReportDetail.class);
+
+			return crit.list();
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public ReportDetail getReportDetailListWithParameter(GeneralType generalType, ReportDetailType detailType,
+			JobTypeEnum jobType, Integer year, Integer month) {
+		try {
+			Criteria crit = session.createCriteria(ReportDetail.class);
+			crit.createAlias("reportStatusId", "reportStatusId");
+
+			if (generalType != null)
+				crit.add(Restrictions.eq("generalType", generalType));
+
+			if (detailType != null)
+				crit.add(Restrictions.eq("detailType", detailType));
+
+			if (jobType != null)
+				crit.add(Restrictions.eq("jobType", jobType));
+
+			if (year != null)
+				crit.add(Restrictions.eq("reportStatusId.year", year));
+
+			if (month != null)
+				crit.add(Restrictions.eq("reportStatusId.month", month));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (ReportDetail) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
+			Integer month) {
+		try {
+			Criteria crit = session.createCriteria(ReportDetail.class);
+			crit.createAlias("reportStatusId", "reportStatusId");
+
+			if (generalType != null)
+				crit.add(Restrictions.eq("generalType", generalType));
+
+			if (detailType != null)
+				crit.add(Restrictions.eq("detailType", detailType));
+
+			if (year != null)
+				crit.add(Restrictions.eq("reportStatusId.year", year));
+
+			if (month != null)
+				crit.add(Restrictions.eq("reportStatusId.month", month));
+
+			crit.setProjection(Projections.sum("value"));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (Long) crit.list().get(0);
 			else
 				return null;
 
