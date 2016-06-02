@@ -6,34 +6,35 @@
 				<h4 class="text-dark header-title m-t-0">${message:lavlahgeneraltype}</h4>
 				<t:Form>
 					<div class="insert-report">
-						<div style="width:18%;float:left;margin-right:10px;">
+						<div style="width:23%;float:left;margin-right:2%;">
 							<div class="form-group">
 								<label>${message:mergejil}</label>
 								<t:select class="form-control" model="generalTypeSM"
-									value="reportDetail.generalType" />
+									value="reportDetail.generalType" disabled="${reportSent}" />
 							</div>
 						</div>
-						<div style="width:18%;float:left;margin-right:10px;">
+						<div style="width:23%;float:left;margin-right:2%;">
 							<div class="form-group">
 								<label>${message:jobType-label}</label>
 								<t:select class="form-control" model="reportTypeEnum"
-									value="reportDetail.detailType" />
+									value="reportDetail.detailType" disabled="${reportSent}" />
 							</div>
 						</div>
-						<div style="width:18%;float:left;margin-right:10px;">
+						<div style="width:23%;float:left;margin-right:2%;">
 							<div class="form-group">
 								<label>${message:hugatsaa}</label>
 								<t:select class="form-control" model="jobTypeEnum"
-									value="reportDetail.jobType" />
+									value="reportDetail.jobType" disabled="${reportSent}" />
 							</div>
 						</div>
-						<div style="width:18%;float:left;margin-right:10px;">
+						<div style="width:25%;float:left">
 							<div class="form-group">
 								<label>${message:orontoo}</label>
-								<t:TextField class="form-control" t:value="reportDetail.value" />
+								<t:TextField class="form-control" t:value="reportDetail.value"
+									disabled="${reportSent}" />
 							</div>
 						</div>
-						<div style="float:left;margin-top:28px;">
+						<div style="float:right;margin-top:28px;">
 							<button type="submit" class="btn btn-success waves-effect waves-light"
 								style="float:left;margin-right:10px;">
 								<span class="btn-label">
@@ -102,11 +103,11 @@
 							<t:Loop t:source="list" t:value="row">
 								<tr>
 									<td>${row?.name}</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td>${number}</td>
+									<td>${preTotal}</td>
+									<td>${prePer}</td>
+									<td>${preQua}</td>
+									<td>${preTemp}</td>
 									<td>${addedTotal}</td>
 									<td>${addedPer}</td>
 									<td>${addedQua}</td>
@@ -115,15 +116,21 @@
 									<td>${removedPer}</td>
 									<td>${removedQua}</td>
 									<td>${removedTemp}</td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
+									<td>${total}</td>
+									<td>${per}</td>
+									<td>${qua}</td>
+									<td>${temp}</td>
 								</tr>
 							</t:Loop>
 						</table>
 					</t:zone>
+				</div>
+				<div style="float:right;margin-top:28px;">
+					<t:ActionLink t:id="reportSend">
+						<button class="btn btn-primary waves-effect waves-light"
+							style="float:right">${message:send}</button>
+					</t:ActionLink>
+					<!-- </button> -->
 				</div>
 			</div>
 		</div>

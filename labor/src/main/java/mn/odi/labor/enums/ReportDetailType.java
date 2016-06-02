@@ -1,7 +1,7 @@
 package mn.odi.labor.enums;
 
 public enum ReportDetailType {
-	NEMEGDSEN(0), HASAGDSAN(1);
+	NEMEGDSEN(0), HASAGDSAN(1), DUN(2);
 
 	private final int val;
 
