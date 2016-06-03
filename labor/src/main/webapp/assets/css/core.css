@@ -1577,18 +1577,22 @@ body.fixed-left .side-menu.left {
 	background: #265ecd;
 	border: none;
 	border-radius: 2px;
+	height: 100px;
 }
 
 .lightblue-widget {
 	background: #00d2ed;
+	height: 100px;
 }
 
 .red-widget {
 	background: #ed0e09;
+	height: 100px;
 }
 
 .green-widget {
 	background: #00bf00;
+	height: 100px;
 }
 
 .top-widget-title {

@@ -8,11 +8,12 @@ import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.IntegerType;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
@@ -346,8 +347,8 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
-	
-	public List<Organization> getOrgList(){
+
+	public List<Organization> getOrgList() {
 		try {
 			Criteria crit = session.createCriteria(Organization.class);
 
@@ -360,41 +361,41 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
-	
-	public List<Employee> getEmpFilter(Employee emp){
-		
+
+	public List<Employee> getEmpFilter(Employee emp) {
+
 		try {
 			String sql = "SELECT employee.* FROM employee WHERE employee.deleted_by_id IS NULL";
 
-			if(emp != null) {
+			if (emp != null) {
 
-				if(emp.getJob() != null){
+				if (emp.getJob() != null) {
 					sql += " AND employee.job_id = " + emp.getJob().getId();
 				}
 
-				if(emp.getOrg() != null){
+				if (emp.getOrg() != null) {
 					sql += " AND employee.org_id = " + emp.getOrg().getId();
 				}
 
-				if(emp.getCreatedDate() != null){
+				if (emp.getCreatedDate() != null) {
 					sql += " AND employee.created_date = " + emp.getCreatedDate();
 				}
 
-				if(emp.getPhone() != null){
+				if (emp.getPhone() != null) {
 					sql += " AND employee.phone = " + emp.getPhone();
 				}
 
-				if(emp.getSurName() != null){
+				if (emp.getSurName() != null) {
 					sql += " AND employee.surname LIKE " + emp.getSurName();
 				}
 
-				if(emp.getEmpName() != null){
+				if (emp.getEmpName() != null) {
 					sql += " AND employee.empname LIKE " + emp.getEmpName();
 				}
 			}
-			
+
 			sql += " ORDER BY employee.empname";
-			
+
 			SQLQuery query = session.createSQLQuery(sql);
 			query.addEntity(Employee.class);
 			List<Employee> list = query.list();
@@ -512,5 +513,32 @@ public class SccDAOHibernate implements SccDAO {
 		} catch (HibernateException e) {
 			return null;
 		}
+	}
+
+	public Integer getAllJobs() {
+
+		String sql = "SELECT COUNT(id) countJob FROM job";
+
+		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getNewJobs() {
+
+		String sql = "SELECT COUNT(id) countJob FROM job where isnew=1";
+
+		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getAllEmployees() {
+
+		String sql = "SELECT COUNT(id) countEmp FROM employee";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
 	}
 }

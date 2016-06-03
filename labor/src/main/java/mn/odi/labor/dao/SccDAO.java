@@ -90,7 +90,7 @@ public interface SccDAO {
 	public List<AjiliinBairHurungu> getFundingSourceList();
 
 	public List<Organization> getOrgList();
-	
+
 	public List<Employee> getEmpFilter(Employee emp);
 
 	public List<Report> getReportList();
@@ -104,4 +104,10 @@ public interface SccDAO {
 
 	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
 			Integer month);
+
+	public Integer getAllJobs();
+
+	public Integer getNewJobs();
+
+	public Integer getAllEmployees();
 }
