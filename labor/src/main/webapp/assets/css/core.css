@@ -3100,3 +3100,7 @@ rotate
 .reporttable tr td {
 text-align:center;
 }
+
+.tjq-error-popup {
+	display: inherit !important;
+}
