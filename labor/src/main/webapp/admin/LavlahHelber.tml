@@ -24,7 +24,7 @@
 					t:add="delete">
 					<p:DeleteCell>
 						<t:ActionLink class="table-action-btn" t:id="deleteObject"
-							t:context="typeRow">
+							t:context="row">
 							<i class="md md-close" />
 						</t:ActionLink>
 					</p:DeleteCell>
