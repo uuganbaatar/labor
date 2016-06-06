@@ -3,6 +3,8 @@ package mn.odi.labor.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
+
 import mn.odi.labor.entities.admin.AjiliinBairHurungu;
 import mn.odi.labor.entities.admin.CompanyHelber;
 import mn.odi.labor.entities.admin.CompanyStatus;
@@ -38,6 +40,7 @@ public interface SccDAO {
 
 	public void mergeObject(Object obj);
 
+	@CommitAfter
 	public void deleteObject(Object obj);
 
 	public void deleteBaseObject(BaseObject obj);

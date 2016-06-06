@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
+import org.apache.tapestry5.ioc.internal.OperationException;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
@@ -114,7 +115,11 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	public void deleteObject(Object obj) {
-		session.delete(obj);
+		try {
+			session.delete(obj);
+		} catch (OperationException e) {
+			System.out.println("[ERROR DELETE:]" + e);
+		}
 	}
 
 	public void deleteBaseObject(BaseObject obj) {

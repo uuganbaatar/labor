@@ -2,6 +2,9 @@ package mn.odi.labor.pages.admin;
 
 import java.util.List;
 
+import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.alerts.Duration;
+import org.apache.tapestry5.alerts.Severity;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
@@ -16,6 +19,7 @@ import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.admin.AjiliinBairHurungu;
+import mn.odi.labor.entities.admin.GeneralType;
 
 public class LavlahHurungu {
 
@@ -47,6 +51,9 @@ public class LavlahHurungu {
 	@Inject
 	private AjaxResponseRenderer ajaxResponseRenderer;
 
+	@Inject
+	private AlertManager alertManager;
+
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("lavlah");
@@ -68,6 +75,17 @@ public class LavlahHurungu {
 			ajaxResponseRenderer.addRender(listZone);
 		}
 		list = dao.getLavlahHurunguList();
+	}
+
+	public Object onActionFromDeleteObject(GeneralType obj) {
+		try {
+			dao.deleteObject(obj);
+		} catch (Exception e) {
+			System.out.println("[ERROR DELETE:]" + e);
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
+		}
+
+		return LavlahEmpGarsan.class;
 	}
 
 }
