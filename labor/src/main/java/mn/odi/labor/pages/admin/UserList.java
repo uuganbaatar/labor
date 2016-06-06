@@ -2,6 +2,7 @@ package mn.odi.labor.pages.admin;
 
 import java.util.List;
 
+import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
@@ -61,6 +62,9 @@ public class UserList {
 	@Persist
 	private String email;
 
+	@InjectPage
+	private UserCreate createPage;
+
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("user");
@@ -72,14 +76,19 @@ public class UserList {
 		return loginState.getUser().getFullName();
 	}
 
-	// public void onActionFromUserCreate() {
-	// System.out.println("[Lastname:]");
-	// user = new User();
-	// }
+	public Object onActionFromUserCreate() {
+		createPage.onActivate(null);
+		return createPage;
+	}
 
 	public void onSuccess() {
 		System.out.println("[Lastname:]" + lastname);
 		System.out.println("[Firstname:]" + firstname);
+	}
+
+	public Object onActionFromEditUser(User u) {
+		createPage.onActivate(u);
+		return createPage;
 	}
 
 }

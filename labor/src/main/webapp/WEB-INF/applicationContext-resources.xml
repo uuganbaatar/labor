@@ -15,16 +15,16 @@
 		</beans:property>
 
 		<beans:property name="url">
-			<beans:value>jdbc:oracle:thin:@192.168.0.60:1521:labor</beans:value>
-			<!-- <beans:value>jdbc:mysql://localhost:3306/labor?autoReconnect=true&amp; 
-				</beans:value> -->
+			<!-- <beans:value>jdbc:oracle:thin:@192.168.0.60:1521:labor</beans:value> -->
+			<beans:value>jdbc:oracle:thin:@132.148.25.110:1521:laborweb
+			</beans:value>
 		</beans:property>
 
 		<beans:property name="username">
-			<beans:value>labor</beans:value>
+			<beans:value>laborweb</beans:value>
 		</beans:property>
 		<beans:property name="password">
-			<beans:value>labor</beans:value>
+			<beans:value>laborweb</beans:value>
 		</beans:property>
 
 	</beans:bean>

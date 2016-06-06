@@ -1,6 +1,66 @@
-<html t:type="layout" title=""
+<html t:type="Layout" t:title="${message:userCreate}" t:id="layout"
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
-	<body>
-		Hello
-	</body>
+	<div class="row main-contents">
+		<div class="col-md-12">
+			<div class="card-box">
+
+				<h4 class="text-dark header-title m-t-0">${message:userCreate}</h4>
+
+				<form t:type="form">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>${message:firstname-label}</label>
+							<input t:type="textfield" class="form-control" t:validate="required"
+								t:value="user.firstname" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>${message:lastname-label}</label>
+							<input t:type="textfield" class="form-control" t:validate="required"
+								t:value="user.lastname" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>${message:org-label}</label>
+							<t:Select class="form-control" model="orgSelectModel"
+								value="user.org" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>${message:currentrole-label}</label>
+							<t:Select class="form-control" model="roleSelectModel"
+								value="user.currentrole" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>${message:mobilephone-label}</label>
+							<input t:type="textfield" class="form-control" t:validate="required"
+								t:value="user.mobilephone" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>${message:email-label}</label>
+							<input t:type="textfield" class="form-control" t:validate="required"
+								t:value="user.email" />
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="hairly-line"></div>
+					<div class="col-md-12 text-center">
+						<a t:type="eventlink" t:event="cancel">
+							<button type="button"
+								class="btn btn-padding btn-grey waves-effect waves-light">${message:back}</button>
+						</a>
+						<t:Submit class="btn btn-padding btn-success" value="${message:save}" />
+					</div>
+					<div class="clearfix"></div>
+				</form>
+			</div>
+		</div>
+	</div>
 </html>

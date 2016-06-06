@@ -9,6 +9,7 @@ import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Context;
@@ -83,6 +84,7 @@ public class Layout {
 	@InjectPage
 	private LaborReportOrgList reportListpage;
 
+	@CommitAfter
 	void beginRender() {
 		if (loginState.getUser() == null) {
 
