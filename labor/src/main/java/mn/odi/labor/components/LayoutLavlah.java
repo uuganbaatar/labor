@@ -34,6 +34,7 @@ import mn.odi.labor.pages.admin.LavlahHurungu;
 import mn.odi.labor.pages.admin.UserList;
 import mn.odi.labor.pages.emp.EmpListPage;
 import mn.odi.labor.pages.job.JobPage;
+import mn.odi.labor.pages.labor.OrgListPage;
 
 @Import(stylesheet = { "context:assets/css/bootstrap.min.css", "context:assets/css/core.css",
 		"context:assets/css/components.css", "context:assets/css/icons.css", "context:assets/css/pages.css",
@@ -98,6 +99,9 @@ public class LayoutLavlah {
 
 	@InjectPage
 	private LavlahEmpGarsan lahlahgarsanPage;
+
+	@InjectPage
+	private OrgListPage orgPage;
 
 	void beginRender() {
 		if (loginState.getUser() == null) {
@@ -247,6 +251,14 @@ public class LayoutLavlah {
 
 	public Object onActionFromLavlahGarsanTab() {
 		return lahlahgarsanPage;
+	}
+
+	public String getSelectedOrgLavlah() {
+		return (loginState.getActiveMenu() == "org") ? "waves-effect subdrop" : "waves-effect";
+	}
+
+	public Object onActionFromOrgTab() {
+		return orgPage;
 	}
 
 }

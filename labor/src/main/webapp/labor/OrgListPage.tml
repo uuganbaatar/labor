@@ -1,0 +1,33 @@
+<html t:type="Layout" t:title="${message:org-label}" t:id="layout"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<div class="row main-contents">
+		<div class="col-md-12">
+			<div class="card-box">
+				<h4 class="text-dark header-title m-t-0">${message:orgList}</h4>
+				<div class="add-button">
+					<t:pagelink t:page="emp/EmpAddPage"
+						class="btn btn-success waves-effect waves-light" href="#">
+						<span class="btn-label">
+							<i class="glyphicon glyphicon-plus"></i>
+						</span>
+						${message:orgAdd}
+					</t:pagelink>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+
+						<t:zone t:id="empGridZone">
+							<t:Grid
+								class="table table-striped table-bordered dataTable no-footer table-actions-bar"
+								t:source="empList" t:row="empRow" t:exclude="uuid,code,fax,web"
+								t:reorder="name,regNum,">
+							</t:Grid>
+						</t:zone>
+					</div>
+				</div>
+
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+</html>

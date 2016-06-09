@@ -80,6 +80,12 @@
 									<span>${message:lavlah}</span>
 								</t:actionlink>
 							</li>
+							<li>
+								<t:actionlink t:id="orgTab" class="${selectedorgLavlah}">
+									<i class="ti-file"></i>
+									<span>${message:org-label}</span>
+								</t:actionlink>
+							</li>
 						</ul>
 						<div class="clearfix"></div>
 					</div>
