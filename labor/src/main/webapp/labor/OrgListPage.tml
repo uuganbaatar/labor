@@ -5,13 +5,12 @@
 			<div class="card-box">
 				<h4 class="text-dark header-title m-t-0">${message:orgList}</h4>
 				<div class="add-button">
-					<t:pagelink t:page="emp/EmpAddPage"
-						class="btn btn-success waves-effect waves-light" href="#">
+					<a href="http://www.hudulmur.mn/user/AOStart" class="btn btn-success waves-effect waves-light">
 						<span class="btn-label">
 							<i class="glyphicon glyphicon-plus"></i>
 						</span>
 						${message:orgAdd}
-					</t:pagelink>
+					</a>
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
