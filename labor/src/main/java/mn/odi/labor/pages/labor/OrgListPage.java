@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.InjectComponent;
+import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
@@ -19,6 +20,7 @@ import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.labor.Job;
 import mn.odi.labor.models.CommonSM;
+import mn.odi.labor.pages.organization.LaborReportOrgList;
 
 public class OrgListPage {
 
@@ -55,6 +57,9 @@ public class OrgListPage {
 	@Inject
 	private ComponentResources resources;
 
+	@InjectPage
+	private LaborReportOrgList page;
+
 	void beginRender() {
 
 		loginState.setActiveMenu("org");
@@ -72,6 +77,11 @@ public class OrgListPage {
 
 	public SelectModel getOrgModel() {
 		return new CommonSM<Organization>(Organization.class, dao.getOrgList(), "getName");
+	}
+
+	public Object onActionFromReportAction(Organization o) {
+		page.onActivate(o);
+		return page;
 	}
 
 }

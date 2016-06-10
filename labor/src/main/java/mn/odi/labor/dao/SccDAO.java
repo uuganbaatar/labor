@@ -98,7 +98,7 @@ public interface SccDAO {
 
 	public List<Report> getReportList();
 
-	public ReportStatus getReportStatusList(Report report, Integer year, Integer month);
+	public ReportStatus getReportStatusList(Report report, Integer year, Integer month, Organization orgId);
 
 	public List<ReportDetail> getReportDetailList();
 

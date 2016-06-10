@@ -425,7 +425,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public ReportStatus getReportStatusList(Report report, Integer year, Integer month) {
+	public ReportStatus getReportStatusList(Report report, Integer year, Integer month, Organization orgId) {
 		try {
 			Criteria crit = session.createCriteria(ReportStatus.class);
 
@@ -437,6 +437,9 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (month != null)
 				crit.add(Restrictions.eq("month", month));
+
+			if (orgId != null)
+				crit.add(Restrictions.eq("orgId", orgId));
 
 			if (crit.list() != null && !crit.list().isEmpty())
 				return (ReportStatus) crit.list().get(0);

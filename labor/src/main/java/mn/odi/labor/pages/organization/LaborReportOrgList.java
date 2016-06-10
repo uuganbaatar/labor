@@ -13,6 +13,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.labor.Report;
 import mn.odi.labor.entities.labor.ReportStatus;
 
@@ -66,6 +67,22 @@ public class LaborReportOrgList {
 	@InjectPage
 	private LaborReportInsert insertPage;
 
+	@Property
+	@Persist
+	private Organization org;
+
+	public void onActivate(Organization obj) {
+		if (obj != null)
+			org = obj;
+		else {
+			if (loginState.getUser() != null && loginState.getUser().getOrg() != null)
+				org = loginState.getUser().getOrg();
+			else
+				org = null;
+		}
+
+	}
+
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("report");
@@ -86,7 +103,7 @@ public class LaborReportOrgList {
 
 	public String getStatus(Integer m) {
 		if (year <= Calendar.getInstance().get(Calendar.YEAR) && month >= m) {
-			ReportStatus rt = dao.getReportStatusList(row, year, m);
+			ReportStatus rt = dao.getReportStatusList(row, year, m, org);
 			if (rt != null) {
 				switch (rt.getReportStatus()) {
 				case DRAFT:
@@ -159,8 +176,8 @@ public class LaborReportOrgList {
 	}
 
 	public Object onActionFromJanAction(Report r) {
-		if (dao.getReportStatusList(r, year, 1) != null)
-			insertPage.onActivate(dao.getReportStatusList(r, year, 1));
+		if (dao.getReportStatusList(r, year, 1, org) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 1, org));
 		else {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
@@ -171,8 +188,8 @@ public class LaborReportOrgList {
 	}
 
 	public Object onActionFromFebAction(Report r) {
-		if (dao.getReportStatusList(r, year, 2) != null)
-			insertPage.onActivate(dao.getReportStatusList(r, year, 2));
+		if (dao.getReportStatusList(r, year, 2, org) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 2, org));
 		else {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
@@ -183,8 +200,8 @@ public class LaborReportOrgList {
 	}
 
 	public Object onActionFromMarAction(Report r) {
-		if (dao.getReportStatusList(r, year, 3) != null)
-			insertPage.onActivate(dao.getReportStatusList(r, year, 3));
+		if (dao.getReportStatusList(r, year, 3, org) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 3, org));
 		else {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
@@ -195,8 +212,8 @@ public class LaborReportOrgList {
 	}
 
 	public Object onActionFromAprAction(Report r) {
-		if (dao.getReportStatusList(r, year, 4) != null)
-			insertPage.onActivate(dao.getReportStatusList(r, year, 4));
+		if (dao.getReportStatusList(r, year, 4, org) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 4, org));
 		else {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
@@ -207,8 +224,8 @@ public class LaborReportOrgList {
 	}
 
 	public Object onActionFromMayAction(Report r) {
-		if (dao.getReportStatusList(r, year, 5) != null)
-			insertPage.onActivate(dao.getReportStatusList(r, year, 5));
+		if (dao.getReportStatusList(r, year, 5, org) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 5, org));
 		else {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
@@ -219,8 +236,8 @@ public class LaborReportOrgList {
 	}
 
 	public Object onActionFromJunAction(Report r) {
-		if (dao.getReportStatusList(r, year, 6) != null)
-			insertPage.onActivate(dao.getReportStatusList(r, year, 6));
+		if (dao.getReportStatusList(r, year, 6, org) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 6, org));
 		else {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
@@ -231,8 +248,8 @@ public class LaborReportOrgList {
 	}
 
 	public Object onActionFromJulAction(Report r) {
-		if (dao.getReportStatusList(r, year, 7) != null)
-			insertPage.onActivate(dao.getReportStatusList(r, year, 7));
+		if (dao.getReportStatusList(r, year, 7, org) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 7, org));
 		else {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
@@ -243,8 +260,8 @@ public class LaborReportOrgList {
 	}
 
 	public Object onActionFromAugAction(Report r) {
-		if (dao.getReportStatusList(r, year, 8) != null)
-			insertPage.onActivate(dao.getReportStatusList(r, year, 8));
+		if (dao.getReportStatusList(r, year, 8, org) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 8, org));
 		else {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
@@ -255,20 +272,21 @@ public class LaborReportOrgList {
 	}
 
 	public Object onActionFromSepAction(Report r) {
-		if (dao.getReportStatusList(r, year, 9) != null)
-			insertPage.onActivate(dao.getReportStatusList(r, year, 9));
+		if (dao.getReportStatusList(r, year, 9, org) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 9, org));
 		else {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
 			t.setMonth(9);
+			t.setOrgId(org);
 			insertPage.onActivate(t);
 		}
 		return insertPage;
 	}
 
 	public Object onActionFromOctAction(Report r) {
-		if (dao.getReportStatusList(r, year, 10) != null)
-			insertPage.onActivate(dao.getReportStatusList(r, year, 10));
+		if (dao.getReportStatusList(r, year, 10, org) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 10, org));
 		else {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
@@ -279,8 +297,8 @@ public class LaborReportOrgList {
 	}
 
 	public Object onActionFromNovAction(Report r) {
-		if (dao.getReportStatusList(r, year, 11) != null)
-			insertPage.onActivate(dao.getReportStatusList(r, year, 11));
+		if (dao.getReportStatusList(r, year, 11, org) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 11, org));
 		else {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
@@ -291,8 +309,8 @@ public class LaborReportOrgList {
 	}
 
 	public Object onActionFromDecAction(Report r) {
-		if (dao.getReportStatusList(r, year, 12) != null)
-			insertPage.onActivate(dao.getReportStatusList(r, year, 12));
+		if (dao.getReportStatusList(r, year, 12, org) != null)
+			insertPage.onActivate(dao.getReportStatusList(r, year, 12, org));
 		else {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);

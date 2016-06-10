@@ -15,6 +15,7 @@ import org.apache.tapestry5.beaneditor.NonVisual;
 import org.hibernate.envers.Audited;
 
 import mn.odi.labor.entities.common.BaseObject;
+import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.enums.ReportStatusEnum;
 
 @Entity
@@ -46,6 +47,10 @@ public class ReportStatus extends BaseObject {
 
 	@Column(name = "month")
 	public Integer month;
+
+	@ManyToOne
+	@JoinColumn(name = "org_id")
+	public Organization orgId;
 
 	public Long getId() {
 		return id;
@@ -95,6 +100,14 @@ public class ReportStatus extends BaseObject {
 
 	public void setMonth(Integer month) {
 		this.month = month;
+	}
+
+	public Organization getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(Organization orgId) {
+		this.orgId = orgId;
 	}
 
 	@Override
