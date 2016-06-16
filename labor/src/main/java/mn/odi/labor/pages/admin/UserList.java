@@ -38,6 +38,8 @@ public class UserList {
 	@Persist
 	private String firstname;
 
+	private int rowIndex;
+
 	@Property
 	@Persist
 	private String lastname;
@@ -70,6 +72,12 @@ public class UserList {
 		loginState.setActiveMenu("user");
 		loginState.setPageTitle(message.get("user"));
 		userList = dao.getUserList();
+
+		rowIndex = 1;
+	}
+
+	public int getRowIndex() {
+		return rowIndex++;
 	}
 
 	public String getUserName() {

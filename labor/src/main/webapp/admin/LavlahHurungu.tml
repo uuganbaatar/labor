@@ -5,7 +5,7 @@
 			<h4 class="text-dark header-title m-t-0">${message:lavlahhurungu}</h4>
 			<t:Form>
 				<t:Alerts />
-				<t:TextField t:id="textfield" t:value="name" style="width:50%;"
+				<t:TextField t:id="hurungu" t:value="name" style="width:50%;"
 					t:validate="required"></t:TextField>
 				<div class="add-button">
 					<button type="submit" class="btn btn-success waves-effect waves-light">
