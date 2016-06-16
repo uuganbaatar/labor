@@ -3104,3 +3104,20 @@ text-align:center;
 .tjq-error-popup {
 	display: inherit !important;
 }
+
+.req {
+	float: right;
+	margin-left: 5px;
+	display: block;
+	color: #DB6464;
+}
+
+.card-box .title {
+	height: 36px;
+}
+
+.dataTables_total {
+	padding-left: 10px;
+	color: #282828;
+	float: right;
+}

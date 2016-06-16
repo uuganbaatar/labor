@@ -22,6 +22,7 @@ import org.apache.tapestry5.annotations.AfterRender;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.InjectContainer;
 import org.apache.tapestry5.annotations.Parameter;
+import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
@@ -32,7 +33,11 @@ import org.apache.tapestry5.services.javascript.JavaScriptSupport;
  */
 @Import(library = "context:js/confirm.js")
 public class ConfirmDelete {
-	@Parameter(value = "Are you sure?", defaultPrefix = BindingConstants.LITERAL)
+
+	@Inject
+	private Messages app_message;
+	
+	@Parameter(defaultPrefix = BindingConstants.LITERAL)
 	private String message;
 
 	@Inject

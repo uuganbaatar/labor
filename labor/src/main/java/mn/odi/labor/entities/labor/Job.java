@@ -128,7 +128,7 @@ public class Job extends BaseObject {
 		this.jobType = jobType;
 	}
 
-	public String getDateFormated() {
+	public String getJobDateFormated() {
 		return new SimpleDateFormat("yyyy-MM-dd").format(jobDate);
 	}
 

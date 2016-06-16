@@ -12,6 +12,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.IntegerType;
@@ -214,7 +215,7 @@ public class SccDAOHibernate implements SccDAO {
 	public List<Job> getJobList() {
 		try {
 			Criteria crit = session.createCriteria(Job.class);
-
+			crit.addOrder(Order.desc("jobName"));
 			if (crit.list().size() > 0)
 				return crit.list();
 			else

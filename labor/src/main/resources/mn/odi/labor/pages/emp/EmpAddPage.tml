@@ -11,7 +11,7 @@
 			<form t:type="form" t:id="empForm">
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:RegNumber-label}</label> <input t:type="textfield"
+						<label>${message:RegNumber-label}<span class="req">*</span></label> <input t:type="textfield"
 							class="form-control" t:id="regNumber" t:validate="required"
 							t:value="emp.regNumber" />
 					</div>
@@ -27,28 +27,28 @@
 				<div class="clearfix"></div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:familyName-label}</label> <input t:type="textfield"
+						<label>${message:familyName-label}<span class="req">*</span></label> <input t:type="textfield"
 							class="form-control" t:id="familyName" t:validate="required"
 							t:value="emp.familyName" />
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:surName-label}</label> <input t:type="textfield"
+						<label>${message:surName-label}<span class="req">*</span></label> <input t:type="textfield"
 							class="form-control" t:id="surName" t:validate="required"
 							t:value="emp.surName" />
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:name-label}</label> <input t:type="textfield"
+						<label>${message:name-label}<span class="req">*</span></label> <input t:type="textfield"
 							class="form-control" t:id="empName" t:validate="required"
 							t:value="emp.empName" />
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:gender-label}</label> <input
+						<label>${message:gender-label}<span class="req">*</span></label> <input
 								t:type="select" class="form-control" t:id="gender"
 								t:model="genderModel" t:value="emp.gender" t:validate="required"
 								t:blankOption="always" />
@@ -56,7 +56,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:phone-label}</label> <input t:type="textfield"
+						<label>${message:phone-label}<span class="req">*</span></label> <input t:type="textfield"
 							class="form-control" t:id="phone" t:validate="required"
 							t:value="emp.phone" />
 					</div>
@@ -67,7 +67,7 @@
 
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:eduLevel-label}</label> <input
+						<label>${message:eduLevel-label}<span class="req">*</span></label> <input
 								t:type="select" class="form-control" t:id="eduLevel"
 								t:model="eduLevelModel" t:value="emp.eduLevel" t:validate="required"
 								t:blankOption="always" />
@@ -76,7 +76,7 @@
 
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:profession-label}</label> <input t:type="textfield"
+						<label>${message:profession-label}<span class="req">*</span></label> <input t:type="textfield"
 							class="form-control" t:id="profession" t:validate="required"
 							t:value="emp.profession" />
 					</div>
@@ -88,7 +88,7 @@
 
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:employmentStatus-label}</label> <input
+						<label>${message:employmentStatus-label}<span class="req">*</span></label> <input
 								t:type="select" class="form-control" t:id="employment"
 								t:model="employmentModel" t:value="emp.employment" t:validate="required"
 								t:blankOption="always" />
@@ -96,7 +96,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:job-label}</label> <input
+						<label>${message:job-label}<span class="req">*</span></label> <input
 								t:type="select" class="form-control" t:id="job"
 								t:model="jobModel" t:value="emp.job" t:validate="required"
 								t:blankOption="always" />
@@ -104,7 +104,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:org-label}</label> <input
+						<label>${message:org-label}<span class="req">*</span></label> <input
 								t:type="select" class="form-control" t:id="org"
 								t:model="orgModel" t:value="emp.org" t:validate="required"
 								t:blankOption="always" />
@@ -120,7 +120,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:empMovement-label}</label> <input
+						<label>${message:empMovement-label}<span class="req">*</span></label> <input
 								t:type="select" class="form-control" t:id="movement"
 								t:model="movementModel" t:value="emp.movement" t:validate="required"
 								t:blankOption="always" />
@@ -128,7 +128,7 @@
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:firedReason-label}</label>  <input
+						<label>${message:firedReason-label}<span class="req">*</span></label>  <input
 								t:type="select" class="form-control" t:id="firedReason"
 								t:model="firedReasonModel" t:value="emp.firedReason"
 								t:blankOption="always" />

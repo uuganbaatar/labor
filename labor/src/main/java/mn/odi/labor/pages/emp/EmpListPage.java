@@ -9,6 +9,7 @@ import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.corelib.components.Form;
+import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.Messages;
@@ -39,6 +40,9 @@ public class EmpListPage {
 	
 	@InjectComponent
 	private Form empFilterForm;
+	
+	@InjectComponent
+	private Grid grid;
 
 	@Property
 	@Persist
@@ -60,6 +64,8 @@ public class EmpListPage {
 
 	@Inject
 	private ComponentResources resources;
+	
+	private int number;
 	
 	void beginRender() {
 		
@@ -83,6 +89,14 @@ public class EmpListPage {
 	void onActionFromClearBtn() {
 		emp = new Employee();
 		ajaxResponseRenderer.addRender(empFilterZone);
+	}
+	
+	public int getCount() {
+		return empList.size();
+	}
+	
+	public int getNumber() {
+		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
 
 	@CommitAfter
