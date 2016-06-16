@@ -71,7 +71,7 @@ public class EmpListPage {
 		
 		loginState.setActiveMenu("emp");
 		loginState.setPageTitle(message.get("employer"));
-		empList = dao.getEmpFilter(emp);
+		empList = dao.getEmpList();
 		
 		if (emp == null) {
 			emp = new Employee();

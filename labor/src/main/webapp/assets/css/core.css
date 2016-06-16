@@ -172,13 +172,10 @@ a:focus {
 }
 
 .add-button {
-	margin-top: -25px;
-	margin-bottom: 10px;
-	float: right;
+	float: left;
 }
 
 .filter-button {
-	margin-top: -25px;
 	float: right;
 }
 
