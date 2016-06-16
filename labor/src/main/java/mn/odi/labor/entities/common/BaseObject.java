@@ -18,6 +18,7 @@
 package mn.odi.labor.entities.common;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -140,5 +141,13 @@ public abstract class BaseObject implements Serializable {
 
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+	
+	public String getCreatedDateFormated() {
+		return new SimpleDateFormat("yyyy-MM-dd").format(createdDate);
+	}
+	
+	public String getModifiedDateFormated() {
+		return new SimpleDateFormat("yyyy-MM-dd").format(modifiedDate);
 	}
 }
