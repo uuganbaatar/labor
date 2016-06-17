@@ -25,7 +25,7 @@
 					<p:numberCell>${number}</p:numberCell>
 					<p:DeleteCell>
 						<t:ActionLink class="table-action-btn" t:id="deleteObject"
-							t:context="typeRow" t:mixins="ConfirmDelete">
+							t:context="typeRow" t:mixins="ConfirmDelete" t:message="${message:confirmDelete}" >
 							<i class="md md-close" />
 						</t:ActionLink>
 					</p:DeleteCell>
