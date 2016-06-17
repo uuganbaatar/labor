@@ -3,6 +3,13 @@ package mn.odi.labor.pages;
 import java.util.ArrayList;
 import java.util.List;
 
+import mn.odi.labor.aso.LoginState;
+import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.common.AccessLog;
+import mn.odi.labor.entities.common.User;
+
+import org.apache.tapestry5.annotations.Persist;
+import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.Messages;
@@ -12,9 +19,6 @@ import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestGlobals;
 import org.apache.tapestry5.services.Response;
-
-import mn.odi.labor.aso.LoginState;
-import mn.odi.labor.dao.SccDAO;
 
 public class Index {
 
@@ -38,11 +42,29 @@ public class Index {
 
 	@Inject
 	private SccDAO dao;
+	
+	@Persist
+	@Property
+	private List<AccessLog> aList;
+	
+	@Persist
+	@Property
+	private AccessLog aRow;
+	
+	private int rowIndex;
 
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("hyanah");
 		loginState.setPageTitle(message.get("dashboard"));
+		
+		aList=dao.getAccessLogs();
+		
+		rowIndex = 1;
+	}
+	
+	public int getRowIndex() {
+		return rowIndex++;
 	}
 
 	public String getUserName() {
