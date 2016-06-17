@@ -1,5 +1,7 @@
 package mn.odi.labor.pages.admin;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +10,11 @@ import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.common.User;
 import mn.odi.labor.enums.RoleEnum;
+import mn.odi.labor.util.Constants;
 
+import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.alerts.Duration;
+import org.apache.tapestry5.alerts.Severity;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Persist;
@@ -77,6 +83,12 @@ public class UserList {
 	@Property
 	private String fname;
 
+	@Inject
+	private AlertManager alertManager;
+
+	@Inject
+	private Messages messages;
+
 	@Persist
 	@Property
 	private String mail;
@@ -97,7 +109,7 @@ public class UserList {
 	void beginRender() {
 		loginState.setActiveMenu("user");
 		loginState.setPageTitle(message.get("user"));
-		userList = dao.getUserList();
+		userList = dao.getUserListSearch(lname, fname, mail, d1, d2, active);
 
 		rowIndex = 1;
 	}
@@ -132,7 +144,41 @@ public class UserList {
 
 	@OnEvent(value = "cancel")
 	void reset() {
+		lname = null;
+		fname = null;
+		mail = null;
+		d1 = null;
+		d2 = null;
+		active = null;
+	}
 
+	public Format getDateFormat() {
+		return new SimpleDateFormat(Constants.DATE_FORMAT);
+	}
+
+	@CommitAfter
+	Object onActionFromUserDelete(User u) {
+		dao.deleteObject(u);
+		u = new User();
+		userList = dao.getUserList();
+		return UserList.class;
+	}
+
+	@CommitAfter
+	Object onActionFromChangepass(User u) {
+		try {
+			u.setPassword(u.getUsername());
+			dao.updateObject(u);
+			alertManager.alert(Duration.SINGLE, Severity.SUCCESS,
+					messages.get("successPassword"));
+			return UserList.class;
+
+		} catch (Exception e) {
+
+			alertManager.alert(Duration.SINGLE, Severity.WARN,
+					messages.get("cannotDeleteMessage"));
+			return UserList.class;
+		}
 	}
 
 }

@@ -43,12 +43,12 @@ import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.enums.ReportDetailType;
 
 public class SccDAOHibernate implements SccDAO {
-	
+
 	private Session session;
 
 	@Inject
 	private AlertManager alertManager;
-	
+
 	@Inject
 	private Messages messages;
 
@@ -71,7 +71,8 @@ public class SccDAOHibernate implements SccDAO {
 
 			obj.setModifiedDate(getCurrentDate());
 
-			if (obj.getCreatedBy() == null && loginState != null && loginState.getUser() != null) {
+			if (obj.getCreatedBy() == null && loginState != null
+					&& loginState.getUser() != null) {
 				obj.setCreatedBy(loginState.getUser());
 			}
 
@@ -116,7 +117,7 @@ public class SccDAOHibernate implements SccDAO {
 		if (obj != null) {
 			session.saveOrUpdate(obj);
 			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
-				messages.get("success"));
+					messages.get("success"));
 		}
 	}
 
@@ -125,7 +126,7 @@ public class SccDAOHibernate implements SccDAO {
 		try {
 			session.saveOrUpdate(obj);
 			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
-				messages.get("success"));
+					messages.get("success"));
 		} catch (Exception e) {
 			session.merge(obj);
 		}
@@ -208,8 +209,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Systemiin hereglegchiin jagsaalt
+	 * @param - Systemiin hereglegchiin jagsaalt
 	 * @return List<User>
 	 */
 	public List<User> getUserList() {
@@ -228,8 +228,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Ajliin bairnii jagsaalt
+	 * @param - Ajliin bairnii jagsaalt
 	 * @return List<Job>
 	 */
 	public List<Job> getJobList() {
@@ -247,8 +246,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            General type jagsaalt
+	 * @param - General type jagsaalt
 	 * @return List<GeneralType>
 	 */
 	public List<GeneralType> getGeneralTypeList() {
@@ -342,15 +340,14 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Ajiltnii jagsaalt
+	 * @param - Ajiltnii jagsaalt
 	 * @return List<Employee>
 	 */
 	public List<Employee> getEmpList() {
 		try {
 			Criteria crit = session.createCriteria(Employee.class);
 			crit.addOrder(Order.desc("empName"));
-			
+
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -405,7 +402,8 @@ public class SccDAOHibernate implements SccDAO {
 				}
 
 				if (emp.getCreatedDate() != null) {
-					sql += " AND employee.created_date = " + emp.getCreatedDate();
+					sql += " AND employee.created_date = "
+							+ emp.getCreatedDate();
 				}
 
 				if (emp.getPhone() != null) {
@@ -447,7 +445,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public ReportStatus getReportStatusList(Report report, Integer year, Integer month, Organization orgId) {
+	public ReportStatus getReportStatusList(Report report, Integer year,
+			Integer month, Organization orgId) {
 		try {
 			Criteria crit = session.createCriteria(ReportStatus.class);
 
@@ -484,7 +483,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public ReportDetail getReportDetailListWithParameter(GeneralType generalType, ReportDetailType detailType,
+	public ReportDetail getReportDetailListWithParameter(
+			GeneralType generalType, ReportDetailType detailType,
 			JobTypeEnum jobType, Integer year, Integer month) {
 		try {
 			Criteria crit = session.createCriteria(ReportDetail.class);
@@ -515,8 +515,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
-			Integer month) {
+	public Long getReportDetailAddRemove(GeneralType generalType,
+			ReportDetailType detailType, Integer year, Integer month) {
 		try {
 			Criteria crit = session.createCriteria(ReportDetail.class);
 			crit.createAlias("reportStatusId", "reportStatusId");
@@ -549,7 +549,8 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countJob FROM job";
 
-		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countJob",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -558,7 +559,8 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countJob FROM job where isnew=1";
 
-		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countJob",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -567,11 +569,12 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countEmp FROM employee";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
-	
+
 	public boolean isJobExists(Job job) {
 
 		Criteria crit = session.createCriteria(Job.class);
@@ -591,13 +594,45 @@ public class SccDAOHibernate implements SccDAO {
 
 		return false;
 	}
-	
-	public List<AccessLog> getAccessLogs(){
+
+	public List<AccessLog> getAccessLogs() {
 		try {
 			Criteria crit = session.createCriteria(AccessLog.class);
 
-			//crit.addOrder(Order.desc("createdDate"));
-			
+			// crit.addOrder(Order.desc("createdDate"));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<User> getUserListSearch(String ln, String fn, String mail,
+			Date d1, Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(User.class);
+
+			if (ln != null)
+				crit.add(Restrictions.ilike("lastname", ln));
+
+			if (fn != null)
+				crit.add(Restrictions.ilike("firstname", fn));
+
+			if (mail != null)
+				crit.add(Restrictions.ilike("email", mail));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+
 			if (crit.list().size() > 0)
 				return crit.list();
 			else

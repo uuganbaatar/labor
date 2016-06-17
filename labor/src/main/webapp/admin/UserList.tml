@@ -2,6 +2,19 @@
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 	<div class="row main-contents">
 		<div class="col-md-12">
+			<div class="add-button">
+				<!-- <button type="button" class="btn btn-success waves-effect waves-light" -->
+				<!-- data-toggle="modal" data-keyboard="false" data-backdrop="static" -->
+				<!-- data-target="#myModal"> -->
+				<t:ActionLink t:id="userCreate"
+					class="btn btn-success waves-effect waves-light">
+					<span class="btn-label">
+						<i class="ti-user"></i>
+					</span>
+					${message:userCreate}
+				</t:ActionLink>
+				<!-- </button> -->
+			</div>
 			<div class="filter-button">
 				<button type="button"
 					class="btn btn-primary waves-effect waves-light show_hide">
@@ -95,28 +108,19 @@
 		<div class="col-md-12">
 			<div class="card-box">
 				<h4 class="text-dark header-title m-t-0">${message:userList}</h4>
-				<div class="add-button">
-					<!-- <button type="button" class="btn btn-success waves-effect waves-light" -->
-					<!-- data-toggle="modal" data-keyboard="false" data-backdrop="static" -->
-					<!-- data-target="#myModal"> -->
-					<t:ActionLink t:id="userCreate"
-						class="btn btn-success waves-effect waves-light">
-						<span class="btn-label">
-							<i class="ti-user"></i>
-						</span>
-						${message:userCreate}
-					</t:ActionLink>
-					<!-- </button> -->
-				</div>
+
 				<t:Grid
 					class="table table-striped table-bordered dataTable no-footer table-actions-bar"
 					t:source="userList" t:row="userRow"
-					t:exclude="uuid,regNum,password,telephone,pictureName,AccountNonExpired,AccountNonLocked,CredentialsNonExpired,ConfirmPassword,Firstname,Lastname,Enabled"
+					t:exclude="uuid,regNum,password,telephone,createdDate,pictureName,AccountNonExpired,AccountNonLocked,CredentialsNonExpired,ConfirmPassword,Firstname,Lastname,Enabled,modifiedDate,modifiedDateFormated"
 					t:add="org,edit,rowIndex"
-					t:reorder="rowIndex,fullname,username,currentrole,org,mobilephone,createddate,email,lastAccessDate,edit">
+					t:reorder="rowIndex,fullname,username,currentrole,org,mobilephone,email,lastAccessDate,createdDateFormated,edit">
 					<p:empty>
 						<p>${message:nodata}</p>
 					</p:empty>
+					<p:lastAccessDateCell>
+						<t:output t:value="userRow?.lastAccessDate" t:format="dateFormat" />
+					</p:lastAccessDateCell>
 					<p:OrgCell>
 						${userRow?.org?.name}
 					</p:OrgCell>
@@ -124,9 +128,24 @@
 						${rowIndex}
 					</p:rowIndexCell>
 					<p:Editcell>
-						<t:ActionLink t:id="editUser" t:context="userRow">
+						<t:ActionLink t:id="editUser" t:context="userRow"
+							class="table-action-btn">
 							<i class="md md-edit"></i>
 						</t:ActionLink>
+						<t:actionlink t:id="userDelete" t:context="userRow"
+							class="table-action-btn" t:mixins="ConfirmDelete" t:message="${message:confirm}">
+							<i class="md md-close"></i>
+						</t:actionlink>
+						<t:actionlink t:id="changepass" t:context="userRow"
+							class="table-action-btn"><i class="md md-lock-open"></i>
+						</t:actionlink>
+
+						<!-- <a t:type="eventlink" t:event="changepass" t:context="userRow"
+							id="${userRow.username}" t:zone="^" class="table-action-btn">
+							<span>
+								<i class="md md-lock-open" />
+							</span>
+						</a> -->
 					</p:Editcell>
 				</t:Grid>
 			</div>

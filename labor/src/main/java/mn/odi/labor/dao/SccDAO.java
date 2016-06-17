@@ -118,4 +118,6 @@ public interface SccDAO {
 	public boolean isJobExists(Job job);
 	
 	public List<AccessLog> getAccessLogs();
+	
+	public List<User> getUserListSearch(String ln, String fn, String mail, Date d1,Date d2,Boolean b);
 }
