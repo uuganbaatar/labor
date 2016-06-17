@@ -3128,3 +3128,9 @@ text-align:center;
     padding: 10px;
     margin-top: 20px;
 }
+
+#alerts .t-success { 
+	background: #4db12a;
+    padding: 10px;
+    margin-top: 20px;
+}
