@@ -18,17 +18,18 @@
 				</div>
 			</t:Form>
 			<t:zone t:id="listZone" id="listZone">
-				<t:Grid
+				<table t:type="grid" t:id="grid"
 					class="table table-striped table-bordered dataTable no-footer table-actions-bar"
-					t:source="list" t:row="row" t:exclude="uuid" t:reorder="name,createddate,delete"
-					t:add="delete">
+					t:source="list" t:row="row" t:exclude="uuid, createddate" t:reorder="number, name, createddateformated, modifieddateformated, delete"
+					t:add="number, delete">
+					<p:numberCell>${number}</p:numberCell>
 					<p:DeleteCell>
 						<t:ActionLink class="table-action-btn" t:id="deleteObject"
-							t:context="row">
+							t:context="row" t:mixins="ConfirmDelete">
 							<i class="md md-close" />
 						</t:ActionLink>
 					</p:DeleteCell>
-				</t:Grid>
+				</table>
 			</t:zone>
 		</div>
 	</div>

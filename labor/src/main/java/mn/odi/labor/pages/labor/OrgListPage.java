@@ -9,6 +9,7 @@ import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -34,19 +35,22 @@ public class OrgListPage {
 	private SccDAO dao;
 
 	@InjectComponent
-	private Zone empGridZone;
+	private Zone orgGridZone;
+	
+	@InjectComponent
+	private Grid grid;
 
 	@Property
 	@Persist
-	private List<Organization> empList;
+	private List<Organization> orgList;
 
 	@Property
 	@Persist
-	private Organization empRow;
+	private Organization orgRow;
 
 	@Property
 	@Persist
-	private Organization emp;
+	private Organization org;
 
 	@Inject
 	private Request request;
@@ -59,15 +63,17 @@ public class OrgListPage {
 
 	@InjectPage
 	private LaborReportOrgList page;
+	
+	private int number;
 
 	void beginRender() {
 
 		loginState.setActiveMenu("org");
 		loginState.setPageTitle(message.get("org-label"));
-		empList = dao.getOrgList();
+		orgList = dao.getOrgList();
 
-		if (emp == null) {
-			emp = new Organization();
+		if (org == null) {
+			org = new Organization();
 		}
 	}
 
@@ -82,6 +88,14 @@ public class OrgListPage {
 	public Object onActionFromReportAction(Organization o) {
 		page.onActivate(o);
 		return page;
+	}
+	
+	public int getCount() {
+		return orgList.size();
+	}
+	
+	public int getNumber() {
+		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
 
 }

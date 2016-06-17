@@ -2,33 +2,49 @@
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 	<div class="row main-contents">
 		<div class="col-md-12">
-			<div class="card-box">
-				<h4 class="text-dark header-title m-t-0">${message:orgList}</h4>
-				<div class="add-button">
-					<a href="http://www.hudulmur.mn/user/AOStart" class="btn btn-success waves-effect waves-light">
-						<span class="btn-label">
-							<i class="glyphicon glyphicon-plus"></i>
-						</span>
-						${message:orgAdd}
-					</a>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<t:zone t:id="empGridZone">
-							<t:Grid
-								class="table table-striped table-bordered dataTable no-footer table-actions-bar"
-								t:source="empList" t:row="empRow" t:exclude="uuid,code,fax,web"
-								t:add="report" t:reorder="name,regNum">
-								<p:ReportCell>
-									<t:Actionlink t:id="reportAction" context="empRow">
-										<span class="label label-table label-success">report</span>
-									</t:Actionlink>
-								</p:ReportCell>
-							</t:Grid>
-						</t:zone>
+
+			<div class="left-button">
+				<a href="http://www.hudulmur.mn/user/AOStart" class="btn btn-success waves-effect waves-light">
+					<span class="btn-label">
+						<i class="glyphicon glyphicon-plus"></i>
+					</span>
+					${message:orgAdd}
+				</a>
+			</div>
+
+			<div class="clearfix"></div>
+
+				
+			<div class="row main-contents">
+				<div class="col-md-12">
+					<div class="card-box">
+						<div class="title">
+							<h4 class="text-dark header-title m-t-0" style="float:left">${message:orgList}</h4>
+							<div class="dataTables_total">
+								<label>${message:total-label}</label>
+								<strong> ${count}</strong>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-12">
+								<t:zone t:id="orgGridZone">
+									<table t:type="grid" t:id="grid"
+										class="table table-striped table-bordered dataTable no-footer table-actions-bar"
+										t:source="orgList" t:row="orgRow" t:exclude="uuid,code,fax,web,mobilePhone,createddate"
+										t:add="number, report" t:reorder="number, name, regNum, phone, createddateformated, modifieddateformated">
+										<p:numberCell>${number}</p:numberCell>
+										<p:ReportCell>
+											<t:Actionlink t:id="reportAction" context="orgRow">
+												<span class="label label-table label-success">${message:seeReport}</span>
+											</t:Actionlink>
+										</p:ReportCell>
+									</table>
+								</t:zone>
+							</div>
+						</div>
 					</div>
 				</div>
-
 				<div class="clearfix"></div>
 			</div>
 		</div>

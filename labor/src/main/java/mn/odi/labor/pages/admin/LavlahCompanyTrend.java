@@ -9,6 +9,7 @@ import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.Messages;
@@ -53,6 +54,11 @@ public class LavlahCompanyTrend {
 
 	@Inject
 	private AlertManager alertManager;
+	
+	@InjectComponent
+	private Grid grid;
+
+	private int number;
 
 	@CommitAfter
 	void beginRender() {
@@ -86,5 +92,9 @@ public class LavlahCompanyTrend {
 		}
 
 		return LavlahCompanyTrend.class;
+	}
+	
+	public int getNumber() {
+		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
 }

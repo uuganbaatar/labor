@@ -172,6 +172,11 @@ a:focus {
 }
 
 .add-button {
+	float: right;
+    margin-bottom: 15px;
+}
+
+.left-button {
 	float: left;
 }
 

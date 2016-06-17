@@ -4,7 +4,7 @@
 <div class="row main-contents">
 	<div class="col-sm-12">
 
-		<div class="add-button">
+		<div class="left-button">
 			<t:pagelink t:page="emp/EmpAddPage"
 				class="btn btn-success waves-effect waves-light" href="#">
 				<span class="btn-label"><i class="ti-user"></i></span>${message:empAdd}
