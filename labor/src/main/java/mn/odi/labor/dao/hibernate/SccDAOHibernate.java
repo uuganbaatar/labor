@@ -25,6 +25,7 @@ import mn.odi.labor.entities.admin.CompanyStatus;
 import mn.odi.labor.entities.admin.CompanyTrend;
 import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.admin.LavlahGarsan;
+import mn.odi.labor.entities.common.AccessLog;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.common.User;
@@ -549,5 +550,22 @@ public class SccDAOHibernate implements SccDAO {
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
+	}
+	
+	public List<AccessLog> getAccessLogs(){
+		try {
+			Criteria crit = session.createCriteria(AccessLog.class);
+
+			//crit.addOrder(Order.desc("createdDate"));
+			
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
 	}
 }
