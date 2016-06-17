@@ -1,20 +1,22 @@
 package mn.odi.labor.pages.admin;
 
+import java.util.Date;
 import java.util.List;
-
-import org.apache.tapestry5.annotations.InjectPage;
-import org.apache.tapestry5.annotations.Persist;
-import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.annotations.SessionState;
-import org.apache.tapestry5.hibernate.annotations.CommitAfter;
-import org.apache.tapestry5.ioc.Messages;
-import org.apache.tapestry5.ioc.annotations.Inject;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.common.User;
 import mn.odi.labor.enums.RoleEnum;
+
+import org.apache.tapestry5.annotations.InjectPage;
+import org.apache.tapestry5.annotations.OnEvent;
+import org.apache.tapestry5.annotations.Persist;
+import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
+import org.apache.tapestry5.ioc.Messages;
+import org.apache.tapestry5.ioc.annotations.Inject;
 
 public class UserList {
 
@@ -67,6 +69,30 @@ public class UserList {
 	@InjectPage
 	private UserCreate createPage;
 
+	@Persist
+	@Property
+	private String lname;
+
+	@Persist
+	@Property
+	private String fname;
+
+	@Persist
+	@Property
+	private String mail;
+
+	@Persist
+	@Property
+	private Date d1;
+
+	@Persist
+	@Property
+	private Date d2;
+
+	@Persist
+	@Property
+	private Boolean active;
+
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("user");
@@ -97,6 +123,16 @@ public class UserList {
 	public Object onActionFromEditUser(User u) {
 		createPage.onActivate(u);
 		return createPage;
+	}
+
+	@CommitAfter
+	Object onSuccessFromSearch() {
+		return null;
+	}
+
+	@OnEvent(value = "cancel")
+	void reset() {
+
 	}
 
 }

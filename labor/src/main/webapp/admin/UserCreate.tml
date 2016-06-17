@@ -49,6 +49,14 @@
 								t:value="user.email" />
 						</div>
 					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>${message:isActive-label}</label>
+							<!-- <input t:type="textfield" class="form-control" t:validate="required"
+								t:value="user.email" /> -->
+								<input t:id="isActive" t:type="checkbox" t:value="user.isActive" />
+						</div>
+					</div>
 					<div class="clearfix"></div>
 					<div class="hairly-line"></div>
 					<div class="col-md-12 text-center">
