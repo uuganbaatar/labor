@@ -330,7 +330,8 @@ public class SccDAOHibernate implements SccDAO {
 	public List<Employee> getEmpList() {
 		try {
 			Criteria crit = session.createCriteria(Employee.class);
-
+			crit.addOrder(Order.desc("empName"));
+			
 			if (crit.list().size() > 0)
 				return crit.list();
 			else

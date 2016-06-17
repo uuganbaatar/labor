@@ -3,6 +3,14 @@
 	xmlns:p="tapestry:parameter">
 <div class="row main-contents">
 	<div class="col-sm-12">
+
+		<div class="add-button">
+			<t:pagelink t:page="emp/EmpAddPage"
+				class="btn btn-success waves-effect waves-light" href="#">
+				<span class="btn-label"><i class="ti-user"></i></span>${message:empAdd}
+    		</t:pagelink>
+		</div>
+
 		<div class="filter-button">
 			<button type="button"
 				class="btn btn-primary waves-effect waves-light show_hide">
@@ -79,15 +87,6 @@
 <div class="row main-contents">
 	<div class="col-md-12">
 		<div class="card-box">
-		
-			<div class="title">
-				<div class="add-button">
-					<t:pagelink t:page="emp/EmpAddPage"
-						class="btn btn-success waves-effect waves-light" href="#">
-						<span class="btn-label"><i class="ti-user"></i></span>${message:empAdd}
-	        		</t:pagelink>
-				</div>
-			</div>
 		
 			<div class="title">
 				<h4 class="text-dark header-title m-t-0" style="float:left">${message:empList}</h4>
