@@ -3118,3 +3118,13 @@ text-align:center;
 	color: #282828;
 	float: right;
 }
+
+#alerts .t-alert-controls { 
+	display: none; 
+}
+
+#alerts .t-warn { 
+	background: #f4da5b;
+    padding: 10px;
+    margin-top: 20px;
+}

@@ -107,18 +107,25 @@ public class SccDAOHibernate implements SccDAO {
 	public void saveObject(Object obj) {
 
 		session.save(obj);
+		alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+				messages.get("success"));
 	}
 
 	@CommitAfter
 	public void updateObject(Object obj) {
-		if (obj != null)
+		if (obj != null) {
 			session.saveOrUpdate(obj);
+			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+				messages.get("success"));
+		}
 	}
 
 	@CommitAfter
 	public void saveOrUpdateObject(Object obj) {
 		try {
 			session.saveOrUpdate(obj);
+			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+				messages.get("success"));
 		} catch (Exception e) {
 			session.merge(obj);
 		}
