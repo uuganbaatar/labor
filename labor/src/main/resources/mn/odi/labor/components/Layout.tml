@@ -108,6 +108,7 @@
 								<h4 class="page-title">${pageTitle}</h4>
 							</div>
 						</div>
+						<t:alerts />
 						<t:body />
 
 					</div> <!-- container -->

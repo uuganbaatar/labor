@@ -139,6 +139,10 @@ public class JobPage {
 		} else {
 			job.setIsNew(false);
 		}
+		
+		if (dao.isJobExists(job)) {
+			return this;
+		}
 
 		dao.saveOrUpdateObject(job);
 		job = new Job();

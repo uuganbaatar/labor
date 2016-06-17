@@ -3,8 +3,13 @@ package mn.odi.labor.dao.hibernate;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.alerts.Duration;
+import org.apache.tapestry5.alerts.Severity;
 import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
+import org.apache.tapestry5.ioc.Messages;
+import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.internal.OperationException;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
@@ -25,6 +30,7 @@ import mn.odi.labor.entities.admin.CompanyStatus;
 import mn.odi.labor.entities.admin.CompanyTrend;
 import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.admin.LavlahGarsan;
+import mn.odi.labor.entities.common.AccessLog;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.common.User;
@@ -37,7 +43,14 @@ import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.enums.ReportDetailType;
 
 public class SccDAOHibernate implements SccDAO {
+	
 	private Session session;
+
+	@Inject
+	private AlertManager alertManager;
+	
+	@Inject
+	private Messages messages;
 
 	@SessionState
 	private LoginState loginState;
@@ -550,5 +563,42 @@ public class SccDAOHibernate implements SccDAO {
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
+	}
+	
+	public boolean isJobExists(Job job) {
+
+		Criteria crit = session.createCriteria(Job.class);
+
+		crit.add(Restrictions.eq("jobName", job.getJobName()));
+		crit.add(Restrictions.eq("generalType", job.getGeneralType()));
+
+		if (job.getId() != null) {
+			crit.add(Restrictions.ne("id", job.getId()));
+		}
+
+		if (crit.list() != null && crit.list().size() > 0) {
+			alertManager.alert(Duration.SINGLE, Severity.WARN,
+					messages.get("jobExist"));
+			return true;
+		}
+
+		return false;
+	}
+	
+	public List<AccessLog> getAccessLogs(){
+		try {
+			Criteria crit = session.createCriteria(AccessLog.class);
+
+			//crit.addOrder(Order.desc("createdDate"));
+			
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
 	}
 }

@@ -11,6 +11,7 @@ import mn.odi.labor.entities.admin.CompanyStatus;
 import mn.odi.labor.entities.admin.CompanyTrend;
 import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.admin.LavlahGarsan;
+import mn.odi.labor.entities.common.AccessLog;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.common.User;
@@ -113,4 +114,8 @@ public interface SccDAO {
 	public Integer getNewJobs();
 
 	public Integer getAllEmployees();
+	
+	public boolean isJobExists(Job job);
+	
+	public List<AccessLog> getAccessLogs();
 }
