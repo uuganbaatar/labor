@@ -1,4 +1,4 @@
-﻿function getElementsByTagNames(list, obj) {
+function getElementsByTagNames(list, obj) {
 	if (!obj)
 		var obj = document;
 	var tagNames = list.split(',');

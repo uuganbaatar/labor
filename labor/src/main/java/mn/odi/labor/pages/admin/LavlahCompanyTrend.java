@@ -97,4 +97,14 @@ public class LavlahCompanyTrend {
 	public int getNumber() {
 		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
+	@CommitAfter
+	void onEnable(CompanyTrend trend) {
+		if (trend.getIsActive()==true) {
+			trend.setIsActive(false);
+		} else {
+			trend.setIsActive(true);
+		}
+		dao.saveOrUpdateObject(trend);
+		ajaxResponseRenderer.addRender(listZone);
+	}
 }

@@ -97,4 +97,14 @@ public class LavlahHurungu {
 	public int getNumber() {
 		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
+	@CommitAfter
+	void onEnable(AjiliinBairHurungu h) {
+		if (h.getIsActive()==true) {
+			h.setIsActive(false);
+		} else {
+			h.setIsActive(true);
+		}
+		dao.saveOrUpdateObject(h);
+		ajaxResponseRenderer.addRender(listZone);
+	}
 }

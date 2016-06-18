@@ -99,4 +99,15 @@ public class LavlahGeneralType {
 	public int getNumber() {
 		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
+	
+	@CommitAfter
+	void onEnable(GeneralType type) {
+		if (type.getIsActive()==true) {
+			type.setIsActive(false);
+		} else {
+			type.setIsActive(true);
+		}
+		dao.saveOrUpdateObject(type);
+		ajaxResponseRenderer.addRender(listZone);
+	}
 }

@@ -97,4 +97,14 @@ public class LavlahCompanyStatus {
 	public int getNumber() {
 		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
+	@CommitAfter
+	void onEnable(CompanyStatus c) {
+		if (c.getIsActive()==true) {
+			c.setIsActive(false);
+		} else {
+			c.setIsActive(true);
+		}
+		dao.saveOrUpdateObject(c);
+		ajaxResponseRenderer.addRender(listZone);
+	}
 }
