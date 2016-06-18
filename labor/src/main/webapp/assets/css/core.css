@@ -3139,3 +3139,15 @@ text-align:center;
     padding: 10px;
     margin-top: 20px;
 }
+
+#alerts .t-error { 
+	background: #ed0e09;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+#alerts .t-info { 
+	background: #00d2ed;
+    padding: 10px;
+    margin-top: 20px;
+}

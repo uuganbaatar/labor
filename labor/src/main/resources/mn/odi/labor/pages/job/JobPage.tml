@@ -111,7 +111,7 @@
 								<t:actionlink t:id="jobDelete" t:context="jobRow"
 									class="table-action-btn"
 									t:mixins="ConfirmDelete"
-									t:message="${message:confirm}" >
+									t:message="${message:confirmDelete}" >
 									<i class="md md-close"></i>
 								</t:actionlink>
 							</p:EditCell>
