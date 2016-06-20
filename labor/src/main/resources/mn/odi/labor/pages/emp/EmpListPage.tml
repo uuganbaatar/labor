@@ -29,14 +29,14 @@
 								<div class="form-group">
 									<label>${message:job-label}</label> <input
 											t:type="select" class="form-control" t:id="job"
-											t:model="jobModel" t:value="emp.job" t:blankOption="always" />
+											t:model="jobModel" t:value="job" t:blankOption="always" />
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>${message:org-label}</label> <input
 											t:type="select" class="form-control" t:id="org"
-											t:model="orgModel" t:value="emp.org" t:blankOption="always" />
+											t:model="orgModel" t:value="org" t:blankOption="always" />
 								</div>
 							</div>
 							<!--
@@ -51,19 +51,19 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>${message:surName-label}</label> <input t:type="textfield"
-										class="form-control" t:id="surName" t:value="emp.surName" />
+										class="form-control" t:id="surName" t:value="surName" />
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>${message:name-label}</label> <input t:type="textfield"
-										class="form-control" t:id="empName" t:value="emp.empName" />
+										class="form-control" t:id="empName" t:value="empName" />
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>${message:phone-label}</label> <input t:type="textfield"
-										class="form-control" t:id="phone" t:value="emp.phone" />
+										class="form-control" t:id="phone" t:value="phone" />
 								</div>
 							</div>
 							<div class="col-md-12 text-center">

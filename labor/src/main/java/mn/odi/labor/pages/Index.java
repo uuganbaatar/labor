@@ -42,27 +42,27 @@ public class Index {
 
 	@Inject
 	private SccDAO dao;
-	
+
 	@Persist
 	@Property
 	private List<AccessLog> aList;
-	
+
 	@Persist
 	@Property
 	private AccessLog aRow;
-	
+
 	private int rowIndex;
 
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("hyanah");
 		loginState.setPageTitle(message.get("dashboard"));
-		
-		aList=dao.getAccessLogs();
-		
+
+		aList = dao.getAccessLogs();
+
 		rowIndex = 1;
 	}
-	
+
 	public int getRowIndex() {
 		return rowIndex++;
 	}
@@ -122,6 +122,20 @@ public class Index {
 		}
 
 		return bar;
+	}
+
+	public String getUsername() {
+		String name = "-";
+		if (loginState != null && loginState.getUser() != null) {
+			if (loginState.getUser().getLastname() != null) {
+				name = loginState.getUser().getLastname();
+			}
+			if (loginState.getUser().getFirstname() != null) {
+				name = name + "-" + loginState.getUser().getFirstname();
+			}
+		}
+		return name;
+
 	}
 
 }

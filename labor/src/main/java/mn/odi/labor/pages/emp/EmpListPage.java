@@ -2,6 +2,13 @@ package mn.odi.labor.pages.emp;
 
 import java.util.List;
 
+import mn.odi.labor.aso.LoginState;
+import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.common.Organization;
+import mn.odi.labor.entities.labor.Employee;
+import mn.odi.labor.entities.labor.Job;
+import mn.odi.labor.models.CommonSM;
+
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.InjectComponent;
@@ -16,13 +23,6 @@ import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
-
-import mn.odi.labor.aso.LoginState;
-import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.entities.common.Organization;
-import mn.odi.labor.entities.labor.Employee;
-import mn.odi.labor.entities.labor.Job;
-import mn.odi.labor.models.CommonSM;
 
 public class EmpListPage {
 
@@ -67,11 +67,33 @@ public class EmpListPage {
 	
 	private int number;
 	
+	@Persist
+	@Property 
+	private String empName;
+	
+	@Persist
+	@Property 
+	private String surName;
+	
+	@Persist
+	@Property 
+	private String phone;
+	
+	@Persist
+	@Property 
+	private Organization org;
+	
+	@Persist
+	@Property 
+	private Job job;
+	
+	
+	
 	void beginRender() {
 		
 		loginState.setActiveMenu("emp");
 		loginState.setPageTitle(message.get("employer"));
-		empList = dao.getEmpList();
+		empList = dao.getEmpListSearch(org,job,phone,surName,empName);
 		
 		if (emp == null) {
 			emp = new Employee();

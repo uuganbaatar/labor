@@ -16,7 +16,7 @@
 					<div class="login-logo"></div>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal m-t-20" action="/labor/j_spring_security_check"
+					<form  class="form-horizontal m-t-20" action="/labor/j_spring_security_check"
 						method="POST">
 						<t:if test="failed">
 							<div class="row">

@@ -3,25 +3,6 @@ package mn.odi.labor.dao.hibernate;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.tapestry5.alerts.AlertManager;
-import org.apache.tapestry5.alerts.Duration;
-import org.apache.tapestry5.alerts.Severity;
-import org.apache.tapestry5.annotations.SessionState;
-import org.apache.tapestry5.hibernate.annotations.CommitAfter;
-import org.apache.tapestry5.ioc.Messages;
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.ioc.internal.OperationException;
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.type.IntegerType;
-
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.admin.AjiliinBairHurungu;
@@ -41,6 +22,25 @@ import mn.odi.labor.entities.labor.ReportDetail;
 import mn.odi.labor.entities.labor.ReportStatus;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.enums.ReportDetailType;
+
+import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.alerts.Duration;
+import org.apache.tapestry5.alerts.Severity;
+import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
+import org.apache.tapestry5.ioc.Messages;
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.ioc.internal.OperationException;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.IntegerType;
 
 public class SccDAOHibernate implements SccDAO {
 
@@ -599,7 +599,7 @@ public class SccDAOHibernate implements SccDAO {
 		try {
 			Criteria crit = session.createCriteria(AccessLog.class);
 
-			// crit.addOrder(Order.desc("createdDate"));
+			crit.addOrder(Order.desc("createdDate")).setMaxResults(5);
 
 			if (crit.list().size() > 0)
 				return crit.list();
@@ -618,13 +618,13 @@ public class SccDAOHibernate implements SccDAO {
 			Criteria crit = session.createCriteria(User.class);
 
 			if (ln != null)
-				crit.add(Restrictions.ilike("lastname", ln));
+				crit.add(Restrictions.ilike("lastname", "%" + ln + "%"));
 
 			if (fn != null)
-				crit.add(Restrictions.ilike("firstname", fn));
+				crit.add(Restrictions.ilike("firstname", "%" + fn + "%"));
 
 			if (mail != null)
-				crit.add(Restrictions.ilike("email", mail));
+				crit.add(Restrictions.ilike("email", "%" + mail + "%"));
 
 			if (d1 != null && d2 != null) {
 				crit.add(Restrictions.between("createdDate", d1, d2));
@@ -643,4 +643,196 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
+
+	public List<Employee> getEmpListSearch(Organization org, Job job,
+			String emp, String sur, String phone) {
+		try {
+			Criteria crit = session.createCriteria(Employee.class);
+			crit.addOrder(Order.desc("empName"));
+
+			if (emp != null)
+				crit.add(Restrictions.ilike("empName", '%' + emp + '%'));
+
+			if (sur != null)
+				crit.add(Restrictions.ilike("surName", '%' + sur + '%'));
+
+			if (phone != null)
+				crit.add(Restrictions.ilike("phone", '%' + phone + '%'));
+
+			if (org != null)
+				crit.add(Restrictions.eq("org", org));
+
+			if (job != null)
+				crit.add(Restrictions.eq("job", job));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1,
+			Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(GeneralType.class);
+
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1,
+			Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(CompanyTrend.class);
+
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name,
+			Date d1, Date d2, Boolean b) {
+		try {
+
+			Criteria crit = session.createCriteria(AjiliinBairHurungu.class);
+
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<AccessLog> getAccessLogsSearch(String lname, String fname,
+			Date d1, Date d2) {
+		try {
+			Criteria crit = session.createCriteria(AccessLog.class);
+
+			crit.addOrder(Order.desc("createdDate"));
+
+			if (lname != null) {
+				System.err.println("1");
+				List<User> ulist = this.getUserListByLastName(lname);
+				if (ulist != null && ulist.size() > 0) {
+					System.err.println("2");
+					crit.add(Restrictions.in("user", ulist));
+				} else {
+					System.err.println("3");
+					crit.add(Restrictions.eq("id", Long.valueOf("0")));
+				}
+			}
+
+			if (fname != null) {
+				List<User> ulist = this.getUserListByFirstName(fname);
+				if (ulist != null && ulist.size() > 0) {
+					crit.add(Restrictions.in("user", ulist));
+				} else {
+					crit.add(Restrictions.eq("id", Long.valueOf("0")));
+				}
+			}
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<User> getUserListByLastName(String name) {
+		try {
+			Criteria crit = session.createCriteria(User.class);
+
+			if (name != null) {
+				crit.add(Restrictions.ilike("lastname", "%" + name + "%"));
+			}
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<User> getUserListByFirstName(String name) {
+		try {
+			Criteria crit = session.createCriteria(User.class);
+
+			if (name != null) {
+				crit.add(Restrictions.ilike("firstname", "%" + name + "%"));
+			}
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
 }
