@@ -104,14 +104,12 @@ public class Index {
 	}
 
 	public Object getBarData() {
-
-		System.err.println("sdsgdsgdhsghdgs");
 		JSONArray bar = new JSONArray();
 		JSONArray types = new JSONArray();
 		bar.put(types);
 		JSONArray counts = new JSONArray();
 		bar.put(counts);
-		List<Object> list = new ArrayList<Object>();
+		List<Object> list = getInfoAddedByTypeNew();
 
 		for (Object _values : list) {
 			Object[] values = (Object[]) _values;
@@ -123,7 +121,6 @@ public class Index {
 
 		return bar;
 	}
-
 	public String getUsername() {
 		String name = "-";
 		if (loginState != null && loginState.getUser() != null) {
@@ -137,5 +134,25 @@ public class Index {
 		return name;
 
 	}
+	
+	public List<Object> getInfoAddedByTypeNew() {
+		//if (loginState.getRole().getUserType() == UserTypeEnum.DOTOODAUDIT) {
+			return dao.getInfoBar();
+		/*} else {
+			if (securityService.hasRole(StringUtil
+					.getName(UserTypeEnum.ORGMANAGER))) {
+				return dao.getInfoAddedByTypeNew(loginState.getUser().getOrg()
+						.getId(), null);
+			} else if (securityService.hasRole(StringUtil
+					.getName(UserTypeEnum.USER))) {
+				return dao.getInfoAddedByTypeNew(null, loginState.getUser()
+						.getId());
+			}
+			return dao.getInfoAddedByTypeNew(null, null);
+		}*/
+
+	}
+	
+	
 
 }

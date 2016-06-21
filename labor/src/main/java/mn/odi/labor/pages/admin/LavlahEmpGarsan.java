@@ -1,11 +1,13 @@
 package mn.odi.labor.pages.admin;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.alerts.Duration;
 import org.apache.tapestry5.alerts.Severity;
 import org.apache.tapestry5.annotations.InjectComponent;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
@@ -59,13 +61,34 @@ public class LavlahEmpGarsan {
 	private Grid grid;
 
 	private int number;
+	
+	@Persist
+	@Property
+	private Date d1;
+
+	@Persist
+	@Property
+	private Date d2;
+
+	@Persist
+	@Property
+	private Boolean active;
+
+	@Persist
+	@Property
+	private String gname;
 
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("lavlah");
 		loginState.setActiveDedMenu("lavlahhelber");
 		loginState.setPageTitle(message.get("lavlah"));
-		list = dao.getLavlahEmpGarsanList();
+		
+		if(active==null){
+			active=true;
+		}
+		
+		list = dao.getLavlahEmpGarsanListSearch(gname,d1,d2,active);
 	}
 
 	public String getUserName() {
@@ -73,7 +96,7 @@ public class LavlahEmpGarsan {
 	}
 
 	@CommitAfter
-	public void onSuccess() {
+	public void onSuccessFromSave() {
 		LavlahGarsan obj = new LavlahGarsan();
 		obj.setName(name);
 		dao.saveOrUpdateObject(obj);
@@ -106,5 +129,18 @@ public class LavlahEmpGarsan {
 		}
 		dao.saveOrUpdateObject(type);
 		ajaxResponseRenderer.addRender(listZone);
+	}
+	
+	@CommitAfter
+	Object onSuccessFromSearch() {
+		return null;
+	}
+
+	@OnEvent(value = "cancel")
+	void reset() {
+		gname = null;
+		d1 = null;
+		d2 = null;
+		active = null;
 	}
 }

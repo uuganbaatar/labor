@@ -1,11 +1,13 @@
 package mn.odi.labor.pages.admin;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.alerts.Duration;
 import org.apache.tapestry5.alerts.Severity;
 import org.apache.tapestry5.annotations.InjectComponent;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
@@ -51,21 +53,40 @@ public class LavlahCompanyStatus {
 
 	@Inject
 	private AjaxResponseRenderer ajaxResponseRenderer;
-	
+
 	@Inject
 	private AlertManager alertManager;
-	
+
 	@InjectComponent
 	private Grid grid;
 
 	private int number;
-	
+
+	@Persist
+	@Property
+	private Date d1;
+
+	@Persist
+	@Property
+	private Date d2;
+
+	@Persist
+	@Property
+	private Boolean active;
+
+	@Persist
+	@Property
+	private String gname;
+
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("lavlah");
 		loginState.setActiveDedMenu("lavlahhelber");
 		loginState.setPageTitle(message.get("lavlah"));
-		list = dao.getLavlahStatusList();
+		if (active == null) {
+			active = true;
+		}
+		list = dao.getLavlahStatusListSearch(gname, d1, d2, active);
 	}
 
 	public String getUserName() {
@@ -73,7 +94,7 @@ public class LavlahCompanyStatus {
 	}
 
 	@CommitAfter
-	public void onSuccess() {
+	public void onSuccessFromSave() {
 		CompanyStatus obj = new CompanyStatus();
 		obj.setName(name);
 		dao.saveOrUpdateObject(obj);
@@ -88,23 +109,38 @@ public class LavlahCompanyStatus {
 			dao.deleteObject(obj);
 		} catch (Exception e) {
 			System.out.println("[ERROR DELETE:]" + e);
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("deleteerror"));
 		}
 
 		return LavlahCompanyStatus.class;
 	}
-	
+
 	public int getNumber() {
 		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
+
 	@CommitAfter
 	void onEnable(CompanyStatus c) {
-		if (c.getIsActive()==true) {
+		if (c.getIsActive() == true) {
 			c.setIsActive(false);
 		} else {
 			c.setIsActive(true);
 		}
 		dao.saveOrUpdateObject(c);
 		ajaxResponseRenderer.addRender(listZone);
+	}
+
+	@CommitAfter
+	Object onSuccessFromSearch() {
+		return null;
+	}
+
+	@OnEvent(value = "cancel")
+	void reset() {
+		gname = null;
+		d1 = null;
+		d2 = null;
+		active = null;
 	}
 }

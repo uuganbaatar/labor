@@ -80,6 +80,9 @@ public class LavlahCompanyTrend {
 
 	@CommitAfter
 	void beginRender() {
+		if(active==null){
+			active = true;
+		}
 		loginState.setActiveMenu("lavlah");
 		loginState.setActiveDedMenu("lavlahtrend");
 		loginState.setPageTitle(message.get("lavlah"));

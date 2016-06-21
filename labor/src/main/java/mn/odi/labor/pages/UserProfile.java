@@ -20,11 +20,10 @@ import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 import se.unbound.tapestry.breadcrumbs.BreadCrumb;
 import se.unbound.tapestry.breadcrumbs.BreadCrumbReset;
-
-import com.google.common.base.Charsets;
 
 @BreadCrumb(titleKey = "userProfile")
 @BreadCrumbReset(ignorePages = { Object.class })
@@ -66,7 +65,7 @@ public class UserProfile {
 
 	@Inject
 	private SccDAO dao;
-	
+
 	@Property
 	private String currentPassword;
 
@@ -75,10 +74,13 @@ public class UserProfile {
 
 	@Property
 	private String confirmPassword;
-	
+
+	@Property
+	private String password;
+
 	@InjectComponent
 	private Field fieldConfirm;
-	
+
 	@Inject
 	private AlertManager alertManager;
 
@@ -105,7 +107,7 @@ public class UserProfile {
 		}
 		return name;
 	}
-	
+
 	public String getRoleName() {
 		String name = "-";
 		if (user != null && user.getCurrentrole() != null) {
@@ -113,12 +115,16 @@ public class UserProfile {
 		}
 		return name;
 	}
-	
+
 	@CommitAfter
 	Object onSuccessFromChangePass() {
-		/*String encryptedPassword = new Sha1Hash(currentPassword).toString();
+
+		ShaPasswordEncoder encoder = new ShaPasswordEncoder();
+
+		this.password = encoder.encodePassword(currentPassword, null);
+
 		boolean hasError = false;
-		if (!encryptedPassword.equals(user.getPassword())) {
+		if (!password.equals(user.getPassword())) {
 			alertManager.alert(Duration.TRANSIENT, Severity.WARN,
 					messages.get("incorrectOldPassword"));
 			hasError = true;
@@ -131,16 +137,16 @@ public class UserProfile {
 		if (!hasError) {
 			user.setPassword(newPassword);
 			dao.saveOrUpdateObject(user);
-		}*/
+		}
 		return UserProfile.class;
 	}
-	
-	 public static byte[] encrypt(String x) throws Exception {
-		    java.security.MessageDigest d = null;
-		    d = java.security.MessageDigest.getInstance("SHA-1");
-		    d.reset();
-		    d.update(x.getBytes());
-		    return d.digest();
-		  }
+
+	public static byte[] encrypt(String x) throws Exception {
+		java.security.MessageDigest d = null;
+		d = java.security.MessageDigest.getInstance("SHA-1");
+		d.reset();
+		d.update(x.getBytes());
+		return d.digest();
+	}
 
 }

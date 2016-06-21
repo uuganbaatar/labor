@@ -1,5 +1,7 @@
 package mn.odi.labor.dao.hibernate;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -706,8 +708,9 @@ public class SccDAOHibernate implements SccDAO {
 		try {
 			Criteria crit = session.createCriteria(CompanyTrend.class);
 
-			if (name != null)
+			if (name != null) {
 				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+			}
 
 			if (d1 != null && d2 != null) {
 				crit.add(Restrictions.between("createdDate", d1, d2));
@@ -832,6 +835,126 @@ public class SccDAOHibernate implements SccDAO {
 		} catch (HibernateException e) {
 			// Critical errors : database unreachable, etc.
 			return null;
+		}
+	}
+
+	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1,
+			Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(CompanyHelber.class);
+
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1,
+			Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(CompanyStatus.class);
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name,
+			Date d1, Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(LavlahGarsan.class);
+
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<Organization> getOrgListSearch(String name, Date d1, Date d2,
+			Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(Organization.class);
+
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<Object> getInfoBar() {
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		try {
+			String sql = "select fg.name,count(fd.id) from form_data fd "
+					+ "join org_form_config_assoc ofca on ofca.id=fd.org_form_config_assoc_id "
+					+ "join task_org_assoc toa on toa.id=ofca.task_org_assoc_id "
+					+ "join sys_form_config_assoc sfca on sfca.id=ofca.form_config_assoc_id "
+					+ "join form_type ft on ft.id=sfca.form_type_id "
+					+ "join form_group fg on fg.id=ft.form_group join org on org.id=toa.org_id "
+					+ "where fd.year=:tYear ";
+			sql += " group by fg.name";
+			SQLQuery query = session.createSQLQuery(sql);
+			query.setParameter("tYear", year);
+			return query.list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return (new ArrayList<Object>());
 		}
 	}
 

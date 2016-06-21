@@ -138,9 +138,23 @@ public interface SccDAO {
 
 	public List<AccessLog> getAccessLogsSearch(String lname, String fname,
 			Date d1, Date d2);
-	
+
 	public List<User> getUserListByLastName(String name);
-	
+
 	public List<User> getUserListByFirstName(String name);
+
+	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1,
+			Date d2, Boolean b);
+
+	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1,
+			Date d2, Boolean b);
+	
+	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name,
+			Date d1, Date d2, Boolean b);
+	
+	public List<Organization> getOrgListSearch(String name,
+			Date d1, Date d2, Boolean b);
+	
+	public List<Object> getInfoBar();
 
 }

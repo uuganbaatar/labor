@@ -13,7 +13,7 @@
  * ------------------------------------------------------------------------------
  * 
  * ALL RIGHTS RESERVED COPYRIGHT (C) 2014 Od Innovation CO.,LTD SOFTWARE DIVSION
-*/
+ */
 package mn.odi.labor.entities.common;
 
 import java.io.Serializable;
@@ -273,7 +273,8 @@ public class User extends BaseObject implements Serializable, UserDetails {
 	}
 
 	public String toString() {
-		return new ToStringBuilder(this).append("id", this.id).append("username", this.username).toString();
+		return new ToStringBuilder(this).append("id", this.id)
+				.append("username", this.username).toString();
 	}
 
 	// ********************** Business Methods ********************** //
@@ -295,7 +296,8 @@ public class User extends BaseObject implements Serializable, UserDetails {
 		if (authorities == null) {
 			authorities = new ArrayList<GrantedAuthority>();
 
-			authorities.add(new GrantedAuthorityImpl("ROLE_" + currentrole.toString().toUpperCase()));
+			authorities.add(new GrantedAuthorityImpl("ROLE_"
+					+ currentrole.toString().toUpperCase()));
 			System.out.println("[ROLE:]" + authorities.get(0).getAuthority());
 		}
 

@@ -2,7 +2,6 @@
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 	<div class="row main-contents">
 		<div class="col-md-12">
-
 			<div class="left-button">
 				<a href="http://www.hudulmur.mn/user/AOStart" class="btn btn-success waves-effect waves-light">
 					<span class="btn-label">
@@ -11,10 +10,88 @@
 					${message:orgAdd}
 				</a>
 			</div>
+			<div class="filter-button">
+				<button type="button"
+					class="btn btn-primary waves-effect waves-light show_hide">
+					<span class="btn-label">
+						<i class="fa fa-search"></i>
+					</span>
+					${message:filter}
+				</button>
+			</div>
+			<div class="clearfix"></div>
+			<t:form t:id="search" class="form clear">
+				<div class="slidingDiv row main-contents">
+					<div class="col-md-12">
+						<div class="card-box">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label>${message:orgname}</label>
+									<t:TextField class="form-control" t:id="name"
+										t:value="gname" />
+								</div>
+							</div>
+
+							<div class="col-md-3">
+								<div class="form-group">
+									<label>${message:startDate-label}</label>
+									<div class="input-group">
+										<input t:type="datefield" t:class="form-control"
+											t:placeholder="mm/dd/yyyy" t:id="datepicker" t:value="d1">
+											<span
+												class="input-group-addon bg-custom 
+											b-0 text-white">
+												<i class="icon-calender"></i>
+											</span>
+										</input>
+
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label>${message:endDate-label}</label>
+									<div class="input-group">
+										<input t:type="datefield" t:class="form-control"
+											t:placeholder="mm/dd/yyyy" t:id="datepicker1" t:value="d2">
+											<span
+												class="input-group-addon bg-custom 
+											b-0 text-white">
+												<i class="icon-calender"></i>
+											</span>
+										</input>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label>${message:isActive-label}</label>
+									<input t:id="isActive" t:type="checkbox" t:value="active" />
+								</div>
+							</div>
+							<div class="col-md-12 text-right">
+								<a t:type="eventlink" t:event="cancel"
+									class="btn btn-padding 
+										btn-grey waves-effect waves-light">${message:cancel}</a>
+								<button type="submit"
+									class="btn btn-padding btn-success waves-effect waves-light">${message:search}</button>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</t:form>
+		</div>
+
+
+
+		<div class="col-md-12">
+
+
 
 			<div class="clearfix"></div>
 
-				
+
 			<div class="row main-contents">
 				<div class="col-md-12">
 					<div class="card-box">
@@ -31,8 +108,9 @@
 								<t:zone t:id="orgGridZone">
 									<table t:type="grid" t:id="grid"
 										class="table table-striped table-bordered dataTable no-footer table-actions-bar"
-										t:source="orgList" t:row="orgRow" t:exclude="uuid,code,fax,web,mobilePhone,createddate"
-										t:add="number, report" t:reorder="number, name, regNum, phone, createddateformated, modifieddateformated">
+										t:source="orgList" t:row="orgRow"
+										t:exclude="uuid,code,fax,web,mobilePhone,createddate" t:add="number, report"
+										t:reorder="number, name, regNum, phone, createddateformated, modifieddateformated">
 										<p:numberCell>${number}</p:numberCell>
 										<p:ReportCell>
 											<t:Actionlink t:id="reportAction" context="orgRow">

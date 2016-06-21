@@ -83,7 +83,11 @@ public class LavlahHurungu {
 		loginState.setActiveMenu("lavlah");
 		loginState.setActiveDedMenu("lavlahhurungu");
 		loginState.setPageTitle(message.get("lavlah"));
-		
+
+		if (active == null) {
+			active = true;
+		}
+
 		list = dao.getLavlahHurunguListSearch(gname, d1, d2, active);
 	}
 
@@ -93,7 +97,7 @@ public class LavlahHurungu {
 
 	@CommitAfter
 	public void onSuccessFromSave() {
-		
+
 		System.err.println("new");
 		AjiliinBairHurungu obj = new AjiliinBairHurungu();
 		obj.setName(name);
@@ -133,8 +137,6 @@ public class LavlahHurungu {
 
 	@CommitAfter
 	Object onSuccessFromSearch() {
-		list = dao.getLavlahHurunguListSearch(gname, d1, d2, active);
-		System.err.println("srch");
 		return null;
 	}
 
