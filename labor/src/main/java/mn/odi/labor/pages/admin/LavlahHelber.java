@@ -96,8 +96,13 @@ public class LavlahHelber {
 	@CommitAfter
 	public void onSuccessFromSave() {
 		CompanyHelber obj = new CompanyHelber();
+		if (dao.getHelberByName(name) != null) {
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("burtgeltei"));
+		} else {
 		obj.setName(name);
 		dao.saveOrUpdateObject(obj);
+		}
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);
 		}

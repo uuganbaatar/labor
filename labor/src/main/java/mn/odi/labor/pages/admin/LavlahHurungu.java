@@ -100,8 +100,13 @@ public class LavlahHurungu {
 
 		System.err.println("new");
 		AjiliinBairHurungu obj = new AjiliinBairHurungu();
-		obj.setName(name);
-		dao.saveOrUpdateObject(obj);
+		if (dao.getHurunguByName(name) != null) {
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("burtgeltei"));
+		} else {
+			obj.setName(name);
+			dao.saveOrUpdateObject(obj);
+		}
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);
 		}

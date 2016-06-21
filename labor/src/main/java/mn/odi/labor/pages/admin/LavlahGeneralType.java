@@ -95,8 +95,13 @@ public class LavlahGeneralType {
 	@CommitAfter
 	public void onSuccessFromSave() {
 		type = new GeneralType();
-		type.setName(name);
-		dao.saveOrUpdateObject(type);
+		if (dao.getGeneralTypeByName(name) != null) {
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("burtgeltei"));
+		} else {
+			type.setName(name);
+			dao.saveOrUpdateObject(type);
+		}
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);
 		}

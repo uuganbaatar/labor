@@ -56,12 +56,12 @@ public class LavlahEmpGarsan {
 
 	@Inject
 	private AlertManager alertManager;
-	
+
 	@InjectComponent
 	private Grid grid;
 
 	private int number;
-	
+
 	@Persist
 	@Property
 	private Date d1;
@@ -83,12 +83,12 @@ public class LavlahEmpGarsan {
 		loginState.setActiveMenu("lavlah");
 		loginState.setActiveDedMenu("lavlahhelber");
 		loginState.setPageTitle(message.get("lavlah"));
-		
-		if(active==null){
-			active=true;
+
+		if (active == null) {
+			active = true;
 		}
-		
-		list = dao.getLavlahEmpGarsanListSearch(gname,d1,d2,active);
+
+		list = dao.getLavlahEmpGarsanListSearch(gname, d1, d2, active);
 	}
 
 	public String getUserName() {
@@ -98,8 +98,13 @@ public class LavlahEmpGarsan {
 	@CommitAfter
 	public void onSuccessFromSave() {
 		LavlahGarsan obj = new LavlahGarsan();
-		obj.setName(name);
-		dao.saveOrUpdateObject(obj);
+		if (dao.getGarsanByName(name) != null) {
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("burtgeltei"));
+		} else {
+			obj.setName(name);
+			dao.saveOrUpdateObject(obj);
+		}
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);
 		}
@@ -111,18 +116,20 @@ public class LavlahEmpGarsan {
 			dao.deleteObject(obj);
 		} catch (Exception e) {
 			System.out.println("[ERROR DELETE:]" + e);
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("deleteerror"));
 		}
 
 		return LavlahEmpGarsan.class;
 	}
-	
+
 	public int getNumber() {
 		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
+
 	@CommitAfter
 	void onEnable(LavlahGarsan type) {
-		if (type.getIsActive()==true) {
+		if (type.getIsActive() == true) {
 			type.setIsActive(false);
 		} else {
 			type.setIsActive(true);
@@ -130,7 +137,7 @@ public class LavlahEmpGarsan {
 		dao.saveOrUpdateObject(type);
 		ajaxResponseRenderer.addRender(listZone);
 	}
-	
+
 	@CommitAfter
 	Object onSuccessFromSearch() {
 		return null;

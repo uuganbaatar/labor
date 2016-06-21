@@ -80,7 +80,7 @@ public class LavlahCompanyTrend {
 
 	@CommitAfter
 	void beginRender() {
-		if(active==null){
+		if (active == null) {
 			active = true;
 		}
 		loginState.setActiveMenu("lavlah");
@@ -96,8 +96,13 @@ public class LavlahCompanyTrend {
 	@CommitAfter
 	public void onSuccessFromSave() {
 		CompanyTrend obj = new CompanyTrend();
-		obj.setName(name);
-		dao.saveOrUpdateObject(obj);
+		if (dao.getCompanyTrendByName(name) != null) {
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("burtgeltei"));
+		} else {
+			obj.setName(name);
+			dao.saveOrUpdateObject(obj);
+		}
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);
 		}

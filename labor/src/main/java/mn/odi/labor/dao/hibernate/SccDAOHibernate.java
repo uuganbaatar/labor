@@ -958,4 +958,106 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
+	public GeneralType getGeneralTypeByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(GeneralType.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (GeneralType) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public CompanyTrend getCompanyTrendByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(CompanyTrend.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (CompanyTrend) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public AjiliinBairHurungu getHurunguByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(AjiliinBairHurungu.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (AjiliinBairHurungu) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public CompanyHelber getHelberByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(CompanyHelber.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (CompanyHelber) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public CompanyStatus getStatusByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(CompanyStatus.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (CompanyStatus) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public LavlahGarsan getGarsanByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(LavlahGarsan.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (LavlahGarsan) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
 }

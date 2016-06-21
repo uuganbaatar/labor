@@ -148,13 +148,25 @@ public interface SccDAO {
 
 	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1,
 			Date d2, Boolean b);
-	
+
 	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name,
 			Date d1, Date d2, Boolean b);
-	
-	public List<Organization> getOrgListSearch(String name,
-			Date d1, Date d2, Boolean b);
-	
+
+	public List<Organization> getOrgListSearch(String name, Date d1, Date d2,
+			Boolean b);
+
 	public List<Object> getInfoBar();
+
+	public GeneralType getGeneralTypeByName(String name);
+
+	public CompanyTrend getCompanyTrendByName(String name);
+
+	public AjiliinBairHurungu getHurunguByName(String name);
+
+	public CompanyHelber getHelberByName(String name);
+	
+	public CompanyStatus getStatusByName(String name);
+	
+	public LavlahGarsan getGarsanByName(String name);
 
 }
