@@ -80,7 +80,7 @@
 			<t:Form t:id="save">
 				<t:Alerts />
 				<t:TextField t:id="companyTrend" t:value="name" style="width:50%;"
-					t:validate="required"></t:TextField>
+					t:validate="maxlength=255,required"></t:TextField>
 				<div class="add-button">
 					<button type="submit" class="btn btn-success waves-effect waves-light">
 						<span class="btn-label">
