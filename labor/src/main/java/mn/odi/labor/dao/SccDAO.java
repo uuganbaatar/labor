@@ -11,6 +11,7 @@ import mn.odi.labor.entities.admin.CompanyStatus;
 import mn.odi.labor.entities.admin.CompanyTrend;
 import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.admin.LavlahGarsan;
+import mn.odi.labor.entities.common.AccessLog;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.common.User;
@@ -98,19 +99,74 @@ public interface SccDAO {
 
 	public List<Report> getReportList();
 
-	public ReportStatus getReportStatusList(Report report, Integer year, Integer month, Organization orgId);
+	public ReportStatus getReportStatusList(Report report, Integer year,
+			Integer month, Organization orgId);
 
 	public List<ReportDetail> getReportDetailList();
 
-	public ReportDetail getReportDetailListWithParameter(GeneralType generalType, ReportDetailType detailType,
+	public ReportDetail getReportDetailListWithParameter(
+			GeneralType generalType, ReportDetailType detailType,
 			JobTypeEnum jobType, Integer year, Integer month);
 
-	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
-			Integer month);
+	public Long getReportDetailAddRemove(GeneralType generalType,
+			ReportDetailType detailType, Integer year, Integer month);
 
 	public Integer getAllJobs();
 
 	public Integer getNewJobs();
 
 	public Integer getAllEmployees();
+
+	public boolean isJobExists(Job job);
+
+	public List<AccessLog> getAccessLogs();
+
+	public List<User> getUserListSearch(String ln, String fn, String mail,
+			Date d1, Date d2, Boolean b);
+
+	public List<Employee> getEmpListSearch(Organization org, Job job,
+			String emp, String sur, String phone);
+
+	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1,
+			Date d2, Boolean b);
+
+	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1,
+			Date d2, Boolean b);
+
+	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name,
+			Date d1, Date d2, Boolean b);
+
+	public List<AccessLog> getAccessLogsSearch(String lname, String fname,
+			Date d1, Date d2);
+
+	public List<User> getUserListByLastName(String name);
+
+	public List<User> getUserListByFirstName(String name);
+
+	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1,
+			Date d2, Boolean b);
+
+	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1,
+			Date d2, Boolean b);
+
+	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name,
+			Date d1, Date d2, Boolean b);
+
+	public List<Organization> getOrgListSearch(String name, Date d1, Date d2,
+			Boolean b);
+
+	public List<Object> getInfoBar();
+
+	public GeneralType getGeneralTypeByName(String name);
+
+	public CompanyTrend getCompanyTrendByName(String name);
+
+	public AjiliinBairHurungu getHurunguByName(String name);
+
+	public CompanyHelber getHelberByName(String name);
+	
+	public CompanyStatus getStatusByName(String name);
+	
+	public LavlahGarsan getGarsanByName(String name);
+
 }

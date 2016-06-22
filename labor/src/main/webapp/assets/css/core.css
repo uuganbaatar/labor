@@ -172,13 +172,15 @@ a:focus {
 }
 
 .add-button {
-	margin-top: -25px;
-	margin-bottom: 10px;
 	float: right;
+    margin-bottom: 15px;
+}
+
+.left-button {
+	float: left;
 }
 
 .filter-button {
-	margin-top: -25px;
 	float: right;
 }
 
@@ -3103,4 +3105,49 @@ text-align:center;
 
 .tjq-error-popup {
 	display: inherit !important;
+}
+
+.req {
+	float: right;
+	margin-left: 5px;
+	display: block;
+	color: #DB6464;
+}
+
+.card-box .title {
+	height: 36px;
+}
+
+.dataTables_total {
+	padding-left: 10px;
+	color: #282828;
+	float: right;
+}
+
+#alerts .t-alert-controls { 
+	display: none; 
+}
+
+#alerts .t-warn { 
+	background: #f4da5b;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+#alerts .t-success { 
+	background: #4db12a;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+#alerts .t-error { 
+	background: #ed0e09;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+#alerts .t-info { 
+	background: #00d2ed;
+    padding: 10px;
+    margin-top: 20px;
 }

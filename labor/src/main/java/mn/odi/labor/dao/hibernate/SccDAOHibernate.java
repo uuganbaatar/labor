@@ -1,20 +1,9 @@
 package mn.odi.labor.dao.hibernate;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.tapestry5.annotations.SessionState;
-import org.apache.tapestry5.hibernate.annotations.CommitAfter;
-import org.apache.tapestry5.ioc.internal.OperationException;
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.type.IntegerType;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
@@ -24,6 +13,7 @@ import mn.odi.labor.entities.admin.CompanyStatus;
 import mn.odi.labor.entities.admin.CompanyTrend;
 import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.admin.LavlahGarsan;
+import mn.odi.labor.entities.common.AccessLog;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.common.User;
@@ -35,8 +25,34 @@ import mn.odi.labor.entities.labor.ReportStatus;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.enums.ReportDetailType;
 
+import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.alerts.Duration;
+import org.apache.tapestry5.alerts.Severity;
+import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
+import org.apache.tapestry5.ioc.Messages;
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.ioc.internal.OperationException;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.IntegerType;
+
 public class SccDAOHibernate implements SccDAO {
+
 	private Session session;
+
+	@Inject
+	private AlertManager alertManager;
+
+	@Inject
+	private Messages messages;
 
 	@SessionState
 	private LoginState loginState;
@@ -57,7 +73,8 @@ public class SccDAOHibernate implements SccDAO {
 
 			obj.setModifiedDate(getCurrentDate());
 
-			if (obj.getCreatedBy() == null && loginState != null && loginState.getUser() != null) {
+			if (obj.getCreatedBy() == null && loginState != null
+					&& loginState.getUser() != null) {
 				obj.setCreatedBy(loginState.getUser());
 			}
 
@@ -93,18 +110,25 @@ public class SccDAOHibernate implements SccDAO {
 	public void saveObject(Object obj) {
 
 		session.save(obj);
+		alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+				messages.get("success"));
 	}
 
 	@CommitAfter
 	public void updateObject(Object obj) {
-		if (obj != null)
+		if (obj != null) {
 			session.saveOrUpdate(obj);
+			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+					messages.get("success"));
+		}
 	}
 
 	@CommitAfter
 	public void saveOrUpdateObject(Object obj) {
 		try {
 			session.saveOrUpdate(obj);
+			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+					messages.get("success"));
 		} catch (Exception e) {
 			session.merge(obj);
 		}
@@ -187,8 +211,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Systemiin hereglegchiin jagsaalt
+	 * @param - Systemiin hereglegchiin jagsaalt
 	 * @return List<User>
 	 */
 	public List<User> getUserList() {
@@ -207,14 +230,13 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Ajliin bairnii jagsaalt
+	 * @param - Ajliin bairnii jagsaalt
 	 * @return List<Job>
 	 */
 	public List<Job> getJobList() {
 		try {
 			Criteria crit = session.createCriteria(Job.class);
-
+			crit.addOrder(Order.desc("jobName"));
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -226,8 +248,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            General type jagsaalt
+	 * @param - General type jagsaalt
 	 * @return List<GeneralType>
 	 */
 	public List<GeneralType> getGeneralTypeList() {
@@ -321,13 +342,13 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Ajiltnii jagsaalt
+	 * @param - Ajiltnii jagsaalt
 	 * @return List<Employee>
 	 */
 	public List<Employee> getEmpList() {
 		try {
 			Criteria crit = session.createCriteria(Employee.class);
+			crit.addOrder(Order.desc("empName"));
 
 			if (crit.list().size() > 0)
 				return crit.list();
@@ -383,7 +404,8 @@ public class SccDAOHibernate implements SccDAO {
 				}
 
 				if (emp.getCreatedDate() != null) {
-					sql += " AND employee.created_date = " + emp.getCreatedDate();
+					sql += " AND employee.created_date = "
+							+ emp.getCreatedDate();
 				}
 
 				if (emp.getPhone() != null) {
@@ -425,7 +447,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public ReportStatus getReportStatusList(Report report, Integer year, Integer month, Organization orgId) {
+	public ReportStatus getReportStatusList(Report report, Integer year,
+			Integer month, Organization orgId) {
 		try {
 			Criteria crit = session.createCriteria(ReportStatus.class);
 
@@ -462,7 +485,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public ReportDetail getReportDetailListWithParameter(GeneralType generalType, ReportDetailType detailType,
+	public ReportDetail getReportDetailListWithParameter(
+			GeneralType generalType, ReportDetailType detailType,
 			JobTypeEnum jobType, Integer year, Integer month) {
 		try {
 			Criteria crit = session.createCriteria(ReportDetail.class);
@@ -493,8 +517,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
-			Integer month) {
+	public Long getReportDetailAddRemove(GeneralType generalType,
+			ReportDetailType detailType, Integer year, Integer month) {
 		try {
 			Criteria crit = session.createCriteria(ReportDetail.class);
 			crit.createAlias("reportStatusId", "reportStatusId");
@@ -527,7 +551,8 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countJob FROM job";
 
-		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countJob",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -536,7 +561,8 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countJob FROM job where isnew=1";
 
-		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countJob",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -545,8 +571,493 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countEmp FROM employee";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
+
+	public boolean isJobExists(Job job) {
+
+		Criteria crit = session.createCriteria(Job.class);
+
+		crit.add(Restrictions.eq("jobName", job.getJobName()));
+		crit.add(Restrictions.eq("generalType", job.getGeneralType()));
+
+		if (job.getId() != null) {
+			crit.add(Restrictions.ne("id", job.getId()));
+		}
+
+		if (crit.list() != null && crit.list().size() > 0) {
+			alertManager.alert(Duration.SINGLE, Severity.WARN,
+					messages.get("jobExist"));
+			return true;
+		}
+
+		return false;
+	}
+
+	public List<AccessLog> getAccessLogs() {
+		try {
+			Criteria crit = session.createCriteria(AccessLog.class);
+
+			crit.addOrder(Order.desc("createdDate")).setMaxResults(5);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<User> getUserListSearch(String ln, String fn, String mail,
+			Date d1, Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(User.class);
+
+			if (ln != null)
+				crit.add(Restrictions.ilike("lastname", "%" + ln + "%"));
+
+			if (fn != null)
+				crit.add(Restrictions.ilike("firstname", "%" + fn + "%"));
+
+			if (mail != null)
+				crit.add(Restrictions.ilike("email", "%" + mail + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<Employee> getEmpListSearch(Organization org, Job job,
+			String emp, String sur, String phone) {
+		try {
+			Criteria crit = session.createCriteria(Employee.class);
+			crit.addOrder(Order.desc("empName"));
+
+			if (emp != null)
+				crit.add(Restrictions.ilike("empName", '%' + emp + '%'));
+
+			if (sur != null)
+				crit.add(Restrictions.ilike("surName", '%' + sur + '%'));
+
+			if (phone != null)
+				crit.add(Restrictions.ilike("phone", '%' + phone + '%'));
+
+			if (org != null)
+				crit.add(Restrictions.eq("org", org));
+
+			if (job != null)
+				crit.add(Restrictions.eq("job", job));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1,
+			Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(GeneralType.class);
+
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1,
+			Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(CompanyTrend.class);
+
+			if (name != null) {
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+			}
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name,
+			Date d1, Date d2, Boolean b) {
+		try {
+
+			Criteria crit = session.createCriteria(AjiliinBairHurungu.class);
+
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<AccessLog> getAccessLogsSearch(String lname, String fname,
+			Date d1, Date d2) {
+		try {
+			Criteria crit = session.createCriteria(AccessLog.class);
+
+			crit.addOrder(Order.desc("createdDate"));
+
+			if (lname != null) {
+				System.err.println("1");
+				List<User> ulist = this.getUserListByLastName(lname);
+				if (ulist != null && ulist.size() > 0) {
+					System.err.println("2");
+					crit.add(Restrictions.in("user", ulist));
+				} else {
+					System.err.println("3");
+					crit.add(Restrictions.eq("id", Long.valueOf("0")));
+				}
+			}
+
+			if (fname != null) {
+				List<User> ulist = this.getUserListByFirstName(fname);
+				if (ulist != null && ulist.size() > 0) {
+					crit.add(Restrictions.in("user", ulist));
+				} else {
+					crit.add(Restrictions.eq("id", Long.valueOf("0")));
+				}
+			}
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<User> getUserListByLastName(String name) {
+		try {
+			Criteria crit = session.createCriteria(User.class);
+
+			if (name != null) {
+				crit.add(Restrictions.ilike("lastname", "%" + name + "%"));
+			}
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<User> getUserListByFirstName(String name) {
+		try {
+			Criteria crit = session.createCriteria(User.class);
+
+			if (name != null) {
+				crit.add(Restrictions.ilike("firstname", "%" + name + "%"));
+			}
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1,
+			Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(CompanyHelber.class);
+
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1,
+			Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(CompanyStatus.class);
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name,
+			Date d1, Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(LavlahGarsan.class);
+
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<Organization> getOrgListSearch(String name, Date d1, Date d2,
+			Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(Organization.class);
+
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<Object> getInfoBar() {
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		try {
+			String sql = "select fg.name,count(fd.id) from form_data fd "
+					+ "join org_form_config_assoc ofca on ofca.id=fd.org_form_config_assoc_id "
+					+ "join task_org_assoc toa on toa.id=ofca.task_org_assoc_id "
+					+ "join sys_form_config_assoc sfca on sfca.id=ofca.form_config_assoc_id "
+					+ "join form_type ft on ft.id=sfca.form_type_id "
+					+ "join form_group fg on fg.id=ft.form_group join org on org.id=toa.org_id "
+					+ "where fd.year=:tYear ";
+			sql += " group by fg.name";
+			SQLQuery query = session.createSQLQuery(sql);
+			query.setParameter("tYear", year);
+			return query.list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return (new ArrayList<Object>());
+		}
+	}
+
+	public GeneralType getGeneralTypeByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(GeneralType.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (GeneralType) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public CompanyTrend getCompanyTrendByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(CompanyTrend.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (CompanyTrend) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public AjiliinBairHurungu getHurunguByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(AjiliinBairHurungu.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (AjiliinBairHurungu) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public CompanyHelber getHelberByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(CompanyHelber.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (CompanyHelber) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public CompanyStatus getStatusByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(CompanyStatus.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (CompanyStatus) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public LavlahGarsan getGarsanByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(LavlahGarsan.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (LavlahGarsan) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
 }

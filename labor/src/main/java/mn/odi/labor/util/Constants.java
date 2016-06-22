@@ -141,6 +141,8 @@ public class Constants {
 	public static int CURRENT_MILLIS = now.get(Calendar.MILLISECOND);
 	public static int HALF_YEAR_MONTH = Integer.valueOf(6);
 	public static int YEAR_MONTH = Integer.valueOf(12);
+	
+	public static final String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 	/**
 	 * FilType Constants

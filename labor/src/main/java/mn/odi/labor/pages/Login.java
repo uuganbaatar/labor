@@ -1,7 +1,19 @@
 
 package mn.odi.labor.pages;
 
+import javax.naming.AuthenticationException;
+import javax.security.auth.Subject;
+
+import mn.odi.labor.aso.LoginState;
+import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.dao.hibernate.SecurityDAOHibernate;
+import mn.odi.labor.entities.common.AccessLog;
+
+import org.apache.log4j.Logger;
 import org.apache.tapestry5.PersistenceConstants;
+import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.alerts.Duration;
+import org.apache.tapestry5.alerts.Severity;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
@@ -12,10 +24,6 @@ import org.apache.tapestry5.ioc.annotations.Value;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestGlobals;
 import org.apache.tapestry5.services.Response;
-
-import mn.odi.labor.aso.LoginState;
-import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.dao.hibernate.SecurityDAOHibernate;
 
 @Import(stylesheet = { "context:assets/css/bootstrap.min.css", "context:assets/css/core.css",
 		"context:assets/css/components.css", "context:assets/css/pages.css", "context:assets/css/icons.css",
@@ -57,6 +65,14 @@ public class Login {
 
 	@Inject
 	private SecurityDAOHibernate secDao;
+	
+	private static final Logger LOGGER = Logger.getLogger("shilendans");
+	
+	@Inject
+	private AlertManager alertManager;
+	
+	@Inject
+	private Messages messages;
 
 	@Persist("flash")
 	private boolean failed;
@@ -81,5 +97,23 @@ public class Login {
 	public void setLoginMessage(String loginMessage) {
 		this.loginMessage = loginMessage;
 	}
+	
+	/*Object onSubmitFromLoginForm() {
+		
+		//UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+	
+		try {
+			//loginState.setUser(SccDAO.getUserByUsername());
+			AccessLog accessLog = new AccessLog();
+			accessLog.setAccessDate(sccDAO.getCurrentDate());
+			accessLog.setUser(loginState.getUser());
+			accessLog.setIpAddress(requestGlobals.getHTTPServletRequest().getRemoteAddr());
+			sccDAO.saveOrUpdateObject(accessLog);
+		} catch (Exception e) {
+			LOGGER.warn("userCreatePage", e);
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, messages.get("invalidUser"));
+		}
+		return Index.class;
+	}*/
 
 }

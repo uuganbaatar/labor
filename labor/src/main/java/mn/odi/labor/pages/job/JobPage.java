@@ -11,6 +11,7 @@ import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.beaneditor.Validate;
 import org.apache.tapestry5.corelib.components.Form;
+import org.apache.tapestry5.corelib.components.Grid;
 import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.Messages;
@@ -54,6 +55,9 @@ public class JobPage {
 	@Property
 	@Persist
 	private Job job;
+	
+	@InjectComponent
+	private Grid grid;
 
 	@Property
 	@Persist(PersistenceConstants.FLASH)
@@ -71,6 +75,8 @@ public class JobPage {
 
 	@Property
 	private boolean newCheck;
+	
+	private int number;
 
 	void onActivate() {
 		if (job == null) {
@@ -103,6 +109,14 @@ public class JobPage {
 		job = new Job();
 		ajaxResponseRenderer.addRender(jobFormZone);
 	}
+	
+	public int getCount() {
+		return jobList.size();
+	}
+	
+	public int getNumber() {
+		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
+	}
 
 	@CommitAfter
 	Object onActionFromJobDelete(Job job) {
@@ -124,6 +138,10 @@ public class JobPage {
 			job.setIsNew(true);
 		} else {
 			job.setIsNew(false);
+		}
+		
+		if (dao.isJobExists(job)) {
+			return this;
 		}
 
 		dao.saveOrUpdateObject(job);

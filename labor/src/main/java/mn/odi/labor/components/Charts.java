@@ -20,7 +20,9 @@ public class Charts {
 	private String chartType;
 
 	void setupRender() {
-		//jsSupport.require("chart").with(chartType, getData());
+
+		// jsSupport.require("chart").with(chartType, getData());
+
 	}
 
 	private Object getData() {
@@ -41,7 +43,4 @@ public class Charts {
 		return false;
 	}
 
-
-
-	
 }

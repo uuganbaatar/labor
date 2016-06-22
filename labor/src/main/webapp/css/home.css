@@ -928,3 +928,26 @@ span.blackErrMsg {
 .user_table {
 	width: 90%;
 }
+
+.num{
+	    /* display: inline-block; */
+    text-align: center;
+    margin: 8px 8px 0 0;
+    font-size: 11px;
+	
+}
+.greenNum{
+	    background-position: 0 0;
+    border: 1px solid #84b550;
+}
+
+.widget .num a {
+    background: url("/assets/ctx/16a39c84/images/ui/numDataBg.png") repeat-x;
+    height: 19px;
+    padding: 2px 5px;
+    color: #fefefe;
+}
+
+.widget .num a {
+    margin-right: 10px;
+}

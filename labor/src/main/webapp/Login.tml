@@ -16,7 +16,7 @@
 					<div class="login-logo"></div>
 				</div>
 				<div class="panel-body">
-					<form class="form-horizontal m-t-20" action="/labor/j_spring_security_check"
+					<form  class="form-horizontal m-t-20" action="/labor/j_spring_security_check"
 						method="POST">
 						<t:if test="failed">
 							<div class="row">
@@ -27,13 +27,13 @@
 						<div class="form-group">
 							<div class="col-xs-12">
 								<input id="j_username" type="text" name="j_username"
-									class="form-control" placeholder="${message:userNameE}" />
+									class="form-control" placeholder="${message:userName}" />
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12">
 								<input id="j_password" type="password" name="j_password"
-									class="form-control" placeholder="${message:passE}" />
+									class="form-control" placeholder="${message:pass}" />
 							</div>
 						</div>
 						<div class="form-group">

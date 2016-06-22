@@ -27,7 +27,14 @@
 				<div class="navbar navbar-default" role="navigation">
 					<div class="container">
 						<div class="pull-right top-profile">
-							<a href="#">${user?.fullName}</a>
+							<a t:type="pagelink" t:page="UserProfile" title="">
+								<i class="fa fa-user"
+									style="padding-top: 8px;padding-left: 5px; padding-right: 4px;" />
+								<span>
+									${user?.fullName}
+								</span>
+							</a>
+							<!-- <a href="#">${user?.fullName}</a> -->
 							<t:actionlink t:id="logout">${message:logout}</t:actionlink>
 						</div>
 						<!--/.nav-collapse -->
@@ -108,6 +115,7 @@
 								<h4 class="page-title">${pageTitle}</h4>
 							</div>
 						</div>
+						<t:alerts />
 						<t:body />
 
 					</div> <!-- container -->
@@ -123,6 +131,15 @@
 			<!-- ============================================================== -->
 		</div>
 		<!-- END wrapper -->
+		<script type="text/javascript">
+			$(document).ready(function(){
+			$(".slidingDiv").hide();
+			$(".show_hide").show();
+			$('.show_hide').click(function(){
+			$(".slidingDiv").slideToggle();
+			});
+			});
+		</script>
 	</body>
 
 </html>

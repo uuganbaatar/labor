@@ -210,6 +210,16 @@ $(document)
 							}
 						});
 					});
+					
+					$("a > .confirm").click(function() {
+						$("#dialog-message").dialog("open");
+						return false;
+					});
+
+					$("a > .confirm").click(function() {
+						$("#dialog-account").dialog("open");
+						return false;
+					});
 					/* bitii ustgaarai ashiglaj bga begin */
 					$(function() {
 						$("#stab").tabs({

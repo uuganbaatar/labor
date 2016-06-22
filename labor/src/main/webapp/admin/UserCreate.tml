@@ -10,14 +10,14 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label>${message:firstname-label}</label>
-							<input t:type="textfield" class="form-control" t:validate="required"
+							<input t:type="textfield" class="form-control" t:id="firstname" t:validate="required"
 								t:value="user.firstname" />
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label>${message:lastname-label}</label>
-							<input t:type="textfield" class="form-control" t:validate="required"
+							<input t:type="textfield" class="form-control" t:id="lastname" t:validate="required"
 								t:value="user.lastname" />
 						</div>
 					</div>
@@ -39,14 +39,22 @@
 						<div class="form-group">
 							<label>${message:mobilephone-label}</label>
 							<input t:type="textfield" class="form-control" t:validate="required"
-								t:value="user.mobilephone" />
+								t:value="user.mobilephone" t:id="phone"/>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label>${message:email-label}</label>
 							<input t:type="textfield" class="form-control" t:validate="required"
-								t:value="user.email" />
+								t:value="user.email" t:id="email"/>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>${message:isActive-label}</label>
+							<!-- <input t:type="textfield" class="form-control" t:validate="required"
+								t:value="user.email" /> -->
+								<input t:id="isActive" t:type="checkbox" t:value="user.isActive" />
 						</div>
 					</div>
 					<div class="clearfix"></div>

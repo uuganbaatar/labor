@@ -86,6 +86,8 @@ public class UserCreate {
 
 	@CommitAfter
 	Object onSubmit() {
+		user.setUsername(user.getEmail());
+		user.setPassword(user.getEmail());
 		dao.saveOrUpdateObject(user);
 		return listPage;
 	}

@@ -6,7 +6,7 @@
 				<h4 class="text-dark header-title m-t-0">${message:reportList}</h4>
 				<t:Grid
 					class="reporttable table table-striped table-bordered dataTable no-footer table-actions-bar"
-					t:source="list" t:row="row" t:exclude="uuid,createddate,month,year,reportStatus"
+					t:source="list" t:row="row" t:exclude="uuid,createddate,month,year,reportStatus, createddateformated, modifieddateformated"
 					t:add="jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec">
 					<p:JanCell>
 						<button class="${january}">

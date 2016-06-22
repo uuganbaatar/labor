@@ -1,12 +1,87 @@
 <html t:type="layoutLavlah" title=""
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 	<div class="col-md-9">
+		<div class="filter-button">
+			<button type="button"
+				class="btn btn-primary waves-effect waves-light show_hide">
+				<span class="btn-label">
+					<i class="fa fa-search"></i>
+				</span>
+				${message:filter}
+			</button>
+		</div>
+		<div class="clearfix"></div>
+		<t:form t:id="search" class="form clear">
+			<div class="slidingDiv row main-contents">
+				<div class="col-md-12">
+					<div class="card-box">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>${message:lavlahgeneraltype}</label>
+								<t:TextField class="form-control" t:id="name"
+									t:value="gname" />
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>${message:startDate-label}</label>
+								<div class="input-group">
+									<input t:type="datefield" t:class="form-control"
+										t:placeholder="mm/dd/yyyy" t:id="datepicker" t:value="d1">
+										<span
+											class="input-group-addon bg-custom 
+											b-0 text-white">
+											<i class="icon-calender"></i>
+										</span>
+									</input>
+
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>${message:endDate-label}</label>
+								<div class="input-group">
+									<input t:type="datefield" t:class="form-control"
+										t:placeholder="mm/dd/yyyy" t:id="datepicker1" t:value="d2">
+										<span
+											class="input-group-addon bg-custom 
+											b-0 text-white">
+											<i class="icon-calender"></i>
+										</span>
+									</input>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>${message:isActive-label}</label>
+								<input t:id="isActive" t:type="checkbox" t:value="active" />
+							</div>
+						</div>
+						<div class="col-md-12 text-right">
+							<a t:type="eventlink" t:event="cancel"
+								class="btn btn-padding 
+										btn-grey waves-effect waves-light">${message:cancel}</a>
+							<button type="submit"
+								class="btn btn-padding btn-success waves-effect waves-light">${message:search}</button>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</t:form>
+	</div>
+
+	<div class="col-md-9">
 		<div class="card-box">
 			<h4 class="text-dark header-title m-t-0">${message:lavlahgeneraltype}</h4>
-			<t:Form>
+
+			<t:Form t:id="save">
 				<t:alerts />
-				<t:TextField t:id="textfield" t:value="name" style="width:50%;"
-					t:validate="required"></t:TextField>
+				<t:TextField t:value="name" t:id="generalType" style="width:50%;"
+					t:validate="maxlength=255,required"></t:TextField>
 				<div class="add-button">
 					<button type="submit" class="btn btn-success waves-effect waves-light">
 						<span class="btn-label">
@@ -16,19 +91,36 @@
 					</button>
 					<!-- </button> -->
 				</div>
+
 			</t:Form>
 			<t:zone t:id="listZone" id="listZone">
-				<t:Grid
+				<table t:type="grid" t:id="grid"
 					class="table table-striped table-bordered dataTable no-footer table-actions-bar"
-					t:add="delete" t:source="typeList" t:row="typeRow" t:exclude="uuid"
-					t:reorder="name,createddate,delete">
+					t:source="typeList" t:row="typeRow" t:exclude="uuid, createddate"
+					t:reorder="number, name, createddateformated, modifieddateformated,active, delete"
+					t:add="number, delete,active">
+					<p:numberCell>${number}</p:numberCell>
+					<p:activeCell>
+						<t:if test="typeRow.isActive">
+							<div class="num">
+								<a t:type="eventlink" t:event="enable" t:context="typeRow"
+									t:zone="listZone" class="greenNum confirmIsActive">${message:active-label}</a>
+							</div>
+							<p:else>
+								<div class="num">
+									<a t:type="eventlink" t:event="enable" t:context="typeRow"
+										t:zone="listZone" class="redNum confirmIsPassive">${message:passive-label}</a>
+								</div>
+							</p:else>
+						</t:if>
+					</p:activeCell>
 					<p:DeleteCell>
 						<t:ActionLink class="table-action-btn" t:id="deleteObject"
-							t:context="typeRow">
+							t:context="typeRow" t:mixins="ConfirmDelete" t:message="${message:confirmDelete}">
 							<i class="md md-close" />
 						</t:ActionLink>
 					</p:DeleteCell>
-				</t:Grid>
+				</table>
 			</t:zone>
 		</div>
 	</div>
