@@ -939,18 +939,12 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	public List<Object> getInfoBar() {
-		int year = Calendar.getInstance().get(Calendar.YEAR);
+		//int year = Calendar.getInstance().get(Calendar.YEAR);
 		try {
-			String sql = "select fg.name,count(fd.id) from form_data fd "
-					+ "join org_form_config_assoc ofca on ofca.id=fd.org_form_config_assoc_id "
-					+ "join task_org_assoc toa on toa.id=ofca.task_org_assoc_id "
-					+ "join sys_form_config_assoc sfca on sfca.id=ofca.form_config_assoc_id "
-					+ "join form_type ft on ft.id=sfca.form_type_id "
-					+ "join form_group fg on fg.id=ft.form_group join org on org.id=toa.org_id "
-					+ "where fd.year=:tYear ";
-			sql += " group by fg.name";
+			String sql = "select gt.name,count(job.id) from job left join general_type gt on gt.id=job.generaltype_id group by gt.name";
+			//sql += " group by fg.name";
 			SQLQuery query = session.createSQLQuery(sql);
-			query.setParameter("tYear", year);
+			//query.setParameter("tYear", year);
 			return query.list();
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -1058,6 +1052,26 @@ public class SccDAOHibernate implements SccDAO {
 		} catch (HibernateException e) {
 			return null;
 		}
+	}
+	
+	public Integer getTotalJan() {
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '01-JAN-16 11.02.49.590000000 PM' and '01-FEB-16 11.02.49.590000000 PM'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+	
+	public Integer getTotalFemaleJan() {
+
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '01-JAN-16 11.02.49.590000000 PM' and '01-FEB-16 11.02.49.590000000 PM'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
 	}
 
 }

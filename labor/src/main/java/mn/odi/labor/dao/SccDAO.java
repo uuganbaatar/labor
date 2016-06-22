@@ -168,5 +168,9 @@ public interface SccDAO {
 	public CompanyStatus getStatusByName(String name);
 	
 	public LavlahGarsan getGarsanByName(String name);
+	
+	public Integer getTotalJan();
+	
+	public Integer getTotalFemaleJan();
 
 }

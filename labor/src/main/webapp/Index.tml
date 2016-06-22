@@ -152,8 +152,9 @@
 
 					<h4 class="text-dark header-title m-t-0">${message:barChartDashboard}</h4>
 
-                 <!--  <t:charts id="mbars" t:chartData="barData" t:chartType="'bar'" />  -->
-                     <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+                    <t:charts id="mbars" t:chartData="barData" t:chartType="'bar'" />  
+                    
+                     
                     
 					<!-- <div class="text-left">
 						<ul class="list-inline chart-detail-list">
@@ -184,30 +185,9 @@
 			<div class="col-sm-6">
 				<div class="card-box">
 
-					<h4 class="text-dark header-title m-t-0">ajilchdiin haritsaa</h4>
 
 					<div class="text-left">
-						<ul class="list-inline chart-detail-list">
-							<li>
-								<h5>
-									<i class="fa fa-circle m-r-5" style="color: #01e5fe;"></i>
-									niit
-
-								</h5>
-							</li>
-							<li>
-								<h5>
-									<i class="fa fa-circle m-r-5" style="color: #0065ff;"></i>
-									emegte
-								</h5>
-							</li>
-							<li>
-								<h5>
-									<i class="fa fa-circle m-r-5" style="color: #e32f2e;"></i>
-									hugjliin berhsheelte
-								</h5>
-							</li>
-						</ul>
+						 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
 					</div>
 
 					<div id="morris-area-with-dotted" style="height: 300px;"></div>
@@ -250,66 +230,110 @@
 			</div>
 		</div>
 		<script src="https://code.highcharts.com/highcharts.js"></script>
-		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<table id="datatable">
+    <thead>
+        <tr>
+            <th></th>
+            <th>${message:total}</th>
+            <th>${message:female}</th>
+            <th>${message:berhsheeltei}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>Jan</th>
+            <td>${totalJan}</td>
+            <td>${totalFemaleJan}</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th>Feb</th>
+            <td>2</td>
+            <td>0</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th>Mar</th>
+            <td>5</td>
+            <td>11</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th>Apr</th>
+            <td>1</td>
+            <td>1</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th>May</th>
+            <td>2</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th>Jun</th>
+            <td>2</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th>Jul</th>
+            <td>2</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th>Aug</th>
+            <td>2</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th>Sep</th>
+            <td>2</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th>Nov</th>
+            <td>2</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <th>Dec</th>
+            <td>2</td>
+            <td>4</td>
+            <td>4</td>
+        </tr>
+    </tbody>
+</table>
 <script>
-$(function () {
+  $(function () {
     $('#container').highcharts({
+        data: {
+            table: 'datatable'
+        },
         chart: {
             type: 'column'
         },
         title: {
-            text: 'Monthly Average Rainfall'
-        },
-        subtitle: {
-            text: 'Source: WorldClimate.com'
-        },
-        xAxis: {
-            categories: [
-                'Jan',
-                'Feb',
-                'Mar',
-                'Apr',
-                'May',
-                'Jun',
-                'Jul',
-                'Aug',
-                'Sep',
-                'Oct',
-                'Nov',
-                'Dec'
-            ],
-            crosshair: true
+            text: 'Ажилчдын харьцаа'
         },
         yAxis: {
-            min: 0,
+            allowDecimals: false,
             title: {
-                text: 'Rainfall (mm)'
+                text: 'Units'
             }
         },
         tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    this.point.y + ' ' + this.point.name.toLowerCase();
             }
-        },
-        series: [{
-            name: 'Ajliin bairnii too',
-            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-
-        }, 
-         {
-            name: 'Shineer nemegdsen',
-            data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
-
-        }]
+        }
     });
 });
 </script>
