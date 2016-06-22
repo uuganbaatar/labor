@@ -1,0 +1,92 @@
+<html t:type="layoutLavlah" title=""
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+	<div class="col-md-9">
+		<div class="filter-button">
+			<button type="button"
+				class="btn btn-primary waves-effect waves-light show_hide">
+				<span class="btn-label">
+					<i class="fa fa-search"></i>
+				</span>
+				${message:filter}
+			</button>
+		</div>
+		<div class="clearfix"></div>
+		<t:form t:id="search" class="form clear">
+			<div class="slidingDiv row main-contents">
+				<div class="col-md-12">
+					<div class="card-box">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>${message:lavlahsum}</label>
+								<t:TextField class="form-control" t:id="name"
+									t:value="gname" />
+							</div>
+						</div>
+						<div class="col-md-12 text-right">
+							<a t:type="eventlink" t:event="cancel"
+								class="btn btn-padding 
+										btn-grey waves-effect waves-light">${message:cancel}</a>
+							<button type="submit"
+								class="btn btn-padding btn-success waves-effect waves-light">${message:search}</button>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</t:form>
+	</div>
+	<div class="col-md-9">
+		<div class="card-box">
+			<h4 class="text-dark header-title m-t-0">${message:lavlahsum}</h4>
+			<t:Form t:id="save">
+				<t:alerts />
+				<div class="col-md-5">
+					<t:TextField class="form-control" t:id="companyStatus"
+						t:value="name" t:validate="maxlength=255,required"></t:TextField>
+				</div>
+				<div class="col-md-4">
+					<t:Select class="form-control" model="aimagSelectModel"
+						value="aimag" />
+				</div>
+				<div class="add-button">
+					<button type="submit" class="btn btn-success waves-effect waves-light">
+						<span class="btn-label">
+							<i class="glyphicon glyphicon-plus"></i>
+						</span>
+						${message:save}
+					</button>
+					<!-- </button> -->
+				</div>
+			</t:Form>
+			<t:zone t:id="listZone" id="listZone">
+				<table t:type="grid" t:id="grid"
+					class="table table-striped table-bordered dataTable no-footer table-actions-bar"
+					t:source="list" t:row="row" t:exclude="uuid, createddate"
+					t:reorder="number, name,aimagId,createddateformated,modifieddateformated,active,delete"
+					t:add="number,active, delete">
+					<p:numberCell>${number}</p:numberCell>
+					<p:DeleteCell>
+						<t:ActionLink class="table-action-btn" t:id="deleteObject"
+							t:context="row" t:mixins="ConfirmDelete" t:message="${message:confirmDelete}">
+							<i class="md md-close" />
+						</t:ActionLink>
+					</p:DeleteCell>
+					<p:activeCell>
+						<t:if test="row.isActive">
+							<div class="num">
+								<a t:type="eventlink" t:event="enable" t:context="row" t:zone="listZone"
+									class="greenNum confirmIsActive">${message:active-label}</a>
+							</div>
+							<p:else>
+								<div class="num">
+									<a t:type="eventlink" t:event="enable" t:context="row"
+										t:zone="listZone" class="redNum confirmIsPassive">${message:passive-label}</a>
+								</div>
+							</p:else>
+						</t:if>
+					</p:activeCell>
+				</table>
+			</t:zone>
+		</div>
+	</div>
+</html>

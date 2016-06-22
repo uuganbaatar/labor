@@ -1,10 +1,12 @@
 package mn.odi.labor.pages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.common.AccessLog;
+import mn.odi.labor.entities.common.User;
 
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;

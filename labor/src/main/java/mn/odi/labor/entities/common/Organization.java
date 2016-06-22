@@ -25,13 +25,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.hibernate.envers.Audited;
 
-import mn.odi.labor.enums.AimagNiislelEnum;
 import mn.odi.labor.util.UUIDUtil;
 
 @Entity
@@ -74,8 +75,9 @@ public class Organization extends BaseObject {
 	@Column(name = "web")
 	protected String web;
 
-	@Column(name = "aimag_id")
-	protected AimagNiislelEnum aimagId;
+	@ManyToOne
+	@JoinColumn(name = "sum_id")
+	private SumDuureg sumId;
 
 	public Organization() {
 		this.uuid = UUIDUtil.getUUID();
@@ -153,21 +155,13 @@ public class Organization extends BaseObject {
 		this.regNum = regNum;
 	}
 
-	/*
-	 * public Set<User> getUsers() { return users; }
-	 * 
-	 * public void setUsers(Set<User> users) { this.users = users; }
-	 * 
-	 * public Set<Employee> getEmployees() { return employees; }
-	 * 
-	 * public void setEmployees(Set<Employee> employees) { this.employees =
-	 * employees; }
-	 * 
-	 * public Set<Department> getDepartments() { return departments; }
-	 * 
-	 * public void setDepartments(Set<Department> departments) {
-	 * this.departments = departments; }
-	 */
+	public SumDuureg getSumId() {
+		return sumId;
+	}
+
+	public void setSumId(SumDuureg sumId) {
+		this.sumId = sumId;
+	}
 
 	// ********************** Common Methods ********************** //
 
