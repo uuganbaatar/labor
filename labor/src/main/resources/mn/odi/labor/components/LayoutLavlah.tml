@@ -139,6 +139,11 @@
 										${message:lavlahgarsan}
 									</t:actionlink>
 								</button>
+								<button type="button" class="${SelectedTabLavlahSum}">
+									<t:actionlink t:id="lavlahSumTab">
+										${message:lavlahsum}
+									</t:actionlink>
+								</button>
 							</div>
 							<t:body />
 						</div>

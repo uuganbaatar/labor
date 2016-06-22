@@ -5,26 +5,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import mn.odi.labor.aso.LoginState;
-import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.entities.admin.AjiliinBairHurungu;
-import mn.odi.labor.entities.admin.CompanyHelber;
-import mn.odi.labor.entities.admin.CompanyStatus;
-import mn.odi.labor.entities.admin.CompanyTrend;
-import mn.odi.labor.entities.admin.GeneralType;
-import mn.odi.labor.entities.admin.LavlahGarsan;
-import mn.odi.labor.entities.common.AccessLog;
-import mn.odi.labor.entities.common.BaseObject;
-import mn.odi.labor.entities.common.Organization;
-import mn.odi.labor.entities.common.User;
-import mn.odi.labor.entities.labor.Employee;
-import mn.odi.labor.entities.labor.Job;
-import mn.odi.labor.entities.labor.Report;
-import mn.odi.labor.entities.labor.ReportDetail;
-import mn.odi.labor.entities.labor.ReportStatus;
-import mn.odi.labor.enums.JobTypeEnum;
-import mn.odi.labor.enums.ReportDetailType;
-
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.alerts.Duration;
 import org.apache.tapestry5.alerts.Severity;
@@ -43,6 +23,28 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.IntegerType;
+
+import mn.odi.labor.aso.LoginState;
+import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.admin.AjiliinBairHurungu;
+import mn.odi.labor.entities.admin.CompanyHelber;
+import mn.odi.labor.entities.admin.CompanyStatus;
+import mn.odi.labor.entities.admin.CompanyTrend;
+import mn.odi.labor.entities.admin.GeneralType;
+import mn.odi.labor.entities.admin.LavlahGarsan;
+import mn.odi.labor.entities.common.AccessLog;
+import mn.odi.labor.entities.common.BaseObject;
+import mn.odi.labor.entities.common.Organization;
+import mn.odi.labor.entities.common.SumDuureg;
+import mn.odi.labor.entities.common.User;
+import mn.odi.labor.entities.labor.Employee;
+import mn.odi.labor.entities.labor.Job;
+import mn.odi.labor.entities.labor.Report;
+import mn.odi.labor.entities.labor.ReportDetail;
+import mn.odi.labor.entities.labor.ReportStatus;
+import mn.odi.labor.enums.AimagNiislelEnum;
+import mn.odi.labor.enums.JobTypeEnum;
+import mn.odi.labor.enums.ReportDetailType;
 
 public class SccDAOHibernate implements SccDAO {
 
@@ -73,8 +75,7 @@ public class SccDAOHibernate implements SccDAO {
 
 			obj.setModifiedDate(getCurrentDate());
 
-			if (obj.getCreatedBy() == null && loginState != null
-					&& loginState.getUser() != null) {
+			if (obj.getCreatedBy() == null && loginState != null && loginState.getUser() != null) {
 				obj.setCreatedBy(loginState.getUser());
 			}
 
@@ -110,16 +111,14 @@ public class SccDAOHibernate implements SccDAO {
 	public void saveObject(Object obj) {
 
 		session.save(obj);
-		alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
-				messages.get("success"));
+		alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS, messages.get("success"));
 	}
 
 	@CommitAfter
 	public void updateObject(Object obj) {
 		if (obj != null) {
 			session.saveOrUpdate(obj);
-			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
-					messages.get("success"));
+			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS, messages.get("success"));
 		}
 	}
 
@@ -127,8 +126,7 @@ public class SccDAOHibernate implements SccDAO {
 	public void saveOrUpdateObject(Object obj) {
 		try {
 			session.saveOrUpdate(obj);
-			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
-					messages.get("success"));
+			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS, messages.get("success"));
 		} catch (Exception e) {
 			session.merge(obj);
 		}
@@ -211,7 +209,8 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param - Systemiin hereglegchiin jagsaalt
+	 * @param -
+	 *            Systemiin hereglegchiin jagsaalt
 	 * @return List<User>
 	 */
 	public List<User> getUserList() {
@@ -230,7 +229,8 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param - Ajliin bairnii jagsaalt
+	 * @param -
+	 *            Ajliin bairnii jagsaalt
 	 * @return List<Job>
 	 */
 	public List<Job> getJobList() {
@@ -248,7 +248,8 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param - General type jagsaalt
+	 * @param -
+	 *            General type jagsaalt
 	 * @return List<GeneralType>
 	 */
 	public List<GeneralType> getGeneralTypeList() {
@@ -342,7 +343,8 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param - Ajiltnii jagsaalt
+	 * @param -
+	 *            Ajiltnii jagsaalt
 	 * @return List<Employee>
 	 */
 	public List<Employee> getEmpList() {
@@ -404,8 +406,7 @@ public class SccDAOHibernate implements SccDAO {
 				}
 
 				if (emp.getCreatedDate() != null) {
-					sql += " AND employee.created_date = "
-							+ emp.getCreatedDate();
+					sql += " AND employee.created_date = " + emp.getCreatedDate();
 				}
 
 				if (emp.getPhone() != null) {
@@ -447,8 +448,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public ReportStatus getReportStatusList(Report report, Integer year,
-			Integer month, Organization orgId) {
+	public ReportStatus getReportStatusList(Report report, Integer year, Integer month, Organization orgId) {
 		try {
 			Criteria crit = session.createCriteria(ReportStatus.class);
 
@@ -485,8 +485,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public ReportDetail getReportDetailListWithParameter(
-			GeneralType generalType, ReportDetailType detailType,
+	public ReportDetail getReportDetailListWithParameter(GeneralType generalType, ReportDetailType detailType,
 			JobTypeEnum jobType, Integer year, Integer month) {
 		try {
 			Criteria crit = session.createCriteria(ReportDetail.class);
@@ -517,8 +516,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public Long getReportDetailAddRemove(GeneralType generalType,
-			ReportDetailType detailType, Integer year, Integer month) {
+	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
+			Integer month) {
 		try {
 			Criteria crit = session.createCriteria(ReportDetail.class);
 			crit.createAlias("reportStatusId", "reportStatusId");
@@ -551,8 +550,7 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countJob FROM job";
 
-		Query query = session.createSQLQuery(sql).addScalar("countJob",
-				IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -561,8 +559,7 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countJob FROM job where isnew=1";
 
-		Query query = session.createSQLQuery(sql).addScalar("countJob",
-				IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -571,8 +568,7 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countEmp FROM employee";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp",
-				IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -589,8 +585,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 
 		if (crit.list() != null && crit.list().size() > 0) {
-			alertManager.alert(Duration.SINGLE, Severity.WARN,
-					messages.get("jobExist"));
+			alertManager.alert(Duration.SINGLE, Severity.WARN, messages.get("jobExist"));
 			return true;
 		}
 
@@ -614,8 +609,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<User> getUserListSearch(String ln, String fn, String mail,
-			Date d1, Date d2, Boolean b) {
+	public List<User> getUserListSearch(String ln, String fn, String mail, Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(User.class);
 
@@ -646,8 +640,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<Employee> getEmpListSearch(Organization org, Job job,
-			String emp, String sur, String phone) {
+	public List<Employee> getEmpListSearch(Organization org, Job job, String emp, String sur, String phone) {
 		try {
 			Criteria crit = session.createCriteria(Employee.class);
 			crit.addOrder(Order.desc("empName"));
@@ -677,8 +670,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1,
-			Date d2, Boolean b) {
+	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(GeneralType.class);
 
@@ -703,8 +695,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1,
-			Date d2, Boolean b) {
+	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(CompanyTrend.class);
 
@@ -730,8 +721,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name,
-			Date d1, Date d2, Boolean b) {
+	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name, Date d1, Date d2, Boolean b) {
 		try {
 
 			Criteria crit = session.createCriteria(AjiliinBairHurungu.class);
@@ -757,8 +747,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<AccessLog> getAccessLogsSearch(String lname, String fname,
-			Date d1, Date d2) {
+	public List<AccessLog> getAccessLogsSearch(String lname, String fname, Date d1, Date d2) {
 		try {
 			Criteria crit = session.createCriteria(AccessLog.class);
 
@@ -838,8 +827,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1,
-			Date d2, Boolean b) {
+	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(CompanyHelber.class);
 
@@ -864,8 +852,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1,
-			Date d2, Boolean b) {
+	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(CompanyStatus.class);
 			if (name != null)
@@ -888,8 +875,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name,
-			Date d1, Date d2, Boolean b) {
+	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name, Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(LavlahGarsan.class);
 
@@ -913,8 +899,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<Organization> getOrgListSearch(String name, Date d1, Date d2,
-			Boolean b) {
+	public List<Organization> getOrgListSearch(String name, Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(Organization.class);
 
@@ -1052,6 +1037,37 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (crit.list() != null && !crit.list().isEmpty())
 				return (LavlahGarsan) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public List<SumDuureg> getSumDuureg() {
+		try {
+			Criteria crit = session.createCriteria(SumDuureg.class);
+
+			return crit.list();
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public SumDuureg getSumDuuregByName(String name, AimagNiislelEnum aimagId) {
+		try {
+			Criteria crit = session.createCriteria(SumDuureg.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (aimagId != null)
+				crit.add(Restrictions.eq("aimagId", aimagId));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (SumDuureg) crit.list().get(0);
 			else
 				return null;
 

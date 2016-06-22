@@ -1,12 +1,6 @@
 package mn.odi.labor.pages;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import mn.odi.labor.aso.LoginState;
-import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.entities.common.AccessLog;
-import mn.odi.labor.entities.common.User;
 
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
@@ -19,6 +13,10 @@ import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestGlobals;
 import org.apache.tapestry5.services.Response;
+
+import mn.odi.labor.aso.LoginState;
+import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.common.AccessLog;
 
 public class Index {
 
