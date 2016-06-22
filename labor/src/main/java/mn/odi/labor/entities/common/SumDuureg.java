@@ -1,6 +1,6 @@
 /* 
  * Package Name: mn.odi.scc.entities.common
- * File Name: Organization.java
+ * File Name: Department.java
  * 
  * Created By: Tserentogtokh.D
  * Created Date: 2014/04/14
@@ -9,9 +9,10 @@
  * ------------------------------------------------------------------------------
  * Date							Programmer						Description
  * ------------------------------------------------------------------------------
- * 2014/04/14 1.0.0 			Tserentogtokh.D				    Ð¨Ð¸Ð½Ñ�Ñ�Ñ€ Ò¯Ò¯Ñ�Ð³Ñ�Ð².
+ * 2014/04/14 1.0.0 			Tserentogtokh.D				    Шинээр үүсгэв.
  * 
- * 2014/04/23 1.0.0 			Tserentogtokh.D				    Ó¨Ó©Ñ€Ñ‡Ð¸Ð»Ó©Ð»Ñ‚ Ð¾Ñ€ÑƒÑƒÐ»Ð°Ð².
+ * 2014/04/23 1.0.0 			Tserentogtokh.D				    Parent Department, 
+ * 																Employee оруулав.
  * ------------------------------------------------------------------------------
  * 
  * ALL RIGHTS RESERVED COPYRIGHT (C) 2014 Od Innovation CO.,LTD SOFTWARE DIVSION
@@ -35,62 +36,34 @@ import mn.odi.labor.enums.AimagNiislelEnum;
 import mn.odi.labor.util.UUIDUtil;
 
 @Entity
-@Table(name = "organization")
+@Table(name = "sum_duureg")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Audited(auditParents = BaseObject.class)
-public class Organization extends BaseObject {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2430043464624551384L;
+public class SumDuureg extends BaseObject {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@NonVisual
 	@GeneratedValue
 	@Column(name = "id")
-	protected Long id;
+	private Long id;
 
 	@Column(name = "uuid", length = 32, insertable = true, updatable = false)
-	protected String uuid;
+	private String uuid;
 
 	@Column(name = "name")
-	protected String name;
-
-	@Column(name = "code")
-	protected String code;
-
-	@Column(name = "reg_num")
-	protected String regNum;
-
-	@Column(name = "mobile_phone")
-	protected String mobilePhone;
-
-	@Column(name = "phone")
-	protected String phone;
-
-	@Column(name = "fax")
-	protected String fax;
-
-	@Column(name = "web")
-	protected String web;
+	private String name;
 
 	@Column(name = "aimag_id")
-	protected AimagNiislelEnum aimagId;
+	private AimagNiislelEnum aimagId;
 
-	public Organization() {
+	public SumDuureg() {
 		this.uuid = UUIDUtil.getUUID();
 	}
 
 	public Long getId() {
 		return id;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
 	}
 
 	public void setId(Long id) {
@@ -113,61 +86,13 @@ public class Organization extends BaseObject {
 		this.name = name;
 	}
 
-	public String getMobilePhone() {
-		return mobilePhone;
+	public AimagNiislelEnum getAimagId() {
+		return aimagId;
 	}
 
-	public void setMobilePhone(String mobilePhone) {
-		this.mobilePhone = mobilePhone;
+	public void setAimagId(AimagNiislelEnum aimagId) {
+		this.aimagId = aimagId;
 	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getFax() {
-		return fax;
-	}
-
-	public void setFax(String fax) {
-		this.fax = fax;
-	}
-
-	public String getWeb() {
-		return web;
-	}
-
-	public void setWeb(String web) {
-		this.web = web;
-	}
-
-	public String getRegNum() {
-		return regNum;
-	}
-
-	public void setRegNum(String regNum) {
-		this.regNum = regNum;
-	}
-
-	/*
-	 * public Set<User> getUsers() { return users; }
-	 * 
-	 * public void setUsers(Set<User> users) { this.users = users; }
-	 * 
-	 * public Set<Employee> getEmployees() { return employees; }
-	 * 
-	 * public void setEmployees(Set<Employee> employees) { this.employees =
-	 * employees; }
-	 * 
-	 * public Set<Department> getDepartments() { return departments; }
-	 * 
-	 * public void setDepartments(Set<Department> departments) {
-	 * this.departments = departments; }
-	 */
 
 	// ********************** Common Methods ********************** //
 
@@ -181,11 +106,11 @@ public class Organization extends BaseObject {
 			return false;
 		}
 
-		if (!(o instanceof Organization)) {
+		if (!(o instanceof SumDuureg)) {
 			return false;
 		}
 
-		final Organization u = (Organization) o;
+		final SumDuureg u = (SumDuureg) o;
 
 		if (u.getId() == null) {
 			return false;
@@ -200,12 +125,11 @@ public class Organization extends BaseObject {
 
 	@Override
 	public int hashCode() {
-		return 0;
+		return getUuid().hashCode();
 	}
 
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("id", this.id).append("uuid", this.uuid).toString();
 	}
-
 }
