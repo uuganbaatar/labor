@@ -82,9 +82,9 @@ public interface SccDAO {
 	public List<Job> getJobList();
 
 	public List<GeneralType> getGeneralTypeList();
-	
+
 	public List<PropertyType> getPropertyTypeList();
-	
+
 	public List<EconomicCategory> getEconomicCategoryList();
 
 	public List<CompanyTrend> getCompanyTrendList();
@@ -107,15 +107,17 @@ public interface SccDAO {
 
 	public List<Report> getReportList();
 
-	public ReportStatus getReportStatusList(Report report, Integer year, Integer month, Organization orgId);
+	public ReportStatus getReportStatusList(Report report, Integer year,
+			Integer month, Organization orgId);
 
 	public List<ReportDetail> getReportDetailList();
 
-	public ReportDetail getReportDetailListWithParameter(GeneralType generalType, ReportDetailType detailType,
+	public ReportDetail getReportDetailListWithParameter(
+			GeneralType generalType, ReportDetailType detailType,
 			JobTypeEnum jobType, Integer year, Integer month);
 
-	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
-			Integer month);
+	public Long getReportDetailAddRemove(GeneralType generalType,
+			ReportDetailType detailType, Integer year, Integer month);
 
 	public Integer getAllJobs();
 
@@ -127,40 +129,52 @@ public interface SccDAO {
 
 	public List<AccessLog> getAccessLogs();
 
-	public List<User> getUserListSearch(String ln, String fn, String mail, Date d1, Date d2, Boolean b);
+	public List<User> getUserListSearch(String ln, String fn, String mail,
+			Date d1, Date d2, Boolean b);
 
-	public List<Employee> getEmpListSearch(Organization org, Job job, String emp, String sur, String phone);
+	public List<Employee> getEmpListSearch(Organization org, Job job,
+			String emp, String sur, String phone);
 
-	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1,
+			Date d2, Boolean b);
 
-	public List<PropertyType> getPropertyTypeListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<PropertyType> getPropertyTypeListSearch(String name, Date d1,
+			Date d2, Boolean b);
 
-	public List<EconomicCategory> getEconomicCategoryListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<EconomicCategory> getEconomicCategoryListSearch(String name,
+			Date d1, Date d2, Boolean b);
 
-	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1,
+			Date d2, Boolean b);
 
-	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name,
+			Date d1, Date d2, Boolean b);
 
-	public List<AccessLog> getAccessLogsSearch(String lname, String fname, Date d1, Date d2);
+	public List<AccessLog> getAccessLogsSearch(String lname, String fname,
+			Date d1, Date d2);
 
 	public List<User> getUserListByLastName(String name);
 
 	public List<User> getUserListByFirstName(String name);
 
-	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1,
+			Date d2, Boolean b);
 
-	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1,
+			Date d2, Boolean b);
 
-	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name,
+			Date d1, Date d2, Boolean b);
 
-	public List<Organization> getOrgListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<Organization> getOrgListSearch(String name, Date d1, Date d2,
+			Boolean b);
 
 	public List<Object> getInfoBar();
 
 	public GeneralType getGeneralTypeByName(String name);
-	
+
 	public PropertyType getPropertyTypeByName(String name);
-	
+
 	public EconomicCategory getEconomicCategoryByName(String name);
 
 	public CompanyTrend getCompanyTrendByName(String name);
@@ -172,13 +186,57 @@ public interface SccDAO {
 	public CompanyStatus getStatusByName(String name);
 
 	public LavlahGarsan getGarsanByName(String name);
-	
-	public Integer getTotalJan();
-	
-	public Integer getTotalFemaleJan();
+
+	public Integer getTotalJan(int year);
+
+	public Integer getTotalFemaleJan(int year);
 
 	public List<SumDuureg> getSumDuureg();
 
 	public SumDuureg getSumDuuregByName(String name, AimagNiislelEnum aimagId);
+
+	public Integer getTotalFeb(int year);
+
+	public Integer getTotalFemaleFeb(int year);
+	
+	public Integer getTotalMar(int year);
+
+	public Integer getTotalFemaleMar(int year);
+	
+	public Integer getTotalApr(int year);
+
+	public Integer getTotalFemaleApr(int year);
+	
+	public Integer getTotalMay(int year);
+
+	public Integer getTotalFemaleMay(int year);
+	
+	public Integer getTotalJun(int year);
+
+	public Integer getTotalFemaleJun(int year);
+	
+	public Integer getTotalJul(int year);
+
+	public Integer getTotalFemaleJul(int year);
+	
+	public Integer getTotalAug(int year);
+
+	public Integer getTotalFemaleAug(int year);
+	
+	public Integer getTotalSep(int year);
+
+	public Integer getTotalFemaleSep(int year);
+	
+	public Integer getTotalOct(int year);
+
+	public Integer getTotalFemaleOct(int year);
+	
+	public Integer getTotalNov(int year);
+
+	public Integer getTotalFemaleNov(int year);
+	
+	public Integer getTotalDec(int year);
+
+	public Integer getTotalFemaleDec(int year);
 
 }

@@ -77,7 +77,8 @@ public class SccDAOHibernate implements SccDAO {
 
 			obj.setModifiedDate(getCurrentDate());
 
-			if (obj.getCreatedBy() == null && loginState != null && loginState.getUser() != null) {
+			if (obj.getCreatedBy() == null && loginState != null
+					&& loginState.getUser() != null) {
 				obj.setCreatedBy(loginState.getUser());
 			}
 
@@ -113,14 +114,16 @@ public class SccDAOHibernate implements SccDAO {
 	public void saveObject(Object obj) {
 
 		session.save(obj);
-		alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS, messages.get("success"));
+		alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+				messages.get("success"));
 	}
 
 	@CommitAfter
 	public void updateObject(Object obj) {
 		if (obj != null) {
 			session.saveOrUpdate(obj);
-			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS, messages.get("success"));
+			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+					messages.get("success"));
 		}
 	}
 
@@ -128,7 +131,8 @@ public class SccDAOHibernate implements SccDAO {
 	public void saveOrUpdateObject(Object obj) {
 		try {
 			session.saveOrUpdate(obj);
-			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS, messages.get("success"));
+			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+					messages.get("success"));
 		} catch (Exception e) {
 			session.merge(obj);
 		}
@@ -211,8 +215,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Systemiin hereglegchiin jagsaalt
+	 * @param - Systemiin hereglegchiin jagsaalt
 	 * @return List<User>
 	 */
 	public List<User> getUserList() {
@@ -231,8 +234,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Ajliin bairnii jagsaalt
+	 * @param - Ajliin bairnii jagsaalt
 	 * @return List<Job>
 	 */
 	public List<Job> getJobList() {
@@ -248,10 +250,9 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
-	
+
 	/**
-	 * @param -
-	 *            General type jagsaalt
+	 * @param - General type jagsaalt
 	 * @return List<GeneralType>
 	 */
 	public List<GeneralType> getGeneralTypeList() {
@@ -270,8 +271,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Property type jagsaalt
+	 * @param - Property type jagsaalt
 	 * @return List<GeneralType>
 	 */
 	public List<PropertyType> getPropertyTypeList() {
@@ -290,8 +290,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            EconomicCategory jagsaalt
+	 * @param - EconomicCategory jagsaalt
 	 * @return List<GeneralType>
 	 */
 	public List<EconomicCategory> getEconomicCategoryList() {
@@ -308,7 +307,7 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
-	
+
 	public List<CompanyTrend> getCompanyTrendList() {
 		try {
 			Criteria crit = session.createCriteria(CompanyTrend.class);
@@ -385,8 +384,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Ajiltnii jagsaalt
+	 * @param - Ajiltnii jagsaalt
 	 * @return List<Employee>
 	 */
 	public List<Employee> getEmpList() {
@@ -448,7 +446,8 @@ public class SccDAOHibernate implements SccDAO {
 				}
 
 				if (emp.getCreatedDate() != null) {
-					sql += " AND employee.created_date = " + emp.getCreatedDate();
+					sql += " AND employee.created_date = "
+							+ emp.getCreatedDate();
 				}
 
 				if (emp.getPhone() != null) {
@@ -490,7 +489,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public ReportStatus getReportStatusList(Report report, Integer year, Integer month, Organization orgId) {
+	public ReportStatus getReportStatusList(Report report, Integer year,
+			Integer month, Organization orgId) {
 		try {
 			Criteria crit = session.createCriteria(ReportStatus.class);
 
@@ -527,7 +527,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public ReportDetail getReportDetailListWithParameter(GeneralType generalType, ReportDetailType detailType,
+	public ReportDetail getReportDetailListWithParameter(
+			GeneralType generalType, ReportDetailType detailType,
 			JobTypeEnum jobType, Integer year, Integer month) {
 		try {
 			Criteria crit = session.createCriteria(ReportDetail.class);
@@ -558,8 +559,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
-			Integer month) {
+	public Long getReportDetailAddRemove(GeneralType generalType,
+			ReportDetailType detailType, Integer year, Integer month) {
 		try {
 			Criteria crit = session.createCriteria(ReportDetail.class);
 			crit.createAlias("reportStatusId", "reportStatusId");
@@ -592,7 +593,8 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countJob FROM job";
 
-		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countJob",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -601,7 +603,8 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countJob FROM job where isnew=1";
 
-		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countJob",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -610,7 +613,8 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countEmp FROM employee";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -627,7 +631,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 
 		if (crit.list() != null && crit.list().size() > 0) {
-			alertManager.alert(Duration.SINGLE, Severity.WARN, messages.get("jobExist"));
+			alertManager.alert(Duration.SINGLE, Severity.WARN,
+					messages.get("jobExist"));
 			return true;
 		}
 
@@ -651,7 +656,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<User> getUserListSearch(String ln, String fn, String mail, Date d1, Date d2, Boolean b) {
+	public List<User> getUserListSearch(String ln, String fn, String mail,
+			Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(User.class);
 
@@ -682,7 +688,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<Employee> getEmpListSearch(Organization org, Job job, String emp, String sur, String phone) {
+	public List<Employee> getEmpListSearch(Organization org, Job job,
+			String emp, String sur, String phone) {
 		try {
 			Criteria crit = session.createCriteria(Employee.class);
 			crit.addOrder(Order.desc("empName"));
@@ -712,7 +719,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1,
+			Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(GeneralType.class);
 
@@ -736,8 +744,9 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
-	
-	public List<PropertyType> getPropertyTypeListSearch(String name, Date d1, Date d2, Boolean b) {
+
+	public List<PropertyType> getPropertyTypeListSearch(String name, Date d1,
+			Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(PropertyType.class);
 
@@ -762,7 +771,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<EconomicCategory> getEconomicCategoryListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<EconomicCategory> getEconomicCategoryListSearch(String name,
+			Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(EconomicCategory.class);
 
@@ -786,8 +796,9 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
-	
-	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1, Date d2, Boolean b) {
+
+	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1,
+			Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(CompanyTrend.class);
 
@@ -813,7 +824,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name,
+			Date d1, Date d2, Boolean b) {
 		try {
 
 			Criteria crit = session.createCriteria(AjiliinBairHurungu.class);
@@ -829,7 +841,7 @@ public class SccDAOHibernate implements SccDAO {
 				crit.add(Restrictions.eq("isActive", b));
 
 			crit.addOrder(Order.desc("name"));
-			
+
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -841,7 +853,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<AccessLog> getAccessLogsSearch(String lname, String fname, Date d1, Date d2) {
+	public List<AccessLog> getAccessLogsSearch(String lname, String fname,
+			Date d1, Date d2) {
 		try {
 			Criteria crit = session.createCriteria(AccessLog.class);
 
@@ -921,7 +934,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1,
+			Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(CompanyHelber.class);
 
@@ -934,9 +948,9 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (b != null)
 				crit.add(Restrictions.eq("isActive", b));
-			
+
 			crit.addOrder(Order.desc("name"));
-			
+
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -948,7 +962,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1,
+			Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(CompanyStatus.class);
 			if (name != null)
@@ -960,9 +975,9 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (b != null)
 				crit.add(Restrictions.eq("isActive", b));
-			
+
 			crit.addOrder(Order.desc("name"));
-			
+
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -974,7 +989,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name,
+			Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(LavlahGarsan.class);
 
@@ -987,9 +1003,9 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (b != null)
 				crit.add(Restrictions.eq("isActive", b));
-			
+
 			crit.addOrder(Order.desc("name"));
-			
+
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -1001,7 +1017,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<Organization> getOrgListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<Organization> getOrgListSearch(String name, Date d1, Date d2,
+			Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(Organization.class);
 
@@ -1026,12 +1043,12 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	public List<Object> getInfoBar() {
-		//int year = Calendar.getInstance().get(Calendar.YEAR);
+		// int year = Calendar.getInstance().get(Calendar.YEAR);
 		try {
 			String sql = "select gt.name,count(job.id) from job left join general_type gt on gt.id=job.generaltype_id group by gt.name";
-			//sql += " group by fg.name";
+			// sql += " group by fg.name";
 			SQLQuery query = session.createSQLQuery(sql);
-			//query.setParameter("tYear", year);
+			// query.setParameter("tYear", year);
 			return query.list();
 		} catch (HibernateException e) {
 			e.printStackTrace();
@@ -1055,7 +1072,7 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
-	
+
 	public PropertyType getPropertyTypeByName(String name) {
 		try {
 			Criteria crit = session.createCriteria(PropertyType.class);
@@ -1089,7 +1106,7 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
-	
+
 	public CompanyTrend getCompanyTrendByName(String name) {
 		try {
 			Criteria crit = session.createCriteria(CompanyTrend.class);
@@ -1164,7 +1181,7 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (name != null)
 				crit.add(Restrictions.eq("name", name));
-			
+
 			crit.addOrder(Order.desc("name"));
 
 			if (crit.list() != null && !crit.list().isEmpty())
@@ -1176,20 +1193,34 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
-	
-	public Integer getTotalJan() {
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '01-JAN-16 11.02.49.590000000 PM' and '01-FEB-16 11.02.49.590000000 PM'";
+	public Integer getTotalJan(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-JAN-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-FEB-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
 		Query query = session.createSQLQuery(sql).addScalar("countEmp",
 				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
-	
-	public Integer getTotalFemaleJan() {
 
-		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '01-JAN-16 11.02.49.590000000 PM' and '01-FEB-16 11.02.49.590000000 PM'";
+	public Integer getTotalFemaleJan(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-JAN-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-FEB-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
 		Query query = session.createSQLQuery(sql).addScalar("countEmp",
 				IntegerType.INSTANCE);
@@ -1226,6 +1257,380 @@ public class SccDAOHibernate implements SccDAO {
 		} catch (HibernateException e) {
 			return null;
 		}
+	}
+
+	public Integer getTotalFeb(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-FEB-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-MAR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalFemaleFeb(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-FEB-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-MAR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalMar(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-MAR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-APR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalFemaleMar(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-MAR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-APR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalApr(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-APR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-MAY-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalFemaleApr(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-APR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-MAY-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalMay(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-MAY-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-JUN-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalFemaleMay(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-MAY-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-JUN-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalJun(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-JUN-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-JUL-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalFemaleJun(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-JUN-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-JUL-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalJul(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-JUL-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-AUG-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalFemaleJul(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-JUL-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-AUG-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalAug(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-AUG-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-SEP-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalFemaleAug(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-AUG-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-SEP-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalSep(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-SEP-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-OCT-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalFemaleSep(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-SEP-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-OCT-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalOct(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-OCT-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-NOV-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalFemaleOct(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-OCT-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-NOV-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalNov(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-NOV-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalFemaleNov(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-NOV-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalDec(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "31-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalFemaleDec(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "31-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
 	}
 
 }

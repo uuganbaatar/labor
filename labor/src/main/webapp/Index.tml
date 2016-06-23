@@ -150,32 +150,12 @@
 			<div class="col-sm-12">
 				<div class="card-box">
 
-					<h4 class="text-dark header-title m-t-0">${message:barChartDashboard}</h4>
+			<!-- 		<h4 class="text-dark header-title m-t-0">${message:barChartDashboard}</h4> -->
 
-                    <t:charts id="mbars" t:chartData="barData" t:chartType="'bar'" />  
+                   <!--  <t:charts id="mbars" t:chartData="barData" t:chartType="'bar'" />   -->
                     
-                     
-                    
-					<!-- <div class="text-left">
-						<ul class="list-inline chart-detail-list">
-							<li>
-								<h5>
-									<i class="fa fa-circle m-r-5" style="color: #01e5fe;"></i>
-									ajliin bairnii too
-								</h5>
-							</li>
-							<li>
-								<h5>
-									<i class="fa fa-circle m-r-5" style="color: #0065ff;"></i>
-									shineer nemegdsen
-								</h5>
-							</li>
-						</ul>
-					</div> -->
-
-					<div id="morris-area-with-dotted" style="height: 300px;"></div>
-
-
+                     <div id="jobchart" style="min-width: 310px; margin: 0 auto"></div>
+         
 				</div>
 			</div>
 		</div>
@@ -187,11 +167,8 @@
 
 
 					<div class="text-left">
-						 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> 
+						 <div id="container" style="min-width: 310px; margin: 0 auto"></div> 
 					</div>
-
-					<div id="morris-area-with-dotted" style="height: 300px;"></div>
-
 
 				</div>
 			</div>
@@ -232,7 +209,7 @@
 		<script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
-<table id="datatable">
+<table hidden='true' id="datatable">
     <thead>
         <tr>
             <th></th>
@@ -242,72 +219,102 @@
         </tr>
     </thead>
     <tbody>
+    <t:if test="${jan}">
         <tr>
             <th>Jan</th>
             <td>${totalJan}</td>
             <td>${totalFemaleJan}</td>
             <td>4</td>
         </tr>
+        </t:if>
+        <t:if test="${feb}">
         <tr>
             <th>Feb</th>
-            <td>2</td>
-            <td>0</td>
+           <td>${totalFeb}</td>
+            <td>${totalFemaleFeb}</td>
             <td>4</td>
         </tr>
+        </t:if>
+        <t:if test="${mar}">
         <tr>
             <th>Mar</th>
-            <td>5</td>
-            <td>11</td>
+            <td>${totalMar}</td>
+            <td>${totalFemaleMar}</td>
             <td>4</td>
         </tr>
+        </t:if>
+        <t:if test="${apr}">
         <tr>
             <th>Apr</th>
-            <td>1</td>
-            <td>1</td>
+            <td>${totalApr}</td>
+            <td>${totalFemaleApr}</td>
             <td>4</td>
         </tr>
+        </t:if>
+        <t:if test="${may}">
         <tr>
             <th>May</th>
-            <td>2</td>
-            <td>4</td>
+            <td>${totalMay}</td>
+            <td>${totalFemaleMay}</td>
             <td>4</td>
         </tr>
+        </t:if>
+        <t:if test="${jun}">
         <tr>
             <th>Jun</th>
-            <td>2</td>
-            <td>4</td>
+            <td>${totalJun}</td>
+            <td>${totalFemaleJun}</td>
             <td>4</td>
         </tr>
+        </t:if>
+        <t:if test="${jul}">
         <tr>
             <th>Jul</th>
-            <td>2</td>
-            <td>4</td>
+            <td>${totalJul}</td>
+            <td>${totalFemaleJul}</td>
             <td>4</td>
         </tr>
+        </t:if>
+        <t:if test="${aug}">
         <tr>
             <th>Aug</th>
-            <td>2</td>
-            <td>4</td>
+           <td>${totalAug}</td>
+            <td>${totalFemaleAug}</td>
             <td>4</td>
         </tr>
+        </t:if>
+        <t:if test="${sep}">
         <tr>
             <th>Sep</th>
-            <td>2</td>
-            <td>4</td>
+           <td>${totalSep}</td>
+            <td>${totalFemaleSep}</td>
             <td>4</td>
         </tr>
+        </t:if>
+        <t:if test="${oct}">
+         <tr>
+            <th>Oct</th>
+           <td>${totalOct}</td>
+            <td>${totalFemaleOct}</td>
+            <td>4</td>
+        </tr>
+        </t:if>
+        <t:if test="${nov}">
         <tr>
             <th>Nov</th>
-            <td>2</td>
-            <td>4</td>
+            <td>${totalNov}</td>
+            <td>${totalFemaleNov}</td>
             <td>4</td>
         </tr>
+        </t:if>
+        <t:if test="${dec}">
         <tr>
             <th>Dec</th>
-            <td>2</td>
-            <td>4</td>
+           <td>${totalDec}</td>
+            <td>${totalFemaleDec}</td>
             <td>4</td>
         </tr>
+        </t:if>
     </tbody>
 </table>
 <script>
@@ -325,7 +332,7 @@
         yAxis: {
             allowDecimals: false,
             title: {
-                text: 'Units'
+                text: ''
             }
         },
         tooltip: {
@@ -334,6 +341,59 @@
                     this.point.y + ' ' + this.point.name.toLowerCase();
             }
         }
+    });
+});
+
+$(function () {
+    $('#jobchart').highcharts({
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: 'Ажлын байрны орон тоо болон шинээр нэмэгдсэн'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: ['2010', '2011', '2012', '2013', '2014', '2015', '2016'],
+            tickmarkPlacement: 'on',
+            title: {
+                enabled: false
+            }
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            labels: {
+                formatter: function () {
+                    return this.value / 1000;
+                }
+            }
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: ' '
+        },
+        plotOptions: {
+            area: {
+                stacking: 'normal',
+                lineColor: '#666666',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 1,
+                    lineColor: '#666666'
+                }
+            }
+        },
+        series: [{
+            name: 'Ажлын байрны тоо',
+            data: [5, 6, 9, 7, 10, 6, 2]
+        }, {
+            name: 'Шинээр нэмэгдсэн',
+            data: [2, 3, 1, 6, 13, 0, 6]
+        }]
     });
 });
 </script>
