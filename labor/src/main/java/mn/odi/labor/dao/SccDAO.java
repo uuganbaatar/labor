@@ -163,4 +163,6 @@ public interface SccDAO {
 
 	public SumDuureg getSumDuuregByName(String name, AimagNiislelEnum aimagId);
 
+	public List<SumDuureg> getSumDuuregSearch(String name, AimagNiislelEnum aimagId);
+
 }

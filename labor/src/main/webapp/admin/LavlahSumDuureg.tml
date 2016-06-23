@@ -37,14 +37,15 @@
 	</div>
 	<div class="col-md-9">
 		<div class="card-box">
-			<h4 class="text-dark header-title m-t-0">${message:lavlahsum}</h4>
 			<t:Form t:id="save">
 				<t:alerts />
 				<div class="col-md-5">
-					<t:TextField class="form-control" t:id="companyStatus"
+					<label>${message:sumname-label}</label>
+					<t:TextField class="form-control" t:id="sumname"
 						t:value="name" t:validate="maxlength=255,required"></t:TextField>
 				</div>
 				<div class="col-md-4">
+					<label>${message:aimagId-label}</label>
 					<t:Select class="form-control" model="aimagSelectModel"
 						value="aimag" />
 				</div>
