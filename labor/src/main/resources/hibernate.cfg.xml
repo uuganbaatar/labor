@@ -35,6 +35,7 @@
 
 		<mapping class="mn.odi.labor.entities.common.User" />
 		<mapping class="mn.odi.labor.entities.common.Department" />
+		<mapping class="mn.odi.labor.entities.common.SumDuureg" />
 		<mapping class="mn.odi.labor.entities.common.Organization" />
 		<mapping class="mn.odi.labor.entities.admin.GeneralType" />
 		<mapping class="mn.odi.labor.entities.common.AccessLog" />
