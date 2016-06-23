@@ -83,7 +83,8 @@ public class LavlahSumDuureg {
 		if (active == null) {
 			active = true;
 		}
-		list = dao.getSumDuureg();
+		if (list == null)
+			list = dao.getSumDuureg();
 	}
 
 	public String getUserName() {
@@ -138,8 +139,11 @@ public class LavlahSumDuureg {
 		ajaxResponseRenderer.addRender(listZone);
 	}
 
-	@CommitAfter
 	Object onSuccessFromSearch() {
+		if (request.isXHR()) {
+			ajaxResponseRenderer.addRender(listZone);
+		}
+		list = dao.getSumDuuregSearch(gname, null);
 		return null;
 	}
 

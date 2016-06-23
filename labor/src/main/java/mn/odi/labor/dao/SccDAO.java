@@ -82,9 +82,9 @@ public interface SccDAO {
 	public List<Job> getJobList();
 
 	public List<GeneralType> getGeneralTypeList();
-
+	
 	public List<PropertyType> getPropertyTypeList();
-
+	
 	public List<EconomicCategory> getEconomicCategoryList();
 
 	public List<CompanyTrend> getCompanyTrendList();
@@ -107,17 +107,15 @@ public interface SccDAO {
 
 	public List<Report> getReportList();
 
-	public ReportStatus getReportStatusList(Report report, Integer year,
-			Integer month, Organization orgId);
+	public ReportStatus getReportStatusList(Report report, Integer year, Integer month, Organization orgId);
 
 	public List<ReportDetail> getReportDetailList();
 
-	public ReportDetail getReportDetailListWithParameter(
-			GeneralType generalType, ReportDetailType detailType,
+	public ReportDetail getReportDetailListWithParameter(GeneralType generalType, ReportDetailType detailType,
 			JobTypeEnum jobType, Integer year, Integer month);
 
-	public Long getReportDetailAddRemove(GeneralType generalType,
-			ReportDetailType detailType, Integer year, Integer month);
+	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
+			Integer month);
 
 	public Integer getAllJobs();
 
@@ -238,5 +236,8 @@ public interface SccDAO {
 	public Integer getTotalDec(int year);
 
 	public Integer getTotalFemaleDec(int year);
+
+	public List<SumDuureg> getSumDuuregSearch(String name, AimagNiislelEnum aimagId);
+
 
 }

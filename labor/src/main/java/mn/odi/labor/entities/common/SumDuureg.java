@@ -41,6 +41,9 @@ import mn.odi.labor.util.UUIDUtil;
 @Audited(auditParents = BaseObject.class)
 public class SumDuureg extends BaseObject {
 
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id

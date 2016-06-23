@@ -1633,4 +1633,23 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
+	public List<SumDuureg> getSumDuuregSearch(String name,
+			AimagNiislelEnum aimagId) {
+		try {
+			Criteria crit = session.createCriteria(SumDuureg.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (aimagId != null)
+				crit.add(Restrictions.eq("aimagId", aimagId));
+
+			return crit.list();
+
+		} catch (HibernateException e) {
+			return null;
+		}
+
+	}
+
 }
