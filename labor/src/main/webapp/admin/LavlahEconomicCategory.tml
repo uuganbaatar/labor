@@ -17,7 +17,7 @@
 					<div class="card-box">
 						<div class="col-md-4">
 							<div class="form-group">
-								<label>${message:lavlahgeneraltype}</label>
+								<label>${message:lavlaheconomic}</label>
 								<t:TextField class="form-control" t:id="name"
 									t:value="gname" />
 							</div>
@@ -76,11 +76,11 @@
 
 	<div class="col-md-9">
 		<div class="card-box">
-			<h4 class="text-dark header-title m-t-0">${message:lavlahgeneraltype}</h4>
+			<h4 class="text-dark header-title m-t-0">${message:lavlaheconomic}</h4>
 
 			<t:Form t:id="save">
 				<t:alerts />
-				<t:TextField t:value="name" t:id="generalType" style="width:50%;"
+				<t:TextField t:value="name" t:id="economicCategory" style="width:50%;"
 					t:validate="maxlength=255,required"></t:TextField>
 				<div class="add-button">
 					<button type="submit" class="btn btn-success waves-effect waves-light">

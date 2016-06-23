@@ -30,8 +30,10 @@ import mn.odi.labor.entities.admin.AjiliinBairHurungu;
 import mn.odi.labor.entities.admin.CompanyHelber;
 import mn.odi.labor.entities.admin.CompanyStatus;
 import mn.odi.labor.entities.admin.CompanyTrend;
+import mn.odi.labor.entities.admin.EconomicCategory;
 import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.admin.LavlahGarsan;
+import mn.odi.labor.entities.admin.PropertyType;
 import mn.odi.labor.entities.common.AccessLog;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.Organization;
@@ -246,7 +248,7 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
-
+	
 	/**
 	 * @param -
 	 *            General type jagsaalt
@@ -267,6 +269,46 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
+	/**
+	 * @param -
+	 *            Property type jagsaalt
+	 * @return List<GeneralType>
+	 */
+	public List<PropertyType> getPropertyTypeList() {
+		try {
+			Criteria crit = session.createCriteria(PropertyType.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	/**
+	 * @param -
+	 *            EconomicCategory jagsaalt
+	 * @return List<GeneralType>
+	 */
+	public List<EconomicCategory> getEconomicCategoryList() {
+		try {
+			Criteria crit = session.createCriteria(EconomicCategory.class);
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+	
 	public List<CompanyTrend> getCompanyTrendList() {
 		try {
 			Criteria crit = session.createCriteria(CompanyTrend.class);
@@ -285,7 +327,7 @@ public class SccDAOHibernate implements SccDAO {
 	public List<AjiliinBairHurungu> getLavlahHurunguList() {
 		try {
 			Criteria crit = session.createCriteria(AjiliinBairHurungu.class);
-
+			crit.addOrder(Order.desc("name"));
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -300,7 +342,7 @@ public class SccDAOHibernate implements SccDAO {
 	public List<CompanyHelber> getLavlahHelberList() {
 		try {
 			Criteria crit = session.createCriteria(CompanyHelber.class);
-
+			crit.addOrder(Order.desc("name"));
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -315,7 +357,7 @@ public class SccDAOHibernate implements SccDAO {
 	public List<CompanyStatus> getLavlahStatusList() {
 		try {
 			Criteria crit = session.createCriteria(CompanyStatus.class);
-
+			crit.addOrder(Order.desc("name"));
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -330,7 +372,7 @@ public class SccDAOHibernate implements SccDAO {
 	public List<LavlahGarsan> getLavlahEmpGarsanList() {
 		try {
 			Criteria crit = session.createCriteria(LavlahGarsan.class);
-
+			crit.addOrder(Order.desc("name"));
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -694,7 +736,57 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
+	
+	public List<PropertyType> getPropertyTypeListSearch(String name, Date d1, Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(PropertyType.class);
 
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+
+	public List<EconomicCategory> getEconomicCategoryListSearch(String name, Date d1, Date d2, Boolean b) {
+		try {
+			Criteria crit = session.createCriteria(EconomicCategory.class);
+
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
+			return null;
+		}
+	}
+	
 	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(CompanyTrend.class);
@@ -736,6 +828,8 @@ public class SccDAOHibernate implements SccDAO {
 			if (b != null)
 				crit.add(Restrictions.eq("isActive", b));
 
+			crit.addOrder(Order.desc("name"));
+			
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -840,7 +934,9 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (b != null)
 				crit.add(Restrictions.eq("isActive", b));
-
+			
+			crit.addOrder(Order.desc("name"));
+			
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -864,6 +960,9 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (b != null)
 				crit.add(Restrictions.eq("isActive", b));
+			
+			crit.addOrder(Order.desc("name"));
+			
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -888,6 +987,9 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (b != null)
 				crit.add(Restrictions.eq("isActive", b));
+			
+			crit.addOrder(Order.desc("name"));
+			
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -959,7 +1061,41 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
+	
+	public PropertyType getPropertyTypeByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(PropertyType.class);
 
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (PropertyType) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public EconomicCategory getEconomicCategoryByName(String name) {
+		try {
+			Criteria crit = session.createCriteria(EconomicCategory.class);
+
+			if (name != null)
+				crit.add(Restrictions.eq("name", name));
+
+			if (crit.list() != null && !crit.list().isEmpty())
+				return (EconomicCategory) crit.list().get(0);
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+	
 	public CompanyTrend getCompanyTrendByName(String name) {
 		try {
 			Criteria crit = session.createCriteria(CompanyTrend.class);
@@ -1034,6 +1170,8 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (name != null)
 				crit.add(Restrictions.eq("name", name));
+			
+			crit.addOrder(Order.desc("name"));
 
 			if (crit.list() != null && !crit.list().isEmpty())
 				return (LavlahGarsan) crit.list().get(0);
