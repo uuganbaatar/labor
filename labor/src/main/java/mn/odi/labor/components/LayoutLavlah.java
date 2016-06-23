@@ -27,10 +27,12 @@ import mn.odi.labor.entities.common.User;
 import mn.odi.labor.pages.Index;
 import mn.odi.labor.pages.admin.LavlahCompanyStatus;
 import mn.odi.labor.pages.admin.LavlahCompanyTrend;
+import mn.odi.labor.pages.admin.LavlahEconomicCategory;
 import mn.odi.labor.pages.admin.LavlahEmpGarsan;
 import mn.odi.labor.pages.admin.LavlahGeneralType;
 import mn.odi.labor.pages.admin.LavlahHelber;
 import mn.odi.labor.pages.admin.LavlahHurungu;
+import mn.odi.labor.pages.admin.LavlahPropertyType;
 import mn.odi.labor.pages.admin.LavlahSumDuureg;
 import mn.odi.labor.pages.admin.UserList;
 import mn.odi.labor.pages.emp.EmpListPage;
@@ -85,6 +87,12 @@ public class LayoutLavlah {
 
 	@InjectPage
 	private LavlahGeneralType lavlahListpage;
+
+	@InjectPage
+	private LavlahPropertyType lavlahPropertypage;
+
+	@InjectPage
+	private LavlahEconomicCategory lavlahEconomicpage;
 
 	@InjectPage
 	private LavlahCompanyTrend lavlahTrendpage;
@@ -208,6 +216,16 @@ public class LayoutLavlah {
 				: "btn text-left btn-white waves-effect";
 	}
 
+	public String getSelectedTabLavlahProperty() {
+		return (loginState.getActiveDedMenu() == "lavlahproperty") ? "btn text-left btn-white waves-effect selected"
+				: "btn text-left btn-white waves-effect";
+	}
+
+	public String getSelectedTabLavlahEconomic() {
+		return (loginState.getActiveDedMenu() == "lavlaheconomic") ? "btn text-left btn-white waves-effect selected"
+				: "btn text-left btn-white waves-effect";
+	}
+
 	public String getSelectedTabLavlahTrend() {
 		return (loginState.getActiveDedMenu() == "lavlahtrend") ? "btn text-left btn-white waves-effect selected"
 				: "btn text-left btn-white waves-effect";
@@ -240,6 +258,14 @@ public class LayoutLavlah {
 
 	public Object onActionFromLavlahGeneralTab() {
 		return lavlahListpage;
+	}
+
+	public Object onActionFromLavlahPropertyTab() {
+		return lavlahPropertypage;
+	}
+
+	public Object onActionFromLavlahEconomicTab() {
+		return lavlahEconomicpage;
 	}
 
 	public Object onActionFromLavlahTrendTab() {

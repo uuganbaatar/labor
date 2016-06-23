@@ -114,6 +114,16 @@
 										${message:lavlahgeneral}
 									</t:actionlink>
 								</button>
+								<button type="button" class="${SelectedTabLavlahProperty}">
+									<t:actionlink t:id="lavlahPropertyTab">
+										${message:lavlahpropertytype}
+									</t:actionlink>
+								</button>
+								<button type="button" class="${SelectedTabLavlahEconomic}">
+									<t:actionlink t:id="lavlahEconomicTab">
+										${message:lavlaheconomic}
+									</t:actionlink>
+								</button>
 								<button type="button" class="${SelectedTabLavlahTrend}">
 									<t:actionlink t:id="lavlahTrendTab">
 										${message:lavlahtrend}
