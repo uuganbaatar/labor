@@ -1,6 +1,12 @@
 package mn.odi.labor.pages;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import mn.odi.labor.aso.LoginState;
+import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.common.AccessLog;
+import mn.odi.labor.entities.common.User;
 
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
@@ -13,10 +19,6 @@ import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestGlobals;
 import org.apache.tapestry5.services.Response;
-
-import mn.odi.labor.aso.LoginState;
-import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.entities.common.AccessLog;
 
 public class Index {
 
@@ -112,6 +114,9 @@ public class Index {
 		for (Object _values : list) {
 			Object[] values = (Object[]) _values;
 			if (values[0] != null) {
+				
+				System.err.println(types.put(values[0]));
+				System.err.println(counts.put(values[1]));
 				types.put(values[0]);
 				counts.put(values[1]);
 			}
@@ -149,6 +154,16 @@ public class Index {
 			return dao.getInfoAddedByTypeNew(null, null);
 		}*/
 
+	}
+	
+	public Integer getTotalJan(){
+		Integer i=dao.getTotalJan();
+		return i;
+	}
+	
+	public Integer getTotalFemaleJan(){
+		//Integer i=dao.getTotalFemaleJan();
+		return 1;
 	}
 	
 	

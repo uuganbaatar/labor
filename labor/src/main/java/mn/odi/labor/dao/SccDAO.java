@@ -9,8 +9,10 @@ import mn.odi.labor.entities.admin.AjiliinBairHurungu;
 import mn.odi.labor.entities.admin.CompanyHelber;
 import mn.odi.labor.entities.admin.CompanyStatus;
 import mn.odi.labor.entities.admin.CompanyTrend;
+import mn.odi.labor.entities.admin.EconomicCategory;
 import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.admin.LavlahGarsan;
+import mn.odi.labor.entities.admin.PropertyType;
 import mn.odi.labor.entities.common.AccessLog;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.Organization;
@@ -80,6 +82,10 @@ public interface SccDAO {
 	public List<Job> getJobList();
 
 	public List<GeneralType> getGeneralTypeList();
+	
+	public List<PropertyType> getPropertyTypeList();
+	
+	public List<EconomicCategory> getEconomicCategoryList();
 
 	public List<CompanyTrend> getCompanyTrendList();
 
@@ -127,6 +133,10 @@ public interface SccDAO {
 
 	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1, Date d2, Boolean b);
 
+	public List<PropertyType> getPropertyTypeListSearch(String name, Date d1, Date d2, Boolean b);
+
+	public List<EconomicCategory> getEconomicCategoryListSearch(String name, Date d1, Date d2, Boolean b);
+
 	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1, Date d2, Boolean b);
 
 	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name, Date d1, Date d2, Boolean b);
@@ -148,6 +158,10 @@ public interface SccDAO {
 	public List<Object> getInfoBar();
 
 	public GeneralType getGeneralTypeByName(String name);
+	
+	public PropertyType getPropertyTypeByName(String name);
+	
+	public EconomicCategory getEconomicCategoryByName(String name);
 
 	public CompanyTrend getCompanyTrendByName(String name);
 
@@ -158,6 +172,10 @@ public interface SccDAO {
 	public CompanyStatus getStatusByName(String name);
 
 	public LavlahGarsan getGarsanByName(String name);
+	
+	public Integer getTotalJan();
+	
+	public Integer getTotalFemaleJan();
 
 	public List<SumDuureg> getSumDuureg();
 
