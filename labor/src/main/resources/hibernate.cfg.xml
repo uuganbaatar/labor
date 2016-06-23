@@ -17,7 +17,7 @@
 		<!-- <property name="hibernate.connection.username">root</property> -->
 		<!-- <property name="hibernate.connection.password">root</property> -->
 
-		<!-- <property name="hbm2ddl.auto">update</property> -->
+		<property name="hbm2ddl.auto">update</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
 		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.format_sql">false</property>
@@ -38,7 +38,10 @@
 		<mapping class="mn.odi.labor.entities.common.SumDuureg" />
 		<mapping class="mn.odi.labor.entities.common.Organization" />
 		<mapping class="mn.odi.labor.entities.admin.GeneralType" />
+		<mapping class="mn.odi.labor.entities.admin.AjiliinBairHurungu" />
 		<mapping class="mn.odi.labor.entities.common.AccessLog" />
+		<mapping class="mn.odi.labor.entities.labor.Job" />
+		<mapping class="mn.odi.labor.entities.labor.JobOrgAssoc" />
 
 		<!-- Envers Configuration -->
 		<listener class="org.hibernate.envers.event.AuditEventListener"

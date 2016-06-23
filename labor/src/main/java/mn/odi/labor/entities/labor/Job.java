@@ -170,6 +170,4 @@ public class Job extends BaseObject {
 	public int hashCode() {
 		return 0;
 	}
-
-	
 }
