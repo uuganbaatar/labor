@@ -83,7 +83,7 @@ public class LavlahEconomicCategory {
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("lavlah");
-		loginState.setActiveDedMenu("lavlahgeneral");
+		loginState.setActiveDedMenu("lavlaheconomic");
 		loginState.setPageTitle(message.get("lavlah"));
 		typeList = dao.getEconomicCategoryListSearch(gname, d1, d2, active);
 	}

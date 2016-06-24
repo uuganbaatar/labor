@@ -81,7 +81,7 @@ public class LavlahEmpGarsan {
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("lavlah");
-		loginState.setActiveDedMenu("lavlahhelber");
+		loginState.setActiveDedMenu("lavlahgarsan");
 		loginState.setPageTitle(message.get("lavlah"));
 
 		if (active == null) {

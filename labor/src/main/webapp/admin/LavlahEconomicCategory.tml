@@ -63,9 +63,9 @@
 						<div class="col-md-12 text-right">
 							<a t:type="eventlink" t:event="cancel"
 								class="btn btn-padding 
-										btn-grey waves-effect waves-light">${message:cancel}</a>
+										btn-grey waves-effect waves-light">${message:clear}</a>
 							<button type="submit"
-								class="btn btn-padding btn-success waves-effect waves-light">${message:search}</button>
+								class="btn btn-padding btn-success waves-effect waves-light">${message:seeFilter}</button>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -80,8 +80,8 @@
 
 			<t:Form t:id="save">
 				<t:alerts />
-				<t:TextField t:value="name" t:id="economicCategory" style="width:50%;"
-					t:validate="maxlength=255,required"></t:TextField>
+				<t:TextField t:value="name" t:id="economicCategory"
+					style="width:50%;" t:validate="maxlength=255,required"></t:TextField>
 				<div class="add-button">
 					<button type="submit" class="btn btn-success waves-effect waves-light">
 						<span class="btn-label">

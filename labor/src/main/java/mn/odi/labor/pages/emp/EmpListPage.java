@@ -37,10 +37,10 @@ public class EmpListPage {
 
 	@InjectComponent
 	private Zone empFilterZone, empGridZone;
-	
+
 	@InjectComponent
 	private Form empFilterForm;
-	
+
 	@InjectComponent
 	private Grid grid;
 
@@ -64,37 +64,35 @@ public class EmpListPage {
 
 	@Inject
 	private ComponentResources resources;
-	
+
 	private int number;
-	
+
 	@Persist
-	@Property 
+	@Property
 	private String empName;
-	
+
 	@Persist
-	@Property 
+	@Property
 	private String surName;
-	
+
 	@Persist
-	@Property 
+	@Property
 	private String phone;
-	
+
 	@Persist
-	@Property 
+	@Property
 	private Organization org;
-	
+
 	@Persist
-	@Property 
+	@Property
 	private Job job;
-	
-	
-	
+
 	void beginRender() {
-		
+
 		loginState.setActiveMenu("emp");
 		loginState.setPageTitle(message.get("employer"));
-		empList = dao.getEmpListSearch(org,job,phone,surName,empName);
-		
+		empList = dao.getEmpListSearch(org, job, phone, surName, empName);
+
 		if (emp == null) {
 			emp = new Employee();
 		}
@@ -105,18 +103,23 @@ public class EmpListPage {
 	}
 
 	public SelectModel getOrgModel() {
-		return new CommonSM<Organization>(Organization.class, dao.getOrgList(), "getName");
+		return new CommonSM<Organization>(Organization.class, dao.getOrgList(),
+				"getName");
 	}
 
 	void onActionFromClearBtn() {
 		emp = new Employee();
 		ajaxResponseRenderer.addRender(empFilterZone);
 	}
-	
+
 	public int getCount() {
-		return empList.size();
+		if (empList != null && empList.size() > 0) {
+			return empList.size();
+		} else {
+			return 0;
+		}
 	}
-	
+
 	public int getNumber() {
 		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
@@ -126,7 +129,7 @@ public class EmpListPage {
 		dao.deleteObject(emp);
 		emp = new Employee();
 		empList = dao.getEmpList();
-		
+
 		if (request.isXHR()) {
 			return empGridZone.getBody();
 		} else {
@@ -137,7 +140,7 @@ public class EmpListPage {
 	@CommitAfter
 	Object onSuccessFromEmpFilterForm() {
 		emp = new Employee();
-		
+
 		if (request.isXHR()) {
 			return empGridZone.getBody();
 		} else {

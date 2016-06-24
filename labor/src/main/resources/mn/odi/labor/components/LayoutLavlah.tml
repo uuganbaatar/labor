@@ -109,51 +109,60 @@
 						</div>
 						<div class="row main-contents">
 							<div class="col-md-3 btn-group-vertical lavlah_cat">
-								<button type="button" class="${SelectedTabLavlahGeneral}">
-									<t:actionlink t:id="lavlahGeneralTab">
+								<t:actionlink t:id="lavlahGeneralTab">
+									<button type="button" class="${SelectedTabLavlahGeneral}"
+										style="width: 100%;">
 										${message:lavlahgeneral}
-									</t:actionlink>
-								</button>
-								<button type="button" class="${SelectedTabLavlahProperty}">
-									<t:actionlink t:id="lavlahPropertyTab">
+									</button>
+								</t:actionlink>
+								<t:actionlink t:id="lavlahPropertyTab">
+									<button type="button" class="${SelectedTabLavlahProperty}"
+										style="width: 100%;">
 										${message:lavlahpropertytype}
-									</t:actionlink>
-								</button>
-								<button type="button" class="${SelectedTabLavlahEconomic}">
-									<t:actionlink t:id="lavlahEconomicTab">
+									</button>
+								</t:actionlink>
+								<t:actionlink t:id="lavlahEconomicTab">
+									<button type="button" class="${SelectedTabLavlahEconomic}"
+										style="width: 100%;">
 										${message:lavlaheconomic}
-									</t:actionlink>
-								</button>
-								<button type="button" class="${SelectedTabLavlahTrend}">
-									<t:actionlink t:id="lavlahTrendTab">
+									</button>
+								</t:actionlink>
+								<t:actionlink t:id="lavlahTrendTab">
+									<button type="button" class="${SelectedTabLavlahTrend}"
+										style="width: 100%;">
 										${message:lavlahtrend}
-									</t:actionlink>
-								</button>
-								<button type="button" class="${SelectedTabLavlahHurungu}">
-									<t:actionlink t:id="lavlahHurunguTab">
+									</button>
+								</t:actionlink>
+								<t:actionlink t:id="lavlahHurunguTab">
+									<button type="button" class="${SelectedTabLavlahHurungu}"
+										style="width: 100%;">
 										${message:lavlahhurungu}
-									</t:actionlink>
-								</button>
-								<button type="button" class="${SelectedTabLavlahHelber}">
-									<t:actionlink t:id="lavlahHelberTab">
+									</button>
+								</t:actionlink>
+								<t:actionlink t:id="lavlahHelberTab">
+									<button type="button" class="${SelectedTabLavlahHelber}"
+										style="width: 100%;">
 										${message:lavlahhelber}
-									</t:actionlink>
-								</button>
-								<button type="button" class="${SelectedTabLavlahStatus}">
-									<t:actionlink t:id="lavlahStatusTab" class="${selectedTabreport}">
+									</button>
+								</t:actionlink>
+								<t:actionlink t:id="lavlahStatusTab" class="${selectedTabreport}">
+									<button type="button" class="${SelectedTabLavlahStatus}"
+										style="width: 100%;">
 										${message:lavlahstatus}
-									</t:actionlink>
-								</button>
-								<button type="button" class="${SelectedTabLavlahGarsan}">
-									<t:actionlink t:id="lavlahGarsanTab">
+									</button>
+								</t:actionlink>
+								<t:actionlink t:id="lavlahGarsanTab">
+									<button type="button" class="${SelectedTabLavlahGarsan}"
+										style="width: 100%;">
 										${message:lavlahgarsan}
-									</t:actionlink>
-								</button>
-								<button type="button" class="${SelectedTabLavlahSum}">
-									<t:actionlink t:id="lavlahSumTab">
+									</button>
+								</t:actionlink>
+								<t:actionlink t:id="lavlahSumTab">
+									<button type="button" class="${SelectedTabLavlahSum}"
+										style="width: 100%;">
 										${message:lavlahsum}
-									</t:actionlink>
-								</button>
+									</button>
+								</t:actionlink>
 							</div>
 							<t:body />
 						</div>

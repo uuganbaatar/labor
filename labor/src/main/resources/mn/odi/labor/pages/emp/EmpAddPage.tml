@@ -96,18 +96,20 @@
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:job-label}<span class="req">*</span></label> <input
+						<label>${message:job-label}<span class="req">*</span></label> 
+						<!-- <input
 								t:type="select" class="form-control" t:id="job"
 								t:model="jobModel" t:value="emp.job" t:validate="required"
-								t:blankOption="always" />
+								t:blankOption="always" /> -->
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>${message:org-label}<span class="req">*</span></label> <input
+						<label>${message:org-label}<span class="req">*</span></label> 
+						<!-- <input
 								t:type="select" class="form-control" t:id="org"
 								t:model="orgModel" t:value="emp.org" t:validate="required"
-								t:blankOption="always" />
+								t:blankOption="always" /> -->
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -139,7 +141,7 @@
 				<div class="hairly-line"></div>
 				<div class="col-md-12 text-center">
 					<a t:type="eventlink" t:event="cancel"><button type="button"
-							class="btn btn-padding btn-grey waves-effect waves-light">${message:back}</button></a>
+							class="btn btn-padding btn-grey waves-effect waves-light">${message:cancel}</button></a>
 					<t:Submit class="btn btn-padding btn-success"
 							value="${message:save}" />
 				</div>

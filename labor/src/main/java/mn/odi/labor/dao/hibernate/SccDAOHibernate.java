@@ -437,13 +437,13 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (emp != null) {
 
-				if (emp.getJob() != null) {
+			/*	if (emp.getJob() != null) {
 					sql += " AND employee.job_id = " + emp.getJob().getId();
 				}
 
 				if (emp.getOrg() != null) {
 					sql += " AND employee.org_id = " + emp.getOrg().getId();
-				}
+				}*/
 
 				if (emp.getCreatedDate() != null) {
 					sql += " AND employee.created_date = "

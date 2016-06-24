@@ -73,6 +73,7 @@ public class JobPage {
 	@Inject
 	private ComponentResources resources;
 
+	@Persist
 	@Property
 	private boolean newCheck;
 	
@@ -82,6 +83,8 @@ public class JobPage {
 		if (job == null) {
 			job = new Job();
 		}
+		
+		System.err.println(newCheck);
 
 		loginState.setActiveMenu("job");
 		loginState.setPageTitle(message.get("job"));

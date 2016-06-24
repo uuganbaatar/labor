@@ -154,7 +154,7 @@
 
                    <!--  <t:charts id="mbars" t:chartData="barData" t:chartType="'bar'" />   -->
                     
-                    <!--  <div id="jobchart" style="min-width: 310px; margin: 0 auto"></div> -->
+                   <div id="jobchart" style="min-width: 310px; margin: 0 auto"></div>
                      
                        <t:charts id="area" t:chartData="areaData" t:chartType="'area'" />  
          

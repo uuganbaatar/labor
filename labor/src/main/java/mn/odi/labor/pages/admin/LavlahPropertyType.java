@@ -97,7 +97,7 @@ public class LavlahPropertyType {
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("lavlah");
-		loginState.setActiveDedMenu("lavlahgeneral");
+		loginState.setActiveDedMenu("lavlahproperty");
 		loginState.setPageTitle(message.get("lavlah"));
 		typeList = dao.getPropertyTypeListSearch(gname, d1, d2, active);
 	}
