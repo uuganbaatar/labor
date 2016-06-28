@@ -1,18 +1,5 @@
 package mn.odi.labor.pages.emp;
 
-import org.apache.tapestry5.ComponentResources;
-import org.apache.tapestry5.SelectModel;
-import org.apache.tapestry5.annotations.DiscardAfter;
-import org.apache.tapestry5.annotations.InjectComponent;
-import org.apache.tapestry5.annotations.PageActivationContext;
-import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.annotations.SessionState;
-import org.apache.tapestry5.corelib.components.Form;
-import org.apache.tapestry5.hibernate.annotations.CommitAfter;
-import org.apache.tapestry5.ioc.Messages;
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.util.EnumSelectModel;
-
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.admin.LavlahGarsan;
@@ -25,6 +12,21 @@ import mn.odi.labor.enums.EmploymentEnum;
 import mn.odi.labor.enums.GenderEnum;
 import mn.odi.labor.enums.YesNoEnum;
 import mn.odi.labor.models.CommonSM;
+import mn.odi.labor.models.OrgSM;
+
+import org.apache.tapestry5.ComponentResources;
+import org.apache.tapestry5.SelectModel;
+import org.apache.tapestry5.annotations.DiscardAfter;
+import org.apache.tapestry5.annotations.InjectComponent;
+import org.apache.tapestry5.annotations.PageActivationContext;
+import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.corelib.components.Form;
+import org.apache.tapestry5.corelib.components.Zone;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
+import org.apache.tapestry5.ioc.Messages;
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.util.EnumSelectModel;
 
 public class EmpAddPage {
 
@@ -49,6 +51,15 @@ public class EmpAddPage {
 
 	@Property 
 	private boolean disabled; 
+	
+	@Property
+	private Organization organization;
+	
+	@Property
+	private Job job;
+	
+	/*@InjectComponent
+	private Zone orgZone;*/
 	
 	void onActivate(Employee emp) {
 		
@@ -86,9 +97,16 @@ public class EmpAddPage {
 		return new CommonSM<Job>(Job.class, dao.getJobList(), "getJobName");
 	}
 
-	public SelectModel getOrgModel() {
+	/*public SelectModel getOrgModel() {
 		return new CommonSM<Organization>(Organization.class, dao.getOrgList(), "getName");
-	}
+	}*/
+	
+/*	public SelectModel getOrgModel() {
+
+		OrgSM sm = new OrgSM(dao);
+
+		return sm;
+	}*/
 	
 	public SelectModel getIsNewModel() {
 		return new EnumSelectModel(YesNoEnum.class, resources.getMessages());
@@ -114,4 +132,15 @@ public class EmpAddPage {
 	Object onCancel() {
 		return EmpListPage.class;
 	}
+	
+	/*public Object onValueChangedFromOrg(Organization org) {
+		if (org != null) {
+			organization = org;
+			//this.getSohCallTypeSelectionModel();
+			//this.sohCallTypeNemelt = null;
+			//this.getNemeltCallTypeSelectionModel();
+		}
+
+		return orgZone.getBody();
+	}*/
 }

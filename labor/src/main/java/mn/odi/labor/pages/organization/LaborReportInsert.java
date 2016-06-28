@@ -104,7 +104,7 @@ public class LaborReportInsert {
 	@CommitAfter
 	public Object onSuccess() {
 		reportStatus.setReportStatus(ReportStatusEnum.DRAFT);
-		dao.saveOrUpdateObject(reportStatus);
+		dao.saveOrUpdate(reportStatus,false);
 		ReportDetail rt = dao.getReportDetailListWithParameter(
 				reportDetail.getGeneralType(), reportDetail.getDetailType(),
 				reportDetail.getJobType(), reportStatus.getYear(),
@@ -245,7 +245,7 @@ public class LaborReportInsert {
 				rtd.setValue(0);
 				break;
 			}
-			dao.saveOrUpdateObject(rtd);
+			dao.saveOrUpdate(rtd,false);
 		}
 		list = dao.getGeneralTypeList();
 		return request.isXHR() ? listZone.getBody() : null;

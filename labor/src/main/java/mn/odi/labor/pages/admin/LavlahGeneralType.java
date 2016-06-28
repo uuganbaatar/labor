@@ -94,13 +94,20 @@ public class LavlahGeneralType {
 
 	@CommitAfter
 	public void onSuccessFromSave() {
-		type = new GeneralType();
-		if (dao.getGeneralTypeByName(name) != null) {
+		
+		if (name.trim().substring(0, 1).isEmpty()) {
+			System.err.println("sdsdsdh");
 			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("burtgeltei"));
+					message.get("hoosonzai"));
 		} else {
-			type.setName(name);
-			dao.saveOrUpdateObject(type);
+			if (dao.getGeneralTypeByName(name) != null) {
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
+			} else {
+				type = new GeneralType();
+				type.setName(name);
+				dao.saveOrUpdateObject(type);
+			}
 		}
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);

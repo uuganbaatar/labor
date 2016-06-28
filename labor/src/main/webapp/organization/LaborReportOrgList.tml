@@ -2,11 +2,38 @@
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 	<div class="row main-contents">
 		<div class="col-md-12">
+			<t:form t:id="search" class="form clear">
+				<div class="row main-contents">
+					<div class="col-md-12">
+						<div class="card-box">
+							<div class="col-md-4">
+								<div class="form-group">
+									<label>${message:year}</label>
+									<t:select class="form-control" value="s_year"
+										model="literal:2015,2016,2017,2018,2019,2020" />
+								</div>
+							</div>
+							<div class="col-md-12 text-right">
+								<a t:type="eventlink" t:event="cancel"
+									class="btn btn-padding 
+										btn-grey waves-effect waves-light">${message:clear}</a>
+								<button type="submit"
+									class="btn btn-padding btn-success waves-effect waves-light">${message:see}</button>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</div>
+			</t:form>
+
+		</div>
+		<div class="col-md-12">
 			<div class="card-box">
 				<h4 class="text-dark header-title m-t-0">${message:reportList}</h4>
 				<t:Grid
 					class="reporttable table table-striped table-bordered dataTable no-footer table-actions-bar"
-					t:source="list" t:row="row" t:exclude="uuid,createddate,month,year,reportStatus, createddateformated, modifieddateformated"
+					t:source="list" t:row="row"
+					t:exclude="uuid,createddate,month,year,reportStatus, createddateformated, modifieddateformated"
 					t:add="jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec">
 					<p:JanCell>
 						<button class="${january}">

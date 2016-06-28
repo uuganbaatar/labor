@@ -10,28 +10,31 @@
 							<div class="form-group">
 								<label>${message:mergejil}</label>
 								<t:select class="form-control" model="generalTypeSM"
-									value="reportDetail.generalType" disabled="${reportSent}" />
+									value="reportDetail.generalType" disabled="${reportSent}"
+									t:validate="required" />
 							</div>
 						</div>
 						<div style="width:23%;float:left;margin-right:2%;">
 							<div class="form-group">
 								<label>${message:jobType-label}</label>
 								<t:select class="form-control" model="reportTypeEnum"
-									value="reportDetail.detailType" disabled="${reportSent}" />
+									value="reportDetail.detailType" disabled="${reportSent}"
+									t:validate="required" />
 							</div>
 						</div>
 						<div style="width:23%;float:left;margin-right:2%;">
 							<div class="form-group">
 								<label>${message:hugatsaa}</label>
 								<t:select class="form-control" model="jobTypeEnum"
-									value="reportDetail.jobType" disabled="${reportSent}" />
+									value="reportDetail.jobType" disabled="${reportSent}"
+									t:validate="required" />
 							</div>
 						</div>
 						<div style="width:25%;float:left">
 							<div class="form-group">
 								<label>${message:orontoo}</label>
-								<t:TextField class="form-control" t:value="reportDetail.value"
-									disabled="${reportSent}" />
+								<t:TextField t:id="orontoo" class="form-control" t:value="reportDetail.value"
+									disabled="${reportSent}" t:validate="required" />
 							</div>
 						</div>
 						<div style="float:right;margin-top:28px;">
