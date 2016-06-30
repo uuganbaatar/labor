@@ -33,6 +33,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.hibernate.envers.Audited;
 
+import mn.odi.labor.enums.OrgTypeEnum;
 import mn.odi.labor.util.UUIDUtil;
 
 @Entity
@@ -74,6 +75,9 @@ public class Organization extends BaseObject {
 
 	@Column(name = "web")
 	protected String web;
+
+	@Column(name = "org_type")
+	protected OrgTypeEnum orgType;
 
 	@ManyToOne
 	@JoinColumn(name = "sum_id")
@@ -161,6 +165,14 @@ public class Organization extends BaseObject {
 
 	public void setSumId(SumDuureg sumId) {
 		this.sumId = sumId;
+	}
+
+	public OrgTypeEnum getOrgType() {
+		return orgType;
+	}
+
+	public void setOrgType(OrgTypeEnum orgType) {
+		this.orgType = orgType;
 	}
 
 	// ********************** Common Methods ********************** //

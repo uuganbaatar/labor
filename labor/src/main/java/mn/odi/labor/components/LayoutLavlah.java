@@ -31,6 +31,7 @@ import mn.odi.labor.pages.admin.LavlahEconomicCategory;
 import mn.odi.labor.pages.admin.LavlahEmpGarsan;
 import mn.odi.labor.pages.admin.LavlahGeneralType;
 import mn.odi.labor.pages.admin.LavlahHelber;
+import mn.odi.labor.pages.admin.LavlahHudulmurHeltes;
 import mn.odi.labor.pages.admin.LavlahHurungu;
 import mn.odi.labor.pages.admin.LavlahPropertyType;
 import mn.odi.labor.pages.admin.LavlahSumDuureg;
@@ -114,6 +115,9 @@ public class LayoutLavlah {
 
 	@InjectPage
 	private OrgListPage orgPage;
+
+	@InjectPage
+	private LavlahHudulmurHeltes lahlahorgPage;
 
 	void beginRender() {
 		if (loginState.getUser() == null) {
@@ -256,6 +260,11 @@ public class LayoutLavlah {
 				: "btn text-left btn-white waves-effect";
 	}
 
+	public String getSelectedTabLavlahOrg() {
+		return (loginState.getActiveDedMenu() == "lavlahorg") ? "btn text-left btn-white waves-effect selected"
+				: "btn text-left btn-white waves-effect";
+	}
+
 	public Object onActionFromLavlahGeneralTab() {
 		return lavlahListpage;
 	}
@@ -290,6 +299,10 @@ public class LayoutLavlah {
 
 	public Object onActionFromLavlahSumTab() {
 		return lahlahsumPage;
+	}
+
+	public Object onActionFromLavlahOrgTab() {
+		return lahlahorgPage;
 	}
 
 	public String getSelectedOrgLavlah() {

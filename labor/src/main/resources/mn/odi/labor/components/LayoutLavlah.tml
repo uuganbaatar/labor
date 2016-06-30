@@ -154,6 +154,11 @@
 										${message:lavlahsum}
 									</t:actionlink>
 								</button>
+								<button type="button" class="${SelectedTabLavlahOrg}">
+									<t:actionlink t:id="lavlahOrgTab">
+										${message:lavlahheltes}
+									</t:actionlink>
+								</button>
 							</div>
 							<t:body />
 						</div>
