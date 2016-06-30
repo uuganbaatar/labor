@@ -68,6 +68,7 @@ public class EmpAddPage {
 
 		if (emp != null) {
 			this.emp = emp;
+			job = emp.getJob();
 		}
 
 		disabled = false;
@@ -80,6 +81,7 @@ public class EmpAddPage {
 	void onPrepare() {
 		if (emp == null) {
 			emp = new Employee();
+			job = emp.getJob();
 		}
 		disabled = false;
 	}
@@ -138,7 +140,8 @@ public class EmpAddPage {
 
 	@CommitAfter
 	Object onSubmit() {
-
+		
+		emp.setJob(job);
 		dao.saveOrUpdateObject(emp);
 		return EmpListPage.class;
 	}
