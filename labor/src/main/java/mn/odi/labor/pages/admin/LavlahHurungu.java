@@ -94,18 +94,32 @@ public class LavlahHurungu {
 	public String getUserName() {
 		return loginState.getUser().getFullName();
 	}
+	
+	public static boolean containsWhiteSpace(final String testCode) {
+		if (testCode != null) {
+			for (int i = 0; i < 2; i++) {
+				if (Character.isWhitespace(testCode.charAt(i))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	@CommitAfter
 	public void onSuccessFromSave() {
-
-		System.err.println("new");
-		AjiliinBairHurungu obj = new AjiliinBairHurungu();
-		if (dao.getHurunguByName(name) != null) {
+		if (LavlahHurungu.containsWhiteSpace(name)) {
 			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("burtgeltei"));
+					message.get("hoosonzai"));
 		} else {
-			obj.setName(name);
-			dao.saveOrUpdateObject(obj);
+			if (dao.getHurunguByName(name) != null) {
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
+			} else {
+				AjiliinBairHurungu obj = new AjiliinBairHurungu();
+				obj.setName(name);
+				dao.saveOrUpdateObject(obj);
+			}
 		}
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);

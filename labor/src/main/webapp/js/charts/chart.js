@@ -8,8 +8,8 @@ define(
 					Highcharts.setOptions({
 						 colors: [ '#7CB5EC', '#FF6060', '#41BA55']
 						});
-					if (chartType == 'pie') {
-						$('#pie')
+					if (chartType == 'area') {
+						$('#area')
 								.highcharts(
 										{
 											chart : {

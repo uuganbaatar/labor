@@ -95,9 +95,9 @@
 							<div class="col-md-12 text-right">
 								<a t:type="eventlink" t:event="cancel"
 									class="btn btn-padding 
-										btn-grey waves-effect waves-light">${message:cancel}</a>
+										btn-grey waves-effect waves-light">	${message:clear}</a>
 								<button type="submit"
-									class="btn btn-padding btn-success waves-effect waves-light">${message:search}</button>
+									class="btn btn-padding btn-success waves-effect waves-light">${message:seeFilter}</button>
 							</div>
 							<div class="clearfix"></div>
 						</div>

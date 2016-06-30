@@ -92,15 +92,32 @@ public class LavlahGeneralType {
 		return loginState.getUser().getFullName();
 	}
 
+	public static boolean containsWhiteSpace(final String testCode) {
+		if (testCode != null) {
+			for (int i = 0; i < 2; i++) {
+				if (Character.isWhitespace(testCode.charAt(i))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	@CommitAfter
 	public void onSuccessFromSave() {
-		type = new GeneralType();
-		if (dao.getGeneralTypeByName(name) != null) {
+
+		if (LavlahGeneralType.containsWhiteSpace(name)) {
 			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("burtgeltei"));
+					message.get("hoosonzai"));
 		} else {
-			type.setName(name);
-			dao.saveOrUpdateObject(type);
+			if (dao.getGeneralTypeByName(name) != null) {
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
+			} else {
+				type = new GeneralType();
+				type.setName(name);
+				dao.saveOrUpdateObject(type);
+			}
 		}
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);

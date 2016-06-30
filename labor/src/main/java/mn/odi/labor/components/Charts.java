@@ -41,8 +41,15 @@ public class Charts {
 
 	public boolean isBar() 
 	{
-		System.err.println("fghjkl" + chartType);
 		if (chartType.equals("bar"))
+			return true;
+
+		return false;
+	}
+	
+	public boolean isArea() 
+	{
+		if (chartType.equals("area"))
 			return true;
 
 		return false;

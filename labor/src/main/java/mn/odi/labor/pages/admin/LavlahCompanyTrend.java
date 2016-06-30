@@ -93,15 +93,32 @@ public class LavlahCompanyTrend {
 		return loginState.getUser().getFullName();
 	}
 
+	public static boolean containsWhiteSpace(final String testCode) {
+		if (testCode != null) {
+			for (int i = 0; i < 2; i++) {
+				if (Character.isWhitespace(testCode.charAt(i))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	@CommitAfter
 	public void onSuccessFromSave() {
-		CompanyTrend obj = new CompanyTrend();
-		if (dao.getCompanyTrendByName(name) != null) {
+		if (LavlahCompanyTrend.containsWhiteSpace(name)) {
 			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("burtgeltei"));
+					message.get("hoosonzai"));
 		} else {
-			obj.setName(name);
-			dao.saveOrUpdateObject(obj);
+
+			if (dao.getCompanyTrendByName(name) != null) {
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
+			} else {
+				CompanyTrend obj = new CompanyTrend();
+				obj.setName(name);
+				dao.saveOrUpdateObject(obj);
+			}
 		}
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);

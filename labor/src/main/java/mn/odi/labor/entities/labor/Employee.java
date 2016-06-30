@@ -67,10 +67,6 @@ public class Employee extends BaseObject {
 	@Column(name = "employment")
 	private EmploymentEnum employment;
 
-	@ManyToOne
-	@JoinColumn(name = "job_id", nullable = true)
-	private Job job;
-
 	@Column(name = "uamatCode")
 	private String uamatCode;
 
@@ -80,10 +76,10 @@ public class Employee extends BaseObject {
 	@ManyToOne
 	@JoinColumn(name = "firedreason_id", nullable = true)
 	private LavlahGarsan firedReason;
-
+	
 	@ManyToOne
-	@JoinColumn(name = "org_id", nullable = true)
-	private Organization org;
+	@JoinColumn(name = "job_org_id", nullable = true)
+	private JobOrgAssoc jobOrgId;
 
 	public Employee() {
 		this.uuid = UUIDUtil.getUUID();
@@ -181,14 +177,6 @@ public class Employee extends BaseObject {
 		this.employment = employment;
 	}
 
-	public Job getJob() {
-		return job;
-	}
-
-	public void setJob(Job job) {
-		this.job = job;
-	}
-
 	public String getUamatCode() {
 		return uamatCode;
 	}
@@ -213,12 +201,12 @@ public class Employee extends BaseObject {
 		this.firedReason = firedReason;
 	}
 
-	public Organization getOrg() {
-		return org;
+	public JobOrgAssoc getJobOrgId() {
+		return jobOrgId;
 	}
 
-	public void setOrg(Organization org) {
-		this.org = org;
+	public void setJobOrgId(JobOrgAssoc jobOrgId) {
+		this.jobOrgId = jobOrgId;
 	}
 
 	public String getFullName() {

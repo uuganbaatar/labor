@@ -43,6 +43,10 @@ public class LaborReportOrgList {
 	private Integer month;
 
 	@Property
+	@Persist
+	private Integer s_year;
+
+	@Property
 	private String btnClass;
 
 	private final String check = "fa fa-check";
@@ -75,7 +79,8 @@ public class LaborReportOrgList {
 		if (obj != null)
 			org = obj;
 		else {
-			if (loginState.getUser() != null && loginState.getUser().getOrg() != null)
+			if (loginState.getUser() != null
+					&& loginState.getUser().getOrg() != null)
 				org = loginState.getUser().getOrg();
 			else
 				org = null;
@@ -93,8 +98,13 @@ public class LaborReportOrgList {
 			month = Calendar.getInstance().get(Calendar.MONTH) + 1;
 		}
 
-		if (year == null)
+		if (s_year == null) {
 			year = Calendar.getInstance().get(Calendar.YEAR);
+		} else {
+			year = s_year;
+		}
+
+		System.err.println("jil:" + year);
 	}
 
 	public String getUserName() {
@@ -318,6 +328,11 @@ public class LaborReportOrgList {
 			insertPage.onActivate(t);
 		}
 		return insertPage;
+	}
+
+	@CommitAfter
+	Object onSuccessFromSearch() {
+		return null;
 	}
 
 }

@@ -81,7 +81,7 @@ public class LavlahCompanyStatus {
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("lavlah");
-		loginState.setActiveDedMenu("lavlahhelber");
+		loginState.setActiveDedMenu("lavlahstatus");
 		loginState.setPageTitle(message.get("lavlah"));
 		if (active == null) {
 			active = true;
@@ -95,14 +95,20 @@ public class LavlahCompanyStatus {
 
 	@CommitAfter
 	public void onSuccessFromSave() {
-		CompanyStatus obj = new CompanyStatus();
-		if (dao.getStatusByName(name) != null) {
+		if (LavlahGeneralType.containsWhiteSpace(name)) {
 			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("burtgeltei"));
+					message.get("hoosonzai"));
 		} else {
-			obj.setName(name);
-			dao.saveOrUpdateObject(obj);
+			if (dao.getStatusByName(name) != null) {
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
+			} else {
+				CompanyStatus obj = new CompanyStatus();
+				obj.setName(name);
+				dao.saveOrUpdateObject(obj);
+			}
 		}
+
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);
 		}

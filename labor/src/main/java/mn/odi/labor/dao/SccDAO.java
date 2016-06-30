@@ -226,6 +226,10 @@ public interface SccDAO {
 	public Integer getTotalFemaleDec(int year);
 
 	public List<SumDuureg> getSumDuuregSearch(String name, AimagNiislelEnum aimagId);
+	
+	public void saveOrUpdate(BaseObject object, boolean hasMessage);
+	
+	public List<Organization> getOrgListByAssoc();
 
 	public Organization getOrgByNameDuureg(String name, SumDuureg sumDuureg);
 

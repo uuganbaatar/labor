@@ -81,7 +81,7 @@ public class LavlahEmpGarsan {
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("lavlah");
-		loginState.setActiveDedMenu("lavlahhelber");
+		loginState.setActiveDedMenu("lavlahgarsan");
 		loginState.setPageTitle(message.get("lavlah"));
 
 		if (active == null) {
@@ -95,15 +95,31 @@ public class LavlahEmpGarsan {
 		return loginState.getUser().getFullName();
 	}
 
+	public static boolean containsWhiteSpace(final String testCode) {
+		if (testCode != null) {
+			for (int i = 0; i < 2; i++) {
+				if (Character.isWhitespace(testCode.charAt(i))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	@CommitAfter
 	public void onSuccessFromSave() {
-		LavlahGarsan obj = new LavlahGarsan();
-		if (dao.getGarsanByName(name) != null) {
+		if (LavlahEmpGarsan.containsWhiteSpace(name)) {
 			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("burtgeltei"));
+					message.get("hoosonzai"));
 		} else {
-			obj.setName(name);
-			dao.saveOrUpdateObject(obj);
+			if (dao.getGarsanByName(name) != null) {
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
+			} else {
+				LavlahGarsan obj = new LavlahGarsan();
+				obj.setName(name);
+				dao.saveOrUpdateObject(obj);
+			}
 		}
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);

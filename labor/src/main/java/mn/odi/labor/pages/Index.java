@@ -205,7 +205,7 @@ public class Index {
 		}
 	}
 
-	public Object getBarData() {
+	public Object getAreaData() {
 		JSONArray bar = new JSONArray();
 		JSONArray types = new JSONArray();
 		bar.put(types);

@@ -62,7 +62,7 @@
 					<div class="col-md-12 text-center">
 						<a t:type="eventlink" t:event="cancel">
 							<button type="button"
-								class="btn btn-padding btn-grey waves-effect waves-light">${message:back}</button>
+								class="btn btn-padding btn-grey waves-effect waves-light">${message:cancel}</button>
 						</a>
 						<t:Submit class="btn btn-padding btn-success" value="${message:save}" />
 					</div>

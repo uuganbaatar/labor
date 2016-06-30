@@ -84,11 +84,16 @@ public class UserProfile {
 	@Inject
 	private AlertManager alertManager;
 
+	@Inject
+	private Messages message;
+
 	/*
 	 * PAGE RENDER
 	 */
 	void setupRender() {
 		user = loginState.getUser();
+
+		loginState.setPageTitle(message.get("userProfile"));
 
 		System.err.println(user);
 	}

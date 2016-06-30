@@ -22,26 +22,26 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>${message:currentPassword}</label>
-									<input t:type="passwordfield" t:id="currentPassword" class="form-control"/>
+									<input t:type="passwordfield" t:id="currentPassword"
+										class="form-control" />
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>${message:newPassword}</label>
-									<input t:type="passwordfield" t:id="newPassword" class="form-control"/>
+									<input t:type="passwordfield" t:id="newPassword" class="form-control" />
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>${message:confirmPassword}</label>
 									<input t:type="passwordfield" t:id="fieldConfirm"
-										t:value="confirmPassword" class="form-control"/>
+										t:value="confirmPassword" class="form-control" />
 								</div>
 							</div>
 							<div class="col-md-12 text-right">
-								<!-- <a t:type="eventlink" t:event="cancel"
-									class="btn btn-padding 
-										btn-grey waves-effect waves-light">${message:back}</a> -->
+								<!-- <a t:type="eventlink" t:event="cancel" class="btn btn-padding 
+									btn-grey waves-effect waves-light">${message:back}</a> -->
 								<button type="submit"
 									class="btn btn-padding btn-success waves-effect waves-light">${message:save}</button>
 							</div>
@@ -74,13 +74,13 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>${message:org-label}</label>
-							<label class="form-control">${orgName}</label>
+							<label class="form-control" style="border:none;">${orgName}</label>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>${message:currentrole-label}</label>
-							<label class="form-control">${roleName}</label>
+							<label class="form-control" style="border:none;">${roleName}</label>
 						</div>
 					</div>
 					<div class="col-md-6">

@@ -91,16 +91,33 @@ public class LavlahSumDuureg {
 		return loginState.getUser().getFullName();
 	}
 
+	public static boolean containsWhiteSpace(final String testCode) {
+		if (testCode != null) {
+			for (int i = 0; i < 2; i++) {
+				if (Character.isWhitespace(testCode.charAt(i))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	@CommitAfter
 	public void onSuccessFromSave() {
-		SumDuureg obj = new SumDuureg();
-		if (dao.getSumDuuregByName(name, aimag) != null) {
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("burtgeltei"));
+		if (LavlahSumDuureg.containsWhiteSpace(name)) {
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("hoosonzai"));
 		} else {
-			obj.setName(name);
-			obj.setIsActive(true);
-			obj.setAimagId(aimag);
-			dao.saveOrUpdateObject(obj);
+			if (dao.getSumDuuregByName(name, aimag) != null) {
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
+			} else {
+				SumDuureg obj = new SumDuureg();
+				obj.setName(name);
+				obj.setIsActive(true);
+				obj.setAimagId(aimag);
+				dao.saveOrUpdateObject(obj);
+			}
 		}
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);
@@ -113,7 +130,8 @@ public class LavlahSumDuureg {
 			dao.deleteObject(obj);
 		} catch (Exception e) {
 			System.out.println("[ERROR DELETE:]" + e);
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("deleteerror"));
 		}
 
 		return LavlahSumDuureg.class;
@@ -124,7 +142,8 @@ public class LavlahSumDuureg {
 	}
 
 	public SelectModel getAimagSelectModel() {
-		EnumSelectModel em = new EnumSelectModel(AimagNiislelEnum.class, message);
+		EnumSelectModel em = new EnumSelectModel(AimagNiislelEnum.class,
+				message);
 		return em;
 	}
 
