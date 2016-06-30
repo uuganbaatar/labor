@@ -16,7 +16,6 @@ import org.hibernate.envers.Audited;
 
 import mn.odi.labor.entities.admin.LavlahGarsan;
 import mn.odi.labor.entities.common.BaseObject;
-import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.enums.EduLevelEnum;
 import mn.odi.labor.enums.EmpMovementEnum;
 import mn.odi.labor.enums.EmploymentEnum;
@@ -78,8 +77,8 @@ public class Employee extends BaseObject {
 	private LavlahGarsan firedReason;
 	
 	@ManyToOne
-	@JoinColumn(name = "job_org_id", nullable = true)
-	private JobOrgAssoc jobOrgId;
+	@JoinColumn(name = "job_id", nullable = true)
+	private Job job;
 
 	public Employee() {
 		this.uuid = UUIDUtil.getUUID();
@@ -201,12 +200,12 @@ public class Employee extends BaseObject {
 		this.firedReason = firedReason;
 	}
 
-	public JobOrgAssoc getJobOrgId() {
-		return jobOrgId;
+	public Job getJob() {
+		return job;
 	}
 
-	public void setJobOrgId(JobOrgAssoc jobOrgId) {
-		this.jobOrgId = jobOrgId;
+	public void setJob(Job job) {
+		this.job = job;
 	}
 
 	public String getFullName() {

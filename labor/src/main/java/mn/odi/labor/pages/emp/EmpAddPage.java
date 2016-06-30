@@ -1,20 +1,5 @@
 package mn.odi.labor.pages.emp;
 
-import mn.odi.labor.aso.LoginState;
-import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.entities.admin.LavlahGarsan;
-import mn.odi.labor.entities.common.Organization;
-import mn.odi.labor.entities.labor.Employee;
-import mn.odi.labor.entities.labor.Job;
-import mn.odi.labor.entities.labor.JobOrgAssoc;
-import mn.odi.labor.enums.EduLevelEnum;
-import mn.odi.labor.enums.EmpMovementEnum;
-import mn.odi.labor.enums.EmploymentEnum;
-import mn.odi.labor.enums.GenderEnum;
-import mn.odi.labor.enums.YesNoEnum;
-import mn.odi.labor.models.CommonSM;
-import mn.odi.labor.models.OrgSM;
-
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.DiscardAfter;
@@ -28,6 +13,20 @@ import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.util.EnumSelectModel;
+
+import mn.odi.labor.aso.LoginState;
+import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.admin.LavlahGarsan;
+import mn.odi.labor.entities.common.Organization;
+import mn.odi.labor.entities.labor.Employee;
+import mn.odi.labor.entities.labor.Job;
+import mn.odi.labor.enums.EduLevelEnum;
+import mn.odi.labor.enums.EmpMovementEnum;
+import mn.odi.labor.enums.EmploymentEnum;
+import mn.odi.labor.enums.GenderEnum;
+import mn.odi.labor.enums.YesNoEnum;
+import mn.odi.labor.models.CommonSM;
+import mn.odi.labor.models.JobSM;
 
 public class EmpAddPage {
 
@@ -55,15 +54,15 @@ public class EmpAddPage {
 
 	@Property
 	private Organization organization;
-	
-	@Property
-	private JobOrgAssoc assoc;
 
 	@Property
 	private Job job;
 
-	/*@InjectComponent
-	private Zone orgZone;*/
+	@InjectComponent
+	private Zone orgZone;
+
+	@Property
+	private Organization orgSel;
 
 	void onActivate(Employee emp) {
 
@@ -94,39 +93,47 @@ public class EmpAddPage {
 	}
 
 	public SelectModel getEmploymentModel() {
-		return new EnumSelectModel(EmploymentEnum.class,
-				resources.getMessages());
+		return new EnumSelectModel(EmploymentEnum.class, resources.getMessages());
+	}
+
+	public SelectModel getJobModel(Organization org) {
+		return new CommonSM<Job>(Job.class, dao.getJobList(), "getJobName");
+	}
+
+	public SelectModel getOrgModel() {
+		return new CommonSM<Organization>(Organization.class, dao.getOrgList(), "getName");
 	}
 
 	public SelectModel getJobModel() {
-		return new CommonSM<Job>(Job.class, dao.getJobList(), "getJobName");
+		JobSM sm = new JobSM(dao, orgSel);
+		return sm;
 	}
-/*
-	public SelectModel getOrgModel() {
-		return new CommonSM<Organization>(Organization.class, dao.getOrgList(),
-				"getName");
-	}*/
 
-	
-	  public SelectModel getOrgModel() {
-	  
-	  OrgSM sm = new OrgSM(dao);
-	 
-	  return sm; }
-	 
+	public Object onValueChangedFromOrg(Organization org) {
+		if (org != null) {
+			orgSel = org;
+			this.getJobModel();
+		}
+		return orgZone.getBody();
+	}
+
+	// public SelectModel getOrgModel() {
+	//
+	// OrgSM sm = new OrgSM(dao);
+	//
+	// return sm;
+	// }
 
 	public SelectModel getIsNewModel() {
 		return new EnumSelectModel(YesNoEnum.class, resources.getMessages());
 	}
 
 	public SelectModel getMovementModel() {
-		return new EnumSelectModel(EmpMovementEnum.class,
-				resources.getMessages());
+		return new EnumSelectModel(EmpMovementEnum.class, resources.getMessages());
 	}
 
 	public SelectModel getFiredReasonModel() {
-		return new CommonSM<LavlahGarsan>(LavlahGarsan.class,
-				dao.getLavlahEmpGarsanList(), "getName");
+		return new CommonSM<LavlahGarsan>(LavlahGarsan.class, dao.getLavlahEmpGarsanList(), "getName");
 	}
 
 	@CommitAfter
@@ -141,16 +148,8 @@ public class EmpAddPage {
 		return EmpListPage.class;
 	}
 
-/*	public Object onValueChangedFromOrg(JobOrgAssoc org) {
-		if (org != null) {
-			
-			System.err.println(org);
-			assoc = org;
-			// this.getSohCallTypeSelectionModel();
-			// this.sohCallTypeNemelt = null;
-			// this.getNemeltCallTypeSelectionModel();
-		}
+//	public Object onValueChangedFromOrg(Organization org) {
+//		return orgZone.getBody();
+//	}
 
-		return orgZone.getBody();
-	}*/
 }

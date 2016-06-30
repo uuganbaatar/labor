@@ -24,6 +24,7 @@ import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.admin.AjiliinBairHurungu;
 import mn.odi.labor.entities.admin.GeneralType;
+import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.labor.Job;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.models.CommonSM;
@@ -97,6 +98,10 @@ public class JobPage {
 
 	public SelectModel getFundingSourceModel() {
 		return new CommonSM<AjiliinBairHurungu>(AjiliinBairHurungu.class, dao.getFundingSourceList(), "getName");
+	}
+
+	public SelectModel getOrgModel() {
+		return new CommonSM<Organization>(Organization.class, dao.getOrgList(), "getName");
 	}
 
 	public SelectModel getJobTypeModel() {

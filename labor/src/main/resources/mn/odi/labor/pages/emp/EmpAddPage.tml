@@ -124,9 +124,9 @@
 								${message:org-label}
 								<span class="req">*</span>
 							</label>
-							<!-- <input t:type="select" class="form-control" t:id="org"
-								t:model="orgModel" t:value="assoc" t:validate="required"
-								t:blankOption="always" zone="orgZone" /> -->
+							<input t:type="select" class="form-control" t:id="org"
+								t:model="orgModel" t:value="orgSel" t:validate="required"
+								t:blankOption="always" zone="orgZone" />
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -135,11 +135,11 @@
 								${message:job-label}
 								<span class="req">*</span>
 							</label>
-							<!-- <t:Zone t:id="orgZone" id="orgZone">
+							<t:Zone t:id="orgZone" id="orgZone">
 								<input t:type="select" class="form-control" t:id="job"
 									t:model="jobModel" t:value="job" t:validate="required"
 									t:blankOption="always" />
-							</t:Zone> -->
+							</t:Zone>
 
 						</div>
 					</div>

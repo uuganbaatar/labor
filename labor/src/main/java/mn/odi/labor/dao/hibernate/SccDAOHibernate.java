@@ -443,12 +443,8 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (emp != null) {
 
-				if (emp.getJobOrgId() != null) {
-					sql += " AND employee.job_id = " + emp.getJobOrgId().getId();
-				}
-
-				if (emp.getJobOrgId() != null) {
-					sql += " AND employee.org_id = " + emp.getJobOrgId().getId();
+				if (emp.getJob() != null) {
+					sql += " AND employee.job_id = " + emp.getJob().getId();
 				}
 
 				if (emp.getCreatedDate() != null) {
@@ -1647,6 +1643,20 @@ public class SccDAOHibernate implements SccDAO {
 		} catch (HibernateException e) {
 			e.printStackTrace();
 			return (new ArrayList<Organization>());
+		}
+	}
+	
+	public List<Job> getJobListByOrg(Organization org) {
+		try {
+			Criteria crit = session.createCriteria(Job.class);
+
+			if (org != null)
+				crit.add(Restrictions.eq("org", org));
+
+			return crit.list();
+
+		} catch (HibernateException e) {
+			return null;
 		}
 	}
 

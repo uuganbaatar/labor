@@ -17,9 +17,10 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.hibernate.envers.Audited;
 
-import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.admin.AjiliinBairHurungu;
+import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.common.BaseObject;
+import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.util.UUIDUtil;
 
@@ -59,6 +60,10 @@ public class Job extends BaseObject {
 
 	@Column(name = "jobType")
 	public JobTypeEnum jobType;
+	
+	@ManyToOne
+	@JoinColumn(name = "org_id", nullable = true)
+	public Organization org;
 
 	public Job() {
 		this.uuid = UUIDUtil.getUUID();
@@ -126,6 +131,14 @@ public class Job extends BaseObject {
 
 	public void setJobType(JobTypeEnum jobType) {
 		this.jobType = jobType;
+	}
+
+	public Organization getOrgId() {
+		return org;
+	}
+
+	public void setOrgId(Organization org) {
+		this.org = org;
 	}
 
 	public String getJobDateFormated() {

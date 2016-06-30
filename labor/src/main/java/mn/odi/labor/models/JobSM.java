@@ -1,11 +1,7 @@
 package mn.odi.labor.models;
 
-
 import java.io.Serializable;
 import java.util.List;
-
-import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.entities.common.Organization;
 
 import org.apache.tapestry5.OptionGroupModel;
 import org.apache.tapestry5.OptionModel;
@@ -13,30 +9,36 @@ import org.apache.tapestry5.internal.OptionModelImpl;
 import org.apache.tapestry5.ioc.internal.util.CollectionFactory;
 import org.apache.tapestry5.util.AbstractSelectModel;
 
-public class OrgSM extends AbstractSelectModel implements
-		Serializable {
+import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.common.Organization;
+import mn.odi.labor.entities.labor.Job;
 
-	
+public class JobSM extends AbstractSelectModel implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4089874863547817451L;
 
 	private final List<OptionModel> options = CollectionFactory.newList();
 
-	List<Organization> orglist;
+	List<Job> jobList;
 
-	public OrgSM(SccDAO sccDao) {
-		orglist = sccDao.getOrgListByAssoc();
-		setLists(orglist);
+	public JobSM(SccDAO sccDao) {
+		jobList = sccDao.getJobList();
+		setLists(jobList);
 	}
 
-	public void setLists(List<Organization> list) {
+	public JobSM(SccDAO sccDao, Organization org) {
+		if (org != null) {
+			jobList = sccDao.getJobListByOrg(org);
+			setLists(jobList);
+		}
+	}
 
-		for (Organization value : list) {
-			options.add(new OptionModelImpl(value.toString() == null ? value
-					.toString() : value.toString(), value));
+	public void setLists(List<Job> list) {
+		if (list != null) {
+			for (Job value : list) {
+				options.add(new OptionModelImpl(value.getJobName() == null ? value
+						.getJobName() : value.getJobName(), value));
+			}
 		}
 
 	}
@@ -51,5 +53,5 @@ public class OrgSM extends AbstractSelectModel implements
 		return options;
 	}
 
-}
 
+}

@@ -41,7 +41,6 @@
 		<mapping class="mn.odi.labor.entities.admin.AjiliinBairHurungu" />
 		<mapping class="mn.odi.labor.entities.common.AccessLog" />
 		<mapping class="mn.odi.labor.entities.labor.Job" />
-		<mapping class="mn.odi.labor.entities.labor.JobOrgAssoc" />
 
 		<!-- Envers Configuration -->
 		<listener class="org.hibernate.envers.event.AuditEventListener"

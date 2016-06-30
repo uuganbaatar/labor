@@ -233,4 +233,5 @@ public interface SccDAO {
 
 	public Organization getOrgByNameDuureg(String name, SumDuureg sumDuureg);
 
+	public List<Job> getJobListByOrg(Organization org);
 }
