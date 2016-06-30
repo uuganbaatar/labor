@@ -93,15 +93,31 @@ public class LavlahHelber {
 		return loginState.getUser().getFullName();
 	}
 
+	public static boolean containsWhiteSpace(final String testCode) {
+		if (testCode != null) {
+			for (int i = 0; i < 2; i++) {
+				if (Character.isWhitespace(testCode.charAt(i))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	@CommitAfter
 	public void onSuccessFromSave() {
-		CompanyHelber obj = new CompanyHelber();
-		if (dao.getHelberByName(name) != null) {
+		if (LavlahHelber.containsWhiteSpace(name)) {
 			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("burtgeltei"));
+					message.get("hoosonzai"));
 		} else {
-		obj.setName(name);
-		dao.saveOrUpdateObject(obj);
+			if (dao.getHelberByName(name) != null) {
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
+			} else {
+				CompanyHelber obj = new CompanyHelber();
+				obj.setName(name);
+				dao.saveOrUpdateObject(obj);
+			}
 		}
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);

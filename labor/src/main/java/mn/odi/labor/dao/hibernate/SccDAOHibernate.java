@@ -1,28 +1,8 @@
 package mn.odi.labor.dao.hibernate;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.tapestry5.alerts.AlertManager;
-import org.apache.tapestry5.alerts.Duration;
-import org.apache.tapestry5.alerts.Severity;
-import org.apache.tapestry5.annotations.SessionState;
-import org.apache.tapestry5.hibernate.annotations.CommitAfter;
-import org.apache.tapestry5.ioc.Messages;
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.ioc.internal.OperationException;
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.type.IntegerType;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
@@ -41,12 +21,35 @@ import mn.odi.labor.entities.common.SumDuureg;
 import mn.odi.labor.entities.common.User;
 import mn.odi.labor.entities.labor.Employee;
 import mn.odi.labor.entities.labor.Job;
+import mn.odi.labor.entities.labor.JobOrgAssoc;
 import mn.odi.labor.entities.labor.Report;
 import mn.odi.labor.entities.labor.ReportDetail;
 import mn.odi.labor.entities.labor.ReportStatus;
 import mn.odi.labor.enums.AimagNiislelEnum;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.enums.ReportDetailType;
+
+import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.alerts.Duration;
+import org.apache.tapestry5.alerts.Severity;
+import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
+import org.apache.tapestry5.ioc.Messages;
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.ioc.internal.OperationException;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
+import org.hibernate.type.IntegerType;
+import org.hibernate.type.LongType;
+import org.hibernate.type.StringType;
 
 public class SccDAOHibernate implements SccDAO {
 
@@ -109,14 +112,15 @@ public class SccDAOHibernate implements SccDAO {
 
 		this.saveOrUpdateObject((Object) obj);
 	}
-	
+
 	@CommitAfter
 	public void saveOrUpdate(BaseObject object, boolean hasMessage) {
 		object.setCreatedDate(new Date());
 		session.save(object);
 
 		if (hasMessage) {
-			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS, messages.get("success"));
+			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+					messages.get("success"));
 		}
 	}
 
@@ -447,13 +451,13 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (emp != null) {
 
-			/*	if (emp.getJob() != null) {
-					sql += " AND employee.job_id = " + emp.getJob().getId();
-				}
-
-				if (emp.getOrg() != null) {
-					sql += " AND employee.org_id = " + emp.getOrg().getId();
-				}*/
+				/*
+				 * if (emp.getJob() != null) { sql += " AND employee.job_id = "
+				 * + emp.getJob().getId(); }
+				 * 
+				 * if (emp.getOrg() != null) { sql += " AND employee.org_id = "
+				 * + emp.getOrg().getId(); }
+				 */
 
 				if (emp.getCreatedDate() != null) {
 					sql += " AND employee.created_date = "
@@ -1661,22 +1665,18 @@ public class SccDAOHibernate implements SccDAO {
 		}
 
 	}
-	
-	/*public List<Organization> getOrgListByAssoc(){
+
+	public List<Organization> getOrgListByAssoc() {
 		try {
-			Criteria crit = session.createCriteria(SumDuureg.class);
-
-			if (name != null)
-				crit.add(Restrictions.eq("name", name));
-
-			if (aimagId != null)
-				crit.add(Restrictions.eq("aimagId", aimagId));
-
-			return crit.list();
-
+			String sql = "select org.id , org.name from organization org left join job_org_assoc ass on ass.org_id=org.id";
+			SQLQuery query = session.createSQLQuery(sql).addScalar("id", LongType.INSTANCE).addScalar("name", StringType.INSTANCE);
+			query.setResultTransformer(Transformers.aliasToBean(Organization.class));
+			List<Organization> list = query.list();
+			return list;
 		} catch (HibernateException e) {
-			return null;
+			e.printStackTrace();
+			return (new ArrayList<Organization>());
 		}
-	}*/
+	}
 
 }

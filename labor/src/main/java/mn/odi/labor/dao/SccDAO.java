@@ -20,6 +20,7 @@ import mn.odi.labor.entities.common.SumDuureg;
 import mn.odi.labor.entities.common.User;
 import mn.odi.labor.entities.labor.Employee;
 import mn.odi.labor.entities.labor.Job;
+import mn.odi.labor.entities.labor.JobOrgAssoc;
 import mn.odi.labor.entities.labor.Report;
 import mn.odi.labor.entities.labor.ReportDetail;
 import mn.odi.labor.entities.labor.ReportStatus;
@@ -241,7 +242,7 @@ public interface SccDAO {
 	
 	public void saveOrUpdate(BaseObject object, boolean hasMessage);
 	
-	/*public List<Organization> getOrgListByAssoc();*/
+	public List<Organization> getOrgListByAssoc();
 
 
 }

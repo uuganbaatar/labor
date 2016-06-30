@@ -92,15 +92,31 @@ public class LavlahEconomicCategory {
 		return loginState.getUser().getFullName();
 	}
 
+	public static boolean containsWhiteSpace(final String testCode) {
+		if (testCode != null) {
+			for (int i = 0; i < 2; i++) {
+				if (Character.isWhitespace(testCode.charAt(i))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	@CommitAfter
 	public void onSuccessFromSave() {
-		type = new EconomicCategory();
-		if (dao.getEconomicCategoryByName(name) != null) {
+		if (LavlahEconomicCategory.containsWhiteSpace(name)) {
 			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("burtgeltei"));
+					message.get("hoosonzai"));
 		} else {
-			type.setName(name);
-			dao.saveOrUpdateObject(type);
+			if (dao.getEconomicCategoryByName(name) != null) {
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
+			} else {
+				type = new EconomicCategory();
+				type.setName(name);
+				dao.saveOrUpdateObject(type);
+			}
 		}
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);

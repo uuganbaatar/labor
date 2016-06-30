@@ -105,21 +105,41 @@ public class LavlahPropertyType {
 	public String getUserName() {
 		return loginState.getUser().getFullName();
 	}
-	
+
 	public SelectModel getPropertyTypeModel() {
-		return new EnumSelectModel(PropertyTypeEnum.class, resources.getMessages());
+		return new EnumSelectModel(PropertyTypeEnum.class,
+				resources.getMessages());
+	}
+
+	public static boolean containsWhiteSpace(final String testCode) {
+		if (testCode != null) {
+			for (int i = 0; i < 2; i++) {
+				if (Character.isWhitespace(testCode.charAt(i))) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	@CommitAfter
 	public void onSuccessFromSave() {
-		type = new PropertyType();
-		if (dao.getPropertyTypeByName(name) != null) {
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("burtgeltei"));
+
+		if (LavlahPropertyType.containsWhiteSpace(name)) {
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("hoosonzai"));
 		} else {
-			type.setName(name);
-			type.setPropertyTypeEnum(propertyTypeEnum);
-			dao.saveOrUpdateObject(type);
+			if (dao.getPropertyTypeByName(name) != null) {
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
+			} else {
+				type = new PropertyType();
+				type.setName(name);
+				type.setPropertyTypeEnum(propertyTypeEnum);
+				dao.saveOrUpdateObject(type);
+			}
 		}
+
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);
 		}
@@ -131,7 +151,8 @@ public class LavlahPropertyType {
 			dao.deleteObject(obj);
 		} catch (Exception e) {
 			System.out.println("[ERROR DELETE:]" + e);
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("deleteerror"));
 		}
 
 		return LavlahPropertyType.class;

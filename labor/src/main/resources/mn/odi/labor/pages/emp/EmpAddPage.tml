@@ -121,23 +121,26 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label>
-								${message:job-label}
+								${message:org-label}
 								<span class="req">*</span>
 							</label>
-							<!-- <t:Zone t:id="orgZone" id="orgZone">
-							 <input t:type="select" class="form-control" t:id="job" t:model="jobModel" 
-								t:value="job" t:validate="required" t:blankOption="always" /> 
-								</t:Zone> -->
+							<!-- <input t:type="select" class="form-control" t:id="org"
+								t:model="orgModel" t:value="assoc" t:validate="required"
+								t:blankOption="always" zone="orgZone" /> -->
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label>
-								${message:org-label}
+								${message:job-label}
 								<span class="req">*</span>
 							</label>
-							<!--  <input t:type="select" class="form-control" t:id="org" t:model="orgModel" 
-								t:value="organization" t:validate="required" t:blankOption="always" zone="orgZone"/>  -->
+							<!-- <t:Zone t:id="orgZone" id="orgZone">
+								<input t:type="select" class="form-control" t:id="job"
+									t:model="jobModel" t:value="job" t:validate="required"
+									t:blankOption="always" />
+							</t:Zone> -->
+
 						</div>
 					</div>
 					<div class="col-md-4">

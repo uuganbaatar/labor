@@ -6,6 +6,7 @@ import mn.odi.labor.entities.admin.LavlahGarsan;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.labor.Employee;
 import mn.odi.labor.entities.labor.Job;
+import mn.odi.labor.entities.labor.JobOrgAssoc;
 import mn.odi.labor.enums.EduLevelEnum;
 import mn.odi.labor.enums.EmpMovementEnum;
 import mn.odi.labor.enums.EmploymentEnum;
@@ -42,35 +43,38 @@ public class EmpAddPage {
 	@Property
 	@PageActivationContext
 	private Employee emp;
-	
+
 	@InjectComponent
 	private Form empForm;
-	
+
 	@Inject
 	private ComponentResources resources;
 
-	@Property 
-	private boolean disabled; 
-	
+	@Property
+	private boolean disabled;
+
 	@Property
 	private Organization organization;
 	
 	@Property
+	private JobOrgAssoc assoc;
+
+	@Property
 	private Job job;
-	
+
 	/*@InjectComponent
 	private Zone orgZone;*/
-	
+
 	void onActivate(Employee emp) {
-		
-		if(emp != null){
+
+		if (emp != null) {
 			this.emp = emp;
 		}
-		
+
 		disabled = false;
 	}
-	
-	Employee onPassivate(){
+
+	Employee onPassivate() {
 		return emp;
 	}
 
@@ -80,44 +84,49 @@ public class EmpAddPage {
 		}
 		disabled = false;
 	}
-	
+
 	public SelectModel getGenderModel() {
 		return new EnumSelectModel(GenderEnum.class, resources.getMessages());
 	}
-	
+
 	public SelectModel getEduLevelModel() {
 		return new EnumSelectModel(EduLevelEnum.class, resources.getMessages());
 	}
-	
+
 	public SelectModel getEmploymentModel() {
-		return new EnumSelectModel(EmploymentEnum.class, resources.getMessages());
+		return new EnumSelectModel(EmploymentEnum.class,
+				resources.getMessages());
 	}
 
 	public SelectModel getJobModel() {
 		return new CommonSM<Job>(Job.class, dao.getJobList(), "getJobName");
 	}
-
-	/*public SelectModel getOrgModel() {
-		return new CommonSM<Organization>(Organization.class, dao.getOrgList(), "getName");
+/*
+	public SelectModel getOrgModel() {
+		return new CommonSM<Organization>(Organization.class, dao.getOrgList(),
+				"getName");
 	}*/
-	
-/*	public SelectModel getOrgModel() {
 
-		OrgSM sm = new OrgSM(dao);
-
-		return sm;
-	}*/
 	
+	  public SelectModel getOrgModel() {
+	  
+	  OrgSM sm = new OrgSM(dao);
+	 
+	  return sm; }
+	 
+
 	public SelectModel getIsNewModel() {
 		return new EnumSelectModel(YesNoEnum.class, resources.getMessages());
 	}
-	
+
 	public SelectModel getMovementModel() {
-		return new EnumSelectModel(EmpMovementEnum.class, resources.getMessages());
+		return new EnumSelectModel(EmpMovementEnum.class,
+				resources.getMessages());
 	}
 
 	public SelectModel getFiredReasonModel() {
-		return new CommonSM<LavlahGarsan>(LavlahGarsan.class, dao.getLavlahEmpGarsanList(), "getName");
+		return new CommonSM<LavlahGarsan>(LavlahGarsan.class,
+				dao.getLavlahEmpGarsanList(), "getName");
 	}
 
 	@CommitAfter
@@ -127,18 +136,19 @@ public class EmpAddPage {
 		return EmpListPage.class;
 	}
 
-
 	@DiscardAfter
 	Object onCancel() {
 		return EmpListPage.class;
 	}
-	
-	/*public Object onValueChangedFromOrg(Organization org) {
+
+/*	public Object onValueChangedFromOrg(JobOrgAssoc org) {
 		if (org != null) {
-			organization = org;
-			//this.getSohCallTypeSelectionModel();
-			//this.sohCallTypeNemelt = null;
-			//this.getNemeltCallTypeSelectionModel();
+			
+			System.err.println(org);
+			assoc = org;
+			// this.getSohCallTypeSelectionModel();
+			// this.sohCallTypeNemelt = null;
+			// this.getNemeltCallTypeSelectionModel();
 		}
 
 		return orgZone.getBody();

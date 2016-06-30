@@ -92,11 +92,21 @@ public class LavlahGeneralType {
 		return loginState.getUser().getFullName();
 	}
 
+	public static boolean containsWhiteSpace(final String testCode) {
+		if (testCode != null) {
+			for (int i = 0; i < 2; i++) {
+				if (Character.isWhitespace(testCode.charAt(i))) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	@CommitAfter
 	public void onSuccessFromSave() {
-		
-		if (name.trim().substring(0, 1).isEmpty()) {
-			System.err.println("sdsdsdh");
+
+		if (LavlahGeneralType.containsWhiteSpace(name)) {
 			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
 					message.get("hoosonzai"));
 		} else {
