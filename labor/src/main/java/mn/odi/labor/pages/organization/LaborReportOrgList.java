@@ -1,6 +1,8 @@
 package mn.odi.labor.pages.organization;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.tapestry5.annotations.InjectPage;
@@ -16,6 +18,7 @@ import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.labor.Report;
 import mn.odi.labor.entities.labor.ReportStatus;
+import mn.odi.labor.models.FormYearSM;
 
 public class LaborReportOrgList {
 
@@ -352,6 +355,20 @@ public class LaborReportOrgList {
 	@CommitAfter
 	Object onSuccessFromSearch() {
 		return null;
+	}
+
+	public FormYearSM getFormDateModel() {
+		Date d = dao.getCurrentDate();
+		List<Integer> formYears = new ArrayList<Integer>();
+		for (int i = d.getYear() + 1900; i >= 2015; i--) {
+			formYears.add(i);
+
+		}
+		if (year == null) {
+			year = formYears.get(0);
+		}
+
+		return new FormYearSM(formYears);
 	}
 
 }
