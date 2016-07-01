@@ -101,12 +101,11 @@ public class JobPage {
 
 	@CommitAfter
 	void beginRender() {
-		System.err.println(generalType);
-		System.err.println(newCheck);
-		System.err.println(startDate);
+		System.err.println(jobName);
 
 		loginState.setActiveMenu("job");
 		loginState.setPageTitle(message.get("job"));
+
 		jobList = dao.getJobSearch(generalType, jobName, newCheck, startDate,
 				endDate, fundingSource, jobType, org);
 	}
@@ -147,8 +146,13 @@ public class JobPage {
 
 	@OnEvent(value = "cancel")
 	void reset() {
-		
+		generalType = null;
+		jobName = null;
 		startDate = null;
+		endDate = null;
+		fundingSource = null;
+		jobType = null;
+		org = null;
 	}
 
 	public int getCount() {

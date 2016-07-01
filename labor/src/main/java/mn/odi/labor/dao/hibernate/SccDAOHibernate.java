@@ -1713,6 +1713,7 @@ public class SccDAOHibernate implements SccDAO {
 			boolean check, Date d1, Date d2, AjiliinBairHurungu fundSource,
 			JobTypeEnum type, Organization org) {
 		try {
+			
 
 			Criteria crit = session.createCriteria(Job.class);
 
@@ -1723,7 +1724,7 @@ public class SccDAOHibernate implements SccDAO {
 			}
 
 			if (name != null) {
-				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+				crit.add(Restrictions.ilike("jobName", "%" + name + "%"));
 			}
 
 			if (d1 != null && d2 != null) {

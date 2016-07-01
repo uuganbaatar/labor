@@ -44,7 +44,7 @@
 									${message:jobName-label}
 									<span class="req">*</span>
 								</label>
-									<t:TextField class="form-control" t:id="jobName" />
+								<t:TextField class="form-control" t:id="jobName" />
 							</div>
 						</div>
 						<div class="col-md-4 padding_only_top">
@@ -153,6 +153,9 @@
 								t:source="jobList" t:row="jobRow"
 								t:add="number, generalType, fundingSource, edit" t:exclude="uuid, jobDate, isNew, createddate"
 								t:reorder="number, generalType, jobName, jobDateFormated, fundingSource, jobType">
+								<p:empty>
+									<p>${message:nodata}</p>
+								</p:empty>
 								<p:numberCell>${number}</p:numberCell>
 								<p:GeneralTypeCell>
 									${jobRow?.generalType?.name}
