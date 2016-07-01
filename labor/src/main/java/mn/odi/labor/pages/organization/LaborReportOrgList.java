@@ -79,8 +79,7 @@ public class LaborReportOrgList {
 		if (obj != null)
 			org = obj;
 		else {
-			if (loginState.getUser() != null
-					&& loginState.getUser().getOrg() != null)
+			if (loginState.getUser() != null && loginState.getUser().getOrg() != null)
 				org = loginState.getUser().getOrg();
 			else
 				org = null;
@@ -112,7 +111,7 @@ public class LaborReportOrgList {
 	}
 
 	public String getStatus(Integer m) {
-		if (year <= Calendar.getInstance().get(Calendar.YEAR) && month >= m) {
+		if (year < Calendar.getInstance().get(Calendar.YEAR)) {
 			ReportStatus rt = dao.getReportStatusList(row, year, m, org);
 			if (rt != null) {
 				switch (rt.getReportStatus()) {
@@ -131,9 +130,29 @@ public class LaborReportOrgList {
 				return crossButton;
 			}
 		} else {
-			btnClass = lock;
-			isaction = true;
-			return lockButton;
+			if (year == Calendar.getInstance().get(Calendar.YEAR) && month >= m) {
+				ReportStatus rt = dao.getReportStatusList(row, year, m, org);
+				if (rt != null) {
+					switch (rt.getReportStatus()) {
+					case DRAFT:
+						btnClass = draft;
+						return draftButton;
+					case SENT:
+						btnClass = check;
+						return checkButton;
+					default:
+						btnClass = cross;
+						return crossButton;
+					}
+				} else {
+					btnClass = cross;
+					return crossButton;
+				}
+			} else {
+				btnClass = lock;
+				isaction = true;
+				return lockButton;
+			}
 		}
 	}
 
