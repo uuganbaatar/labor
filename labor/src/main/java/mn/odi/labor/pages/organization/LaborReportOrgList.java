@@ -1,6 +1,8 @@
 package mn.odi.labor.pages.organization;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.tapestry5.annotations.InjectPage;
@@ -16,6 +18,7 @@ import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.labor.Report;
 import mn.odi.labor.entities.labor.ReportStatus;
+import mn.odi.labor.models.FormYearSM;
 
 public class LaborReportOrgList {
 
@@ -79,8 +82,7 @@ public class LaborReportOrgList {
 		if (obj != null)
 			org = obj;
 		else {
-			if (loginState.getUser() != null
-					&& loginState.getUser().getOrg() != null)
+			if (loginState.getUser() != null && loginState.getUser().getOrg() != null)
 				org = loginState.getUser().getOrg();
 			else
 				org = null;
@@ -112,7 +114,7 @@ public class LaborReportOrgList {
 	}
 
 	public String getStatus(Integer m) {
-		if (year <= Calendar.getInstance().get(Calendar.YEAR) && month >= m) {
+		if (year < Calendar.getInstance().get(Calendar.YEAR)) {
 			ReportStatus rt = dao.getReportStatusList(row, year, m, org);
 			if (rt != null) {
 				switch (rt.getReportStatus()) {
@@ -131,9 +133,29 @@ public class LaborReportOrgList {
 				return crossButton;
 			}
 		} else {
-			btnClass = lock;
-			isaction = true;
-			return lockButton;
+			if (year == Calendar.getInstance().get(Calendar.YEAR) && month >= m) {
+				ReportStatus rt = dao.getReportStatusList(row, year, m, org);
+				if (rt != null) {
+					switch (rt.getReportStatus()) {
+					case DRAFT:
+						btnClass = draft;
+						return draftButton;
+					case SENT:
+						btnClass = check;
+						return checkButton;
+					default:
+						btnClass = cross;
+						return crossButton;
+					}
+				} else {
+					btnClass = cross;
+					return crossButton;
+				}
+			} else {
+				btnClass = lock;
+				isaction = true;
+				return lockButton;
+			}
 		}
 	}
 
@@ -333,6 +355,20 @@ public class LaborReportOrgList {
 	@CommitAfter
 	Object onSuccessFromSearch() {
 		return null;
+	}
+
+	public FormYearSM getFormDateModel() {
+		Date d = dao.getCurrentDate();
+		List<Integer> formYears = new ArrayList<Integer>();
+		for (int i = d.getYear() + 1900; i >= 2015; i--) {
+			formYears.add(i);
+
+		}
+		if (year == null) {
+			year = formYears.get(0);
+		}
+
+		return new FormYearSM(formYears);
 	}
 
 }

@@ -51,6 +51,12 @@ public class LavlahHudulmurHeltes {
 	private String name;
 
 	@Property
+	private String register;
+
+	@Property
+	private String telephone;
+
+	@Property
 	@Persist
 	private AimagNiislelEnum aimag;
 
@@ -111,6 +117,8 @@ public class LavlahHudulmurHeltes {
 		obj.setIsActive(true);
 		obj.setSumId(sumDuureg);
 		obj.setOrgType(OrgTypeEnum.HELTES);
+		obj.setMobilePhone(telephone);
+		obj.setRegNum(register);
 		dao.saveOrUpdateObject(obj);
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);
@@ -139,13 +147,13 @@ public class LavlahHudulmurHeltes {
 	}
 
 	public SelectModel getSumSelectModel() {
+		System.out.println("Aimag:" + aimag);
 		CommonSM<SumDuureg> sm = new CommonSM<SumDuureg>(SumDuureg.class, dao.getSumDuuregSearch(null, aimag),
 				"getName");
 		return sm;
 	}
 
 	public void onValueChangedFromAimag() {
-		System.out.println("Aimag:" + aimag);
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(sumZone);
 		}

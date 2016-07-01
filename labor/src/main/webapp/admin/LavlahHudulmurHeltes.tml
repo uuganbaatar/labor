@@ -40,23 +40,35 @@
 			<t:Form t:id="save">
 				<t:alerts />
 				<div class="col-md-5">
-					<label>${message:name}</label>
+					<label>${message:name-label}</label>
 					<t:TextField class="form-control" t:id="sumname"
 						t:value="name" t:validate="maxlength=255,required"></t:TextField>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-5">
 					<label>${message:aimagId-label}</label>
 					<t:Select class="form-control" model="aimagSelectModel"
 						t:id="aimag" t:zone="sumZone" />
 				</div>
 				<t:zone t:id="sumZone" id="sumZone">
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<label>${message:sumname-label}</label>
 						<t:Select class="form-control" model="sumSelectModel"
 							value="sumDuureg" />
 					</div>
 				</t:zone>
-				<div class="add-button" style="margin-top:28px;">
+				<div class="col-md-5">
+					<label>${message:regNumber-label}</label>
+					<t:TextField class="form-control" t:value="register"
+						t:validate="required"></t:TextField>
+				</div>
+				<div class="
+						col-md-5 ">
+					<label>${message:phone}</label>
+					<t:TextField class="form-control" t:value="telephone"
+						t:validate="required"></t:TextField>
+				</div>
+				<div class="
+							add-button " style="margin-top:28px;">
 					<button type="submit" class="btn btn-success waves-effect waves-light">
 						<span class="btn-label">
 							<i class="glyphicon glyphicon-plus"></i>
@@ -74,9 +86,9 @@
 			<t:zone t:id="listZone" id="listZone">
 				<table t:type="grid" t:id="grid"
 					class="table table-striped table-bordered dataTable no-footer table-actions-bar"
-					t:source="list" t:row="row" t:exclude="uuid, createddate"
-					t:reorder="number, name,createddateformated,modifieddateformated,active,delete"
-					t:add="number,active, delete">
+					t:source="list" t:row="row" t:exclude="uuid,orgType,createddate,code,phone,fax,web"
+					t:reorder="number,name,mobilephone,regNum,createddateformated,modifieddateformated,active,delete"
+					t:add="number,active,delete">
 					<p:numberCell>${number}</p:numberCell>
 					<p:DeleteCell>
 						<t:ActionLink class="table-action-btn" t:id="deleteObject"
