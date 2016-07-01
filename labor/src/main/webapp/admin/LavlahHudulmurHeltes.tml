@@ -40,7 +40,7 @@
 			<t:Form t:id="save">
 				<t:alerts />
 				<div class="col-md-5">
-					<label>${message:name}</label>
+					<label>${message:name-label}</label>
 					<t:TextField class="form-control" t:id="sumname"
 						t:value="name" t:validate="maxlength=255,required"></t:TextField>
 				</div>
@@ -74,9 +74,9 @@
 			<t:zone t:id="listZone" id="listZone">
 				<table t:type="grid" t:id="grid"
 					class="table table-striped table-bordered dataTable no-footer table-actions-bar"
-					t:source="list" t:row="row" t:exclude="uuid, createddate"
-					t:reorder="number, name,createddateformated,modifieddateformated,active,delete"
-					t:add="number,active, delete">
+					t:source="list" t:row="row" t:exclude="uuid,orgType,createddate,code,phone,fax,web"
+					t:reorder="number,name,mobilephone,regNum,createddateformated,modifieddateformated,active,delete"
+					t:add="number,active,delete">
 					<p:numberCell>${number}</p:numberCell>
 					<p:DeleteCell>
 						<t:ActionLink class="table-action-btn" t:id="deleteObject"

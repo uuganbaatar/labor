@@ -145,7 +145,7 @@
 										${message:lavlahhelber}
 									</button>
 								</t:actionlink>
-								<t:actionlink t:id="lavlahStatusTab" class="${selectedTabreport}">
+								<t:actionlink t:id="lavlahStatusTab">
 									<button type="button" class="${SelectedTabLavlahStatus}"
 										style="width: 100%;">
 										${message:lavlahstatus}
@@ -163,11 +163,12 @@
 										${message:lavlahsum}
 									</button>
 								</t:actionlink>
-								<button type="button" class="${SelectedTabLavlahOrg}">
-									<t:actionlink t:id="lavlahOrgTab">
+								<t:actionlink t:id="lavlahOrgTab">
+									<button type="button" class="${SelectedTabLavlahOrg}"
+										style="width: 100%;">
 										${message:lavlahheltes}
-									</t:actionlink>
-								</button>
+									</button>
+								</t:actionlink>
 							</div>
 							<t:body />
 						</div>

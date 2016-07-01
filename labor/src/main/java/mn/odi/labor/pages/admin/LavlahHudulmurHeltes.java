@@ -139,13 +139,13 @@ public class LavlahHudulmurHeltes {
 	}
 
 	public SelectModel getSumSelectModel() {
+		System.out.println("Aimag:" + aimag);
 		CommonSM<SumDuureg> sm = new CommonSM<SumDuureg>(SumDuureg.class, dao.getSumDuuregSearch(null, aimag),
 				"getName");
 		return sm;
 	}
 
 	public void onValueChangedFromAimag() {
-		System.out.println("Aimag:" + aimag);
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(sumZone);
 		}
