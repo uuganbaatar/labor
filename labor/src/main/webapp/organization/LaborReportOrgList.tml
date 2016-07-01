@@ -9,7 +9,7 @@
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>${message:year}</label>
-									<t:select class="form-control" value="s_year" model="FormDateModel" />
+									<t:select class="form-control" value="year" model="FormDateModel" />
 								</div>
 							</div>
 							<div class="col-md-12 text-right">

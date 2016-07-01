@@ -46,10 +46,6 @@ public class LaborReportOrgList {
 	private Integer month;
 
 	@Property
-	@Persist
-	private Integer s_year;
-
-	@Property
 	private String btnClass;
 
 	private final String check = "fa fa-check";
@@ -100,13 +96,9 @@ public class LaborReportOrgList {
 			month = Calendar.getInstance().get(Calendar.MONTH) + 1;
 		}
 
-		if (s_year == null) {
+		if (year == null) {
 			year = Calendar.getInstance().get(Calendar.YEAR);
-		} else {
-			year = s_year;
 		}
-
-		System.err.println("jil:" + year);
 	}
 
 	public String getUserName() {
@@ -355,6 +347,11 @@ public class LaborReportOrgList {
 	@CommitAfter
 	Object onSuccessFromSearch() {
 		return null;
+	}
+
+	void onCancel() {
+		Date d = dao.getCurrentDate();
+		year = d.getYear() + 1900;
 	}
 
 	public FormYearSM getFormDateModel() {
