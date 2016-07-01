@@ -44,19 +44,31 @@
 					<t:TextField class="form-control" t:id="sumname"
 						t:value="name" t:validate="maxlength=255,required"></t:TextField>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-5">
 					<label>${message:aimagId-label}</label>
 					<t:Select class="form-control" model="aimagSelectModel"
 						t:id="aimag" t:zone="sumZone" />
 				</div>
 				<t:zone t:id="sumZone" id="sumZone">
-					<div class="col-md-4">
+					<div class="col-md-5">
 						<label>${message:sumname-label}</label>
 						<t:Select class="form-control" model="sumSelectModel"
 							value="sumDuureg" />
 					</div>
 				</t:zone>
-				<div class="add-button" style="margin-top:28px;">
+				<div class="col-md-5">
+					<label>${message:regNumber-label}</label>
+					<t:TextField class="form-control" t:value="register"
+						t:validate="required"></t:TextField>
+				</div>
+				<div class="
+						col-md-5 ">
+					<label>${message:phone}</label>
+					<t:TextField class="form-control" t:value="telephone"
+						t:validate="required"></t:TextField>
+				</div>
+				<div class="
+							add-button " style="margin-top:28px;">
 					<button type="submit" class="btn btn-success waves-effect waves-light">
 						<span class="btn-label">
 							<i class="glyphicon glyphicon-plus"></i>
