@@ -1,0 +1,88 @@
+<html t:type="Layout" t:title="${message:job}" t:id="layout"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
+	xmlns:p="tapestry:parameter">
+<div class="row main-contents">
+	<div class="col-md-12">
+		<div class="card-box">
+			<h4 class="text-dark header-title m-t-0">${message:jobAddTitle}</h4>
+			
+				<form t:id="jobAddForm" t:type="form" >
+					<div class="col-md-4 padding_only_top">
+						<div class="form-group">
+							<label>${message:generalType-label}<span class="req">*</span></label> 
+							<input
+								t:type="select" class="form-control" t:id="generalType"
+								t:model="generalTypeModel" t:value="jobs.generalType" t:validate="required"
+								t:blankOption="always" />
+						</div>
+					</div>
+					<div class="col-md-4 padding_only_top">
+						<div class="form-group">
+							<label>${message:jobName-label}<span class="req">*</span></label> 
+							<input t:type="textfield"
+								class="form-control" t:id="name" t:value="jobs.jobName" t:validate="required"/>
+						</div>
+					</div>
+					<div class="col-md-4 padding_only_top">
+						<div class="form-group">
+							<div class="">
+								<input t:id="checkbox1" t:type="checkbox" t:value="newCheck"/>
+								<label for="checkbox1">${message:isJobNew-label}<span class="req">*</span></label>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>${message:date}<span class="req">*</span></label>
+							<div class="input-group">
+							<input t:type="datefield" t:id="jobDate" t:value="jobs.jobDate"
+									t:class="form-control" id="datepicker" t:validate="required" /> 
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>${message:fundingSource-label}<span class="req">*</span></label> <input
+								t:type="select" class="form-control" t:id="fundingSource"
+								t:model="fundingSourceModel" t:value="jobs.fundingSource" t:validate="required"
+								t:blankOption="always" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>${message:jobType-label}<span class="req">*</span></label> <input
+								t:type="select" class="form-control" t:id="jobType"
+								t:model="jobTypeModel" t:value="jobs.jobtype" t:validate="required"
+								t:blankOption="always" />
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>${message:org-label}<span class="req">*</span></label> <input
+								t:type="select" class="form-control" t:id="organization"
+								t:model="orgModel" t:value="jobs.org" t:validate="required"
+								t:blankOption="always" />
+						</div>
+					</div>
+
+					<div class="col-md-12 text-center">
+						 <t:actionlink t:id="jobCancel"
+							class="btn btn-padding btn-grey waves-effect waves-light">
+									${message:cancel}
+								</t:actionlink> 
+								<button type="submit"
+										class="btn btn-padding btn-success waves-effect waves-light">${message:search}</button>
+						<t:Submit class="btn btn-padding btn-success"
+							value="${message:save}" />
+					</div>
+				</form>
+			
+
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</div>
+
+</html>

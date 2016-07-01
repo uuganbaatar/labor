@@ -81,7 +81,8 @@ public class SccDAOHibernate implements SccDAO {
 
 			obj.setModifiedDate(getCurrentDate());
 
-			if (obj.getCreatedBy() == null && loginState != null && loginState.getUser() != null) {
+			if (obj.getCreatedBy() == null && loginState != null
+					&& loginState.getUser() != null) {
 				obj.setCreatedBy(loginState.getUser());
 			}
 
@@ -117,14 +118,16 @@ public class SccDAOHibernate implements SccDAO {
 	public void saveObject(Object obj) {
 
 		session.save(obj);
-		alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS, messages.get("success"));
+		alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+				messages.get("success"));
 	}
 
 	@CommitAfter
 	public void updateObject(Object obj) {
 		if (obj != null) {
 			session.saveOrUpdate(obj);
-			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS, messages.get("success"));
+			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+					messages.get("success"));
 		}
 	}
 
@@ -132,7 +135,8 @@ public class SccDAOHibernate implements SccDAO {
 	public void saveOrUpdateObject(Object obj) {
 		try {
 			session.saveOrUpdate(obj);
-			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS, messages.get("success"));
+			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+					messages.get("success"));
 		} catch (Exception e) {
 			session.merge(obj);
 		}
@@ -215,8 +219,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Systemiin hereglegchiin jagsaalt
+	 * @param - Systemiin hereglegchiin jagsaalt
 	 * @return List<User>
 	 */
 	public List<User> getUserList() {
@@ -235,8 +238,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Ajliin bairnii jagsaalt
+	 * @param - Ajliin bairnii jagsaalt
 	 * @return List<Job>
 	 */
 	public List<Job> getJobList() {
@@ -254,8 +256,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            General type jagsaalt
+	 * @param - General type jagsaalt
 	 * @return List<GeneralType>
 	 */
 	public List<GeneralType> getGeneralTypeList() {
@@ -274,8 +275,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Property type jagsaalt
+	 * @param - Property type jagsaalt
 	 * @return List<GeneralType>
 	 */
 	public List<PropertyType> getPropertyTypeList() {
@@ -294,8 +294,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            EconomicCategory jagsaalt
+	 * @param - EconomicCategory jagsaalt
 	 * @return List<GeneralType>
 	 */
 	public List<EconomicCategory> getEconomicCategoryList() {
@@ -389,8 +388,7 @@ public class SccDAOHibernate implements SccDAO {
 	}
 
 	/**
-	 * @param -
-	 *            Ajiltnii jagsaalt
+	 * @param - Ajiltnii jagsaalt
 	 * @return List<Employee>
 	 */
 	public List<Employee> getEmpList() {
@@ -448,7 +446,8 @@ public class SccDAOHibernate implements SccDAO {
 				}
 
 				if (emp.getCreatedDate() != null) {
-					sql += " AND employee.created_date = " + emp.getCreatedDate();
+					sql += " AND employee.created_date = "
+							+ emp.getCreatedDate();
 				}
 
 				if (emp.getPhone() != null) {
@@ -490,7 +489,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public ReportStatus getReportStatusList(Report report, Integer year, Integer month, Organization orgId) {
+	public ReportStatus getReportStatusList(Report report, Integer year,
+			Integer month, Organization orgId) {
 		try {
 			Criteria crit = session.createCriteria(ReportStatus.class);
 
@@ -527,7 +527,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public ReportDetail getReportDetailListWithParameter(GeneralType generalType, ReportDetailType detailType,
+	public ReportDetail getReportDetailListWithParameter(
+			GeneralType generalType, ReportDetailType detailType,
 			JobTypeEnum jobType, Integer year, Integer month) {
 		try {
 			Criteria crit = session.createCriteria(ReportDetail.class);
@@ -558,8 +559,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
-			Integer month) {
+	public Long getReportDetailAddRemove(GeneralType generalType,
+			ReportDetailType detailType, Integer year, Integer month) {
 		try {
 			Criteria crit = session.createCriteria(ReportDetail.class);
 			crit.createAlias("reportStatusId", "reportStatusId");
@@ -592,7 +593,8 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countJob FROM job";
 
-		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countJob",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -601,7 +603,8 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countJob FROM job where isnew=1";
 
-		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countJob",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -610,7 +613,8 @@ public class SccDAOHibernate implements SccDAO {
 
 		String sql = "SELECT COUNT(id) countEmp FROM employee";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -627,7 +631,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 
 		if (crit.list() != null && crit.list().size() > 0) {
-			alertManager.alert(Duration.SINGLE, Severity.WARN, messages.get("jobExist"));
+			alertManager.alert(Duration.SINGLE, Severity.WARN,
+					messages.get("jobExist"));
 			return true;
 		}
 
@@ -651,7 +656,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<User> getUserListSearch(String ln, String fn, String mail, Date d1, Date d2, Boolean b) {
+	public List<User> getUserListSearch(String ln, String fn, String mail,
+			Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(User.class);
 
@@ -682,7 +688,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<Employee> getEmpListSearch(Organization org, Job job, String emp, String sur, String phone) {
+	public List<Employee> getEmpListSearch(Organization org, Job job,
+			String emp, String sur, String phone) {
 		try {
 			Criteria crit = session.createCriteria(Employee.class);
 			crit.addOrder(Order.desc("empName"));
@@ -712,7 +719,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1,
+			Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(GeneralType.class);
 
@@ -737,7 +745,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<PropertyType> getPropertyTypeListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<PropertyType> getPropertyTypeListSearch(String name, Date d1,
+			Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(PropertyType.class);
 
@@ -762,7 +771,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<EconomicCategory> getEconomicCategoryListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<EconomicCategory> getEconomicCategoryListSearch(String name,
+			Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(EconomicCategory.class);
 
@@ -787,7 +797,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1,
+			Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(CompanyTrend.class);
 
@@ -813,7 +824,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name,
+			Date d1, Date d2, Boolean b) {
 		try {
 
 			Criteria crit = session.createCriteria(AjiliinBairHurungu.class);
@@ -841,7 +853,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<AccessLog> getAccessLogsSearch(String lname, String fname, Date d1, Date d2) {
+	public List<AccessLog> getAccessLogsSearch(String lname, String fname,
+			Date d1, Date d2) {
 		try {
 			Criteria crit = session.createCriteria(AccessLog.class);
 
@@ -921,7 +934,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1,
+			Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(CompanyHelber.class);
 
@@ -948,7 +962,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1,
+			Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(CompanyStatus.class);
 			if (name != null)
@@ -974,7 +989,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name,
+			Date d1, Date d2, Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(LavlahGarsan.class);
 
@@ -1001,7 +1017,8 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<Organization> getOrgListSearch(String name, Date d1, Date d2, Boolean b) {
+	public List<Organization> getOrgListSearch(String name, Date d1, Date d2,
+			Boolean b) {
 		try {
 			Criteria crit = session.createCriteria(Organization.class);
 
@@ -1185,10 +1202,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-FEB-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1201,10 +1219,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-FEB-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '" + date1
-				+ "' and '" + date2 + "'";
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1248,10 +1267,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-MAR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1264,10 +1284,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-MAR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '" + date1
-				+ "' and '" + date2 + "'";
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1280,10 +1301,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-APR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1296,10 +1318,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-APR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '" + date1
-				+ "' and '" + date2 + "'";
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1312,10 +1335,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-MAY-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1328,10 +1352,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-MAY-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '" + date1
-				+ "' and '" + date2 + "'";
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1344,10 +1369,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-JUN-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1360,10 +1386,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-JUN-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '" + date1
-				+ "' and '" + date2 + "'";
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1376,10 +1403,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-JUL-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1392,10 +1420,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-JUL-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '" + date1
-				+ "' and '" + date2 + "'";
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1408,10 +1437,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-AUG-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1424,10 +1454,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-AUG-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '" + date1
-				+ "' and '" + date2 + "'";
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1440,10 +1471,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-SEP-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1456,10 +1488,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-SEP-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '" + date1
-				+ "' and '" + date2 + "'";
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1472,10 +1505,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-OCT-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1488,10 +1522,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-OCT-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '" + date1
-				+ "' and '" + date2 + "'";
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1504,10 +1539,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-NOV-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1520,10 +1556,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-NOV-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '" + date1
-				+ "' and '" + date2 + "'";
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1536,10 +1573,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1552,10 +1590,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '" + date1
-				+ "' and '" + date2 + "'";
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1568,10 +1607,11 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "31-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
@@ -1584,15 +1624,17 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "31-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '" + date1
-				+ "' and '" + date2 + "'";
+		String sql = "select count(id) countEmp from employee where gender='1' and created_date BETWEEN '"
+				+ date1 + "' and '" + date2 + "'";
 
-		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		Query query = session.createSQLQuery(sql).addScalar("countEmp",
+				IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
 
-	public List<SumDuureg> getSumDuuregSearch(String name, AimagNiislelEnum aimagId) {
+	public List<SumDuureg> getSumDuuregSearch(String name,
+			AimagNiislelEnum aimagId) {
 		try {
 			Criteria crit = session.createCriteria(SumDuureg.class);
 
@@ -1635,9 +1677,11 @@ public class SccDAOHibernate implements SccDAO {
 	public List<Organization> getOrgListByAssoc() {
 		try {
 			String sql = "select org.id , org.name from organization org left join job_org_assoc ass on ass.org_id=org.id";
-			SQLQuery query = session.createSQLQuery(sql).addScalar("id", LongType.INSTANCE).addScalar("name",
-					StringType.INSTANCE);
-			query.setResultTransformer(Transformers.aliasToBean(Organization.class));
+			SQLQuery query = session.createSQLQuery(sql)
+					.addScalar("id", LongType.INSTANCE)
+					.addScalar("name", StringType.INSTANCE);
+			query.setResultTransformer(Transformers
+					.aliasToBean(Organization.class));
 			List<Organization> list = query.list();
 			return list;
 		} catch (HibernateException e) {
@@ -1645,7 +1689,7 @@ public class SccDAOHibernate implements SccDAO {
 			return (new ArrayList<Organization>());
 		}
 	}
-	
+
 	public List<Job> getJobListByOrg(Organization org) {
 		try {
 			Criteria crit = session.createCriteria(Job.class);
@@ -1663,5 +1707,50 @@ public class SccDAOHibernate implements SccDAO {
 	public void saveOrUpdate(BaseObject object, boolean hasMessage) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public List<Job> getJobSearch(GeneralType generalType, String name,
+			boolean check, Date d1, Date d2, AjiliinBairHurungu fundSource,
+			JobTypeEnum type, Organization org) {
+		try {
+
+			Criteria crit = session.createCriteria(Job.class);
+
+			crit.addOrder(Order.desc("createdDate"));
+
+			if (generalType != null) {
+				crit.add(Restrictions.eq("generalType", generalType));
+			}
+
+			if (name != null) {
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+			}
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (fundSource != null) {
+				crit.add(Restrictions.eq("fundingSource", fundSource));
+			}
+
+			if (type != null) {
+				crit.add(Restrictions.eq("jobType", type));
+			}
+
+			if (org != null) {
+				crit.add(Restrictions.eq("org", org));
+			}
+
+			crit.add(Restrictions.eq("isNew", check));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
 	}
 }
