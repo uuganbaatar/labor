@@ -73,9 +73,9 @@
 									${message:cancel}
 								</t:actionlink> 
 								<button type="submit"
-										class="btn btn-padding btn-success waves-effect waves-light">${message:search}</button>
-						<t:Submit class="btn btn-padding btn-success"
-							value="${message:save}" />
+										class="btn btn-padding btn-success waves-effect waves-light">${message:save}</button>
+						<!-- <t:Submit class="btn btn-padding btn-success"
+							value="${message:save}" /> -->
 					</div>
 				</form>
 			
