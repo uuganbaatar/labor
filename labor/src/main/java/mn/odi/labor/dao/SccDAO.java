@@ -253,4 +253,6 @@ public interface SccDAO {
 	public List<Job> getJobSearch(GeneralType generalType, String name,
 			boolean check, Date d1, Date d2, AjiliinBairHurungu fundSource,
 			JobTypeEnum type, Organization org);
+	
+	public Integer getHasagdsanJobs();
 }

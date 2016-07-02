@@ -192,8 +192,12 @@ public class Index {
 	}
 
 	public Integer getHasagdsanJobs() {
-		Integer i = 0;
-		return i;
+		Integer l = dao.getHasagdsanJobs();
+		if (l != null && l > 0) {
+			return l;
+		} else {
+			return 0;
+		}
 	}
 
 	public Integer getAllEmployees() {

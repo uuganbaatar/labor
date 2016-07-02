@@ -591,7 +591,7 @@ public class SccDAOHibernate implements SccDAO {
 
 	public Integer getAllJobs() {
 
-		String sql = "SELECT COUNT(id) countJob FROM job";
+		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL AND organization.DELETED_BY_ID IS NULL";
 
 		Query query = session.createSQLQuery(sql).addScalar("countJob",
 				IntegerType.INSTANCE);
@@ -601,7 +601,7 @@ public class SccDAOHibernate implements SccDAO {
 
 	public Integer getNewJobs() {
 
-		String sql = "SELECT COUNT(id) countJob FROM job where isnew=1";
+		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL AND organization.DELETED_BY_ID IS NULL AND job.ISNEW = 1";
 
 		Query query = session.createSQLQuery(sql).addScalar("countJob",
 				IntegerType.INSTANCE);
@@ -611,7 +611,7 @@ public class SccDAOHibernate implements SccDAO {
 
 	public Integer getAllEmployees() {
 
-		String sql = "SELECT COUNT(id) countEmp FROM employee";
+		String sql = "SELECT COUNT(DISTINCT employee.ID) AS countEmp FROM employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND employee.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL AND organization.DELETED_BY_ID IS NULL AND employee.DELETED_BY_ID IS NULL";
 
 		Query query = session.createSQLQuery(sql).addScalar("countEmp",
 				IntegerType.INSTANCE);
@@ -1753,5 +1753,15 @@ public class SccDAOHibernate implements SccDAO {
 		} catch (HibernateException e) {
 			return null;
 		}
+	}
+	
+	public Integer getHasagdsanJobs() {
+
+		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID WHERE job.IS_ACTIVE = 0 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL AND organization.DELETED_BY_ID IS NULL";
+
+		Query query = session.createSQLQuery(sql).addScalar("countJob",
+				IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
 	}
 }
