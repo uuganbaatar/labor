@@ -9,6 +9,10 @@
 	<t:if test="bar">
 		 <div id="bar" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 	</t:if>
+	
+	<t:if test="area">
+		 <div id="area" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	</t:if>
 
 	
 </t:container>
