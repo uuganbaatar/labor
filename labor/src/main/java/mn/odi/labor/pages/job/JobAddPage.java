@@ -49,20 +49,24 @@ public class JobAddPage {
 	@Property
 	private Job jobs;
 
+	@Persist
+	@Property
+	private boolean isActive;
+
 	void onActivate(Job job) {
 		if (job != null) {
 			jobs = job;
-		} 
+		}
 
 	}
-	
+
 	@CommitAfter
 	void beginRender() {
 		System.out.println("onBeginRender Success");
-		
+
 		loginState.setActiveMenu("job");
 		loginState.setPageTitle(message.get("job"));
-		
+
 		loginState.setActiveMenu("news");
 
 		if (jobs == null)
@@ -89,8 +93,6 @@ public class JobAddPage {
 		return new EnumSelectModel(JobTypeEnum.class, resources.getMessages());
 	}
 
-	
-
 	public Object onActionFromJobCancel() {
 		return JobPage.class;
 	}
@@ -102,6 +104,12 @@ public class JobAddPage {
 			jobs.setIsNew(true);
 		} else {
 			jobs.setIsNew(false);
+		}
+
+		if (isActive == true) {
+			jobs.setIsActive(false);
+		} else {
+			jobs.setIsActive(true);
 		}
 
 		if (dao.isJobExists(jobs)) {

@@ -1,9 +1,6 @@
 
 package mn.odi.labor.pages;
 
-import javax.naming.AuthenticationException;
-import javax.security.auth.Subject;
-
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.dao.hibernate.SecurityDAOHibernate;
@@ -18,6 +15,7 @@ import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Value;
@@ -66,7 +64,7 @@ public class Login {
 	@Inject
 	private SecurityDAOHibernate secDao;
 	
-	private static final Logger LOGGER = Logger.getLogger("shilendans");
+	private static final Logger LOGGER = Logger.getLogger("labor");
 	
 	@Inject
 	private AlertManager alertManager;
@@ -97,11 +95,8 @@ public class Login {
 	public void setLoginMessage(String loginMessage) {
 		this.loginMessage = loginMessage;
 	}
-	
-	/*Object onSubmitFromLoginForm() {
-		
-		//UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-	
+	@CommitAfter
+	Object onSuccess() {
 		try {
 			//loginState.setUser(SccDAO.getUserByUsername());
 			AccessLog accessLog = new AccessLog();
@@ -114,6 +109,6 @@ public class Login {
 			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, messages.get("invalidUser"));
 		}
 		return Index.class;
-	}*/
+	}
 
 }
