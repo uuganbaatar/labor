@@ -385,6 +385,7 @@ function getElementsStartsWithId(id) {
 	return element;
 }
 //
+
 var sorter = new TINY.table.sorter("sorter");
 sorter.head = "head";
 sorter.asc = "asc";

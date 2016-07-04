@@ -1,31 +1,11 @@
 package mn.odi.labor.dao.hibernate;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import org.apache.tapestry5.alerts.AlertManager;
-import org.apache.tapestry5.alerts.Duration;
-import org.apache.tapestry5.alerts.Severity;
-import org.apache.tapestry5.annotations.SessionState;
-import org.apache.tapestry5.hibernate.annotations.CommitAfter;
-import org.apache.tapestry5.ioc.Messages;
-import org.apache.tapestry5.ioc.internal.OperationException;
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.transform.Transformers;
-import org.hibernate.type.IntegerType;
-import org.hibernate.type.LongType;
-import org.hibernate.type.StringType;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
@@ -51,6 +31,27 @@ import mn.odi.labor.enums.AimagNiislelEnum;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.enums.OrgTypeEnum;
 import mn.odi.labor.enums.ReportDetailType;
+
+import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.alerts.Duration;
+import org.apache.tapestry5.alerts.Severity;
+import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
+import org.apache.tapestry5.ioc.Messages;
+import org.apache.tapestry5.ioc.internal.OperationException;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
+import org.hibernate.type.IntegerType;
+import org.hibernate.type.LongType;
+import org.hibernate.type.StringType;
 
 public class SccDAOHibernate implements SccDAO {
 
@@ -1742,5 +1743,59 @@ public class SccDAOHibernate implements SccDAO {
 			return list.get(0);
 		else
 			return 0;
+	}
+
+	public Integer getEZJobsSum(AimagNiislelEnum aimag_id, CompanyTrend companyTrendId) {
+
+		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID "
+				+ "WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL "
+				+ "AND organization.DELETED_BY_ID IS NULL";
+
+		if (aimag_id != null) {
+			sql = sql + " AND organization.SUM_ID in (select id from sum_duureg where aimag_id=:aimag_id)";
+		}
+
+		if (companyTrendId != null) {
+			sql = sql + " AND job.COMPANY_TREND_ID = :companyTrendId";
+		}
+
+		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
+
+		if (aimag_id != null)
+			query.setParameter("aimag_id", aimag_id.getVal());
+
+		if (companyTrendId != null)
+			query.setParameter("companyTrendId", companyTrendId.getId());
+
+		List<Integer> list = query.list();
+
+		if (list != null && !list.isEmpty())
+			return list.get(0);
+		else
+			return 0;
+	}
+
+	public boolean checkEmpReg(String regNum) {
+		String sql = "select count(id) from employee " + " where UPPER(regNumber) = :regNum";
+
+		Query query = session.createSQLQuery(sql);
+
+		query.setParameter("regNum", regNum.toUpperCase());
+
+		BigDecimal jsCount = (BigDecimal) session.createSQLQuery(sql).setParameter("regNum", regNum.toUpperCase())
+				.list().get(0);
+		if (jsCount.intValue() > 0)
+			return true;
+
+		return false;
+	}
+
+	public Employee getEmpByReg(String regNum) {
+		Criteria crit = session.createCriteria(Employee.class);
+		crit.add(Restrictions.eq("regNumber", regNum).ignoreCase());
+		List<Employee> list = crit.list();
+		if (list.size() > 0)
+			return list.get(0);
+		return null;
 	}
 }

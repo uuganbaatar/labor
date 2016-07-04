@@ -5,25 +5,31 @@
 			<div class="card-box">
 				<h4 class="text-dark header-title m-t-0">${message:empDetail}</h4>
 				<div class="title-1">${message:personalInfo}</div>
-				<form t:type="form" t:id="empForm">
+				<form t:type="form" t:id="regForm">
 					<div class="col-md-4">
 						<div class="form-group">
 							<label>
 								${message:RegNumber-label}
 								<span class="req">*</span>
 							</label>
-							<input t:type="textfield" class="form-control" t:id="regNumber"
-								t:validate="required" t:value="emp.regNumber" />
+							<t:zone t:id="regZone" id="regzone">
+							    <input t:type="textfield" class="form-control" t:id="regNum"
+								t:validate="required,regexp" t:value="regNum" />
+							</t:zone>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group check-register-number">
-							<t:actionlink t:id="checkReg"
-								class="btn btn-padding btn-primary waves-effect waves-light">
-								${message:check}
-							</t:actionlink>
+							<t:if test="newEmp">
+								<t:Submit class="btn btn-padding btn-primary" id="checkRegister"
+										t:value="${message:check}" />		
+										<p:else>
+										</p:else>
+							</t:if>			
 						</div>
 					</div>
+				</form>
+				<form t:type="form" t:id="empForm">
 					<div class="clearfix"></div>
 					<div class="col-md-4">
 						<div class="form-group">

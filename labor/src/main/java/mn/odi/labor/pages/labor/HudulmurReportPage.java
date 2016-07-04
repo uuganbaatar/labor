@@ -14,6 +14,7 @@ import org.apache.tapestry5.services.Request;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.admin.CompanyTrend;
 import mn.odi.labor.enums.AimagNiislelEnum;
 
 public class HudulmurReportPage {
@@ -37,7 +38,14 @@ public class HudulmurReportPage {
 	@Property
 	private AimagNiislelEnum row;
 
-	private int number;
+	@Property
+	@Persist
+	private List<CompanyTrend> headerEz;
+
+	@Property
+	private CompanyTrend valueEZ;
+
+	private int number = 0;
 
 	@CommitAfter
 	void beginRender() {
@@ -46,12 +54,33 @@ public class HudulmurReportPage {
 		if (list == null) {
 			list = new ArrayList<AimagNiislelEnum>(Arrays.asList(AimagNiislelEnum.values()));
 		}
+
+		if (headerEz == null)
+			headerEz = dao.getCompanyTrendList();
 	}
 
 	public int getAllJobs() {
 		int i = 0;
 		i = dao.getAllJobsSum(row);
 		return i;
+	}
+
+	public Integer getEzval() {
+		int i = 0;
+		i = dao.getEZJobsSum(row, valueEZ);
+		return i;
+	}
+
+	public Integer getHeadersize() {
+		int i = 1;
+		if (headerEz != null && !headerEz.isEmpty())
+			i = headerEz.size();
+		return i;
+	}
+
+	public int getNumber() {
+		number = number + 1;
+		return number;
 	}
 
 }
