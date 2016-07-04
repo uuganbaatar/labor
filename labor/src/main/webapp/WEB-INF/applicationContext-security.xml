@@ -11,7 +11,7 @@
 		<intercept-url pattern="/images/**" filters="none" />
 		<intercept-url pattern="/css/**" filters="none" />
 
-		<intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN" />
+		<intercept-url pattern="/**" access="ROLE_USER, ROLE_ADMIN,ROLE_LABORUSER" />
 
 		<form-login login-page="/login" default-target-url='/index'
 			always-use-default-target='true' authentication-failure-url="/login:seterror" />

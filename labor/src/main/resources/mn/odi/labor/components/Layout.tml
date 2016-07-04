@@ -57,6 +57,7 @@
 									<span>${message:dashboard}</span>
 								</t:actionlink>
 							</li>
+							
 							<li>
 								<t:actionlink t:id="jobTab" class="${selectedTabJob}">
 									<i class="fa fa-building-o"></i>
@@ -69,12 +70,15 @@
 									<span>${message:employer}</span>
 								</t:actionlink>
 							</li>
+							<t:if test="${!isLabUser}">
 							<li>
 								<t:actionlink t:id="reportTab" class="${selectedTabreport}">
 									<i class="ti-file"></i>
 									<span>${message:report}</span>
 								</t:actionlink>
 							</li>
+							</t:if>
+							<t:if test="${isAdmin}">
 							<li>
 								<t:actionlink t:id="userTab" class="${selectedTabUser}">
 									<i class="ti-file"></i>
@@ -87,6 +91,8 @@
 									<span>${message:lavlah}</span>
 								</t:actionlink>
 							</li>
+							</t:if>
+							<t:if test="${!isUser}">
 							<li>
 								<t:actionlink t:id="orgTab" class="${selectedorgLavlah}">
 									<i class="ti-file"></i>
@@ -99,6 +105,7 @@
 									<span>${message:helReport-label}</span>
 								</t:actionlink>
 							</li>
+							</t:if>
 						</ul>
 						<div class="clearfix"></div>
 					</div>
