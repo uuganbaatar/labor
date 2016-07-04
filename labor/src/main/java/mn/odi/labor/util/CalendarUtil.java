@@ -23,7 +23,7 @@ public class CalendarUtil {
 	// ~ Static fields/initializers
 	// =============================================
 
-	//private final static Log log = LogFactory.getLog(CalendarUtil.class);
+	// private final static Log log = LogFactory.getLog(CalendarUtil.class);
 
 	// ~ Methods
 	// ================================================================
@@ -99,8 +99,7 @@ public class CalendarUtil {
 		} else if (cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH)) {
 			yearMonth[1] = 0;
 		} else {
-			yearMonth[1] = (12 - cal1.get(Calendar.MONTH) + cal2
-					.get(Calendar.MONTH));
+			yearMonth[1] = (12 - cal1.get(Calendar.MONTH) + cal2.get(Calendar.MONTH));
 		}
 
 		cal1.add(Calendar.MONTH, yearMonth[1]);
@@ -180,6 +179,21 @@ public class CalendarUtil {
 
 		cal.setTimeInMillis(0l);
 
+		return cal.getTime();
+	}
+
+	public static Date getFirstDate(int year, int month) {
+		Calendar cal = Calendar.getInstance();
+		month = month - 1;
+		cal.set(year, month, 1);
+		return cal.getTime();
+	}
+
+	public static Date getLastDate(int year, int month) {
+		Calendar cal = Calendar.getInstance();
+		Calendar cal1 = Calendar.getInstance();
+		cal1.set(year, month - 1, 1);
+		cal.set(year, month - 1, cal1.getActualMaximum(cal1.DAY_OF_MONTH));
 		return cal.getTime();
 	}
 

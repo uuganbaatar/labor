@@ -240,9 +240,9 @@ public interface SccDAO {
 
 	public Integer getHasagdsanJobs();
 
-	public Integer getAllJobsSum(AimagNiislelEnum aimag_id);
+	public Integer getAllJobsSum(AimagNiislelEnum aimag_id, Date firstdate, Date lastdate);
 
-	public Integer getEZJobsSum(AimagNiislelEnum aimag_id, CompanyTrend companyTrendId);
+	public Integer getEZJobsSum(AimagNiislelEnum aimag_id, CompanyTrend companyTrendId, Date firstdate, Date lastdate);
 
 	public boolean checkEmpReg(String regNum);
 

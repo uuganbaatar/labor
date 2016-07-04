@@ -1,6 +1,7 @@
 package mn.odi.labor.dao.hibernate;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -1722,7 +1723,7 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getAllJobsSum(AimagNiislelEnum aimag_id) {
+	public Integer getAllJobsSum(AimagNiislelEnum aimag_id, Date firstdate, Date lastdate) {
 
 		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID "
 				+ "WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL "
@@ -1732,10 +1733,21 @@ public class SccDAOHibernate implements SccDAO {
 			sql = sql + " AND organization.SUM_ID in (select id from sum_duureg where aimag_id=:aimag_id)";
 		}
 
+		if (firstdate != null && lastdate != null) {
+			sql = sql
+					+ " AND job.JOBDATE BETWEEN to_date(:firstdate, 'yyyy-MM-dd') AND to_date(:lastdate, 'yyyy-MM-dd')";
+		}
+
 		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
 
 		if (aimag_id != null)
 			query.setParameter("aimag_id", aimag_id.getVal());
+
+		if (firstdate != null && lastdate != null) {
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			query.setParameter("firstdate", df.format(firstdate));
+			query.setParameter("lastdate", df.format(lastdate));
+		}
 
 		List<Integer> list = query.list();
 
@@ -1745,7 +1757,7 @@ public class SccDAOHibernate implements SccDAO {
 			return 0;
 	}
 
-	public Integer getEZJobsSum(AimagNiislelEnum aimag_id, CompanyTrend companyTrendId) {
+	public Integer getEZJobsSum(AimagNiislelEnum aimag_id, CompanyTrend companyTrendId, Date firstdate, Date lastdate) {
 
 		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID "
 				+ "WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL "
@@ -1759,6 +1771,11 @@ public class SccDAOHibernate implements SccDAO {
 			sql = sql + " AND job.COMPANY_TREND_ID = :companyTrendId";
 		}
 
+		if (firstdate != null && lastdate != null) {
+			sql = sql
+					+ " AND job.JOBDATE BETWEEN to_date(:firstdate, 'yyyy-MM-dd') AND to_date(:lastdate, 'yyyy-MM-dd')";
+		}
+
 		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
 
 		if (aimag_id != null)
@@ -1766,6 +1783,12 @@ public class SccDAOHibernate implements SccDAO {
 
 		if (companyTrendId != null)
 			query.setParameter("companyTrendId", companyTrendId.getId());
+
+		if (firstdate != null && lastdate != null) {
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			query.setParameter("firstdate", df.format(firstdate));
+			query.setParameter("lastdate", df.format(lastdate));
+		}
 
 		List<Integer> list = query.list();
 

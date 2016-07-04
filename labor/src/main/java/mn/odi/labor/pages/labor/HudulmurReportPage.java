@@ -2,6 +2,8 @@ package mn.odi.labor.pages.labor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.tapestry5.annotations.Persist;
@@ -16,6 +18,8 @@ import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.admin.CompanyTrend;
 import mn.odi.labor.enums.AimagNiislelEnum;
+import mn.odi.labor.models.FormYearSM;
+import mn.odi.labor.util.CalendarUtil;
 
 public class HudulmurReportPage {
 
@@ -47,6 +51,14 @@ public class HudulmurReportPage {
 
 	private int number = 0;
 
+	@Property
+	@Persist
+	private Integer year;
+
+	@Property
+	@Persist
+	private Integer month;
+
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("heltes");
@@ -57,17 +69,29 @@ public class HudulmurReportPage {
 
 		if (headerEz == null)
 			headerEz = dao.getCompanyTrendList();
+
+		if (year == null) {
+			year = Calendar.getInstance().get(Calendar.YEAR);
+		}
+
+		if (month == null) {
+			month = Calendar.getInstance().get(Calendar.MONTH) + 1;
+		}
+
+		System.out.println("FIRST DAY:" + CalendarUtil.getFirstDate(year, month));
+		System.out.println("LAST DAY:" + CalendarUtil.getLastDate(year, month));
 	}
 
 	public int getAllJobs() {
 		int i = 0;
-		i = dao.getAllJobsSum(row);
+		i = dao.getAllJobsSum(row, CalendarUtil.getFirstDate(year, month), CalendarUtil.getLastDate(year, month));
 		return i;
 	}
 
 	public Integer getEzval() {
 		int i = 0;
-		i = dao.getEZJobsSum(row, valueEZ);
+		i = dao.getEZJobsSum(row, valueEZ, CalendarUtil.getFirstDate(year, month),
+				CalendarUtil.getLastDate(year, month));
 		return i;
 	}
 
@@ -81,6 +105,20 @@ public class HudulmurReportPage {
 	public int getNumber() {
 		number = number + 1;
 		return number;
+	}
+
+	public FormYearSM getFormDateModel() {
+		Date d = dao.getCurrentDate();
+		List<Integer> formYears = new ArrayList<Integer>();
+		for (int i = d.getYear() + 1900; i >= 2015; i--) {
+			formYears.add(i);
+
+		}
+		if (year == null) {
+			year = formYears.get(0);
+		}
+
+		return new FormYearSM(formYears);
 	}
 
 }
