@@ -106,12 +106,12 @@
 							t:exclude="uuid, createddate, regNumber, familyName,isImpairment, surName, empName, gender, eduLevel, profession, employment, uamatCode, movement, firedReason"
 							t:reorder="number, fullName, job, org, phone">
 							<p:numberCell>${number}</p:numberCell>
-							<!-- <p:JobCell>
-									${empRow?.job?.jobName}
+							<p:JobCell>
+								${empRow?.job?.jobName}
 							</p:JobCell>
 							<p:OrgCell>
-									${empRow?.org?.name}
-							</p:OrgCell> -->
+								${empRow?.job?.org?.name}
+							</p:OrgCell>
 							<p:EditCell>
 								<t:pagelink t:page="emp/EmpAddPage" t:id="empEdit"
 									t:context="empRow" class="table-action-btn">

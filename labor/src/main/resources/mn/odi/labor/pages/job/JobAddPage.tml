@@ -20,40 +20,6 @@
 					<div class="col-md-4 padding_only_top">
 						<div class="form-group">
 							<label>
-								${message:jobName-label}
-								<span class="req">*</span>
-							</label>
-							<input t:type="textfield" class="form-control" t:id="name"
-								t:value="jobs.jobName" t:validate="required" />
-						</div>
-					</div>
-					<div class="col-md-4 padding_only_top">
-						<div class="form-group">
-							<div class="">
-								<input t:id="checkbox1" t:type="checkbox" t:value="newCheck" />
-								<label for="checkbox1">
-									${message:isJobNew-label}
-									<span class="req">*</span>
-								</label>
-							</div>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label>
-								${message:date}
-								<span class="req">*</span>
-							</label>
-							<div class="input-group">
-								<input t:type="datefield" t:id="jobDate" t:value="jobs.jobDate"
-									t:class="form-control" id="datepicker" t:validate="required" />
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label>
 								${message:fundingSource-label}
 								<span class="req">*</span>
 							</label>
@@ -62,7 +28,7 @@
 								t:validate="required" t:blankOption="always" />
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-4 padding_only_top">
 						<div class="form-group">
 							<label>
 								${message:jobType-label}
@@ -87,9 +53,56 @@
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
-							<label>${message:hasagdsan}</label>
-							<span class="val">*</span>
-							<input t:id="isActive" t:type="checkbox" t:value="isActive" />
+							<label>
+								${message:jobName-label}
+								<span class="req">*</span>
+							</label>
+							<input t:type="textfield" class="form-control" t:id="name"
+								t:value="jobs.jobName" t:validate="required" />
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>
+								${message:lavlahtrend}
+								<span class="req">*</span>
+							</label>
+							<input t:type="select" class="form-control" t:id="companyTrend"
+								t:model="companyTrendModel" t:value="jobs.companyTrendId"
+								t:validate="required" t:blankOption="always" />
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>
+								${message:date}
+								<span class="req">*</span>
+							</label>
+							<div class="input-group">
+								<input t:type="datefield" t:id="jobDate" t:value="jobs.jobDate"
+									t:class="form-control" id="datepicker" t:validate="required" />
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="checkbox1">
+								${message:isJobNew-label}
+							</label>
+							<div class="form-group">
+								<input t:id="checkbox1" t:type="checkbox" t:value="newCheck" />
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>
+								${message:hasagdsan}
+							</label>
+							<div class="form-group">
+								<input t:id="isActive" t:type="checkbox" t:value="isActive" />
+							</div>
 						</div>
 					</div>
 					<div class="col-md-12 text-center">
