@@ -151,12 +151,15 @@
 							<table t:type="grid" t:id="grid"
 								class="table table-striped table-bordered dataTable no-footer table-actions-bar"
 								t:source="jobList" t:row="jobRow"
-								t:add="number, generalType, fundingSource, edit" t:exclude="uuid, jobDate, isNew, createddate"
-								t:reorder="number, generalType, jobName, jobDateFormated, fundingSource, jobType">
+								t:add="number, generalType, fundingSource, companyTrend, edit" t:exclude="uuid, jobDate, isNew, createddate"
+								t:reorder="number, generalType, jobName, jobDateFormated, fundingSource, jobType, companyTrend">
 								<p:empty>
 									<p>${message:nodata}</p>
 								</p:empty>
 								<p:numberCell>${number}</p:numberCell>
+								<p:CompanyTrendCell>
+									${jobRow?.companyTrendId?.name}
+								</p:CompanyTrendCell>
 								<p:GeneralTypeCell>
 									${jobRow?.generalType?.name}
 								</p:GeneralTypeCell>

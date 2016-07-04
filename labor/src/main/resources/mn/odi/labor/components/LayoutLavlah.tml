@@ -121,12 +121,13 @@
 										${message:lavlahpropertytype}
 									</button>
 								</t:actionlink>
-								<t:actionlink t:id="lavlahEconomicTab">
-									<button type="button" class="${SelectedTabLavlahEconomic}"
-										style="width: 100%;">
-										${message:lavlaheconomic}
-									</button>
-								</t:actionlink>
+								<!-- <t:actionlink t:id="lavlahEconomicTab">
+										<button type="button" class="${SelectedTabLavlahEconomic}"
+											style="width: 100%;">
+											${message:lavlaheconomic}
+										</button>
+									</t:actionlink>
+								-->
 								<t:actionlink t:id="lavlahTrendTab">
 									<button type="button" class="${SelectedTabLavlahTrend}"
 										style="width: 100%;">

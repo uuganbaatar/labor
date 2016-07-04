@@ -1,14 +1,5 @@
 package mn.odi.labor.pages.job;
 
-import mn.odi.labor.aso.LoginState;
-import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.entities.admin.AjiliinBairHurungu;
-import mn.odi.labor.entities.admin.GeneralType;
-import mn.odi.labor.entities.common.Organization;
-import mn.odi.labor.entities.labor.Job;
-import mn.odi.labor.enums.JobTypeEnum;
-import mn.odi.labor.models.CommonSM;
-
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.Persist;
@@ -20,6 +11,16 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
 import org.apache.tapestry5.util.EnumSelectModel;
+
+import mn.odi.labor.aso.LoginState;
+import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.admin.AjiliinBairHurungu;
+import mn.odi.labor.entities.admin.CompanyTrend;
+import mn.odi.labor.entities.admin.GeneralType;
+import mn.odi.labor.entities.common.Organization;
+import mn.odi.labor.entities.labor.Job;
+import mn.odi.labor.enums.JobTypeEnum;
+import mn.odi.labor.models.CommonSM;
 
 public class JobAddPage {
 
@@ -75,18 +76,19 @@ public class JobAddPage {
 	}
 
 	public SelectModel getGeneralTypeModel() {
-		return new CommonSM<GeneralType>(GeneralType.class,
-				dao.getGeneralTypeList(), "getName");
+		return new CommonSM<GeneralType>(GeneralType.class, dao.getGeneralTypeList(), "getName");
 	}
 
 	public SelectModel getFundingSourceModel() {
-		return new CommonSM<AjiliinBairHurungu>(AjiliinBairHurungu.class,
-				dao.getFundingSourceList(), "getName");
+		return new CommonSM<AjiliinBairHurungu>(AjiliinBairHurungu.class, dao.getFundingSourceList(), "getName");
+	}
+
+	public SelectModel getCompanyTrendModel() {
+		return new CommonSM<CompanyTrend>(CompanyTrend.class, dao.getCompanyTrendList(), "getName");
 	}
 
 	public SelectModel getOrgModel() {
-		return new CommonSM<Organization>(Organization.class, dao.getOrgList(),
-				"getName");
+		return new CommonSM<Organization>(Organization.class, dao.getOrgList(), "getName");
 	}
 
 	public SelectModel getJobTypeModel() {
