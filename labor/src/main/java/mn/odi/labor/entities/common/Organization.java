@@ -33,6 +33,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.hibernate.envers.Audited;
 
+import mn.odi.labor.entities.admin.CompanyHelber;
+import mn.odi.labor.entities.admin.PropertyType;
 import mn.odi.labor.enums.OrgTypeEnum;
 import mn.odi.labor.util.UUIDUtil;
 
@@ -82,6 +84,14 @@ public class Organization extends BaseObject {
 	@ManyToOne
 	@JoinColumn(name = "sum_id")
 	private SumDuureg sumId;
+
+	@ManyToOne
+	@JoinColumn(name = "helber_id")
+	private CompanyHelber helberId;
+
+	@ManyToOne
+	@JoinColumn(name = "property_id")
+	private PropertyType propertyId;
 
 	public Organization() {
 		this.uuid = UUIDUtil.getUUID();
@@ -175,8 +185,23 @@ public class Organization extends BaseObject {
 		this.orgType = orgType;
 	}
 
-	// ********************** Common Methods ********************** //
+	public CompanyHelber getHelberId() {
+		return helberId;
+	}
 
+	public void setHelberId(CompanyHelber helberId) {
+		this.helberId = helberId;
+	}
+
+	public PropertyType getPropertyId() {
+		return propertyId;
+	}
+
+	public void setPropertyId(PropertyType propertyId) {
+		this.propertyId = propertyId;
+	}
+
+	// ********************** Common Methods ********************** //
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

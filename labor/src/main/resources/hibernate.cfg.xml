@@ -40,6 +40,8 @@
 		<mapping class="mn.odi.labor.entities.admin.GeneralType" />
 		<mapping class="mn.odi.labor.entities.admin.AjiliinBairHurungu" />
 		<mapping class="mn.odi.labor.entities.admin.CompanyTrend" />
+		<mapping class="mn.odi.labor.entities.admin.CompanyHelber" />
+		<mapping class="mn.odi.labor.entities.admin.PropertyType" />
 		<mapping class="mn.odi.labor.entities.common.AccessLog" />
 		<mapping class="mn.odi.labor.entities.labor.Job" />
 

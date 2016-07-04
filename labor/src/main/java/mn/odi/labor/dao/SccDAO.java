@@ -273,6 +273,7 @@ public interface SccDAO {
 
 	public Integer getTotalImpDec(int year);
 
-	public Integer getRestJobsSum(AimagNiislelEnum aimag_id, GeneralType generalTypeId, Date firstdate, Date lastdate);
+	public Integer getRestJobsSum(AimagNiislelEnum aimag_id, GeneralType generalTypeId, CompanyHelber helberId,
+			PropertyType propertyId, Date firstdate, Date lastdate);
 
 }

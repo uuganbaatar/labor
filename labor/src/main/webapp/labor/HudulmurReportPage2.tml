@@ -38,10 +38,18 @@
 									<th rowspan="2" style="text-align: center;">${message:rownumber}</th>
 									<th rowspan="2" style="text-align: center;">${message:all}</th>
 									<th colspan="${headersize}" style="text-align: center;">${message:mer_angilal}</th>
+									<th colspan="${headersizeHel}" style="text-align: center;">${message:umch_helber}</th>
+									<th colspan="${headersizePro}" style="text-align: center;">${message:hariu_helber}</th>
 								</tr>
 								<tr>
 									<t:Loop t:source="headerEz" t:value="valueEZ">
 										<th style="text-align: center;">${valueEZ?.name}</th>
+									</t:Loop>
+									<t:Loop t:source="headerHel" t:value="valueHel">
+										<th style="text-align: center;">${valueHel?.name}</th>
+									</t:Loop>
+									<t:Loop t:source="headerPro" t:value="valuePro">
+										<th style="text-align: center;">${valuePro?.name}</th>
 									</t:Loop>
 								</tr>
 								<t:Loop t:source="list" t:value="row">
@@ -51,6 +59,12 @@
 										<td style="text-align: center;"> ${allJobs}</td>
 										<t:Loop t:source="headerEz" t:value="valueEZ">
 											<td style="text-align: center;">${ezval}</td>
+										</t:Loop>
+										<t:Loop t:source="headerHel" t:value="valueHel">
+											<td style="text-align: center;">${helval}</td>
+										</t:Loop>
+										<t:Loop t:source="headerPro" t:value="valuePro">
+											<td style="text-align: center;">${proval}</td>
 										</t:Loop>
 									</tr>
 								</t:Loop>

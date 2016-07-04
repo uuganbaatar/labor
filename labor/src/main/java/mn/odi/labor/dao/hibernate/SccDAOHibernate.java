@@ -2014,7 +2014,8 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getRestJobsSum(AimagNiislelEnum aimag_id, GeneralType generalTypeId, Date firstdate, Date lastdate) {
+	public Integer getRestJobsSum(AimagNiislelEnum aimag_id, GeneralType generalTypeId, CompanyHelber helberId,
+			PropertyType propertyId, Date firstdate, Date lastdate) {
 
 		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID "
 				+ "WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL "
@@ -2026,6 +2027,14 @@ public class SccDAOHibernate implements SccDAO {
 
 		if (generalTypeId != null) {
 			sql = sql + " AND job.GENERALTYPE_ID = :generalTypeId";
+		}
+
+		if (helberId != null) {
+			sql = sql + " AND organization.HELBER_ID = :helberId";
+		}
+
+		if (propertyId != null) {
+			sql = sql + " AND organization.PROPERTY_ID = :propertyId";
 		}
 
 		if (firstdate != null && lastdate != null) {
@@ -2040,6 +2049,12 @@ public class SccDAOHibernate implements SccDAO {
 
 		if (generalTypeId != null)
 			query.setParameter("generalTypeId", generalTypeId.getId());
+
+		if (helberId != null)
+			query.setParameter("helberId", helberId.getId());
+
+		if (propertyId != null)
+			query.setParameter("propertyId", propertyId.getId());
 
 		if (firstdate != null && lastdate != null) {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
