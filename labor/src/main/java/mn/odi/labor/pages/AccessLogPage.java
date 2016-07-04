@@ -1,5 +1,7 @@
 package mn.odi.labor.pages;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.common.AccessLog;
 import mn.odi.labor.entities.common.User;
+import mn.odi.labor.util.Constants;
 
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.annotations.Import;
@@ -135,6 +138,10 @@ public class AccessLogPage {
 		}
 		return name;
 
+	}
+	
+	public Format getTimeFormat() {
+		return new SimpleDateFormat(Constants.TIME_FORMAT);
 	}
 
 }

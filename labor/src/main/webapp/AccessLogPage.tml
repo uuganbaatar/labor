@@ -84,8 +84,8 @@
 					<t:Grid
 						class="table table-striped table-bordered dataTable no-footer table-actions-bar"
 						t:source="accList" t:row="accRow"
-						t:exclude="uuid,modifiedDate,createdDate,modifiedDateFormated,createdDateFormated"
-						t:add="number,fullname" t:reorder="number,accessDate,fullname,ipAddress">
+						t:exclude="uuid,modifiedDate,createdDate,modifiedDateFormated,createdDateFormated,logoutDate"
+						t:add="rowIndex,fullname" t:reorder="rowIndex,accessDate,fullname,ipAddress" t:rowsPerPage="50">
 						<p:empty>
 							<p>${message:nodata}</p>
 						</p:empty>
@@ -95,6 +95,9 @@
 						<p:fullnameCell>
 							${username}
 						</p:fullnameCell>
+						<p:accessDateCell>
+									<t:output t:value="accRow?.accessDate" t:format="timeFormat" />
+								</p:accessDateCell>
 					</t:Grid>
 				</t:zone>
 			</div>

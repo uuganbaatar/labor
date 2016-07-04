@@ -247,5 +247,29 @@ public interface SccDAO {
 	public boolean checkEmpReg(String regNum);
 
 	public Employee getEmpByReg(String regNum);
+	
+	public Integer getTotalImpJul(int year);
+	
+	public Integer getTotalImpJan(int year);
+	
+	public Integer getTotalImpFeb(int year);
+	
+	public Integer getTotalImpMar(int year);
+	
+	public Integer getTotalImpApr(int year);
+	
+	public Integer getTotalImpMay(int year);
+	
+	public Integer getTotalImpJun(int year);
+	
+	public Integer getTotalImpAug(int year);
+	
+	public Integer getTotalImpSep(int year);
+	
+	public Integer getTotalImpOct(int year);
+	
+	public Integer getTotalImpNov(int year);
+	
+	public Integer getTotalImpDec(int year);
 
 }

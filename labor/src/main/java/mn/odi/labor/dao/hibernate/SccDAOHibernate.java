@@ -8,6 +8,27 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.alerts.Duration;
+import org.apache.tapestry5.alerts.Severity;
+import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
+import org.apache.tapestry5.ioc.Messages;
+import org.apache.tapestry5.ioc.internal.OperationException;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
+import org.hibernate.type.IntegerType;
+import org.hibernate.type.LongType;
+import org.hibernate.type.StringType;
+
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.admin.AjiliinBairHurungu;
@@ -32,27 +53,6 @@ import mn.odi.labor.enums.AimagNiislelEnum;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.enums.OrgTypeEnum;
 import mn.odi.labor.enums.ReportDetailType;
-
-import org.apache.tapestry5.alerts.AlertManager;
-import org.apache.tapestry5.alerts.Duration;
-import org.apache.tapestry5.alerts.Severity;
-import org.apache.tapestry5.annotations.SessionState;
-import org.apache.tapestry5.hibernate.annotations.CommitAfter;
-import org.apache.tapestry5.ioc.Messages;
-import org.apache.tapestry5.ioc.internal.OperationException;
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.transform.Transformers;
-import org.hibernate.type.IntegerType;
-import org.hibernate.type.LongType;
-import org.hibernate.type.StringType;
 
 public class SccDAOHibernate implements SccDAO {
 
@@ -1820,5 +1820,197 @@ public class SccDAOHibernate implements SccDAO {
 		if (list.size() > 0)
 			return list.get(0);
 		return null;
+	}
+
+	public Integer getTotalImpJan(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-JAN-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-FEB-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
+				+ "' and is_impairment='1'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalImpJul(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-JUL-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-AUG-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
+				+ "' and is_impairment='1'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalImpFeb(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-FEB-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-MAR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
+				+ "' and is_impairment='1'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalImpMar(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-MAR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-APR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
+				+ "' and is_impairment='1'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalImpApr(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-APR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-MAY-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
+				+ "' and is_impairment='1'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalImpMay(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-MAY-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-JUN-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
+				+ "' and is_impairment='1'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalImpJun(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-JUN-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-JUL-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
+				+ "' and is_impairment='1'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalImpAug(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-AUG-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-SEP-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
+				+ "' and is_impairment='1'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalImpSep(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-SEP-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-OCT-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
+				+ "' and is_impairment='1'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalImpOct(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-OCT-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-NOV-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
+				+ "' and is_impairment='1'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalImpNov(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-NOV-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "01-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
+				+ "' and is_impairment='1'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
+	}
+
+	public Integer getTotalImpDec(int year) {
+
+		String s = String.valueOf(year);
+
+		String date1 = "01-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String date2 = "31-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
+
+		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
+				+ "' and is_impairment='1'";
+
+		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
+		List<Integer> list = query.list();
+		return list.get(0);
 	}
 }

@@ -229,7 +229,7 @@
             <th>Jan</th>
             <td>${totalJan}</td>
             <td>${totalFemaleJan}</td>
-            <td>1</td>
+            <td>${totalImpJan}</td>
         </tr>
         </t:if>
         <t:if test="${feb}">
@@ -237,7 +237,7 @@
             <th>Feb</th>
            <td>${totalFeb}</td>
             <td>${totalFemaleFeb}</td>
-            <td>0</td>
+            <td>${totalImpFeb}</td>
         </tr>
         </t:if>
         <t:if test="${mar}">
@@ -245,7 +245,7 @@
             <th>Mar</th>
             <td>${totalMar}</td>
             <td>${totalFemaleMar}</td>
-            <td>2</td>
+            <td>${totalImpMar}</td>
         </tr>
         </t:if>
         <t:if test="${apr}">
@@ -253,7 +253,7 @@
             <th>Apr</th>
             <td>${totalApr}</td>
             <td>${totalFemaleApr}</td>
-            <td>3</td>
+            <td>${totalImpApr}</td>
         </tr>
         </t:if>
         <t:if test="${may}">
@@ -261,7 +261,7 @@
             <th>May</th>
             <td>${totalMay}</td>
             <td>${totalFemaleMay}</td>
-            <td>1</td>
+            <td>${totalImpMay}</td>
         </tr>
         </t:if>
         <t:if test="${jun}">
@@ -269,7 +269,7 @@
             <th>Jun</th>
             <td>${totalJun}</td>
             <td>${totalFemaleJun}</td>
-            <td>0</td>
+            <td>${totalImpJun}</td>
         </tr>
         </t:if>
         <t:if test="${jul}">
@@ -277,7 +277,7 @@
             <th>Jul</th>
             <td>${totalJul}</td>
             <td>${totalFemaleJul}</td>
-            <td>2</td>
+            <td>${totalImpJul}</td>
         </tr>
         </t:if>
         <t:if test="${aug}">
@@ -285,7 +285,7 @@
             <th>Aug</th>
            <td>${totalAug}</td>
             <td>${totalFemaleAug}</td>
-            <td>1</td>
+            <td>${totalImpAug}</td>
         </tr>
         </t:if>
         <t:if test="${sep}">
@@ -293,7 +293,7 @@
             <th>Sep</th>
            <td>${totalSep}</td>
             <td>${totalFemaleSep}</td>
-            <td>3</td>
+            <td>${totalImpSep}</td>
         </tr>
         </t:if>
         <t:if test="${oct}">
@@ -301,7 +301,7 @@
             <th>Oct</th>
            <td>${totalOct}</td>
             <td>${totalFemaleOct}</td>
-            <td>0</td>
+            <td>${totalImpOct}</td>
         </tr>
         </t:if>
         <t:if test="${nov}">
@@ -309,7 +309,7 @@
             <th>Nov</th>
             <td>${totalNov}</td>
             <td>${totalFemaleNov}</td>
-            <td>2</td>
+            <td>${totalImpNov}</td>
         </tr>
         </t:if>
         <t:if test="${dec}">
@@ -317,7 +317,7 @@
             <th>Dec</th>
            <td>${totalDec}</td>
             <td>${totalFemaleDec}</td>
-            <td>4</td>
+            <td>${totalImpDec}</td>
         </tr>
         </t:if>
     </tbody>
