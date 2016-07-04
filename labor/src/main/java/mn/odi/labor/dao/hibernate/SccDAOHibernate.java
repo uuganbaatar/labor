@@ -1732,8 +1732,12 @@ public class SccDAOHibernate implements SccDAO {
 		}
 
 		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
-		query.setParameter("aimag_id", aimag_id.getVal());
+
+		if (aimag_id != null)
+			query.setParameter("aimag_id", aimag_id.getVal());
+
 		List<Integer> list = query.list();
+
 		if (list != null && !list.isEmpty())
 			return list.get(0);
 		else
