@@ -18,6 +18,7 @@ import org.apache.tapestry5.beaneditor.NonVisual;
 import org.hibernate.envers.Audited;
 
 import mn.odi.labor.entities.admin.AjiliinBairHurungu;
+import mn.odi.labor.entities.admin.CompanyTrend;
 import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.Organization;
@@ -58,9 +59,13 @@ public class Job extends BaseObject {
 	@JoinColumn(name = "generaltype_id", nullable = true)
 	public GeneralType generalType;
 
+	@ManyToOne
+	@JoinColumn(name = "company_trend_id", nullable = true)
+	public CompanyTrend companyTrendId;
+
 	@Column(name = "jobType")
 	public JobTypeEnum jobType;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "org_id", nullable = true)
 	public Organization org;
@@ -143,6 +148,22 @@ public class Job extends BaseObject {
 
 	public String getJobDateFormated() {
 		return new SimpleDateFormat("yyyy-MM-dd").format(jobDate);
+	}
+
+	public CompanyTrend getCompanyTrendId() {
+		return companyTrendId;
+	}
+
+	public void setCompanyTrendId(CompanyTrend companyTrendId) {
+		this.companyTrendId = companyTrendId;
+	}
+
+	public Organization getOrg() {
+		return org;
+	}
+
+	public void setOrg(Organization org) {
+		this.org = org;
 	}
 
 	// ********************** Common Methods ********************** //

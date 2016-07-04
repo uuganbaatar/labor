@@ -1743,4 +1743,34 @@ public class SccDAOHibernate implements SccDAO {
 		else
 			return 0;
 	}
+
+	public Integer getEZJobsSum(AimagNiislelEnum aimag_id, CompanyTrend companyTrendId) {
+
+		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID "
+				+ "WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL "
+				+ "AND organization.DELETED_BY_ID IS NULL";
+
+		if (aimag_id != null) {
+			sql = sql + " AND organization.SUM_ID in (select id from sum_duureg where aimag_id=:aimag_id)";
+		}
+
+		if (companyTrendId != null) {
+			sql = sql + " AND job.COMPANY_TREND_ID = :companyTrendId";
+		}
+
+		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
+
+		if (aimag_id != null)
+			query.setParameter("aimag_id", aimag_id.getVal());
+
+		if (companyTrendId != null)
+			query.setParameter("companyTrendId", companyTrendId.getId());
+
+		List<Integer> list = query.list();
+
+		if (list != null && !list.isEmpty())
+			return list.get(0);
+		else
+			return 0;
+	}
 }

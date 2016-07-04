@@ -242,4 +242,6 @@ public interface SccDAO {
 
 	public Integer getAllJobsSum(AimagNiislelEnum aimag_id);
 
+	public Integer getEZJobsSum(AimagNiislelEnum aimag_id, CompanyTrend companyTrendId);
+
 }
