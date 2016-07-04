@@ -71,6 +71,9 @@ public class Employee extends BaseObject {
 
 	@Column(name = "movement")
 	private EmpMovementEnum movement;
+	
+	@Column(name="is_impairment")
+	private Boolean isImpairment;
 
 	@ManyToOne
 	@JoinColumn(name = "firedreason_id", nullable = true)
@@ -86,6 +89,14 @@ public class Employee extends BaseObject {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Boolean getIsImpairment() {
+		return isImpairment;
+	}
+
+	public void setIsImpairment(Boolean isImpairment) {
+		this.isImpairment = isImpairment;
 	}
 
 	public Long getId() {
@@ -143,6 +154,7 @@ public class Employee extends BaseObject {
 	public void setGender(GenderEnum gender) {
 		this.gender = gender;
 	}
+
 
 	public String getPhone() {
 		return phone;

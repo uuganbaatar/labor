@@ -103,7 +103,7 @@
 						<table t:type="grid" t:id="grid"
 							class="table table-striped table-bordered dataTable no-footer table-actions-bar"
 							t:source="empList" t:row="empRow" t:add="number, job, org, edit"
-							t:exclude="uuid, createddate, regNumber, familyName, surName, empName, gender, eduLevel, profession, employment, uamatCode, movement, firedReason"
+							t:exclude="uuid, createddate, regNumber, familyName,isImpairment, surName, empName, gender, eduLevel, profession, employment, uamatCode, movement, firedReason"
 							t:reorder="number, fullName, job, org, phone">
 							<p:numberCell>${number}</p:numberCell>
 							<!-- <p:JobCell>

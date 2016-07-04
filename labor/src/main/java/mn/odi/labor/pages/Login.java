@@ -95,9 +95,11 @@ public class Login {
 	public void setLoginMessage(String loginMessage) {
 		this.loginMessage = loginMessage;
 	}
-	@CommitAfter
+	/*@CommitAfter
 	Object onSuccess() {
 		try {
+			
+			System.err.println("dsfghjkl");
 			//loginState.setUser(SccDAO.getUserByUsername());
 			AccessLog accessLog = new AccessLog();
 			accessLog.setAccessDate(sccDAO.getCurrentDate());
@@ -109,6 +111,6 @@ public class Login {
 			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, messages.get("invalidUser"));
 		}
 		return Index.class;
-	}
+	}*/
 
 }

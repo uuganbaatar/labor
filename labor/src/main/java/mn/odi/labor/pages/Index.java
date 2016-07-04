@@ -1,13 +1,16 @@
 package mn.odi.labor.pages;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.common.AccessLog;
+import mn.odi.labor.util.Constants;
 
-import org.apache.tapestry5.annotations.Import;
+import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
@@ -58,13 +61,29 @@ public class Index {
 
 	@Property
 	private boolean jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
+	
+	@Inject
+	private AlertManager alertManager;
+	
+	@Inject
+	private Messages messages;
 
 	@CommitAfter
 	void beginRender() {
 		loginState.setActiveMenu("hyanah");
 		loginState.setPageTitle(message.get("dashboard"));
 
-		aList = dao.getAccessLogs();
+		
+	
+			AccessLog accessLog = new AccessLog();
+			accessLog.setAccessDate(dao.getCurrentDate());
+			accessLog.setUser(loginState.getUser());
+			accessLog.setIpAddress(requestGlobals.getHTTPServletRequest()
+					.getRemoteAddr());
+			dao.saveOrUpdateObject(accessLog);
+		
+			
+			aList = dao.getAccessLogs();
 
 		rowIndex = 1;
 
@@ -474,6 +493,10 @@ public class Index {
 		} else {
 			return 0;
 		}
+	}
+	
+	public Format getTimeFormat() {
+		return new SimpleDateFormat(Constants.TIME_FORMAT);
 	}
 
 }
