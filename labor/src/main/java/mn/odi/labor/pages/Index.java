@@ -20,7 +20,7 @@ import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestGlobals;
 import org.apache.tapestry5.services.Response;
 
-@Import(library = { "context:/js/indexcharts.js" })
+/*@Import(library = { "context:/js/indexcharts.js" })*/
 public class Index {
 
 	@SessionState
