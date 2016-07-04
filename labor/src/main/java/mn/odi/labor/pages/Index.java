@@ -88,8 +88,7 @@ public class Index {
 		rowIndex = 1;
 
 		year = Calendar.getInstance().get(Calendar.YEAR);
-		month = Calendar.getInstance().get(Calendar.MONTH);
-
+		month = Calendar.getInstance().get(Calendar.MONTH)+1;
 		if (month == 1) {
 			jan = true;
 		} else if (month == 2) {
@@ -488,6 +487,110 @@ public class Index {
 
 	public Integer getTotalFemaleOct() {
 		Integer i = dao.getTotalFemaleJan(year);
+		if (i != null && i > 0) {
+			return i;
+		} else {
+			return 0;
+		}
+	}
+	
+	public Integer getTotalImpJan() {
+		Integer i = dao.getTotalImpJan(year);
+		if (i != null && i > 0) {
+			return i;
+		} else {
+			return 0;
+		}
+	}
+	
+	public Integer getTotalImpFeb() {
+		Integer i = dao.getTotalImpFeb(year);
+		if (i != null && i > 0) {
+			return i;
+		} else {
+			return 0;
+		}
+	}
+	
+	public Integer getTotalImpMar() {
+		Integer i = dao.getTotalImpMar(year);
+		if (i != null && i > 0) {
+			return i;
+		} else {
+			return 0;
+		}
+	}
+	
+	public Integer getTotalImpApr() {
+		Integer i = dao.getTotalImpApr(year);
+		if (i != null && i > 0) {
+			return i;
+		} else {
+			return 0;
+		}
+	}
+	public Integer getTotalImpMay() {
+		Integer i = dao.getTotalImpMay(year);
+		if (i != null && i > 0) {
+			return i;
+		} else {
+			return 0;
+		}
+	}
+	public Integer getTotalImpJun() {
+		Integer i = dao.getTotalImpJun(year);
+		if (i != null && i > 0) {
+			return i;
+		} else {
+			return 0;
+		}
+	}
+	
+	public Integer getTotalImpJul() {
+		Integer i = dao.getTotalImpJul(year);
+		if (i != null && i > 0) {
+			return i;
+		} else {
+			return 0;
+		}
+	}
+	public Integer getTotalImpAug() {
+		Integer i = dao.getTotalImpAug(year);
+		if (i != null && i > 0) {
+			return i;
+		} else {
+			return 0;
+		}
+	}
+	
+	public Integer getTotalImpSep() {
+		Integer i = dao.getTotalImpSep(year);
+		if (i != null && i > 0) {
+			return i;
+		} else {
+			return 0;
+		}
+	}
+	
+	public Integer getTotalImpOct() {
+		Integer i = dao.getTotalImpOct(year);
+		if (i != null && i > 0) {
+			return i;
+		} else {
+			return 0;
+		}
+	}
+	public Integer getTotalImpNov() {
+		Integer i = dao.getTotalImpNov(year);
+		if (i != null && i > 0) {
+			return i;
+		} else {
+			return 0;
+		}
+	}
+	
+	public Integer getTotalImpDec() {
+		Integer i = dao.getTotalImpDec(year);
 		if (i != null && i > 0) {
 			return i;
 		} else {
