@@ -1773,4 +1773,28 @@ public class SccDAOHibernate implements SccDAO {
 		else
 			return 0;
 	}
+
+	public boolean checkEmpReg(String regNum) {
+		String sql = "select count(id) from employee " + " where UPPER(regNumber) = :regNum";
+
+		Query query = session.createSQLQuery(sql);
+
+		query.setParameter("regNum", regNum.toUpperCase());
+
+		BigDecimal jsCount = (BigDecimal) session.createSQLQuery(sql).setParameter("regNum", regNum.toUpperCase())
+				.list().get(0);
+		if (jsCount.intValue() > 0)
+			return true;
+
+		return false;
+	}
+
+	public Employee getEmpByReg(String regNum) {
+		Criteria crit = session.createCriteria(Employee.class);
+		crit.add(Restrictions.eq("regNumber", regNum).ignoreCase());
+		List<Employee> list = crit.list();
+		if (list.size() > 0)
+			return list.get(0);
+		return null;
+	}
 }

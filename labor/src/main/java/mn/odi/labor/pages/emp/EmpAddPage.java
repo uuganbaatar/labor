@@ -5,6 +5,7 @@ import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.annotations.DiscardAfter;
 import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.PageActivationContext;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.corelib.components.Form;
@@ -39,6 +40,7 @@ public class EmpAddPage {
 	@Inject
 	private SccDAO dao;
 
+	@Persist
 	@Property
 	@PageActivationContext
 	private Employee emp;
@@ -58,17 +60,30 @@ public class EmpAddPage {
 	@Property
 	private Job job;
 
+	@Property
+	@Persist("flash")
+	private Boolean newEmp;
+
 	@InjectComponent
-	private Zone orgZone;
+	private Zone orgZone, regZone;
 
 	@Property
 	private Organization orgSel;
+
+	@Persist
+	@Property
+	private String regNum;
 
 	void onActivate(Employee emp) {
 
 		if (emp != null) {
 			this.emp = emp;
 			job = emp.getJob();
+			regNum = emp.getRegNumber();
+			newEmp = false;
+		} else {
+			regNum = null;
+			newEmp = true;
 		}
 
 		disabled = false;
@@ -83,6 +98,7 @@ public class EmpAddPage {
 			emp = new Employee();
 			job = emp.getJob();
 		}
+		// this.regNum = emp.getRegNumber();
 		disabled = false;
 	}
 
@@ -139,9 +155,9 @@ public class EmpAddPage {
 	}
 
 	@CommitAfter
-	Object onSubmit() {
-		
+	Object onSuccessFromEmpForm() {
 		emp.setJob(job);
+		emp.setRegNumber(regNum);
 		dao.saveOrUpdateObject(emp);
 		return EmpListPage.class;
 	}
@@ -151,8 +167,19 @@ public class EmpAddPage {
 		return EmpListPage.class;
 	}
 
-//	public Object onValueChangedFromOrg(Organization org) {
-//		return orgZone.getBody();
-//	}
+	@CommitAfter
+	void onSuccessFromRegForm() {
+		if (dao.checkEmpReg(regNum)) {
+			emp = dao.getEmpByReg(regNum);
+		} else {
+			emp = new Employee();
+			System.err.println("emp baihgui bn burtgeh");
+		}
+
+	}
+
+	// public Object onValueChangedFromOrg(Organization org) {
+	// return orgZone.getBody();
+	// }
 
 }

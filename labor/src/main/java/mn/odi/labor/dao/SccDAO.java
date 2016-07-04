@@ -244,4 +244,8 @@ public interface SccDAO {
 
 	public Integer getEZJobsSum(AimagNiislelEnum aimag_id, CompanyTrend companyTrendId);
 
+	public boolean checkEmpReg(String regNum);
+
+	public Employee getEmpByReg(String regNum);
+
 }
