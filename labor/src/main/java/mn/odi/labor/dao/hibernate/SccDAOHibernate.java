@@ -1030,17 +1030,17 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<Object> getInfoBar() {
+	public List<BigDecimal> getInfoBar() {
 		// int year = Calendar.getInstance().get(Calendar.YEAR);
 		try {
-			String sql = "select gt.name,count(job.id) from job left join general_type gt on gt.id=job.generaltype_id group by gt.name";
+			String sql = "select count(job.id) from job left join general_type gt on gt.id=job.generaltype_id group by gt.name";
 			// sql += " group by fg.name";
 			SQLQuery query = session.createSQLQuery(sql);
 			// query.setParameter("tYear", year);
 			return query.list();
 		} catch (HibernateException e) {
 			e.printStackTrace();
-			return (new ArrayList<Object>());
+			return (new ArrayList<BigDecimal>());
 		}
 	}
 

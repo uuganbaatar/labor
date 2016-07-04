@@ -154,9 +154,8 @@
 
                    <!--  <t:charts id="mbars" t:chartData="barData" t:chartType="'bar'" />   -->
                     
-                  <!--  <div id="jobchart" style="min-width: 310px; margin: 0 auto"></div> -->
-                     
-                       <t:charts id="bar" t:chartData="areaData" t:chartType="'bar'" />  
+                   <div id="jobchart" style="min-width: 310px; margin: 0 auto"></div>                    
+                       
          
 				</div>
 			</div>
@@ -346,6 +345,59 @@ $(function () {
                     this.point.y + ' ' + this.point.name.toLowerCase();
             }
         }
+    });
+});
+
+$(function () {
+    $('#jobchart').highcharts({
+        chart: {
+            type: 'area'
+        },
+        title: {
+            text: 'Ажлын байрны орон тоо болон шинээр нэмэгдсэн'
+        },
+        subtitle: {
+            text: ''
+        },
+        xAxis: {
+            categories: ${test},
+            tickmarkPlacement: 'on',
+            title: {
+                enabled: false
+            }
+        },
+        yAxis: {
+            title: {
+                text: ''
+            },
+            labels: {
+                formatter: function () {
+                    return this.value / 1000;
+                }
+            }
+        },
+        tooltip: {
+            shared: true,
+            valueSuffix: ' '
+        },
+        plotOptions: {
+            area: {
+                stacking: 'normal',
+                lineColor: '#666666',
+                lineWidth: 1,
+                marker: {
+                    lineWidth: 1,
+                    lineColor: '#666666'
+                }
+            }
+        },
+        series: [{
+            name: 'Ажлын байрны тоо',
+            data: [5, 6, 9, 7, 10, 6, 2]
+        }, {
+            name: 'Шинээр нэмэгдсэн',
+            data: [2, 3, 1, 6, 13, 0, 6]
+        }]
     });
 });
 

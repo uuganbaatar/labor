@@ -1,5 +1,6 @@
 package mn.odi.labor.pages;
 
+import java.math.BigDecimal;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -226,25 +227,39 @@ public class Index {
 			return 0;
 		}
 	}
+	
+	public String getTest(){
+		return "[1,2,3,4,5,6,7]";
+	}
+	
 
 	public Object getAreaData() {
 		JSONArray bar = new JSONArray();
-		JSONArray types = new JSONArray();
-		bar.put(types);
+		
 		JSONArray counts = new JSONArray();
 		bar.put(counts);
-		List<Object> list = getInfoAddedByTypeNew();
+		List<BigDecimal> list = getInfoAddedByTypeNew();
 
-		for (Object _values : list) {
-			Object[] values = (Object[]) _values;
+		for (BigDecimal _values : list) {
+			counts.put(_values);
+		/*	String[] values = (String[]) _values;
 			if (values[0] != null) {
 
-				System.err.println(types.put(values[0]));
-				System.err.println(counts.put(values[1]));
-				types.put(values[0]);
-				counts.put(values[1]);
-			}
+				System.err.println(counts.put(values[0]));
+				counts.put(values[0]);
+			}*/
 		}
+		System.err.println(bar);
+		
+		
+		String s = bar.toString();
+		
+		System.err.println("substr" + s.substring(1, 7));
+		
+
+Object b = s.substring(1, 9);
+
+System.err.println("obj=" + b);
 
 		return bar;
 	}
@@ -263,7 +278,7 @@ public class Index {
 
 	}
 
-	public List<Object> getInfoAddedByTypeNew() {
+	public List<BigDecimal> getInfoAddedByTypeNew() {
 		// if (loginState.getRole().getUserType() == UserTypeEnum.DOTOODAUDIT) {
 		return dao.getInfoBar();
 		/*

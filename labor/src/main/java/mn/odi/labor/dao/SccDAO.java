@@ -1,9 +1,8 @@
 package mn.odi.labor.dao;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 
 import mn.odi.labor.entities.admin.AjiliinBairHurungu;
 import mn.odi.labor.entities.admin.CompanyHelber;
@@ -26,6 +25,8 @@ import mn.odi.labor.entities.labor.ReportStatus;
 import mn.odi.labor.enums.AimagNiislelEnum;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.enums.ReportDetailType;
+
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 
 public interface SccDAO {
 
@@ -155,7 +156,7 @@ public interface SccDAO {
 
 	public List<Organization> getOrgListSearch(String name, Date d1, Date d2, Boolean b);
 
-	public List<Object> getInfoBar();
+	public List<BigDecimal> getInfoBar();
 
 	public GeneralType getGeneralTypeByName(String name);
 
