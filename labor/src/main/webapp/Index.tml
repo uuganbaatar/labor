@@ -354,7 +354,7 @@ $(function () {
             type: 'area'
         },
         title: {
-            text: 'Ажлын байрны орон тоо болон шинээр нэмэгдсэн'
+            text: '${message:barChartDashboard}'
         },
         subtitle: {
             text: ''
@@ -392,10 +392,10 @@ $(function () {
             }
         },
         series: [{
-            name: 'Ажлын байрны тоо',
+            name: '${message:ajliinBairniiToo}',
             data: [5, 6, 9, 7, 10, 6, 2]
         }, {
-            name: 'Шинээр нэмэгдсэн',
+            name: '${message:newJobs}',
             data: [2, 3, 1, 6, 13, 0, 6]
         }]
     });
