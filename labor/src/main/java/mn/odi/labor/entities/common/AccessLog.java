@@ -13,10 +13,11 @@ import javax.persistence.Table;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.tapestry5.beaneditor.NonVisual;
 
+import mn.odi.labor.util.UUIDUtil;
+
 @Entity
 @Table(name = "access_log")
 public class AccessLog extends BaseObject {
-	
 
 	/**
 	 * 
@@ -28,7 +29,7 @@ public class AccessLog extends BaseObject {
 	@GeneratedValue
 	@Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "uuid", length = 32, insertable = true, updatable = false)
 	private String uuid;
 
@@ -44,8 +45,10 @@ public class AccessLog extends BaseObject {
 
 	@Column(name = "ip_address")
 	private String ipAddress;
-	
-	
+
+	public AccessLog() {
+		this.uuid = UUIDUtil.getUUID();
+	}
 
 	public Long getId() {
 		return id;
