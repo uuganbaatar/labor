@@ -85,6 +85,29 @@
 									<span>${message:org-label}</span>
 								</t:actionlink>
 							</li>
+							<li id="sub">
+								<a href="#" class="${selectedhelReportMain}">
+									<i class="ti-file"></i>
+									<span>${message:helReport-label}</span>
+								</a>
+								<ul>
+									<li>
+										<t:actionlink t:id="helReportTab" class="${selectedhelReport}">
+											<span>${message:helReport1-label}</span>
+										</t:actionlink>
+									</li>
+									<li>
+										<t:actionlink t:id="helReportTab2" class="${selectedhelReport2}">
+											<span>${message:helReport2-label}</span>
+										</t:actionlink>
+									</li>
+									<li>
+										<t:actionlink t:id="helReportTab3" class="${selectedhelReport3}">
+											<span>${message:helReport3-label}</span>
+										</t:actionlink>
+									</li>
+								</ul>
+							</li>
 						</ul>
 						<div class="clearfix"></div>
 					</div>
@@ -121,13 +144,9 @@
 										${message:lavlahpropertytype}
 									</button>
 								</t:actionlink>
-								<!-- <t:actionlink t:id="lavlahEconomicTab">
-										<button type="button" class="${SelectedTabLavlahEconomic}"
-											style="width: 100%;">
-											${message:lavlaheconomic}
-										</button>
-									</t:actionlink>
-								-->
+								<!-- <t:actionlink t:id="lavlahEconomicTab"> <button type="button" 
+									class="${SelectedTabLavlahEconomic}" style="width: 100%;"> ${message:lavlaheconomic} 
+									</button> </t:actionlink> -->
 								<t:actionlink t:id="lavlahTrendTab">
 									<button type="button" class="${SelectedTabLavlahTrend}"
 										style="width: 100%;">
@@ -192,6 +211,13 @@
 			$(".show_hide").show();
 			$('.show_hide').click(function(){
 			$(".slidingDiv").slideToggle();
+			});
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+			$("#sub").click(function(){
+			$("#sub").toggleClass("has_sub");
 			});
 			});
 		</script>

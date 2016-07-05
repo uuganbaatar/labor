@@ -38,23 +38,18 @@ import mn.odi.labor.pages.admin.LavlahSumDuureg;
 import mn.odi.labor.pages.admin.UserList;
 import mn.odi.labor.pages.emp.EmpListPage;
 import mn.odi.labor.pages.job.JobPage;
+import mn.odi.labor.pages.labor.HudulmurReportPage;
+import mn.odi.labor.pages.labor.HudulmurReportPage2;
 import mn.odi.labor.pages.labor.OrgListPage;
 
-@Import(stylesheet = { "context:assets/css/bootstrap.min.css",
-		"context:assets/css/core.css", "context:assets/css/components.css",
-		"context:assets/css/icons.css", "context:assets/css/pages.css",
-		"context:assets/css/responsive.css",
-		"context:assets/css/responsive.css" }, library = {
-		"context:assets/js/modernizr.min.js",
-		"context:assets/js/jquery.min.js",
-		"context:assets/js/bootstrap.min.js", "context:assets/js/detect.js",
-		"context:assets/js/fastclick.js",
-		"context:assets/js/jquery.slimscroll.js",
-		"context:assets/js/jquery.blockUI.js", "context:assets/js/waves.js",
-		"context:assets/js/wow.min.js",
-		"context:assets/js/jquery.nicescroll.js",
-		"context:assets/js/jquery.scrollTo.min.js",
-		"context:assets/js/jquery.core.js" })
+@Import(stylesheet = { "context:assets/css/bootstrap.min.css", "context:assets/css/core.css",
+		"context:assets/css/components.css", "context:assets/css/icons.css", "context:assets/css/pages.css",
+		"context:assets/css/responsive.css", "context:assets/css/responsive.css" }, library = {
+				"context:assets/js/modernizr.min.js", "context:assets/js/jquery.min.js",
+				"context:assets/js/bootstrap.min.js", "context:assets/js/detect.js", "context:assets/js/fastclick.js",
+				"context:assets/js/jquery.slimscroll.js", "context:assets/js/jquery.blockUI.js",
+				"context:assets/js/waves.js", "context:assets/js/wow.min.js", "context:assets/js/jquery.nicescroll.js",
+				"context:assets/js/jquery.scrollTo.min.js", "context:assets/js/jquery.core.js" })
 public class LayoutLavlah {
 
 	@SessionState
@@ -126,6 +121,15 @@ public class LayoutLavlah {
 	@InjectPage
 	private LavlahHudulmurHeltes lahlahorgPage;
 
+	@InjectPage
+	private HudulmurReportPage helreportPage;
+
+	@InjectPage
+	private HudulmurReportPage2 helreportPage2;
+
+	@InjectPage
+	private HudulmurReportPage2 helreportPage3;
+
 	void beginRender() {
 		if (loginState.getUser() == null) {
 
@@ -135,13 +139,12 @@ public class LayoutLavlah {
 
 			UserDetails userDetails = (UserDetails) (auth.getPrincipal());
 
-			User user = (User) this.sccDAO.getUserByUsername(userDetails
-					.getUsername());
+			User user = (User) this.sccDAO.getUserByUsername(userDetails.getUsername());
 
 			if (user == null) {
 				throw new UsernameNotFoundException(
 
-				"User not found in database");
+						"User not found in database");
 			}
 
 			loginState.setUser(user);
@@ -159,8 +162,7 @@ public class LayoutLavlah {
 	}
 
 	void onActionFromLogout() throws IOException {
-		HttpSession session = requestGlobals.getHTTPServletRequest()
-				.getSession(false);
+		HttpSession session = requestGlobals.getHTTPServletRequest().getSession(false);
 
 		if (session != null) {
 			session.invalidate();
@@ -170,8 +172,7 @@ public class LayoutLavlah {
 	}
 
 	public String getSelectedTabJob() {
-		return (loginState.getActiveMenu() == "job") ? "waves-effect subdrop"
-				: "waves-effect";
+		return (loginState.getActiveMenu() == "job") ? "waves-effect subdrop" : "waves-effect";
 	}
 
 	public Object onActionFromJobTab() {
@@ -179,8 +180,7 @@ public class LayoutLavlah {
 	}
 
 	public String getSelectedTabEmployer() {
-		return (loginState.getActiveMenu() == "emp") ? "waves-effect subdrop"
-				: "waves-effect";
+		return (loginState.getActiveMenu() == "emp") ? "waves-effect subdrop" : "waves-effect";
 	}
 
 	public Object onActionFromemployerTab() {
@@ -188,8 +188,7 @@ public class LayoutLavlah {
 	}
 
 	public String getSelectedTabReport() {
-		return (loginState.getActiveMenu() == "report") ? "waves-effect subdrop"
-				: "waves-effect";
+		return (loginState.getActiveMenu() == "report") ? "waves-effect subdrop" : "waves-effect";
 	}
 
 	public Object onActionFromReportTab() {
@@ -197,8 +196,7 @@ public class LayoutLavlah {
 	}
 
 	public String getSelectedTabHyanah() {
-		return (loginState.getActiveMenu() == "hyanah") ? "waves-effect subdrop"
-				: "waves-effect";
+		return (loginState.getActiveMenu() == "hyanah") ? "waves-effect subdrop" : "waves-effect";
 	}
 
 	public Object onActionFromHyanahTab() {
@@ -206,13 +204,11 @@ public class LayoutLavlah {
 	}
 
 	public String getSelectedTabUser() {
-		return (loginState.getActiveMenu() == "user") ? "waves-effect subdrop"
-				: "waves-effect";
+		return (loginState.getActiveMenu() == "user") ? "waves-effect subdrop" : "waves-effect";
 	}
 
 	public String getSelectedTabLavlah() {
-		return (loginState.getActiveMenu() == "lavlah") ? "waves-effect subdrop"
-				: "waves-effect";
+		return (loginState.getActiveMenu() == "lavlah") ? "waves-effect subdrop" : "waves-effect";
 	}
 
 	public Object onActionFromUserTab() {
@@ -280,6 +276,22 @@ public class LayoutLavlah {
 				: "btn text-left btn-white waves-effect";
 	}
 
+	public String getSelectedhelReport() {
+		return (loginState.getActiveMenu() == "heltes") ? "waves-effect subdrop" : "waves-effect";
+	}
+
+	public String getSelectedhelReport2() {
+		return (loginState.getActiveMenu() == "heltes2") ? "waves-effect subdrop" : "waves-effect";
+	}
+
+	public String getSelectedhelReport3() {
+		return (loginState.getActiveMenu() == "heltes3") ? "waves-effect subdrop" : "waves-effect";
+	}
+
+	public String getSelectedhelReportMain() {
+		return (loginState.getActiveMenu().contains("heltes")) ? "waves-effect subdrop" : "waves-effect";
+	}
+
 	public Object onActionFromLavlahGeneralTab() {
 		return lavlahListpage;
 	}
@@ -288,9 +300,9 @@ public class LayoutLavlah {
 		return lavlahPropertypage;
 	}
 
-	public Object onActionFromLavlahEconomicTab() {
-		return lavlahEconomicpage;
-	}
+	// public Object onActionFromLavlahEconomicTab() {
+	// return lavlahEconomicpage;
+	// }
 
 	public Object onActionFromLavlahTrendTab() {
 		return lavlahTrendpage;
@@ -321,12 +333,23 @@ public class LayoutLavlah {
 	}
 
 	public String getSelectedOrgLavlah() {
-		return (loginState.getActiveMenu() == "org") ? "waves-effect subdrop"
-				: "waves-effect";
+		return (loginState.getActiveMenu() == "org") ? "waves-effect subdrop" : "waves-effect";
 	}
 
 	public Object onActionFromOrgTab() {
 		return orgPage;
+	}
+
+	public Object onActionFromHelReportTab() {
+		return helreportPage;
+	}
+
+	public Object onActionFromHelReportTab2() {
+		return helreportPage2;
+	}
+
+	public Object onActionFromHelReportTab3() {
+		return helreportPage3;
 	}
 
 }
