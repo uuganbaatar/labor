@@ -34,6 +34,8 @@ import mn.odi.labor.pages.emp.EmpListPage;
 import mn.odi.labor.pages.job.JobPage;
 import mn.odi.labor.pages.labor.HudulmurReportPage;
 import mn.odi.labor.pages.labor.HudulmurReportPage2;
+import mn.odi.labor.pages.labor.HudulmurReportPage3;
+import mn.odi.labor.pages.labor.HudulmurReportPage4;
 import mn.odi.labor.pages.labor.OrgListPage;
 import mn.odi.labor.pages.organization.LaborReportOrgList;
 
@@ -99,7 +101,10 @@ public class Layout {
 	private HudulmurReportPage2 helreportPage2;
 
 	@InjectPage
-	private HudulmurReportPage2 helreportPage3;
+	private HudulmurReportPage3 helreportPage3;
+
+	@InjectPage
+	private HudulmurReportPage4 helreportPage4;
 
 	@Property
 	private boolean isAdmin, isUser, isLabUser;
@@ -123,7 +128,7 @@ public class Layout {
 			}
 
 			loginState.setUser(user);
-			
+
 			System.err.println("get user=" + loginState.getUser());
 
 			user.setLastAccessDate(Calendar.getInstance().getTime());
@@ -213,6 +218,10 @@ public class Layout {
 		return (loginState.getActiveMenu() == "heltes3") ? "waves-effect subdrop" : "waves-effect";
 	}
 
+	public String getSelectedhelReport4() {
+		return (loginState.getActiveMenu() == "heltes4") ? "waves-effect subdrop" : "waves-effect";
+	}
+
 	public String getSelectedhelReportMain() {
 		return (loginState.getActiveMenu().contains("heltes")) ? "waves-effect subdrop" : "waves-effect";
 	}
@@ -239,6 +248,10 @@ public class Layout {
 
 	public Object onActionFromHelReportTab3() {
 		return helreportPage3;
+	}
+
+	public Object onActionFromHelReportTab4() {
+		return helreportPage4;
 	}
 
 	public String getPageTitle() {

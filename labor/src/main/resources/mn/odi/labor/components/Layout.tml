@@ -100,7 +100,7 @@
 									</t:actionlink>
 								</li>
 								<li id="sub">
-									<a href="#" class="${selectedhelReportMain}">
+									<a href="#" id="asub" class="${selectedhelReportMain}">
 										<i class="ti-file"></i>
 										<span>${message:helReport-label}</span>
 									</a>
@@ -118,6 +118,11 @@
 										<li>
 											<t:actionlink t:id="helReportTab3" class="${selectedhelReport3}">
 												<span>${message:helReport3-label}</span>
+											</t:actionlink>
+										</li>
+										<li>
+											<t:actionlink t:id="helReportTab4" class="${selectedhelReport4}">
+												<span>${message:helReport4-label}</span>
 											</t:actionlink>
 										</li>
 									</ul>
@@ -172,7 +177,7 @@
 		</script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-			$("#sub").click(function(){
+			$("#asub").click(function(){
 			$("#sub").toggleClass("has_sub");
 			});
 			});

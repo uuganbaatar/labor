@@ -40,6 +40,8 @@ import mn.odi.labor.pages.emp.EmpListPage;
 import mn.odi.labor.pages.job.JobPage;
 import mn.odi.labor.pages.labor.HudulmurReportPage;
 import mn.odi.labor.pages.labor.HudulmurReportPage2;
+import mn.odi.labor.pages.labor.HudulmurReportPage3;
+import mn.odi.labor.pages.labor.HudulmurReportPage4;
 import mn.odi.labor.pages.labor.OrgListPage;
 
 @Import(stylesheet = { "context:assets/css/bootstrap.min.css", "context:assets/css/core.css",
@@ -128,7 +130,10 @@ public class LayoutLavlah {
 	private HudulmurReportPage2 helreportPage2;
 
 	@InjectPage
-	private HudulmurReportPage2 helreportPage3;
+	private HudulmurReportPage3 helreportPage3;
+
+	@InjectPage
+	private HudulmurReportPage4 helreportPage4;
 
 	void beginRender() {
 		if (loginState.getUser() == null) {
@@ -288,6 +293,10 @@ public class LayoutLavlah {
 		return (loginState.getActiveMenu() == "heltes3") ? "waves-effect subdrop" : "waves-effect";
 	}
 
+	public String getSelectedhelReport4() {
+		return (loginState.getActiveMenu() == "heltes4") ? "waves-effect subdrop" : "waves-effect";
+	}
+
 	public String getSelectedhelReportMain() {
 		return (loginState.getActiveMenu().contains("heltes")) ? "waves-effect subdrop" : "waves-effect";
 	}
@@ -350,6 +359,10 @@ public class LayoutLavlah {
 
 	public Object onActionFromHelReportTab3() {
 		return helreportPage3;
+	}
+
+	public Object onActionFromHelReportTab4() {
+		return helreportPage4;
 	}
 
 }

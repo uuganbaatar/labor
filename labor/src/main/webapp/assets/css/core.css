@@ -1549,7 +1549,7 @@ File: Topbar,Left-sidebar,Right-sidebar
 
 body.fixed-left .side-menu.left {
 	bottom: 50px;
-	height: 100%;
+	height: calc(100% - 110px);
 	margin-bottom: -70px;
 	margin-top: 110px;
 	padding-bottom: 70px;
@@ -3154,4 +3154,8 @@ text-align:center;
 	background: #00d2ed;
     padding: 10px;
     margin-top: 20px;
+}
+
+.slimscrollleft {
+	overflow : auto;
 }
