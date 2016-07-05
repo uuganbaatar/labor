@@ -16,14 +16,13 @@ import org.apache.tapestry5.services.Request;
 
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.entities.admin.CompanyHelber;
 import mn.odi.labor.entities.admin.GeneralType;
-import mn.odi.labor.entities.admin.PropertyType;
 import mn.odi.labor.enums.AimagNiislelEnum;
+import mn.odi.labor.enums.GenderEnum;
 import mn.odi.labor.models.FormYearSM;
 import mn.odi.labor.util.CalendarUtil;
 
-public class HudulmurReportPage2 {
+public class HudulmurReportPage3 {
 
 	@SessionState
 	private LoginState loginState;
@@ -51,20 +50,6 @@ public class HudulmurReportPage2 {
 	@Property
 	private GeneralType valueEZ;
 
-	@Property
-	@Persist
-	private List<CompanyHelber> headerHel;
-
-	@Property
-	private CompanyHelber valueHel;
-
-	@Property
-	@Persist
-	private List<PropertyType> headerPro;
-
-	@Property
-	private PropertyType valuePro;
-
 	private int number = 0;
 
 	@Property
@@ -77,7 +62,7 @@ public class HudulmurReportPage2 {
 
 	@CommitAfter
 	void beginRender() {
-		loginState.setActiveMenu("heltes2");
+		loginState.setActiveMenu("heltes3");
 		loginState.setPageTitle(message.get("heltes"));
 		if (list == null) {
 			list = new ArrayList<AimagNiislelEnum>(Arrays.asList(AimagNiislelEnum.values()));
@@ -85,12 +70,6 @@ public class HudulmurReportPage2 {
 
 		if (headerEz == null)
 			headerEz = dao.getGeneralTypeList();
-
-		if (headerHel == null)
-			headerHel = dao.getLavlahHelberList();
-
-		if (headerPro == null)
-			headerPro = dao.getPropertyTypeList();
 
 		if (year == null) {
 			year = Calendar.getInstance().get(Calendar.YEAR);
@@ -106,27 +85,28 @@ public class HudulmurReportPage2 {
 
 	public int getAllJobs() {
 		int i = 0;
-		i = dao.getAllJobsSum(row, CalendarUtil.getFirstDate(year, month), CalendarUtil.getLastDate(year, month));
+		i = dao.getJobsSumGender(row, null, null, CalendarUtil.getFirstDate(year, month),
+				CalendarUtil.getLastDate(year, month));
+		return i;
+	}
+
+	public int getAllJobsFem() {
+		int i = 0;
+		i = dao.getJobsSumGender(row, null, GenderEnum.FEMALE, CalendarUtil.getFirstDate(year, month),
+				CalendarUtil.getLastDate(year, month));
 		return i;
 	}
 
 	public Integer getEzval() {
 		int i = 0;
-		i = dao.getRestJobsSum(row, valueEZ, null, null, CalendarUtil.getFirstDate(year, month),
+		i = dao.getJobsSumGender(row, valueEZ, null, CalendarUtil.getFirstDate(year, month),
 				CalendarUtil.getLastDate(year, month));
 		return i;
 	}
 
-	public Integer getHelval() {
+	public Integer getEzvalfem() {
 		int i = 0;
-		i = dao.getRestJobsSum(row, null, valueHel, null, CalendarUtil.getFirstDate(year, month),
-				CalendarUtil.getLastDate(year, month));
-		return i;
-	}
-
-	public Integer getProval() {
-		int i = 0;
-		i = dao.getRestJobsSum(row, null, null, valuePro, CalendarUtil.getFirstDate(year, month),
+		i = dao.getJobsSumGender(row, valueEZ, GenderEnum.FEMALE, CalendarUtil.getFirstDate(year, month),
 				CalendarUtil.getLastDate(year, month));
 		return i;
 	}
@@ -135,20 +115,6 @@ public class HudulmurReportPage2 {
 		int i = 1;
 		if (headerEz != null && !headerEz.isEmpty())
 			i = headerEz.size();
-		return i;
-	}
-
-	public Integer getHeadersizeHel() {
-		int i = 1;
-		if (headerHel != null && !headerHel.isEmpty())
-			i = headerHel.size();
-		return i;
-	}
-
-	public Integer getHeadersizePro() {
-		int i = 1;
-		if (headerPro != null && !headerPro.isEmpty())
-			i = headerPro.size();
 		return i;
 	}
 

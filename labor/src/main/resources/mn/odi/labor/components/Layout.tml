@@ -57,7 +57,7 @@
 									<span>${message:dashboard}</span>
 								</t:actionlink>
 							</li>
-							
+
 							<li>
 								<t:actionlink t:id="jobTab" class="${selectedTabJob}">
 									<i class="fa fa-building-o"></i>
@@ -71,40 +71,57 @@
 								</t:actionlink>
 							</li>
 							<t:if test="${!isLabUser}">
-							<li>
-								<t:actionlink t:id="reportTab" class="${selectedTabreport}">
-									<i class="ti-file"></i>
-									<span>${message:report}</span>
-								</t:actionlink>
-							</li>
+								<li>
+									<t:actionlink t:id="reportTab" class="${selectedTabreport}">
+										<i class="ti-file"></i>
+										<span>${message:report}</span>
+									</t:actionlink>
+								</li>
 							</t:if>
 							<t:if test="${isAdmin}">
-							<li>
-								<t:actionlink t:id="userTab" class="${selectedTabUser}">
-									<i class="ti-file"></i>
-									<span>${message:user}</span>
-								</t:actionlink>
-							</li>
-							<li>
-								<t:actionlink t:id="lavlahTab" class="${selectedTabLavlah}">
-									<i class="ti-file"></i>
-									<span>${message:lavlah}</span>
-								</t:actionlink>
-							</li>
+								<li>
+									<t:actionlink t:id="userTab" class="${selectedTabUser}">
+										<i class="ti-file"></i>
+										<span>${message:user}</span>
+									</t:actionlink>
+								</li>
+								<li>
+									<t:actionlink t:id="lavlahTab" class="${selectedTabLavlah}">
+										<i class="ti-file"></i>
+										<span>${message:lavlah}</span>
+									</t:actionlink>
+								</li>
 							</t:if>
 							<t:if test="${!isUser}">
-							<li>
-								<t:actionlink t:id="orgTab" class="${selectedorgLavlah}">
-									<i class="ti-file"></i>
-									<span>${message:org-label}</span>
-								</t:actionlink>
-							</li>
-							<li>
-								<t:actionlink t:id="helReportTab" class="${selectedhelReport}">
-									<i class="ti-file"></i>
-									<span>${message:helReport-label}</span>
-								</t:actionlink>
-							</li>
+								<li>
+									<t:actionlink t:id="orgTab" class="${selectedorgLavlah}">
+										<i class="ti-file"></i>
+										<span>${message:org-label}</span>
+									</t:actionlink>
+								</li>
+								<li id="sub">
+									<a href="#" class="${selectedhelReportMain}">
+										<i class="ti-file"></i>
+										<span>${message:helReport-label}</span>
+									</a>
+									<ul>
+										<li>
+											<t:actionlink t:id="helReportTab" class="${selectedhelReport}">
+												<span>${message:helReport1-label}</span>
+											</t:actionlink>
+										</li>
+										<li>
+											<t:actionlink t:id="helReportTab2" class="${selectedhelReport2}">
+												<span>${message:helReport2-label}</span>
+											</t:actionlink>
+										</li>
+										<li>
+											<t:actionlink t:id="helReportTab3" class="${selectedhelReport3}">
+												<span>${message:helReport3-label}</span>
+											</t:actionlink>
+										</li>
+									</ul>
+								</li>
 							</t:if>
 						</ul>
 						<div class="clearfix"></div>
@@ -150,6 +167,13 @@
 			$(".show_hide").show();
 			$('.show_hide').click(function(){
 			$(".slidingDiv").slideToggle();
+			});
+			});
+		</script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+			$("#sub").click(function(){
+			$("#sub").toggleClass("has_sub");
 			});
 			});
 		</script>

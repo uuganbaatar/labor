@@ -23,6 +23,7 @@ import mn.odi.labor.entities.labor.Report;
 import mn.odi.labor.entities.labor.ReportDetail;
 import mn.odi.labor.entities.labor.ReportStatus;
 import mn.odi.labor.enums.AimagNiislelEnum;
+import mn.odi.labor.enums.GenderEnum;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.enums.ReportDetailType;
 
@@ -275,5 +276,8 @@ public interface SccDAO {
 
 	public Integer getRestJobsSum(AimagNiislelEnum aimag_id, GeneralType generalTypeId, CompanyHelber helberId,
 			PropertyType propertyId, Date firstdate, Date lastdate);
+
+	public Integer getJobsSumGender(AimagNiislelEnum aimag_id, GeneralType generalTypeId, GenderEnum gender,
+			Date firstdate, Date lastdate);
 
 }
