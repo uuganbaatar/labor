@@ -119,11 +119,11 @@ public interface SccDAO {
 	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
 			Integer month);
 
-	public Integer getAllJobs(Long r);
+	public Integer getAllJobs(Long org,Long sum);
 
-	public Integer getNewJobs(Long r);
+	public Integer getNewJobs(Long org,Long sum);
 
-	public Integer getAllEmployees(Long r);
+	public Integer getAllEmployees(Long org,Long sum);
 
 	public boolean isJobExists(Job job);
 
@@ -175,57 +175,57 @@ public interface SccDAO {
 
 	public LavlahGarsan getGarsanByName(String name);
 
-	public Integer getTotalJan(int year);
+	public Integer getTotalJan(int year,Long org, Long sum);
 
-	public Integer getTotalFemaleJan(int year);
+	public Integer getTotalFemaleJan(int year,Long org, Long sum);
 
 	public List<SumDuureg> getSumDuureg();
 
 	public SumDuureg getSumDuuregByName(String name, AimagNiislelEnum aimagId);
 
-	public Integer getTotalFeb(int year);
+	public Integer getTotalFeb(int year,Long org, Long sum);
 
-	public Integer getTotalFemaleFeb(int year);
+	public Integer getTotalFemaleFeb(int year,Long org, Long sum);
 
-	public Integer getTotalMar(int year);
+	public Integer getTotalMar(int year,Long org, Long sum);
 
-	public Integer getTotalFemaleMar(int year);
+	public Integer getTotalFemaleMar(int year,Long org, Long sum);
 
-	public Integer getTotalApr(int year);
+	public Integer getTotalApr(int year,Long org, Long sum);
 
-	public Integer getTotalFemaleApr(int year);
+	public Integer getTotalFemaleApr(int year,Long org, Long sum);
 
-	public Integer getTotalMay(int year);
+	public Integer getTotalMay(int year,Long org, Long sum);
 
-	public Integer getTotalFemaleMay(int year);
+	public Integer getTotalFemaleMay(int year,Long org, Long sum);
 
-	public Integer getTotalJun(int year);
+	public Integer getTotalJun(int year,Long org, Long sum);
 
-	public Integer getTotalFemaleJun(int year);
+	public Integer getTotalFemaleJun(int year,Long org, Long sum);
 
-	public Integer getTotalJul(int year);
+	public Integer getTotalJul(int year,Long org, Long sum);
 
-	public Integer getTotalFemaleJul(int year);
+	public Integer getTotalFemaleJul(int year,Long org, Long sum);
 
-	public Integer getTotalAug(int year);
+	public Integer getTotalAug(int year,Long org, Long sum);
 
-	public Integer getTotalFemaleAug(int year);
+	public Integer getTotalFemaleAug(int year,Long org, Long sum);
 
-	public Integer getTotalSep(int year);
+	public Integer getTotalSep(int year,Long org, Long sum);
 
-	public Integer getTotalFemaleSep(int year);
+	public Integer getTotalFemaleSep(int year,Long org, Long sum);
 
-	public Integer getTotalOct(int year);
+	public Integer getTotalOct(int year,Long org, Long sum);
 
-	public Integer getTotalFemaleOct(int year);
+	public Integer getTotalFemaleOct(int year,Long org, Long sum);
 
-	public Integer getTotalNov(int year);
+	public Integer getTotalNov(int year,Long org, Long sum);
 
-	public Integer getTotalFemaleNov(int year);
+	public Integer getTotalFemaleNov(int year,Long org, Long sum);
 
-	public Integer getTotalDec(int year);
+	public Integer getTotalDec(int year,Long org, Long sum);
 
-	public Integer getTotalFemaleDec(int year);
+	public Integer getTotalFemaleDec(int year,Long org, Long sum);
 
 	public List<SumDuureg> getSumDuuregSearch(String name, AimagNiislelEnum aimagId);
 
@@ -240,7 +240,7 @@ public interface SccDAO {
 	public List<Job> getJobSearch(GeneralType generalType, String name, boolean check, Date d1, Date d2,
 			AjiliinBairHurungu fundSource, JobTypeEnum type, Organization org);
 
-	public Integer getHasagdsanJobs(Long r);
+	public Integer getHasagdsanJobs(Long org,Long sum);
 
 	public Integer getAllJobsSum(AimagNiislelEnum aimag_id, Date firstdate, Date lastdate);
 
@@ -250,29 +250,29 @@ public interface SccDAO {
 
 	public Employee getEmpByReg(String regNum);
 
-	public Integer getTotalImpJul(int year);
+	public Integer getTotalImpJul(int year,Long org,Long sum);
 
-	public Integer getTotalImpJan(int year);
+	public Integer getTotalImpJan(int year,Long org,Long sum);
 
-	public Integer getTotalImpFeb(int year);
+	public Integer getTotalImpFeb(int year,Long org,Long sum);
 
-	public Integer getTotalImpMar(int year);
+	public Integer getTotalImpMar(int year,Long org,Long sum);
 
-	public Integer getTotalImpApr(int year);
+	public Integer getTotalImpApr(int year,Long org,Long sum);
 
-	public Integer getTotalImpMay(int year);
+	public Integer getTotalImpMay(int year,Long org,Long sum);
 
-	public Integer getTotalImpJun(int year);
+	public Integer getTotalImpJun(int year,Long org,Long sum);
 
-	public Integer getTotalImpAug(int year);
+	public Integer getTotalImpAug(int year,Long org,Long sum);
 
-	public Integer getTotalImpSep(int year);
+	public Integer getTotalImpSep(int year,Long org,Long sum);
 
-	public Integer getTotalImpOct(int year);
+	public Integer getTotalImpOct(int year,Long org,Long sum);
 
-	public Integer getTotalImpNov(int year);
+	public Integer getTotalImpNov(int year,Long org,Long sum);
 
-	public Integer getTotalImpDec(int year);
+	public Integer getTotalImpDec(int year,Long org,Long sum);
 
 	public Integer getRestJobsSum(AimagNiislelEnum aimag_id, GeneralType generalTypeId, CompanyHelber helberId,
 			PropertyType propertyId, Date firstdate, Date lastdate);
