@@ -1675,6 +1675,10 @@ body.fixed-left .side-menu.left {
 	display: none;
 }
 
+#sidebar-menu ul .has_sub ul {
+	display:block;
+}
+
 #sidebar-menu ul ul li {
 	border-top: 0;
 }

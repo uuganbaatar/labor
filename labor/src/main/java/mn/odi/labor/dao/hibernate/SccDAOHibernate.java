@@ -50,6 +50,7 @@ import mn.odi.labor.entities.labor.Report;
 import mn.odi.labor.entities.labor.ReportDetail;
 import mn.odi.labor.entities.labor.ReportStatus;
 import mn.odi.labor.enums.AimagNiislelEnum;
+import mn.odi.labor.enums.GenderEnum;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.enums.OrgTypeEnum;
 import mn.odi.labor.enums.ReportDetailType;
@@ -2014,7 +2015,8 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getRestJobsSum(AimagNiislelEnum aimag_id, GeneralType generalTypeId, Date firstdate, Date lastdate) {
+	public Integer getRestJobsSum(AimagNiislelEnum aimag_id, GeneralType generalTypeId, CompanyHelber helberId,
+			PropertyType propertyId, Date firstdate, Date lastdate) {
 
 		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID "
 				+ "WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL "
@@ -2026,6 +2028,14 @@ public class SccDAOHibernate implements SccDAO {
 
 		if (generalTypeId != null) {
 			sql = sql + " AND job.GENERALTYPE_ID = :generalTypeId";
+		}
+
+		if (helberId != null) {
+			sql = sql + " AND organization.HELBER_ID = :helberId";
+		}
+
+		if (propertyId != null) {
+			sql = sql + " AND organization.PROPERTY_ID = :propertyId";
 		}
 
 		if (firstdate != null && lastdate != null) {
@@ -2040,6 +2050,60 @@ public class SccDAOHibernate implements SccDAO {
 
 		if (generalTypeId != null)
 			query.setParameter("generalTypeId", generalTypeId.getId());
+
+		if (helberId != null)
+			query.setParameter("helberId", helberId.getId());
+
+		if (propertyId != null)
+			query.setParameter("propertyId", propertyId.getId());
+
+		if (firstdate != null && lastdate != null) {
+			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			query.setParameter("firstdate", df.format(firstdate));
+			query.setParameter("lastdate", df.format(lastdate));
+		}
+
+		List<Integer> list = query.list();
+
+		if (list != null && !list.isEmpty())
+			return list.get(0);
+		else
+			return 0;
+	}
+
+	public Integer getJobsSumGender(AimagNiislelEnum aimag_id, GeneralType generalTypeId, GenderEnum gender,
+			Date firstdate, Date lastdate) {
+		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN EMPLOYEE on EMPLOYEE.JOB_ID = job.ID "
+				+ "JOIN ORGANIZATION on job.ORG_ID = ORGANIZATION.ID "
+				+ "WHERE job.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL";
+
+		if (aimag_id != null) {
+			sql = sql + " AND organization.SUM_ID in (select id from sum_duureg where aimag_id=:aimag_id)";
+		}
+
+		if (generalTypeId != null) {
+			sql = sql + " AND job.GENERALTYPE_ID = :generalTypeId";
+		}
+
+		if (gender != null) {
+			sql = sql + " AND EMPLOYEE.GENDER = :gender";
+		}
+
+		if (firstdate != null && lastdate != null) {
+			sql = sql
+					+ " AND job.JOBDATE BETWEEN to_date(:firstdate, 'yyyy-MM-dd') AND to_date(:lastdate, 'yyyy-MM-dd')";
+		}
+
+		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
+
+		if (aimag_id != null)
+			query.setParameter("aimag_id", aimag_id.getVal());
+
+		if (generalTypeId != null)
+			query.setParameter("generalTypeId", generalTypeId.getId());
+
+		if (gender != null)
+			query.setParameter("gender", gender.getVal());
 
 		if (firstdate != null && lastdate != null) {
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
