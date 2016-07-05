@@ -100,7 +100,6 @@ public class Index {
 
 			loginState.setUser(user);
 
-			System.err.println("get user=" + loginState.getUser());
 
 			roleId = loginState.getUser().getCurrentrole().getVal();
 
@@ -115,21 +114,20 @@ public class Index {
 
 			user.setLastAccessDate(Calendar.getInstance().getTime());
 
-			this.dao.saveOrUpdateObject(user);
+			this.dao.saveOrUpdate(user,false);
 
 			loginState.setRoleNames(user.getRoleNames());
 		}
 		loginState.setActiveMenu("hyanah");
 		loginState.setPageTitle(message.get("dashboard"));
 
-		System.err.println(loginState.getUser());
 
 		AccessLog accessLog = new AccessLog();
 		accessLog.setAccessDate(dao.getCurrentDate());
 		accessLog.setUser(loginState.getUser());
 		accessLog.setIpAddress(requestGlobals.getHTTPServletRequest()
 				.getRemoteAddr());
-		dao.saveOrUpdateObject(accessLog);
+		dao.saveOrUpdate(accessLog,false);
 
 		aList = dao.getAccessLogs();
 
@@ -324,15 +322,12 @@ public class Index {
 			 * }
 			 */
 		}
-		System.err.println(bar);
 
 		String s = bar.toString();
 
-		System.err.println("substr" + s.substring(1, 7));
 
 		Object b = s.substring(1, 9);
 
-		System.err.println("obj=" + b);
 
 		return bar;
 	}
@@ -384,7 +379,14 @@ public class Index {
 	}
 
 	public Integer getTotalFemaleJan() {
-		Integer i = dao.getTotalFemaleJan(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalFemaleJan(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalFemaleJan(year, orgId, null);
+		} else {
+			i = dao.getTotalFemaleJan(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -409,7 +411,14 @@ public class Index {
 	}
 
 	public Integer getTotalFemaleFeb() {
-		Integer i = dao.getTotalFemaleFeb(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalFemaleFeb(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalFemaleFeb(year, orgId, null);
+		} else {
+			i = dao.getTotalFemaleFeb(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -434,7 +443,14 @@ public class Index {
 	}
 
 	public Integer getTotalFemaleMar() {
-		Integer i = dao.getTotalFemaleMar(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalFemaleMar(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalFemaleMar(year, orgId, null);
+		} else {
+			i = dao.getTotalFemaleMar(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -459,7 +475,14 @@ public class Index {
 	}
 
 	public Integer getTotalFemaleApr() {
-		Integer i = dao.getTotalFemaleApr(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalFemaleApr(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalFemaleApr(year, orgId, null);
+		} else {
+			i = dao.getTotalFemaleApr(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -484,7 +507,14 @@ public class Index {
 	}
 
 	public Integer getTotalFemaleMay() {
-		Integer i = dao.getTotalFemaleMay(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalFemaleMay(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalFemaleMay(year, orgId, null);
+		} else {
+			i = dao.getTotalFemaleMay(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -509,7 +539,14 @@ public class Index {
 	}
 
 	public Integer getTotalFemaleJun() {
-		Integer i = dao.getTotalFemaleJun(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalFemaleJun(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalFemaleJun(year, orgId, null);
+		} else {
+			i = dao.getTotalFemaleJun(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -534,7 +571,14 @@ public class Index {
 	}
 
 	public Integer getTotalFemaleJul() {
-		Integer i = dao.getTotalFemaleJul(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalFemaleJul(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalFemaleJul(year, orgId, null);
+		} else {
+			i = dao.getTotalFemaleJul(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -559,7 +603,14 @@ public class Index {
 	}
 
 	public Integer getTotalFemaleAug() {
-		Integer i = dao.getTotalFemaleAug(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalFemaleAug(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalFemaleAug(year, orgId, null);
+		} else {
+			i = dao.getTotalFemaleAug(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -584,7 +635,14 @@ public class Index {
 	}
 
 	public Integer getTotalFemaleSep() {
-		Integer i = dao.getTotalFemaleSep(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalFemaleSep(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalFemaleSep(year, orgId, null);
+		} else {
+			i = dao.getTotalFemaleSep(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -609,7 +667,14 @@ public class Index {
 	}
 
 	public Integer getTotalFemaleNov() {
-		Integer i = dao.getTotalFemaleNov(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalFemaleNov(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalFemaleNov(year, orgId, null);
+		} else {
+			i = dao.getTotalFemaleNov(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -634,7 +699,14 @@ public class Index {
 	}
 
 	public Integer getTotalFemaleDec() {
-		Integer i = dao.getTotalFemaleDec(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalFemaleDec(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalFemaleDec(year, orgId, null);
+		} else {
+			i = dao.getTotalFemaleDec(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -659,7 +731,14 @@ public class Index {
 	}
 
 	public Integer getTotalFemaleOct() {
-		Integer i = dao.getTotalFemaleJan(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalFemaleJan(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalFemaleJan(year, orgId, null);
+		} else {
+			i = dao.getTotalFemaleJan(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -668,7 +747,14 @@ public class Index {
 	}
 
 	public Integer getTotalImpJan() {
-		Integer i = dao.getTotalImpJan(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalImpJan(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalImpJan(year, orgId, null);
+		} else {
+			i = dao.getTotalImpJan(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -677,7 +763,14 @@ public class Index {
 	}
 
 	public Integer getTotalImpFeb() {
-		Integer i = dao.getTotalImpFeb(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalImpFeb(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalImpFeb(year, orgId, null);
+		} else {
+			i = dao.getTotalImpFeb(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -686,7 +779,14 @@ public class Index {
 	}
 
 	public Integer getTotalImpMar() {
-		Integer i = dao.getTotalImpMar(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalImpMar(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalImpMar(year, orgId, null);
+		} else {
+			i = dao.getTotalImpMar(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -695,7 +795,14 @@ public class Index {
 	}
 
 	public Integer getTotalImpApr() {
-		Integer i = dao.getTotalImpApr(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalImpApr(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalImpApr(year, orgId, null);
+		} else {
+			i = dao.getTotalImpApr(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -704,7 +811,14 @@ public class Index {
 	}
 
 	public Integer getTotalImpMay() {
-		Integer i = dao.getTotalImpMay(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalImpMay(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalImpMay(year, orgId, null);
+		} else {
+			i = dao.getTotalImpMay(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -713,7 +827,14 @@ public class Index {
 	}
 
 	public Integer getTotalImpJun() {
-		Integer i = dao.getTotalImpJun(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalImpJun(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalImpJun(year, orgId, null);
+		} else {
+			i = dao.getTotalImpJun(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -722,7 +843,14 @@ public class Index {
 	}
 
 	public Integer getTotalImpJul() {
-		Integer i = dao.getTotalImpJul(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalImpJul(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalImpJul(year, orgId, null);
+		} else {
+			i = dao.getTotalImpJul(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -731,7 +859,14 @@ public class Index {
 	}
 
 	public Integer getTotalImpAug() {
-		Integer i = dao.getTotalImpAug(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalImpAug(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalImpAug(year, orgId, null);
+		} else {
+			i = dao.getTotalImpAug(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -740,7 +875,14 @@ public class Index {
 	}
 
 	public Integer getTotalImpSep() {
-		Integer i = dao.getTotalImpSep(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalImpSep(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalImpSep(year, orgId, null);
+		} else {
+			i = dao.getTotalImpSep(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -749,7 +891,14 @@ public class Index {
 	}
 
 	public Integer getTotalImpOct() {
-		Integer i = dao.getTotalImpOct(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalImpOct(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalImpOct(year, orgId, null);
+		} else {
+			i = dao.getTotalImpOct(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -758,7 +907,14 @@ public class Index {
 	}
 
 	public Integer getTotalImpNov() {
-		Integer i = dao.getTotalImpNov(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalImpNov(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalImpNov(year, orgId, null);
+		} else {
+			i = dao.getTotalImpNov(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
@@ -767,7 +923,14 @@ public class Index {
 	}
 
 	public Integer getTotalImpDec() {
-		Integer i = dao.getTotalImpDec(year);
+		Integer i = 0;
+		if (roleId == 0) {
+			i = dao.getTotalImpDec(year, null, null);
+		} else if (roleId == 1) {
+			i = dao.getTotalImpDec(year, orgId, null);
+		} else {
+			i = dao.getTotalImpDec(year, null, sumId);
+		}
 		if (i != null && i > 0) {
 			return i;
 		} else {
