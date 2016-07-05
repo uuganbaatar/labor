@@ -590,7 +590,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public Integer getAllJobs() {
+	public Integer getAllJobs(Long r) {
 
 		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL AND organization.DELETED_BY_ID IS NULL";
 
@@ -602,7 +602,7 @@ public class SccDAOHibernate implements SccDAO {
 			return 0;
 	}
 
-	public Integer getNewJobs() {
+	public Integer getNewJobs(Long r) {
 
 		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL AND organization.DELETED_BY_ID IS NULL AND job.ISNEW = 1";
 
@@ -611,7 +611,7 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getAllEmployees() {
+	public Integer getAllEmployees(Long r) {
 
 		String sql = "SELECT COUNT(DISTINCT employee.ID) AS countEmp FROM employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND employee.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL AND organization.DELETED_BY_ID IS NULL AND employee.DELETED_BY_ID IS NULL";
 
@@ -1714,7 +1714,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public Integer getHasagdsanJobs() {
+	public Integer getHasagdsanJobs(Long r) {
 
 		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID WHERE job.IS_ACTIVE = 0 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL AND organization.DELETED_BY_ID IS NULL";
 

@@ -124,6 +124,8 @@ public class Layout {
 			}
 
 			loginState.setUser(user);
+			
+			System.err.println("get user=" + loginState.getUser());
 
 			user.setLastAccessDate(Calendar.getInstance().getTime());
 

@@ -62,6 +62,10 @@ public class Department extends BaseObject {
 	@ManyToOne
 	@JoinColumn(name = "organization_id")
 	private Organization organization;
+	
+	@ManyToOne
+	@JoinColumn(name = "sum_id")
+	private SumDuureg sumId;
 
 	public Department() {
 		this.uuid = UUIDUtil.getUUID();
@@ -97,6 +101,14 @@ public class Department extends BaseObject {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public SumDuureg getSumId() {
+		return sumId;
+	}
+
+	public void setSumId(SumDuureg sumId) {
+		this.sumId = sumId;
 	}
 
 	public Organization getOrganization() {
