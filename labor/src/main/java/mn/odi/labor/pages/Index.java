@@ -9,6 +9,8 @@ import java.util.List;
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.common.AccessLog;
+import mn.odi.labor.entities.common.User;
+import mn.odi.labor.enums.RoleEnum;
 import mn.odi.labor.util.Constants;
 
 import org.apache.tapestry5.alerts.AlertManager;
@@ -23,6 +25,11 @@ import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestGlobals;
 import org.apache.tapestry5.services.Response;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /*@Import(library = { "context:/js/indexcharts.js" })*/
 public class Index {
@@ -62,34 +69,62 @@ public class Index {
 
 	@Property
 	private boolean jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec;
-	
+
 	@Inject
 	private AlertManager alertManager;
-	
+
+	private Long roleId;
+
 	@Inject
 	private Messages messages;
 
 	@CommitAfter
 	void beginRender() {
+		if (loginState.getUser() == null) {
+
+			SecurityContext ctx = SecurityContextHolder.getContext();
+
+			Authentication auth = ctx.getAuthentication();
+
+			UserDetails userDetails = (UserDetails) (auth.getPrincipal());
+
+			User user = (User) this.dao.getUserByUsername(userDetails
+					.getUsername());
+
+			if (user == null) {
+				throw new UsernameNotFoundException(
+
+				"User not found in database");
+			}
+
+			loginState.setUser(user);
+
+			System.err.println("get user=" + loginState.getUser());
+
+			user.setLastAccessDate(Calendar.getInstance().getTime());
+
+			this.dao.saveOrUpdateObject(user);
+
+			loginState.setRoleNames(user.getRoleNames());
+		}
 		loginState.setActiveMenu("hyanah");
 		loginState.setPageTitle(message.get("dashboard"));
 
-		
-	
-			AccessLog accessLog = new AccessLog();
-			accessLog.setAccessDate(dao.getCurrentDate());
-			accessLog.setUser(loginState.getUser());
-			accessLog.setIpAddress(requestGlobals.getHTTPServletRequest()
-					.getRemoteAddr());
-			dao.saveOrUpdateObject(accessLog);
-		
-			
-			aList = dao.getAccessLogs();
+		System.err.println(loginState.getUser());
+
+		AccessLog accessLog = new AccessLog();
+		accessLog.setAccessDate(dao.getCurrentDate());
+		accessLog.setUser(loginState.getUser());
+		accessLog.setIpAddress(requestGlobals.getHTTPServletRequest()
+				.getRemoteAddr());
+		dao.saveOrUpdateObject(accessLog);
+
+		aList = dao.getAccessLogs();
 
 		rowIndex = 1;
 
 		year = Calendar.getInstance().get(Calendar.YEAR);
-		month = Calendar.getInstance().get(Calendar.MONTH)+1;
+		month = Calendar.getInstance().get(Calendar.MONTH) + 1;
 		if (month == 1) {
 			jan = true;
 		} else if (month == 2) {
@@ -193,7 +228,7 @@ public class Index {
 	}
 
 	public Integer getAllJobCount() {
-		Integer l = dao.getAllJobs();
+		Integer l = dao.getAllJobs(roleId);
 		if (l != null && l > 0) {
 			return l;
 		} else {
@@ -202,7 +237,7 @@ public class Index {
 	}
 
 	public Integer getNewJobCount() {
-		Integer l = dao.getNewJobs();
+		Integer l = dao.getNewJobs(roleId);
 		if (l != null && l > 0) {
 			return l;
 		} else {
@@ -211,7 +246,7 @@ public class Index {
 	}
 
 	public Integer getHasagdsanJobs() {
-		Integer l = dao.getHasagdsanJobs();
+		Integer l = dao.getHasagdsanJobs(roleId);
 		if (l != null && l > 0) {
 			return l;
 		} else {
@@ -220,46 +255,43 @@ public class Index {
 	}
 
 	public Integer getAllEmployees() {
-		Integer l = dao.getAllEmployees();
+		Integer l = dao.getAllEmployees(roleId);
 		if (l != null && l > 0) {
 			return l;
 		} else {
 			return 0;
 		}
 	}
-	
-	public String getTest(){
+
+	public String getTest() {
 		return "[1,2,3,4,5,6,7]";
 	}
-	
 
 	public Object getAreaData() {
 		JSONArray bar = new JSONArray();
-		
+
 		JSONArray counts = new JSONArray();
 		bar.put(counts);
 		List<BigDecimal> list = getInfoAddedByTypeNew();
 
 		for (BigDecimal _values : list) {
 			counts.put(_values);
-		/*	String[] values = (String[]) _values;
-			if (values[0] != null) {
-
-				System.err.println(counts.put(values[0]));
-				counts.put(values[0]);
-			}*/
+			/*
+			 * String[] values = (String[]) _values; if (values[0] != null) {
+			 * 
+			 * System.err.println(counts.put(values[0])); counts.put(values[0]);
+			 * }
+			 */
 		}
 		System.err.println(bar);
-		
-		
+
 		String s = bar.toString();
-		
+
 		System.err.println("substr" + s.substring(1, 7));
-		
 
-Object b = s.substring(1, 9);
+		Object b = s.substring(1, 9);
 
-System.err.println("obj=" + b);
+		System.err.println("obj=" + b);
 
 		return bar;
 	}
@@ -508,7 +540,7 @@ System.err.println("obj=" + b);
 			return 0;
 		}
 	}
-	
+
 	public Integer getTotalImpJan() {
 		Integer i = dao.getTotalImpJan(year);
 		if (i != null && i > 0) {
@@ -517,7 +549,7 @@ System.err.println("obj=" + b);
 			return 0;
 		}
 	}
-	
+
 	public Integer getTotalImpFeb() {
 		Integer i = dao.getTotalImpFeb(year);
 		if (i != null && i > 0) {
@@ -526,7 +558,7 @@ System.err.println("obj=" + b);
 			return 0;
 		}
 	}
-	
+
 	public Integer getTotalImpMar() {
 		Integer i = dao.getTotalImpMar(year);
 		if (i != null && i > 0) {
@@ -535,7 +567,7 @@ System.err.println("obj=" + b);
 			return 0;
 		}
 	}
-	
+
 	public Integer getTotalImpApr() {
 		Integer i = dao.getTotalImpApr(year);
 		if (i != null && i > 0) {
@@ -544,6 +576,7 @@ System.err.println("obj=" + b);
 			return 0;
 		}
 	}
+
 	public Integer getTotalImpMay() {
 		Integer i = dao.getTotalImpMay(year);
 		if (i != null && i > 0) {
@@ -552,6 +585,7 @@ System.err.println("obj=" + b);
 			return 0;
 		}
 	}
+
 	public Integer getTotalImpJun() {
 		Integer i = dao.getTotalImpJun(year);
 		if (i != null && i > 0) {
@@ -560,7 +594,7 @@ System.err.println("obj=" + b);
 			return 0;
 		}
 	}
-	
+
 	public Integer getTotalImpJul() {
 		Integer i = dao.getTotalImpJul(year);
 		if (i != null && i > 0) {
@@ -569,6 +603,7 @@ System.err.println("obj=" + b);
 			return 0;
 		}
 	}
+
 	public Integer getTotalImpAug() {
 		Integer i = dao.getTotalImpAug(year);
 		if (i != null && i > 0) {
@@ -577,7 +612,7 @@ System.err.println("obj=" + b);
 			return 0;
 		}
 	}
-	
+
 	public Integer getTotalImpSep() {
 		Integer i = dao.getTotalImpSep(year);
 		if (i != null && i > 0) {
@@ -586,7 +621,7 @@ System.err.println("obj=" + b);
 			return 0;
 		}
 	}
-	
+
 	public Integer getTotalImpOct() {
 		Integer i = dao.getTotalImpOct(year);
 		if (i != null && i > 0) {
@@ -595,6 +630,7 @@ System.err.println("obj=" + b);
 			return 0;
 		}
 	}
+
 	public Integer getTotalImpNov() {
 		Integer i = dao.getTotalImpNov(year);
 		if (i != null && i > 0) {
@@ -603,7 +639,7 @@ System.err.println("obj=" + b);
 			return 0;
 		}
 	}
-	
+
 	public Integer getTotalImpDec() {
 		Integer i = dao.getTotalImpDec(year);
 		if (i != null && i > 0) {
@@ -612,7 +648,7 @@ System.err.println("obj=" + b);
 			return 0;
 		}
 	}
-	
+
 	public Format getTimeFormat() {
 		return new SimpleDateFormat(Constants.TIME_FORMAT);
 	}

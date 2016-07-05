@@ -119,11 +119,11 @@ public interface SccDAO {
 	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
 			Integer month);
 
-	public Integer getAllJobs();
+	public Integer getAllJobs(Long r);
 
-	public Integer getNewJobs();
+	public Integer getNewJobs(Long r);
 
-	public Integer getAllEmployees();
+	public Integer getAllEmployees(Long r);
 
 	public boolean isJobExists(Job job);
 
@@ -240,7 +240,7 @@ public interface SccDAO {
 	public List<Job> getJobSearch(GeneralType generalType, String name, boolean check, Date d1, Date d2,
 			AjiliinBairHurungu fundSource, JobTypeEnum type, Organization org);
 
-	public Integer getHasagdsanJobs();
+	public Integer getHasagdsanJobs(Long r);
 
 	public Integer getAllJobsSum(AimagNiislelEnum aimag_id, Date firstdate, Date lastdate);
 
