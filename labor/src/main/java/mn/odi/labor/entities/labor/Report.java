@@ -13,6 +13,7 @@ import org.apache.tapestry5.beaneditor.NonVisual;
 import org.hibernate.envers.Audited;
 
 import mn.odi.labor.entities.common.BaseObject;
+import mn.odi.labor.util.UUIDUtil;
 
 @Entity
 @Table(name = "report")
@@ -33,6 +34,10 @@ public class Report extends BaseObject {
 
 	@Column(name = "name")
 	public String name;
+
+	public Report() {
+		this.uuid = UUIDUtil.getUUID();
+	}
 
 	public Long getId() {
 		return id;

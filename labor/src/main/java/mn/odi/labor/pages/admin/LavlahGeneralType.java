@@ -107,12 +107,10 @@ public class LavlahGeneralType {
 	public void onSuccessFromSave() {
 
 		if (LavlahGeneralType.containsWhiteSpace(name)) {
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("hoosonzai"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("hoosonzai"));
 		} else {
 			if (dao.getGeneralTypeByName(name) != null) {
-				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-						message.get("burtgeltei"));
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("burtgeltei"));
 			} else {
 				type = new GeneralType();
 				type.setName(name);
@@ -130,8 +128,7 @@ public class LavlahGeneralType {
 			dao.deleteObject(obj);
 		} catch (Exception e) {
 			System.out.println("[ERROR DELETE:]" + e);
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("deleteerror"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
 		}
 
 		return LavlahGeneralType.class;
@@ -149,6 +146,7 @@ public class LavlahGeneralType {
 			type.setIsActive(true);
 		}
 		dao.saveOrUpdateObject(type);
+		typeList = dao.getGeneralTypeListSearch(gname, d1, d2, active);
 		ajaxResponseRenderer.addRender(listZone);
 	}
 

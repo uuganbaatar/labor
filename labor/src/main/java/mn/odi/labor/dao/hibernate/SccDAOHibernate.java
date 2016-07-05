@@ -109,12 +109,12 @@ public class SccDAOHibernate implements SccDAO {
 		this.updateObject((Object) obj);
 	}
 
-	@CommitAfter
-	public void saveOrUpdateObject(BaseObject obj) {
-		this.updateDateAndActor(obj);
-
-		this.saveOrUpdateObject((Object) obj);
-	}
+//	@CommitAfter
+//	public void saveOrUpdateObject(BaseObject obj) {
+//		this.updateDateAndActor(obj);
+//
+//		this.saveOrUpdateObject((Object) obj);
+//	}
 
 	@CommitAfter
 	public void saveObject(Object obj) {

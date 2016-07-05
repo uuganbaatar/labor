@@ -99,6 +99,13 @@ public class LaborReportOrgList {
 		if (year == null) {
 			year = Calendar.getInstance().get(Calendar.YEAR);
 		}
+
+		if (org == null) {
+			if (loginState.getUser() != null && loginState.getUser().getOrg() != null)
+				org = loginState.getUser().getOrg();
+			else
+				org = null;
+		}
 	}
 
 	public String getUserName() {
@@ -199,6 +206,7 @@ public class LaborReportOrgList {
 		return this.getStatus(12);
 	}
 
+	@CommitAfter
 	public Object onActionFromJanAction(Report r) {
 		if (dao.getReportStatusList(r, year, 1, org) != null)
 			insertPage.onActivate(dao.getReportStatusList(r, year, 1, org));
@@ -206,11 +214,15 @@ public class LaborReportOrgList {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
 			t.setMonth(1);
+			t.setOrgId(org);
+			t.setReportId(r);
+			dao.saveOrUpdateObject(t);
 			insertPage.onActivate(t);
 		}
 		return insertPage;
 	}
 
+	@CommitAfter
 	public Object onActionFromFebAction(Report r) {
 		if (dao.getReportStatusList(r, year, 2, org) != null)
 			insertPage.onActivate(dao.getReportStatusList(r, year, 2, org));
@@ -218,11 +230,15 @@ public class LaborReportOrgList {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
 			t.setMonth(2);
+			t.setOrgId(org);
+			t.setReportId(r);
+			dao.saveOrUpdateObject(t);
 			insertPage.onActivate(t);
 		}
 		return insertPage;
 	}
 
+	@CommitAfter
 	public Object onActionFromMarAction(Report r) {
 		if (dao.getReportStatusList(r, year, 3, org) != null)
 			insertPage.onActivate(dao.getReportStatusList(r, year, 3, org));
@@ -230,11 +246,15 @@ public class LaborReportOrgList {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
 			t.setMonth(3);
+			t.setOrgId(org);
+			t.setReportId(r);
+			dao.saveOrUpdateObject(t);
 			insertPage.onActivate(t);
 		}
 		return insertPage;
 	}
 
+	@CommitAfter
 	public Object onActionFromAprAction(Report r) {
 		if (dao.getReportStatusList(r, year, 4, org) != null)
 			insertPage.onActivate(dao.getReportStatusList(r, year, 4, org));
@@ -242,11 +262,15 @@ public class LaborReportOrgList {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
 			t.setMonth(4);
+			t.setOrgId(org);
+			t.setReportId(r);
+			dao.saveOrUpdateObject(t);
 			insertPage.onActivate(t);
 		}
 		return insertPage;
 	}
 
+	@CommitAfter
 	public Object onActionFromMayAction(Report r) {
 		if (dao.getReportStatusList(r, year, 5, org) != null)
 			insertPage.onActivate(dao.getReportStatusList(r, year, 5, org));
@@ -254,11 +278,15 @@ public class LaborReportOrgList {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
 			t.setMonth(5);
+			t.setOrgId(org);
+			t.setReportId(r);
+			dao.saveOrUpdateObject(t);
 			insertPage.onActivate(t);
 		}
 		return insertPage;
 	}
 
+	@CommitAfter
 	public Object onActionFromJunAction(Report r) {
 		if (dao.getReportStatusList(r, year, 6, org) != null)
 			insertPage.onActivate(dao.getReportStatusList(r, year, 6, org));
@@ -266,11 +294,15 @@ public class LaborReportOrgList {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
 			t.setMonth(6);
+			t.setOrgId(org);
+			t.setReportId(r);
+			dao.saveOrUpdateObject(t);
 			insertPage.onActivate(t);
 		}
 		return insertPage;
 	}
 
+	@CommitAfter
 	public Object onActionFromJulAction(Report r) {
 		if (dao.getReportStatusList(r, year, 7, org) != null)
 			insertPage.onActivate(dao.getReportStatusList(r, year, 7, org));
@@ -278,11 +310,15 @@ public class LaborReportOrgList {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
 			t.setMonth(7);
+			t.setOrgId(org);
+			t.setReportId(r);
+			dao.saveOrUpdateObject(t);
 			insertPage.onActivate(t);
 		}
 		return insertPage;
 	}
 
+	@CommitAfter
 	public Object onActionFromAugAction(Report r) {
 		if (dao.getReportStatusList(r, year, 8, org) != null)
 			insertPage.onActivate(dao.getReportStatusList(r, year, 8, org));
@@ -290,11 +326,15 @@ public class LaborReportOrgList {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
 			t.setMonth(8);
+			t.setOrgId(org);
+			t.setReportId(r);
+			dao.saveOrUpdateObject(t);
 			insertPage.onActivate(t);
 		}
 		return insertPage;
 	}
 
+	@CommitAfter
 	public Object onActionFromSepAction(Report r) {
 		if (dao.getReportStatusList(r, year, 9, org) != null)
 			insertPage.onActivate(dao.getReportStatusList(r, year, 9, org));
@@ -303,11 +343,14 @@ public class LaborReportOrgList {
 			t.setYear(year);
 			t.setMonth(9);
 			t.setOrgId(org);
+			t.setReportId(r);
+			dao.saveOrUpdateObject(t);
 			insertPage.onActivate(t);
 		}
 		return insertPage;
 	}
 
+	@CommitAfter
 	public Object onActionFromOctAction(Report r) {
 		if (dao.getReportStatusList(r, year, 10, org) != null)
 			insertPage.onActivate(dao.getReportStatusList(r, year, 10, org));
@@ -315,11 +358,15 @@ public class LaborReportOrgList {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
 			t.setMonth(10);
+			t.setOrgId(org);
+			t.setReportId(r);
+			dao.saveOrUpdateObject(t);
 			insertPage.onActivate(t);
 		}
 		return insertPage;
 	}
 
+	@CommitAfter
 	public Object onActionFromNovAction(Report r) {
 		if (dao.getReportStatusList(r, year, 11, org) != null)
 			insertPage.onActivate(dao.getReportStatusList(r, year, 11, org));
@@ -327,11 +374,15 @@ public class LaborReportOrgList {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
 			t.setMonth(11);
+			t.setOrgId(org);
+			t.setReportId(r);
+			dao.saveOrUpdateObject(t);
 			insertPage.onActivate(t);
 		}
 		return insertPage;
 	}
 
+	@CommitAfter
 	public Object onActionFromDecAction(Report r) {
 		if (dao.getReportStatusList(r, year, 12, org) != null)
 			insertPage.onActivate(dao.getReportStatusList(r, year, 12, org));
@@ -339,6 +390,9 @@ public class LaborReportOrgList {
 			ReportStatus t = new ReportStatus();
 			t.setYear(year);
 			t.setMonth(12);
+			t.setOrgId(org);
+			t.setReportId(r);
+			dao.saveOrUpdateObject(t);
 			insertPage.onActivate(t);
 		}
 		return insertPage;

@@ -17,6 +17,7 @@ import org.hibernate.envers.Audited;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.enums.ReportStatusEnum;
+import mn.odi.labor.util.UUIDUtil;
 
 @Entity
 @Table(name = "report_status")
@@ -51,6 +52,10 @@ public class ReportStatus extends BaseObject {
 	@ManyToOne
 	@JoinColumn(name = "org_id")
 	public Organization orgId;
+
+	public ReportStatus() {
+		this.uuid = UUIDUtil.getUUID();
+	}
 
 	public Long getId() {
 		return id;

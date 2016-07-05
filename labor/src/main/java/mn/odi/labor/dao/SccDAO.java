@@ -37,7 +37,7 @@ public interface SccDAO {
 
 	public void updateObject(BaseObject obj);
 
-	public void saveOrUpdateObject(BaseObject obj);
+	// public void saveOrUpdateObject(BaseObject obj);
 
 	public void saveObject(Object obj);
 

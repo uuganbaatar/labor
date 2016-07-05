@@ -18,6 +18,7 @@ import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.common.BaseObject;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.enums.ReportDetailType;
+import mn.odi.labor.util.UUIDUtil;
 
 @Entity
 @Table(name = "report_detail")
@@ -56,6 +57,10 @@ public class ReportDetail extends BaseObject {
 
 	@Column(name = "value")
 	public Integer value;
+
+	public ReportDetail() {
+		this.uuid = UUIDUtil.getUUID();
+	}
 
 	public Long getId() {
 		return id;
