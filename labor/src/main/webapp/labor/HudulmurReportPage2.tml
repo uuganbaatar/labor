@@ -54,7 +54,7 @@
 								</tr>
 								<t:Loop t:source="list" t:value="row">
 									<tr>
-										<td>${row?.name}</td>
+										<td>${name}</td>
 										<td style="text-align: center;"> ${number}</td>
 										<td style="text-align: center;"> ${allJobs}</td>
 										<t:Loop t:source="headerEz" t:value="valueEZ">

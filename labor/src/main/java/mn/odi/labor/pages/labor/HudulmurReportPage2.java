@@ -171,4 +171,14 @@ public class HudulmurReportPage2 {
 		return new FormYearSM(formYears);
 	}
 
+	public String getName() {
+		String s = "";
+
+		if (row != null && row.name() != null)
+			s = message.get(row.name());
+
+		return s;
+
+	}
+
 }
