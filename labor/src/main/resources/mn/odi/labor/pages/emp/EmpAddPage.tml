@@ -82,7 +82,18 @@
 								t:validate="required" t:value="emp.phone" />
 						</div>
 					</div>
-
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>
+								${message:isImpairment-label}
+								<span class="req">*</span>
+							</label>
+							<div class="form-group">
+										
+										<input t:id="isImpairment" t:type="checkbox" t:value="emp.isImpairment" />
+									</div>
+						</div>
+					</div>
 					<div class="clearfix"></div>
 					<div class="title-1">${message:education-label}</div>
 
@@ -178,18 +189,6 @@
 							<input t:type="select" class="form-control" t:id="firedReason"
 								t:model="firedReasonModel" t:value="emp.firedReason"
 								t:blankOption="always" />
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label>
-								${message:isImpairment-label}
-								<span class="req">*</span>
-							</label>
-							<div class="form-group">
-										
-										<input t:id="isImpairment" t:type="checkbox" t:value="emp.isImpairment" />
-									</div>
 						</div>
 					</div>
 
