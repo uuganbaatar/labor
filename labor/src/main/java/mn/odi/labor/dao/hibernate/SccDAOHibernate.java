@@ -591,10 +591,21 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public Integer getAllJobs(Long r) {
+	public Integer getAllJobs(Long org,Long sum) {
+		
+		System.err.println("sumid=" + sum);
 
 		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL AND organization.DELETED_BY_ID IS NULL";
 
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			System.err.println("in sum");
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
+			
 		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		if (list != null && !list.isEmpty())
@@ -603,19 +614,32 @@ public class SccDAOHibernate implements SccDAO {
 			return 0;
 	}
 
-	public Integer getNewJobs(Long r) {
+	public Integer getNewJobs(Long org,Long sum) {
 
 		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL AND organization.DELETED_BY_ID IS NULL AND job.ISNEW = 1";
 
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
 	}
 
-	public Integer getAllEmployees(Long r) {
+	public Integer getAllEmployees(Long org,Long sum) {
 
 		String sql = "SELECT COUNT(DISTINCT employee.ID) AS countEmp FROM employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID WHERE job.IS_ACTIVE = 1 AND organization.IS_ACTIVE = 1 AND employee.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL AND organization.DELETED_BY_ID IS NULL AND employee.DELETED_BY_ID IS NULL";
-
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
@@ -1183,7 +1207,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public Integer getTotalJan(int year) {
+	public Integer getTotalJan(int year,Long org,Long sum) {
 
 		String s = String.valueOf(year);
 
@@ -1191,9 +1215,16 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-FEB-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(employee.id) countEmp from employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID where employee.created_date BETWEEN '"+date1+"' and '"+date2+"'";
 
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
+		
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
@@ -1246,7 +1277,7 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public Integer getTotalFeb(int year) {
+	public Integer getTotalFeb(int year,Long org, Long sum) {
 
 		String s = String.valueOf(year);
 
@@ -1254,9 +1285,15 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-MAR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(employee.id) countEmp from employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID where employee.created_date BETWEEN '"+date1+"' and '"+date2+"'";
 
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
@@ -1278,7 +1315,7 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getTotalMar(int year) {
+	public Integer getTotalMar(int year,Long org, Long sum) {
 
 		String s = String.valueOf(year);
 
@@ -1286,8 +1323,15 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-APR-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(employee.id) countEmp from employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID where employee.created_date BETWEEN '"+date1+"' and '"+date2+"'";
+
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
@@ -1310,7 +1354,7 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getTotalApr(int year) {
+	public Integer getTotalApr(int year,Long org, Long sum) {
 
 		String s = String.valueOf(year);
 
@@ -1318,8 +1362,15 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-MAY-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(employee.id) countEmp from employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID where employee.created_date BETWEEN '"+date1+"' and '"+date2+"'";
+
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
@@ -1342,7 +1393,7 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getTotalMay(int year) {
+	public Integer getTotalMay(int year,Long org, Long sum) {
 
 		String s = String.valueOf(year);
 
@@ -1350,8 +1401,15 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-JUN-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(employee.id) countEmp from employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID where employee.created_date BETWEEN '"+date1+"' and '"+date2+"'";
+
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
@@ -1374,7 +1432,7 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getTotalJun(int year) {
+	public Integer getTotalJun(int year,Long org, Long sum) {
 
 		String s = String.valueOf(year);
 
@@ -1382,8 +1440,15 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-JUL-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(employee.id) countEmp from employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID where employee.created_date BETWEEN '"+date1+"' and '"+date2+"'";
+
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
@@ -1406,7 +1471,7 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getTotalJul(int year) {
+	public Integer getTotalJul(int year,Long org, Long sum) {
 
 		String s = String.valueOf(year);
 
@@ -1414,8 +1479,15 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-AUG-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(employee.id) countEmp from employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID where employee.created_date BETWEEN '"+date1+"' and '"+date2+"'";
+
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
@@ -1438,7 +1510,7 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getTotalAug(int year) {
+	public Integer getTotalAug(int year,Long org, Long sum) {
 
 		String s = String.valueOf(year);
 
@@ -1446,8 +1518,15 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-SEP-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(employee.id) countEmp from employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID where employee.created_date BETWEEN '"+date1+"' and '"+date2+"'";
+
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
@@ -1470,7 +1549,7 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getTotalSep(int year) {
+	public Integer getTotalSep(int year,Long org, Long sum) {
 
 		String s = String.valueOf(year);
 
@@ -1478,8 +1557,15 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-OCT-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(employee.id) countEmp from employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID where employee.created_date BETWEEN '"+date1+"' and '"+date2+"'";
+
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
@@ -1502,7 +1588,7 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getTotalOct(int year) {
+	public Integer getTotalOct(int year,Long org, Long sum) {
 
 		String s = String.valueOf(year);
 
@@ -1510,8 +1596,15 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-NOV-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(employee.id) countEmp from employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID where employee.created_date BETWEEN '"+date1+"' and '"+date2+"'";
+
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
@@ -1534,7 +1627,7 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getTotalNov(int year) {
+	public Integer getTotalNov(int year,Long org, Long sum) {
 
 		String s = String.valueOf(year);
 
@@ -1542,8 +1635,15 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "01-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(employee.id) countEmp from employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID where employee.created_date BETWEEN '"+date1+"' and '"+date2+"'";
+
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
@@ -1566,7 +1666,7 @@ public class SccDAOHibernate implements SccDAO {
 		return list.get(0);
 	}
 
-	public Integer getTotalDec(int year) {
+	public Integer getTotalDec(int year,Long org, Long sum) {
 
 		String s = String.valueOf(year);
 
@@ -1574,8 +1674,15 @@ public class SccDAOHibernate implements SccDAO {
 
 		String date2 = "31-DEC-" + s.substring(2, 4) + " 11.02.49.590000000 PM";
 
-		String sql = "select count(id) countEmp from employee where created_date BETWEEN '" + date1 + "' and '" + date2
-				+ "'";
+		String sql = "select count(employee.id) countEmp from employee JOIN job ON employee.JOB_ID = job.ID JOIN organization ON job.ORG_ID = organization.ID where employee.created_date BETWEEN '"+date1+"' and '"+date2+"'";
+
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 
 		Query query = session.createSQLQuery(sql).addScalar("countEmp", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
@@ -1715,10 +1822,18 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public Integer getHasagdsanJobs(Long r) {
+	public Integer getHasagdsanJobs(Long org, Long sum) {
 
 		String sql = "SELECT COUNT(DISTINCT job.ID) AS countJob FROM job JOIN organization ON job.ORG_ID = organization.ID WHERE job.IS_ACTIVE = 0 AND organization.IS_ACTIVE = 1 AND job.DELETED_BY_ID IS NULL AND organization.DELETED_BY_ID IS NULL";
 
+		if(org!=null){
+			sql+=" and organization.id='"+ org +"'";
+		}
+		
+		if(sum!=null){
+			System.err.println("in sum");
+			sql+=" and organization.sum_id='"+ sum +"'";
+		}
 		Query query = session.createSQLQuery(sql).addScalar("countJob", IntegerType.INSTANCE);
 		List<Integer> list = query.list();
 		return list.get(0);
