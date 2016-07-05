@@ -19,6 +19,7 @@ import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.enums.AimagNiislelEnum;
 import mn.odi.labor.enums.GenderEnum;
+import mn.odi.labor.enums.RoleEnum;
 import mn.odi.labor.models.FormYearSM;
 import mn.odi.labor.util.CalendarUtil;
 
@@ -65,7 +66,15 @@ public class HudulmurReportPage3 {
 		loginState.setActiveMenu("heltes3");
 		loginState.setPageTitle(message.get("heltes"));
 		if (list == null) {
-			list = new ArrayList<AimagNiislelEnum>(Arrays.asList(AimagNiislelEnum.values()));
+			if (loginState.getUser().getCurrentrole().equals(RoleEnum.ADMIN))
+				list = new ArrayList<AimagNiislelEnum>(Arrays.asList(AimagNiislelEnum.values()));
+			if (loginState.getUser().getCurrentrole().equals(RoleEnum.LABORUSER)) {
+				list = new ArrayList<AimagNiislelEnum>();
+				if (loginState.getUser().getOrg() != null && loginState.getUser().getOrg().getSumId() != null
+						&& loginState.getUser().getOrg().getSumId().getAimagId() != null)
+					list.add(loginState.getUser().getOrg().getSumId().getAimagId());
+			}
+
 		}
 
 		if (headerEz == null)
