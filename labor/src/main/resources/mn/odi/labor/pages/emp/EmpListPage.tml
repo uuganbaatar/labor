@@ -32,6 +32,7 @@
 											t:model="jobModel" t:value="job" t:blankOption="always" />
 								</div>
 							</div>
+							<t:If test="isAdmin">
 							<div class="col-md-4">
 								<div class="form-group">
 									<label>${message:org-label}</label> <input
@@ -39,6 +40,7 @@
 											t:model="orgModel" t:value="org" t:blankOption="always" />
 								</div>
 							</div>
+							</t:If>
 							<!--
 								<div class="col-md-4">
 									<div class="form-group">

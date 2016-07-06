@@ -109,15 +109,17 @@ public interface SccDAO {
 
 	public List<Report> getReportList();
 
-	public ReportStatus getReportStatusList(Report report, Integer year, Integer month, Organization orgId);
+	public ReportStatus getReportStatusList(Report report, Integer year,
+			Integer month, Organization orgId);
 
 	public List<ReportDetail> getReportDetailList();
 
-	public ReportDetail getReportDetailListWithParameter(GeneralType generalType, ReportDetailType detailType,
+	public ReportDetail getReportDetailListWithParameter(
+			GeneralType generalType, ReportDetailType detailType,
 			JobTypeEnum jobType, Integer year, Integer month);
 
-	public Long getReportDetailAddRemove(GeneralType generalType, ReportDetailType detailType, Integer year,
-			Integer month);
+	public Long getReportDetailAddRemove(GeneralType generalType,
+			ReportDetailType detailType, Integer year, Integer month);
 
 	public Integer getAllJobs(Long org, Long sum);
 
@@ -129,33 +131,45 @@ public interface SccDAO {
 
 	public List<AccessLog> getAccessLogs();
 
-	public List<User> getUserListSearch(String ln, String fn, String mail, Date d1, Date d2, Boolean b);
+	public List<User> getUserListSearch(String ln, String fn, String mail,
+			Date d1, Date d2, Boolean b);
 
-	public List<Employee> getEmpListSearch(Organization org, Job job, String emp, String sur, String phone);
+	public List<Employee> getEmpListSearch(Organization org, Job job,
+			String emp, String sur, String phone);
 
-	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<GeneralType> getGeneralTypeListSearch(String name, Date d1,
+			Date d2, Boolean b);
 
-	public List<PropertyType> getPropertyTypeListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<PropertyType> getPropertyTypeListSearch(String name, Date d1,
+			Date d2, Boolean b);
 
-	public List<EconomicCategory> getEconomicCategoryListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<EconomicCategory> getEconomicCategoryListSearch(String name,
+			Date d1, Date d2, Boolean b);
 
-	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<CompanyTrend> getCompanyTrendListSearch(String name, Date d1,
+			Date d2, Boolean b);
 
-	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<AjiliinBairHurungu> getLavlahHurunguListSearch(String name,
+			Date d1, Date d2, Boolean b);
 
-	public List<AccessLog> getAccessLogsSearch(String lname, String fname, Date d1, Date d2);
+	public List<AccessLog> getAccessLogsSearch(String lname, String fname,
+			Date d1, Date d2);
 
 	public List<User> getUserListByLastName(String name);
 
 	public List<User> getUserListByFirstName(String name);
 
-	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<CompanyHelber> getLavlahHelberListSearch(String name, Date d1,
+			Date d2, Boolean b);
 
-	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<CompanyStatus> getLavlahStatusListSearch(String name, Date d1,
+			Date d2, Boolean b);
 
-	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<LavlahGarsan> getLavlahEmpGarsanListSearch(String name,
+			Date d1, Date d2, Boolean b);
 
-	public List<Organization> getOrgListSearch(String name, Date d1, Date d2, Boolean b);
+	public List<Organization> getOrgListSearch(String name, Date d1, Date d2,
+			Boolean b);
 
 	public List<BigDecimal> getInfoBar();
 
@@ -227,7 +241,8 @@ public interface SccDAO {
 
 	public Integer getTotalFemaleDec(int year, Long org, Long sum);
 
-	public List<SumDuureg> getSumDuuregSearch(String name, AimagNiislelEnum aimagId);
+	public List<SumDuureg> getSumDuuregSearch(String name,
+			AimagNiislelEnum aimagId);
 
 	public void saveOrUpdate(BaseObject object, boolean hasMessage);
 
@@ -237,14 +252,17 @@ public interface SccDAO {
 
 	public List<Job> getJobListByOrg(Organization org);
 
-	public List<Job> getJobSearch(GeneralType generalType, String name, boolean check, Date d1, Date d2,
-			AjiliinBairHurungu fundSource, JobTypeEnum type, Organization org);
+	public List<Job> getJobSearch(GeneralType generalType, String name,
+			boolean check, Date d1, Date d2, AjiliinBairHurungu fundSource,
+			JobTypeEnum type, Organization org);
 
 	public Integer getHasagdsanJobs(Long org, Long sum);
 
-	public Integer getAllJobsSum(AimagNiislelEnum aimag_id, Date firstdate, Date lastdate);
+	public Integer getAllJobsSum(AimagNiislelEnum aimag_id, Date firstdate,
+			Date lastdate);
 
-	public Integer getEZJobsSum(AimagNiislelEnum aimag_id, CompanyTrend companyTrendId, Date firstdate, Date lastdate);
+	public Integer getEZJobsSum(AimagNiislelEnum aimag_id,
+			CompanyTrend companyTrendId, Date firstdate, Date lastdate);
 
 	public boolean checkEmpReg(String regNum);
 
@@ -274,23 +292,29 @@ public interface SccDAO {
 
 	public Integer getTotalImpDec(int year, Long org, Long sum);
 
-	public Integer getRestJobsSum(AimagNiislelEnum aimag_id, GeneralType generalTypeId, CompanyHelber helberId,
+	public Integer getRestJobsSum(AimagNiislelEnum aimag_id,
+			GeneralType generalTypeId, CompanyHelber helberId,
 			PropertyType propertyId, Date firstdate, Date lastdate);
 
-	public Integer getJobsSumGender(AimagNiislelEnum aimag_id, GeneralType generalTypeId, GenderEnum gender,
-			Date firstdate, Date lastdate);
+	public Integer getJobsSumGender(AimagNiislelEnum aimag_id,
+			GeneralType generalTypeId, GenderEnum gender, Date firstdate,
+			Date lastdate);
 
-	public Integer getJobsTrendSumGender(AimagNiislelEnum aimag_id, CompanyTrend generalTypeId, GenderEnum gender,
-			Date firstdate, Date lastdate);
-	
+	public Integer getJobsTrendSumGender(AimagNiislelEnum aimag_id,
+			CompanyTrend generalTypeId, GenderEnum gender, Date firstdate,
+			Date lastdate);
+
 	public List<Organization> getOrgListBySumId(SumDuureg sum);
-	
+
 	public List<Job> getJobSearchSum(GeneralType generalType, String name,
 			boolean check, Date d1, Date d2, AjiliinBairHurungu fundSource,
 			JobTypeEnum type, SumDuureg sum);
-	
+
 	public List<Organization> getOrgListById(Long id);
-	
+
 	public List<Organization> getOrgListBySum(SumDuureg sum);
+
+	public List<Employee> getEmpListSearchUserRole(Organization org, Job job,
+			String emp, String sur, String phone);
 
 }

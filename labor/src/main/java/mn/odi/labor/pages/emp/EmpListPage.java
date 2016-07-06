@@ -87,11 +87,21 @@ public class EmpListPage {
 	@Property
 	private Job job;
 
+	@Persist
+	@Property
+	private boolean isAdmin, isUser;
+
 	void beginRender() {
 
 		loginState.setActiveMenu("emp");
 		loginState.setPageTitle(message.get("employer"));
-		empList = dao.getEmpListSearch(org, job, phone, surName, empName);
+		if (loginState.getUser().getCurrentrole().getVal() == 0) {
+			isAdmin = true;
+			empList = dao.getEmpListSearch(org, job, phone, surName, empName);
+		} else {
+			empList = dao.getEmpListSearchUserRole(loginState.getUser().getOrg(), job, phone, surName, empName);
+			isUser = true;
+		}
 
 		if (emp == null) {
 			emp = new Employee();

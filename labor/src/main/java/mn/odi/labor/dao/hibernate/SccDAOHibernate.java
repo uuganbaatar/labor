@@ -2679,4 +2679,41 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
+
+	public List<Employee> getEmpListSearchUserRole(Organization org, Job job,
+			String emp, String sur, String phone) {
+		try {
+			Criteria crit = session.createCriteria(Employee.class);
+			crit.addOrder(Order.desc("empName"));
+
+			if (emp != null)
+				crit.add(Restrictions.ilike("empName", '%' + emp + '%'));
+
+			if (sur != null)
+				crit.add(Restrictions.ilike("surName", '%' + sur + '%'));
+
+			if (phone != null)
+				crit.add(Restrictions.ilike("phone", '%' + phone + '%'));
+
+			if (org != null) {
+				List<Job> list = this.getJobListByOrg(org);
+				if (list != null && list.size() > 0) {
+					crit.add(Restrictions.in("job", list));
+				} else {
+					crit.add(Restrictions.eq("id", Long.valueOf("0")));
+				}
+			}
+
+			if (job != null)
+				crit.add(Restrictions.eq("job", job));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
 }

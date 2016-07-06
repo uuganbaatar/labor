@@ -25,6 +25,7 @@ import mn.odi.labor.enums.EduLevelEnum;
 import mn.odi.labor.enums.EmpMovementEnum;
 import mn.odi.labor.enums.EmploymentEnum;
 import mn.odi.labor.enums.GenderEnum;
+import mn.odi.labor.enums.RoleEnum;
 import mn.odi.labor.enums.YesNoEnum;
 import mn.odi.labor.models.CommonSM;
 import mn.odi.labor.models.JobSM;
@@ -111,7 +112,8 @@ public class EmpAddPage {
 	}
 
 	public SelectModel getEmploymentModel() {
-		return new EnumSelectModel(EmploymentEnum.class, resources.getMessages());
+		return new EnumSelectModel(EmploymentEnum.class,
+				resources.getMessages());
 	}
 
 	public SelectModel getJobModel(Organization org) {
@@ -119,7 +121,13 @@ public class EmpAddPage {
 	}
 
 	public SelectModel getOrgModel() {
-		return new CommonSM<Organization>(Organization.class, dao.getOrgList(), "getName");
+		if (loginState.getUser().getCurrentrole() == RoleEnum.ADMIN) {
+			return new CommonSM<Organization>(Organization.class,
+					dao.getOrgList(), "getName");
+		} else {
+			return new CommonSM<Organization>(Organization.class,
+					dao.getOrgListById(loginState.getUser().getOrg().getId()), "getName");
+		}
 	}
 
 	public SelectModel getJobModel() {
@@ -147,11 +155,13 @@ public class EmpAddPage {
 	}
 
 	public SelectModel getMovementModel() {
-		return new EnumSelectModel(EmpMovementEnum.class, resources.getMessages());
+		return new EnumSelectModel(EmpMovementEnum.class,
+				resources.getMessages());
 	}
 
 	public SelectModel getFiredReasonModel() {
-		return new CommonSM<LavlahGarsan>(LavlahGarsan.class, dao.getLavlahEmpGarsanList(), "getName");
+		return new CommonSM<LavlahGarsan>(LavlahGarsan.class,
+				dao.getLavlahEmpGarsanList(), "getName");
 	}
 
 	@CommitAfter
