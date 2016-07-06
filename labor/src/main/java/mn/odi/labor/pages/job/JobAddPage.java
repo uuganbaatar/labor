@@ -53,6 +53,9 @@ public class JobAddPage {
 	@Persist
 	@Property
 	private boolean isActive;
+	
+	@Persist
+	private int roleId;
 
 	void onActivate(Job job) {
 		if (job != null) {
@@ -64,6 +67,8 @@ public class JobAddPage {
 	@CommitAfter
 	void beginRender() {
 		System.out.println("onBeginRender Success");
+		
+		roleId=loginState.getUser().getCurrentrole().getVal();
 
 		loginState.setActiveMenu("job");
 		loginState.setPageTitle(message.get("job"));
@@ -76,19 +81,32 @@ public class JobAddPage {
 	}
 
 	public SelectModel getGeneralTypeModel() {
-		return new CommonSM<GeneralType>(GeneralType.class, dao.getGeneralTypeList(), "getName");
+		return new CommonSM<GeneralType>(GeneralType.class,
+				dao.getGeneralTypeList(), "getName");
 	}
 
 	public SelectModel getFundingSourceModel() {
-		return new CommonSM<AjiliinBairHurungu>(AjiliinBairHurungu.class, dao.getFundingSourceList(), "getName");
+		return new CommonSM<AjiliinBairHurungu>(AjiliinBairHurungu.class,
+				dao.getFundingSourceList(), "getName");
 	}
 
 	public SelectModel getCompanyTrendModel() {
-		return new CommonSM<CompanyTrend>(CompanyTrend.class, dao.getCompanyTrendList(), "getName");
+		return new CommonSM<CompanyTrend>(CompanyTrend.class,
+				dao.getCompanyTrendList(), "getName");
 	}
 
 	public SelectModel getOrgModel() {
-		return new CommonSM<Organization>(Organization.class, dao.getOrgList(), "getName");
+		if(roleId==0){
+			return new CommonSM<Organization>(Organization.class, dao.getOrgList(),
+					"getName");
+		}else if(roleId==1){
+			return new CommonSM<Organization>(Organization.class, dao.getOrgListById(loginState.getUser().getOrg().getId()),
+					"getName");
+		}else{
+			return new CommonSM<Organization>(Organization.class, dao.getOrgListBySum(loginState.getUser().getOrg().getSumId()),
+					"getName");
+		}
+		
 	}
 
 	public SelectModel getJobTypeModel() {
