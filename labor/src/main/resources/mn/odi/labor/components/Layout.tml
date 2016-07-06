@@ -53,7 +53,7 @@
 						<ul>
 							<li>
 								<t:actionlink t:id="hyanahTab" class="${selectedTabHyanah}">
-									<i class="ti-home"></i>
+									<i class="ti-stats-up"></i>
 									<span>${message:dashboard}</span>
 								</t:actionlink>
 							</li>
@@ -73,7 +73,7 @@
 							<t:if test="${!isLabUser}">
 								<li>
 									<t:actionlink t:id="reportTab" class="${selectedTabreport}">
-										<i class="ti-file"></i>
+										<i class="ti-wallet"></i>
 										<span>${message:report}</span>
 									</t:actionlink>
 								</li>
@@ -81,13 +81,13 @@
 							<t:if test="${isAdmin}">
 								<li>
 									<t:actionlink t:id="userTab" class="${selectedTabUser}">
-										<i class="ti-file"></i>
+										<i class="ti-user"></i>
 										<span>${message:user}</span>
 									</t:actionlink>
 								</li>
 								<li>
 									<t:actionlink t:id="lavlahTab" class="${selectedTabLavlah}">
-										<i class="ti-file"></i>
+										<i class="ti-pencil-alt"></i>
 										<span>${message:lavlah}</span>
 									</t:actionlink>
 								</li>
@@ -95,13 +95,13 @@
 							<t:if test="${!isUser}">
 								<li>
 									<t:actionlink t:id="orgTab" class="${selectedorgLavlah}">
-										<i class="ti-file"></i>
+										<i class="ti-home"></i>
 										<span>${message:org-label}</span>
 									</t:actionlink>
 								</li>
 								<li id="sub">
 									<a href="#" id="asub" class="${selectedhelReportMain}">
-										<i class="ti-file"></i>
+										<i class="ti-notepad"></i>
 										<span>${message:helReport-label}</span>
 									</a>
 									<ul>
