@@ -87,6 +87,7 @@ public class LavlahHelber {
 			active = true;
 		}
 		list = dao.getLavlahHelberListSearch(gname, d1, d2, active);
+		ajaxResponseRenderer.addRender(listZone);
 	}
 
 	public String getUserName() {
@@ -147,7 +148,9 @@ public class LavlahHelber {
 		}
 		dao.saveOrUpdateObject(c);
 		list = dao.getLavlahHelberListSearch(gname, d1, d2, active);
-		ajaxResponseRenderer.addRender(listZone);
+		if (request.isXHR()) {
+			ajaxResponseRenderer.addRender(listZone);
+		}
 		return LavlahHelber.class;
 	}
 
