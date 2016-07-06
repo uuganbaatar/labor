@@ -23,6 +23,7 @@ import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.common.Organization;
 import mn.odi.labor.entities.labor.Job;
+import mn.odi.labor.enums.RoleEnum;
 import mn.odi.labor.models.CommonSM;
 import mn.odi.labor.pages.organization.LaborReportOrgList;
 
@@ -93,7 +94,11 @@ public class OrgListPage {
 		if (active == null) {
 			active = true;
 		}
+		if(loginState.getUser().getCurrentrole()==RoleEnum.ADMIN){
 		orgList = dao.getOrgListSearch(gname, d1, d2, active);
+		}else{
+			orgList = dao.getOrgListSearchWithSum(gname, d1, d2, active,loginState.getUser().getOrg().getSumId());
+		}
 
 		if (org == null) {
 			org = new Organization();

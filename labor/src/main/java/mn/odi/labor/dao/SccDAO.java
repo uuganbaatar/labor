@@ -317,4 +317,7 @@ public interface SccDAO {
 	public List<Employee> getEmpListSearchUserRole(Organization org, Job job,
 			String emp, String sur, String phone);
 
+	public List<Organization> getOrgListSearchWithSum(String name, Date d1,
+			Date d2, Boolean b, SumDuureg sum);
+
 }

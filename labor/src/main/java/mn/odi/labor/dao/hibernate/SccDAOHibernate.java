@@ -24,6 +24,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.ejb.criteria.expression.function.AggregationFunction.SUM;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.IntegerType;
 import org.hibernate.type.LongType;
@@ -2713,6 +2714,36 @@ public class SccDAOHibernate implements SccDAO {
 				return null;
 
 		} catch (HibernateException e) {
+			return null;
+		}
+	}
+	
+	public List<Organization> getOrgListSearchWithSum(String name, Date d1, Date d2,
+			Boolean b, SumDuureg sum) {
+		try {
+			Criteria crit = session.createCriteria(Organization.class);
+
+			if (name != null)
+				crit.add(Restrictions.ilike("name", "%" + name + "%"));
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (b != null)
+				crit.add(Restrictions.eq("isActive", b));
+			
+			if(sum!=null){
+				crit.add(Restrictions.eq("sumId", sum));
+			}
+			
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			// Critical errors : database unreachable, etc.
 			return null;
 		}
 	}
