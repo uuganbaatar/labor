@@ -86,6 +86,7 @@ public class LavlahGeneralType {
 		loginState.setActiveDedMenu("lavlahgeneral");
 		loginState.setPageTitle(message.get("lavlah"));
 		typeList = dao.getGeneralTypeListSearch(gname, d1, d2, active);
+		ajaxResponseRenderer.addRender(listZone);
 	}
 
 	public String getUserName() {
@@ -139,7 +140,7 @@ public class LavlahGeneralType {
 	}
 
 	@CommitAfter
-	void onActionFromEnable(GeneralType type) {
+	public Object onActionFromEnable(GeneralType type) {
 		if (type.getIsActive() == true) {
 			type.setIsActive(false);
 		} else {
@@ -147,7 +148,10 @@ public class LavlahGeneralType {
 		}
 		dao.saveOrUpdateObject(type);
 		typeList = dao.getGeneralTypeListSearch(gname, d1, d2, active);
-		ajaxResponseRenderer.addRender(listZone);
+		if (request.isXHR()) {
+			ajaxResponseRenderer.addRender(listZone);
+		}
+		return LavlahGeneralType.class;
 	}
 
 	@CommitAfter

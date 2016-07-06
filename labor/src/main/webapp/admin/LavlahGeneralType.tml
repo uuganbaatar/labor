@@ -101,20 +101,20 @@
 					t:add="number, delete, active">
 					<p:numberCell>${number}</p:numberCell>
 					<p:activeCell>
-						<t:if test="typeRow.isActive">
-							<div class="num">
-								<t:actionlink t:id="enable" t:context="typeRow"
-									t:zone="listZone" class="greenNum confirmIsActive">
-									${message:active-label}
-								</t:actionlink>
-							</div>
-							<p:else>
+						<t:actionlink t:id="enable" t:context="typeRow"
+							t:zone="listZone" class="greenNum
+								confirmIsActive">
+							<t:if test="typeRow.isActive">
 								<div class="num">
-									<a t:type="eventlink" t:event="enable" t:context="typeRow"
-										t:zone="listZone" class="redNum confirmIsPassive">${message:passive-label}</a>
+									${message:active-label}
 								</div>
-							</p:else>
-						</t:if>
+								<p:else>
+									<div class="num">
+										${message:passive-label}
+									</div>
+								</p:else>
+							</t:if>
+						</t:actionlink>
 					</p:activeCell>
 					<p:DeleteCell>
 						<t:ActionLink class="table-action-btn" t:id="deleteObject"

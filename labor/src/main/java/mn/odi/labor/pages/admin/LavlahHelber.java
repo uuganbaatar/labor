@@ -139,7 +139,7 @@ public class LavlahHelber {
 	}
 
 	@CommitAfter
-	void onEnable(CompanyHelber c) {
+	public Object onEnable(CompanyHelber c) {
 		if (c.getIsActive() == true) {
 			c.setIsActive(false);
 		} else {
@@ -148,6 +148,7 @@ public class LavlahHelber {
 		dao.saveOrUpdateObject(c);
 		list = dao.getLavlahHelberListSearch(gname, d1, d2, active);
 		ajaxResponseRenderer.addRender(listZone);
+		return LavlahHelber.class;
 	}
 
 	@CommitAfter

@@ -220,10 +220,15 @@
 
 		<!-- Tapestry and JQuery -->
 
+		<!-- <dependency> -->
+		<!-- <groupId>com.github.lltyk</groupId> -->
+		<!-- <artifactId>tapestry5-jquery</artifactId> -->
+		<!-- <version>3.2.1</version> -->
+		<!-- </dependency> -->
 		<dependency>
-			<groupId>com.github.lltyk</groupId>
+			<groupId>org.got5</groupId>
 			<artifactId>tapestry5-jquery</artifactId>
-			<version>3.2.1</version>
+			<version>3.4.2</version>
 		</dependency>
 
 		<!-- Apache and Poi -->
