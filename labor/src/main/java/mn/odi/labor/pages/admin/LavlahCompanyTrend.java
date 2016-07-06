@@ -107,13 +107,11 @@ public class LavlahCompanyTrend {
 	@CommitAfter
 	public void onSuccessFromSave() {
 		if (LavlahCompanyTrend.containsWhiteSpace(name)) {
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("hoosonzai"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("hoosonzai"));
 		} else {
 
 			if (dao.getCompanyTrendByName(name) != null) {
-				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-						message.get("burtgeltei"));
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("burtgeltei"));
 			} else {
 				CompanyTrend obj = new CompanyTrend();
 				obj.setName(name);
@@ -131,8 +129,7 @@ public class LavlahCompanyTrend {
 			dao.deleteObject(obj);
 		} catch (Exception e) {
 			System.out.println("[ERROR DELETE:]" + e);
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("deleteerror"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
 		}
 
 		return LavlahCompanyTrend.class;
@@ -150,6 +147,7 @@ public class LavlahCompanyTrend {
 			trend.setIsActive(true);
 		}
 		dao.saveOrUpdateObject(trend);
+		list = dao.getCompanyTrendListSearch(gname, d1, d2, active);
 		ajaxResponseRenderer.addRender(listZone);
 	}
 

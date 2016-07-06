@@ -94,7 +94,7 @@ public class LavlahHurungu {
 	public String getUserName() {
 		return loginState.getUser().getFullName();
 	}
-	
+
 	public static boolean containsWhiteSpace(final String testCode) {
 		if (testCode != null) {
 			for (int i = 0; i < 2; i++) {
@@ -109,12 +109,10 @@ public class LavlahHurungu {
 	@CommitAfter
 	public void onSuccessFromSave() {
 		if (LavlahHurungu.containsWhiteSpace(name)) {
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("hoosonzai"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("hoosonzai"));
 		} else {
 			if (dao.getHurunguByName(name) != null) {
-				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-						message.get("burtgeltei"));
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("burtgeltei"));
 			} else {
 				AjiliinBairHurungu obj = new AjiliinBairHurungu();
 				obj.setName(name);
@@ -132,8 +130,7 @@ public class LavlahHurungu {
 			dao.deleteObject(obj);
 		} catch (Exception e) {
 			System.out.println("[ERROR DELETE:]" + e);
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("deleteerror"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
 		}
 
 		return LavlahEmpGarsan.class;
@@ -151,6 +148,7 @@ public class LavlahHurungu {
 			h.setIsActive(true);
 		}
 		dao.saveOrUpdateObject(h);
+		list = dao.getLavlahHurunguListSearch(gname, d1, d2, active);
 		ajaxResponseRenderer.addRender(listZone);
 	}
 

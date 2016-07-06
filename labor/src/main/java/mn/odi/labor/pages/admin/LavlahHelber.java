@@ -107,12 +107,10 @@ public class LavlahHelber {
 	@CommitAfter
 	public void onSuccessFromSave() {
 		if (LavlahHelber.containsWhiteSpace(name)) {
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("hoosonzai"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("hoosonzai"));
 		} else {
 			if (dao.getHelberByName(name) != null) {
-				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-						message.get("burtgeltei"));
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("burtgeltei"));
 			} else {
 				CompanyHelber obj = new CompanyHelber();
 				obj.setName(name);
@@ -130,8 +128,7 @@ public class LavlahHelber {
 			dao.deleteObject(obj);
 		} catch (Exception e) {
 			System.out.println("[ERROR DELETE:]" + e);
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
-					message.get("deleteerror"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
 		}
 
 		return LavlahEmpGarsan.class;
@@ -149,6 +146,7 @@ public class LavlahHelber {
 			c.setIsActive(true);
 		}
 		dao.saveOrUpdateObject(c);
+		list = dao.getLavlahHelberListSearch(gname, d1, d2, active);
 		ajaxResponseRenderer.addRender(listZone);
 	}
 
