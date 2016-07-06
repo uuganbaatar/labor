@@ -140,15 +140,18 @@ public class LavlahCompanyTrend {
 	}
 
 	@CommitAfter
-	void onEnable(CompanyTrend trend) {
-		if (trend.getIsActive() == true) {
-			trend.setIsActive(false);
+	public Object onActionFromEnable(CompanyTrend type) {
+		if (type.getIsActive() == true) {
+			type.setIsActive(false);
 		} else {
-			trend.setIsActive(true);
+			type.setIsActive(true);
 		}
-		dao.saveOrUpdateObject(trend);
+		dao.saveOrUpdateObject(type);
 		list = dao.getCompanyTrendListSearch(gname, d1, d2, active);
-		ajaxResponseRenderer.addRender(listZone);
+		if (request.isXHR()) {
+			ajaxResponseRenderer.addRender(listZone);
+		}
+		return LavlahCompanyTrend.class;
 	}
 
 	@CommitAfter

@@ -140,16 +140,20 @@ public class LavlahHurungu {
 		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
 
+	
 	@CommitAfter
-	void onEnable(AjiliinBairHurungu h) {
-		if (h.getIsActive() == true) {
-			h.setIsActive(false);
+	public Object onActionFromEnable(AjiliinBairHurungu type) {
+		if (type.getIsActive() == true) {
+			type.setIsActive(false);
 		} else {
-			h.setIsActive(true);
+			type.setIsActive(true);
 		}
-		dao.saveOrUpdateObject(h);
+		dao.saveOrUpdateObject(type);
 		list = dao.getLavlahHurunguListSearch(gname, d1, d2, active);
-		ajaxResponseRenderer.addRender(listZone);
+		if (request.isXHR()) {
+			ajaxResponseRenderer.addRender(listZone);
+		}
+		return LavlahGeneralType.class;
 	}
 
 	@CommitAfter

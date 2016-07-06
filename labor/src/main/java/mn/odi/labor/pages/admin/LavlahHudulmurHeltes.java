@@ -131,7 +131,8 @@ public class LavlahHudulmurHeltes {
 			dao.deleteObject(obj);
 		} catch (Exception e) {
 			System.out.println("[ERROR DELETE:]" + e);
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("deleteerror"));
 		}
 
 		return LavlahHudulmurHeltes.class;
@@ -142,14 +143,15 @@ public class LavlahHudulmurHeltes {
 	}
 
 	public SelectModel getAimagSelectModel() {
-		EnumSelectModel em = new EnumSelectModel(AimagNiislelEnum.class, message);
+		EnumSelectModel em = new EnumSelectModel(AimagNiislelEnum.class,
+				message);
 		return em;
 	}
 
 	public SelectModel getSumSelectModel() {
 		System.out.println("Aimag:" + aimag);
-		CommonSM<SumDuureg> sm = new CommonSM<SumDuureg>(SumDuureg.class, dao.getSumDuuregSearch(null, aimag),
-				"getName");
+		CommonSM<SumDuureg> sm = new CommonSM<SumDuureg>(SumDuureg.class,
+				dao.getSumDuuregSearch(null, aimag), "getName");
 		return sm;
 	}
 
@@ -160,14 +162,18 @@ public class LavlahHudulmurHeltes {
 	}
 
 	@CommitAfter
-	void onEnable(SumDuureg c) {
-		if (c.getIsActive() == true) {
-			c.setIsActive(false);
+	public Object onActionFromEnable(Organization type) {
+		if (type.getIsActive() == true) {
+			type.setIsActive(false);
 		} else {
-			c.setIsActive(true);
+			type.setIsActive(true);
 		}
-		dao.saveOrUpdateObject(c);
-		ajaxResponseRenderer.addRender(listZone);
+		dao.saveOrUpdateObject(type);
+		list = dao.getOrgList();
+		if (request.isXHR()) {
+			ajaxResponseRenderer.addRender(listZone);
+		}
+		return LavlahHudulmurHeltes.class;
 	}
 
 	Object onSuccessFromSearch() {

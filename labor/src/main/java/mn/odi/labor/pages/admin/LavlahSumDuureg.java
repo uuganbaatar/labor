@@ -147,15 +147,21 @@ public class LavlahSumDuureg {
 		return em;
 	}
 
+
+	
 	@CommitAfter
-	void onEnable(SumDuureg c) {
-		if (c.getIsActive() == true) {
-			c.setIsActive(false);
+	public Object onActionFromEnable(SumDuureg type) {
+		if (type.getIsActive() == true) {
+			type.setIsActive(false);
 		} else {
-			c.setIsActive(true);
+			type.setIsActive(true);
 		}
-		dao.saveOrUpdateObject(c);
-		ajaxResponseRenderer.addRender(listZone);
+		dao.saveOrUpdateObject(type);
+		list = dao.getSumDuureg();
+		if (request.isXHR()) {
+			ajaxResponseRenderer.addRender(listZone);
+		}
+		return LavlahSumDuureg.class;
 	}
 
 	Object onSuccessFromSearch() {

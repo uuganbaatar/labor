@@ -3,6 +3,11 @@ package mn.odi.labor.pages.admin;
 import java.util.Date;
 import java.util.List;
 
+import mn.odi.labor.aso.LoginState;
+import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.admin.PropertyType;
+import mn.odi.labor.enums.PropertyTypeEnum;
+
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.SelectModel;
@@ -23,11 +28,6 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
 import org.apache.tapestry5.util.EnumSelectModel;
-
-import mn.odi.labor.aso.LoginState;
-import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.entities.admin.PropertyType;
-import mn.odi.labor.enums.PropertyTypeEnum;
 
 public class LavlahPropertyType {
 
@@ -107,7 +107,8 @@ public class LavlahPropertyType {
 	}
 
 	public SelectModel getPropertyTypeModel() {
-		return new EnumSelectModel(PropertyTypeEnum.class, resources.getMessages());
+		return new EnumSelectModel(PropertyTypeEnum.class,
+				resources.getMessages());
 	}
 
 	public static boolean containsWhiteSpace(final String testCode) {
@@ -125,10 +126,12 @@ public class LavlahPropertyType {
 	public void onSuccessFromSave() {
 
 		if (LavlahPropertyType.containsWhiteSpace(name)) {
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("hoosonzai"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("hoosonzai"));
 		} else {
 			if (dao.getPropertyTypeByName(name) != null) {
-				alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("burtgeltei"));
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
 			} else {
 				type = new PropertyType();
 				type.setName(name);
@@ -148,7 +151,8 @@ public class LavlahPropertyType {
 			dao.deleteObject(obj);
 		} catch (Exception e) {
 			System.out.println("[ERROR DELETE:]" + e);
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("deleteerror"));
 		}
 
 		return LavlahPropertyType.class;
@@ -159,15 +163,18 @@ public class LavlahPropertyType {
 	}
 
 	@CommitAfter
-	void onEnable(PropertyType type) {
+	public Object onActionFromEnable(PropertyType type) {
 		if (type.getIsActive() == true) {
 			type.setIsActive(false);
 		} else {
 			type.setIsActive(true);
 		}
 		dao.saveOrUpdateObject(type);
-		typeList = dao.getPropertyTypeList();
-		ajaxResponseRenderer.addRender(listZone);
+		typeList = dao.getPropertyTypeListSearch(gname, d1, d2, active);
+		if (request.isXHR()) {
+			ajaxResponseRenderer.addRender(listZone);
+		}
+		return LavlahPropertyType.class;
 	}
 
 	@CommitAfter

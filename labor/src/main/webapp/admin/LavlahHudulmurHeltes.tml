@@ -97,18 +97,20 @@
 						</t:ActionLink>
 					</p:DeleteCell>
 					<p:activeCell>
-						<t:if test="row.isActive">
-							<div class="num">
-								<a t:type="eventlink" t:event="enable" t:context="row" t:zone="listZone"
-									class="greenNum confirmIsActive">${message:active-label}</a>
-							</div>
-							<p:else>
+						<t:actionlink t:id="enable" t:context="row"
+							t:zone="listZone" class="greenNum
+								confirmIsActive">
+							<t:if test="row.isActive">
 								<div class="num">
-									<a t:type="eventlink" t:event="enable" t:context="row"
-										t:zone="listZone" class="redNum confirmIsPassive">${message:passive-label}</a>
+									${message:active-label}
 								</div>
-							</p:else>
-						</t:if>
+								<p:else>
+									<div class="num">
+										${message:passive-label}
+									</div>
+								</p:else>
+							</t:if>
+						</t:actionlink>
 					</p:activeCell>
 				</table>
 			</t:zone>

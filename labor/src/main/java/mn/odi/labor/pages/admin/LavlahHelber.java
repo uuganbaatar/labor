@@ -139,14 +139,16 @@ public class LavlahHelber {
 		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
 
+
+	
 	@CommitAfter
-	public Object onEnable(CompanyHelber c) {
-		if (c.getIsActive() == true) {
-			c.setIsActive(false);
+	public Object onActionFromEnable(CompanyHelber type) {
+		if (type.getIsActive() == true) {
+			type.setIsActive(false);
 		} else {
-			c.setIsActive(true);
+			type.setIsActive(true);
 		}
-		dao.saveOrUpdateObject(c);
+		dao.saveOrUpdateObject(type);
 		list = dao.getLavlahHelberListSearch(gname, d1, d2, active);
 		if (request.isXHR()) {
 			ajaxResponseRenderer.addRender(listZone);

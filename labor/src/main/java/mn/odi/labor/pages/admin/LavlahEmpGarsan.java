@@ -140,8 +140,9 @@ public class LavlahEmpGarsan {
 		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
 
+	
 	@CommitAfter
-	void onEnable(LavlahGarsan type) {
+	public Object onActionFromEnable(LavlahGarsan type) {
 		if (type.getIsActive() == true) {
 			type.setIsActive(false);
 		} else {
@@ -149,7 +150,10 @@ public class LavlahEmpGarsan {
 		}
 		dao.saveOrUpdateObject(type);
 		list = dao.getLavlahEmpGarsanListSearch(gname, d1, d2, active);
-		ajaxResponseRenderer.addRender(listZone);
+		if (request.isXHR()) {
+			ajaxResponseRenderer.addRender(listZone);
+		}
+		return LavlahEmpGarsan.class;
 	}
 
 	@CommitAfter

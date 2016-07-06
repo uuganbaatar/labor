@@ -129,15 +129,18 @@ public class LavlahCompanyStatus {
 	}
 
 	@CommitAfter
-	void onEnable(CompanyStatus c) {
-		if (c.getIsActive() == true) {
-			c.setIsActive(false);
+	public Object onActionFromEnable(CompanyStatus type) {
+		if (type.getIsActive() == true) {
+			type.setIsActive(false);
 		} else {
-			c.setIsActive(true);
+			type.setIsActive(true);
 		}
-		dao.saveOrUpdateObject(c);
+		dao.saveOrUpdateObject(type);
 		list = dao.getLavlahStatusListSearch(gname, d1, d2, active);
-		ajaxResponseRenderer.addRender(listZone);
+		if (request.isXHR()) {
+			ajaxResponseRenderer.addRender(listZone);
+		}
+		return LavlahCompanyStatus.class;
 	}
 
 	@CommitAfter
