@@ -139,7 +139,7 @@ public class LavlahGeneralType {
 	}
 
 	@CommitAfter
-	void onEnable(GeneralType type) {
+	void onActionFromEnable(GeneralType type) {
 		if (type.getIsActive() == true) {
 			type.setIsActive(false);
 		} else {

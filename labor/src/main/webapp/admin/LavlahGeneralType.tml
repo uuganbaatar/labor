@@ -103,8 +103,10 @@
 					<p:activeCell>
 						<t:if test="typeRow.isActive">
 							<div class="num">
-								<a t:type="eventlink" t:event="enable" t:context="typeRow"
-									t:zone="listZone" class="greenNum confirmIsActive">${message:active-label}</a>
+								<t:actionlink t:id="enable" t:context="typeRow"
+									t:zone="listZone" class="greenNum confirmIsActive">
+									${message:active-label}
+								</t:actionlink>
 							</div>
 							<p:else>
 								<div class="num">
