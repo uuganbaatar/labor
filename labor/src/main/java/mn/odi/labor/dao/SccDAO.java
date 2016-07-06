@@ -282,5 +282,15 @@ public interface SccDAO {
 
 	public Integer getJobsTrendSumGender(AimagNiislelEnum aimag_id, CompanyTrend generalTypeId, GenderEnum gender,
 			Date firstdate, Date lastdate);
+	
+	public List<Organization> getOrgListBySumId(SumDuureg sum);
+	
+	public List<Job> getJobSearchSum(GeneralType generalType, String name,
+			boolean check, Date d1, Date d2, AjiliinBairHurungu fundSource,
+			JobTypeEnum type, SumDuureg sum);
+	
+	public List<Organization> getOrgListById(Long id);
+	
+	public List<Organization> getOrgListBySum(SumDuureg sum);
 
 }

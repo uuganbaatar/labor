@@ -110,12 +110,12 @@ public class SccDAOHibernate implements SccDAO {
 		this.updateObject((Object) obj);
 	}
 
-//	@CommitAfter
-//	public void saveOrUpdateObject(BaseObject obj) {
-//		this.updateDateAndActor(obj);
-//
-//		this.saveOrUpdateObject((Object) obj);
-//	}
+	// @CommitAfter
+	// public void saveOrUpdateObject(BaseObject obj) {
+	// this.updateDateAndActor(obj);
+	//
+	// this.saveOrUpdateObject((Object) obj);
+	// }
 
 	@CommitAfter
 	public void saveObject(Object obj) {
@@ -2522,7 +2522,7 @@ public class SccDAOHibernate implements SccDAO {
 		else
 			return 0;
 	}
-	
+
 	public Integer getJobsTrendSumGender(AimagNiislelEnum aimag_id,
 			CompanyTrend generalTypeId, GenderEnum gender, Date firstdate,
 			Date lastdate) {
@@ -2572,5 +2572,111 @@ public class SccDAOHibernate implements SccDAO {
 			return list.get(0);
 		else
 			return 0;
+	}
+
+	public List<Job> getJobSearchSum(GeneralType generalType, String name,
+			boolean check, Date d1, Date d2, AjiliinBairHurungu fundSource,
+			JobTypeEnum type, SumDuureg sum) {
+		try {
+
+			Criteria crit = session.createCriteria(Job.class);
+
+			crit.addOrder(Order.desc("createdDate"));
+
+			if (generalType != null) {
+				crit.add(Restrictions.eq("generalType", generalType));
+			}
+
+			if (name != null) {
+				crit.add(Restrictions.ilike("jobName", "%" + name + "%"));
+			}
+
+			if (d1 != null && d2 != null) {
+				crit.add(Restrictions.between("createdDate", d1, d2));
+			}
+
+			if (fundSource != null) {
+				crit.add(Restrictions.eq("fundingSource", fundSource));
+			}
+
+			if (type != null) {
+				crit.add(Restrictions.eq("jobType", type));
+			}
+
+			if (sum != null) {
+
+				List<Organization> olist = this.getOrgListBySumId(sum);
+				if (olist != null && olist.size() > 0) {
+					crit.add(Restrictions.in("org", olist));
+				}
+			}
+
+			crit.add(Restrictions.eq("isNew", check));
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public List<Organization> getOrgListBySumId(SumDuureg sum) {
+		try {
+
+			Criteria crit = session.createCriteria(Organization.class);
+
+			if (sum != null) {
+				crit.add(Restrictions.eq("sumId", sum));
+			}
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public List<Organization> getOrgListById(Long id) {
+		try {
+
+			Criteria crit = session.createCriteria(Organization.class);
+
+			if (id != null) {
+				crit.add(Restrictions.eq("id", id));
+			}
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
+	}
+
+	public List<Organization> getOrgListBySum(SumDuureg sum) {
+		try {
+
+			Criteria crit = session.createCriteria(Organization.class);
+
+			if (sum != null) {
+				crit.add(Restrictions.eq("sumId", sum));
+			}
+
+			if (crit.list().size() > 0)
+				return crit.list();
+			else
+				return null;
+
+		} catch (HibernateException e) {
+			return null;
+		}
 	}
 }

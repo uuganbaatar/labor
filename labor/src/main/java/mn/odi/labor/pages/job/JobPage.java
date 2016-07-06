@@ -8,6 +8,7 @@ import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.admin.AjiliinBairHurungu;
 import mn.odi.labor.entities.admin.GeneralType;
 import mn.odi.labor.entities.common.Organization;
+import mn.odi.labor.entities.common.SumDuureg;
 import mn.odi.labor.entities.labor.Job;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.models.CommonSM;
@@ -99,15 +100,44 @@ public class JobPage {
 	@Property
 	private Organization org;
 
+	@Persist
+	@Property
+	private int roleId;
+
+	@Persist
+	@Property
+	private boolean isUser, isAdmin, isLabUser;
+	
+	@Persist
+	private SumDuureg sum;
+
 	@CommitAfter
 	void beginRender() {
-		System.err.println(jobName);
 
 		loginState.setActiveMenu("job");
 		loginState.setPageTitle(message.get("job"));
 
-		jobList = dao.getJobSearch(generalType, jobName, newCheck, startDate,
-				endDate, fundingSource, jobType, org);
+		roleId = loginState.getUser().getCurrentrole().getVal();
+		
+		if(loginState.getUser().getOrg().getSumId()!=null){
+			sum = loginState.getUser().getOrg().getSumId();
+		}
+
+		if (roleId == 0) {
+			isAdmin = true;
+			jobList = dao.getJobSearch(generalType, jobName, newCheck,
+					startDate, endDate, fundingSource, jobType, org);
+		} else if (roleId == 1) {
+			isUser = true;
+			jobList = dao.getJobSearch(generalType, jobName, newCheck,
+					startDate, endDate, fundingSource, jobType, loginState
+							.getUser().getOrg());
+		} else {
+			isLabUser = true;
+			jobList = dao.getJobSearchSum(generalType, jobName, newCheck,
+					startDate, endDate, fundingSource, jobType, sum);
+		}
+
 	}
 
 	public SelectModel getGeneralTypeModel() {
