@@ -134,7 +134,7 @@ public class LaborReportOrgList {
 		} else {
 			if (year == Calendar.getInstance().get(Calendar.YEAR) && month >= m) {
 				ReportStatus rt = dao.getReportStatusList(row, year, m, org);
-				if (rt != null) {
+				if (rt != null && rt.getReportStatus() != null) {
 					switch (rt.getReportStatus()) {
 					case DRAFT:
 						btnClass = draft;

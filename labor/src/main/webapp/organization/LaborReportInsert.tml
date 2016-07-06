@@ -33,8 +33,9 @@
 						<div style="width:25%;float:left">
 							<div class="form-group">
 								<label>${message:orontoo}</label>
-								<t:TextField t:id="orontoo" class="form-control" t:value="reportDetail.value"
-									disabled="${reportSent}" t:validate="required" />
+								<t:TextField t:id="orontoo" class="form-control"
+									t:value="reportDetail.value" disabled="${reportSent}"
+									t:validate="required" />
 							</div>
 						</div>
 						<div style="float:right;margin-top:28px;">
@@ -45,9 +46,8 @@
 								</span>
 								${message:insert}
 							</button>
-							<button class="btn btn-primary waves-effect waves-light"
-								style="float:right">${message:nochange}</button>
-							<!-- </button> -->
+							<!-- <button class="btn btn-primary waves-effect waves-light" -->
+							<!-- style="float:right">${message:nochange}</button> -->
 						</div>
 					</div>
 				</t:Form>
