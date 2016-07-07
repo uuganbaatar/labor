@@ -100,36 +100,35 @@ public class Index {
 
 			loginState.setUser(user);
 
-
-			roleId = loginState.getUser().getCurrentrole().getVal();
-
-			if (loginState.getUser().getOrg() != null) {
-				orgId = loginState.getUser().getOrg().getId();
-			}
-
-			if (loginState.getUser().getOrg() != null
-					&& loginState.getUser().getOrg().getSumId() != null) {
-				sumId = loginState.getUser().getOrg().getSumId().getId();
-			}
-
 			user.setLastAccessDate(Calendar.getInstance().getTime());
 
-			this.dao.saveOrUpdate(user,false);
+			this.dao.saveOrUpdate(user, false);
 
 			loginState.setRoleNames(user.getRoleNames());
 		}
 		loginState.setActiveMenu("hyanah");
 		loginState.setPageTitle(message.get("dashboard"));
 
-
 		AccessLog accessLog = new AccessLog();
 		accessLog.setAccessDate(dao.getCurrentDate());
 		accessLog.setUser(loginState.getUser());
 		accessLog.setIpAddress(requestGlobals.getHTTPServletRequest()
 				.getRemoteAddr());
-		dao.saveOrUpdate(accessLog,false);
+
+		dao.saveOrUpdate(accessLog, false);
 
 		aList = dao.getAccessLogs();
+
+		roleId = loginState.getUser().getCurrentrole().getVal();
+
+		if (loginState.getUser().getOrg() != null) {
+			orgId = loginState.getUser().getOrg().getId();
+		}
+
+		if (loginState.getUser().getOrg() != null
+				&& loginState.getUser().getOrg().getSumId() != null) {
+			sumId = loginState.getUser().getOrg().getSumId().getId();
+		}
 
 		rowIndex = 1;
 
@@ -325,9 +324,7 @@ public class Index {
 
 		String s = bar.toString();
 
-
 		Object b = s.substring(1, 9);
-
 
 		return bar;
 	}

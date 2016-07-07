@@ -134,6 +134,15 @@ public class SccDAOHibernate implements SccDAO {
 					messages.get("success"));
 		}
 	}
+	
+	public void saveOrUpdate(BaseObject object, boolean hasMessage) {
+		//object.setCreatedDate(new Date());
+		session.saveOrUpdate(object);
+
+		if (hasMessage) {
+			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS, messages.get("success"));
+		}
+	}
 
 	@CommitAfter
 	public void saveOrUpdateObject(Object obj) {
@@ -1906,10 +1915,6 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public void saveOrUpdate(BaseObject object, boolean hasMessage) {
-		// TODO Auto-generated method stub
-
-	}
 
 	public List<Job> getJobSearch(GeneralType generalType, String name,
 			boolean check, Date d1, Date d2, AjiliinBairHurungu fundSource,

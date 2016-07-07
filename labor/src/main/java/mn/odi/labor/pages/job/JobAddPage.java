@@ -53,7 +53,7 @@ public class JobAddPage {
 	@Persist
 	@Property
 	private boolean isActive;
-	
+
 	@Persist
 	private int roleId;
 
@@ -67,8 +67,8 @@ public class JobAddPage {
 	@CommitAfter
 	void beginRender() {
 		System.out.println("onBeginRender Success");
-		
-		roleId=loginState.getUser().getCurrentrole().getVal();
+
+		roleId = loginState.getUser().getCurrentrole().getVal();
 
 		loginState.setActiveMenu("job");
 		loginState.setPageTitle(message.get("job"));
@@ -96,17 +96,19 @@ public class JobAddPage {
 	}
 
 	public SelectModel getOrgModel() {
-		if(roleId==0){
-			return new CommonSM<Organization>(Organization.class, dao.getOrgList(),
+		if (roleId == 0) {
+			return new CommonSM<Organization>(Organization.class,
+					dao.getOrgList(), "getName");
+		} else if (roleId == 1) {
+			return new CommonSM<Organization>(Organization.class,
+					dao.getOrgListById(loginState.getUser().getOrg().getId()),
 					"getName");
-		}else if(roleId==1){
-			return new CommonSM<Organization>(Organization.class, dao.getOrgListById(loginState.getUser().getOrg().getId()),
-					"getName");
-		}else{
-			return new CommonSM<Organization>(Organization.class, dao.getOrgListBySum(loginState.getUser().getOrg().getSumId()),
-					"getName");
+		} else {
+			return new CommonSM<Organization>(Organization.class,
+					dao.getOrgListBySum(loginState.getUser().getOrg()
+							.getSumId()), "getName");
 		}
-		
+
 	}
 
 	public SelectModel getJobTypeModel() {
@@ -114,6 +116,7 @@ public class JobAddPage {
 	}
 
 	public Object onActionFromJobCancel() {
+		jobs = null;
 		return JobPage.class;
 	}
 
