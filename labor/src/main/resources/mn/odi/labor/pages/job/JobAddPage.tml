@@ -46,9 +46,17 @@
 								${message:org-label}
 								<span class="req">*</span>
 							</label>
-							<input t:type="select" class="form-control" t:id="organization"
-								t:model="orgModel" t:value="jobs.org" t:validate="required"
-								t:blankOption="always" />
+							<t:If test="${isUser}">
+								<label class="form-control" style="border:none;">
+									${orgName}
+								</label>
+								<p:else>
+									<input t:type="select" class="form-control" t:id="organization"
+										t:model="orgModel" t:value="jobs.org" t:validate="required"
+										t:blankOption="always" />
+								</p:else>
+							</t:If>
+
 						</div>
 					</div>
 					<div class="col-md-4">

@@ -75,6 +75,14 @@ public class EmpAddPage {
 	@Property
 	private String regNum;
 
+	@Property
+	@Persist
+	private boolean isUser;
+
+	@Property
+	@Persist
+	private int roleId;
+
 	void onActivate(Employee emp) {
 
 		if (emp != null) {
@@ -99,6 +107,13 @@ public class EmpAddPage {
 			emp = new Employee();
 			job = emp.getJob();
 		}
+
+		roleId = loginState.getUser().getCurrentrole().getVal();
+
+		if (roleId == 1) {
+			isUser = true;
+		}
+
 		// this.regNum = emp.getRegNumber();
 		disabled = false;
 	}
@@ -126,7 +141,8 @@ public class EmpAddPage {
 					dao.getOrgList(), "getName");
 		} else {
 			return new CommonSM<Organization>(Organization.class,
-					dao.getOrgListById(loginState.getUser().getOrg().getId()), "getName");
+					dao.getOrgListById(loginState.getUser().getOrg().getId()),
+					"getName");
 		}
 	}
 
@@ -166,8 +182,13 @@ public class EmpAddPage {
 
 	@CommitAfter
 	Object onSuccessFromEmpForm() {
-		emp.setJob(job);
+
 		emp.setRegNumber(regNum);
+		if (roleId == 1) {
+			job.setOrg(loginState.getUser().getOrg());
+		}
+
+		emp.setJob(job);
 		dao.saveOrUpdateObject(emp);
 		return EmpListPage.class;
 	}
@@ -191,5 +212,13 @@ public class EmpAddPage {
 	// public Object onValueChangedFromOrg(Organization org) {
 	// return orgZone.getBody();
 	// }
+
+	public String getOrgName() {
+		String s = "-";
+		if (loginState.getUser().getOrg() != null) {
+			s = loginState.getUser().getOrg().getName();
+		}
+		return s;
+	}
 
 }

@@ -13,8 +13,8 @@
 								<span class="req">*</span>
 							</label>
 							<t:zone t:id="regZone" id="regzone">
-							    <input t:type="textfield" class="form-control" t:id="regNum"
-								t:validate="required,regexp" t:value="regNum" />
+								<input t:type="textfield" class="form-control" t:id="regNum"
+									t:validate="required,regexp" t:value="regNum" />
 							</t:zone>
 						</div>
 					</div>
@@ -22,10 +22,10 @@
 						<div class="form-group check-register-number">
 							<t:if test="newEmp">
 								<t:Submit class="btn btn-padding btn-primary" id="checkRegister"
-										t:value="${message:check}" />		
-										<p:else>
-										</p:else>
-							</t:if>			
+									t:value="${message:check}" />
+								<p:else>
+								</p:else>
+							</t:if>
 						</div>
 					</div>
 				</form>
@@ -89,9 +89,9 @@
 								<span class="req">*</span>
 							</label>
 							<div class="form-group">
-										
-										<input t:id="isImpairment" t:type="checkbox" t:value="emp.isImpairment" />
-									</div>
+
+								<input t:id="isImpairment" t:type="checkbox" t:value="emp.isImpairment" />
+							</div>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -141,9 +141,17 @@
 								${message:org-label}
 								<span class="req">*</span>
 							</label>
-							<input t:type="select" class="form-control" t:id="org"
-								t:model="orgModel" t:value="orgSel" t:validate="required"
-								t:blankOption="always" zone="orgZone" />
+							<t:If test="${isUser}">
+								<label class="form-control" style="border:none;">
+									${orgName}
+								</label>
+								<p:else>
+									<input t:type="select" class="form-control" t:id="org"
+										t:model="orgModel" t:value="orgSel" t:validate="required"
+										t:blankOption="always" zone="orgZone" />
+								</p:else>
+							</t:If>
+
 						</div>
 					</div>
 					<div class="col-md-4">

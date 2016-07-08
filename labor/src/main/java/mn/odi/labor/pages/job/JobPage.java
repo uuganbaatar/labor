@@ -107,7 +107,7 @@ public class JobPage {
 	@Persist
 	@Property
 	private boolean isUser, isAdmin, isLabUser;
-	
+
 	@Persist
 	private SumDuureg sum;
 
@@ -118,8 +118,8 @@ public class JobPage {
 		loginState.setPageTitle(message.get("job"));
 
 		roleId = loginState.getUser().getCurrentrole().getVal();
-		
-		if(loginState.getUser().getOrg().getSumId()!=null){
+
+		if (loginState.getUser().getOrg().getSumId() != null) {
 			sum = loginState.getUser().getOrg().getSumId();
 		}
 
@@ -129,6 +129,7 @@ public class JobPage {
 					startDate, endDate, fundingSource, jobType, org);
 		} else if (roleId == 1) {
 			isUser = true;
+			System.err.println(loginState.getUser().getOrg().getId());
 			jobList = dao.getJobSearch(generalType, jobName, newCheck,
 					startDate, endDate, fundingSource, jobType, loginState
 							.getUser().getOrg());

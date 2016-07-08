@@ -57,6 +57,10 @@ public class JobAddPage {
 	@Persist
 	private int roleId;
 
+	@Property
+	@Persist
+	private boolean isUser;
+
 	void onActivate(Job job) {
 		if (job != null) {
 			jobs = job;
@@ -69,6 +73,10 @@ public class JobAddPage {
 		System.out.println("onBeginRender Success");
 
 		roleId = loginState.getUser().getCurrentrole().getVal();
+
+		if (roleId == 1) {
+			isUser = true;
+		}
 
 		loginState.setActiveMenu("job");
 		loginState.setPageTitle(message.get("job"));
@@ -139,7 +147,19 @@ public class JobAddPage {
 			return this;
 		}
 
+		if (roleId == 1) {
+			jobs.setOrg(loginState.getUser().getOrg());
+		}
+
 		dao.saveOrUpdateObject(jobs);
 		return JobPage.class;
+	}
+
+	public String getOrgName() {
+		String s = "-";
+		if (loginState.getUser().getOrg() != null) {
+			s = loginState.getUser().getOrg().getName();
+		}
+		return s;
 	}
 }
