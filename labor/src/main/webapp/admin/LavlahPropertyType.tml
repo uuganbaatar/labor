@@ -58,7 +58,9 @@
 						<div class="col-md-4">
 							<div class="form-group">
 								<label>${message:isActive-label}</label>
-								<input t:id="isActive" t:type="checkbox" t:value="active" />
+								<div class="form-group">
+									<input t:id="isActive" t:type="checkbox" t:value="active" />
+								</div>
 							</div>
 						</div>
 						<div class="col-md-12 text-right">

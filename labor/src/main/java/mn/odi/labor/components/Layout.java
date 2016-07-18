@@ -46,7 +46,7 @@ import mn.odi.labor.pages.organization.LaborReportOrgList;
 				"context:assets/js/bootstrap.min.js", "context:assets/js/detect.js", "context:assets/js/fastclick.js",
 				"context:assets/js/jquery.slimscroll.js", "context:assets/js/jquery.blockUI.js",
 				"context:assets/js/waves.js", "context:assets/js/wow.min.js", "context:assets/js/jquery.nicescroll.js",
-				"context:assets/js/jquery.scrollTo.min.js", "context:assets/js/jquery.core.js" })
+				"context:assets/js/jquery.scrollTo.min.js", "context:assets/js/jquery.core.js","context:assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"})
 public class Layout {
 
 	@SessionState

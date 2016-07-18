@@ -78,9 +78,14 @@ public class Index {
 
 	@Inject
 	private Messages messages;
+	
+	 @Inject
+	 private Request _request;
+	
 
 	@CommitAfter
 	void beginRender() {
+		
 		if (loginState.getUser() == null) {
 
 			SecurityContext ctx = SecurityContextHolder.getContext();
@@ -112,8 +117,11 @@ public class Index {
 		AccessLog accessLog = new AccessLog();
 		accessLog.setAccessDate(dao.getCurrentDate());
 		accessLog.setUser(loginState.getUser());
+		
 		accessLog.setIpAddress(requestGlobals.getHTTPServletRequest()
 				.getRemoteAddr());
+		
+		System.err.println("remote host:" + request.getRemoteHost());
 
 		dao.saveOrUpdate(accessLog, false);
 
