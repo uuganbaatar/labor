@@ -43,7 +43,7 @@ public class AppModule {
 
 		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "mn");
 
-		configuration.add(SymbolConstants.PRODUCTION_MODE, "true");
+		configuration.add(SymbolConstants.PRODUCTION_MODE, "false");
 
 		configuration.add(SymbolConstants.APPLICATION_VERSION, "0.0.1-SNAPSHOT");
 

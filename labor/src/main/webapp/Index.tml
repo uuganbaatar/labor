@@ -150,13 +150,14 @@
 			<div class="col-sm-12">
 				<div class="card-box">
 
-			<!-- 		<h4 class="text-dark header-title m-t-0">${message:barChartDashboard}</h4> -->
+					<!-- <h4 class="text-dark header-title m-t-0">${message:barChartDashboard}</h4> -->
 
-                   <!--  <t:charts id="mbars" t:chartData="barData" t:chartType="'bar'" />   -->
-                    
-                   <div id="jobchart" style="min-width: 310px; margin: 0 auto"></div>                    
-                       
-         
+					<!-- <t:charts id="mbars" t:chartData="barData" t:chartType="'bar'" 
+						/> -->
+
+					<div id="jobchart" style="min-width: 310px; margin: 0 auto"></div>
+
+
 				</div>
 			</div>
 		</div>
@@ -168,7 +169,7 @@
 
 
 					<div class="text-left">
-						 <div id="container" style="min-width: 310px; margin: 0 auto"></div> 
+						<div id="container" style="min-width: 310px; margin: 0 auto"></div>
 					</div>
 
 				</div>
@@ -190,7 +191,7 @@
 								<p:rowIndexCell>
 									${rowIndex}
 								</p:rowIndexCell>
-									<p:fullnameCell>
+								<p:fullnameCell>
 									${username}
 								</p:fullnameCell>
 								<p:accessDateCell>
@@ -211,196 +212,196 @@
 			</div>
 		</div>
 		<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/data.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<table hidden='true' id="datatable">
-    <thead>
-        <tr>
-            <th></th>
-            <th>${message:total}</th>
-            <th>${message:female}</th>
-            <th>${message:berhsheeltei}</th>
-        </tr>
-    </thead>
-    <tbody>
-    <t:if test="${jan}">
-        <tr>
-            <th>Jan</th>
-            <td>${totalJan}</td>
-            <td>${totalFemaleJan}</td>
-            <td>${totalImpJan}</td>
-        </tr>
-        </t:if>
-        <t:if test="${feb}">
-        <tr>
-            <th>Feb</th>
-           <td>${totalFeb}</td>
-            <td>${totalFemaleFeb}</td>
-            <td>${totalImpFeb}</td>
-        </tr>
-        </t:if>
-        <t:if test="${mar}">
-        <tr>
-            <th>Mar</th>
-            <td>${totalMar}</td>
-            <td>${totalFemaleMar}</td>
-            <td>${totalImpMar}</td>
-        </tr>
-        </t:if>
-        <t:if test="${apr}">
-        <tr>
-            <th>Apr</th>
-            <td>${totalApr}</td>
-            <td>${totalFemaleApr}</td>
-            <td>${totalImpApr}</td>
-        </tr>
-        </t:if>
-        <t:if test="${may}">
-        <tr>
-            <th>May</th>
-            <td>${totalMay}</td>
-            <td>${totalFemaleMay}</td>
-            <td>${totalImpMay}</td>
-        </tr>
-        </t:if>
-        <t:if test="${jun}">
-        <tr>
-            <th>Jun</th>
-            <td>${totalJun}</td>
-            <td>${totalFemaleJun}</td>
-            <td>${totalImpJun}</td>
-        </tr>
-        </t:if>
-        <t:if test="${jul}">
-        <tr>
-            <th>Jul</th>
-            <td>${totalJul}</td>
-            <td>${totalFemaleJul}</td>
-            <td>${totalImpJul}</td>
-        </tr>
-        </t:if>
-        <t:if test="${aug}">
-        <tr>
-            <th>Aug</th>
-           <td>${totalAug}</td>
-            <td>${totalFemaleAug}</td>
-            <td>${totalImpAug}</td>
-        </tr>
-        </t:if>
-        <t:if test="${sep}">
-        <tr>
-            <th>Sep</th>
-           <td>${totalSep}</td>
-            <td>${totalFemaleSep}</td>
-            <td>${totalImpSep}</td>
-        </tr>
-        </t:if>
-        <t:if test="${oct}">
-         <tr>
-            <th>Oct</th>
-           <td>${totalOct}</td>
-            <td>${totalFemaleOct}</td>
-            <td>${totalImpOct}</td>
-        </tr>
-        </t:if>
-        <t:if test="${nov}">
-        <tr>
-            <th>Nov</th>
-            <td>${totalNov}</td>
-            <td>${totalFemaleNov}</td>
-            <td>${totalImpNov}</td>
-        </tr>
-        </t:if>
-        <t:if test="${dec}">
-        <tr>
-            <th>Dec</th>
-           <td>${totalDec}</td>
-            <td>${totalFemaleDec}</td>
-            <td>${totalImpDec}</td>
-        </tr>
-        </t:if>
-    </tbody>
-</table>
-<script>
-$(function () {
-    $('#container').highcharts({
-        data: {
-            table: 'datatable'
-        },
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: '${message:haritsaa}'
-        },
-        yAxis: {
-            allowDecimals: false,
-            title: {
-                text: ''
-            }
-        },
-        tooltip: {
-            formatter: function () {
-                return '<b>' + this.series.name + '</b><br/>' +
-                    this.point.y + ' ' + this.point.name.toLowerCase();
-            }
-        }
-    });
-});
+		<script src="https://code.highcharts.com/modules/data.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+		<table hidden='true' id="datatable">
+			<thead>
+				<tr>
+					<th></th>
+					<th>${message:total}</th>
+					<th>${message:female}</th>
+					<th>${message:berhsheeltei}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<t:if test="${jan}">
+					<tr>
+						<th>Jan</th>
+						<td>${totalJan}</td>
+						<td>${totalFemaleJan}</td>
+						<td>${totalImpJan}</td>
+					</tr>
+				</t:if>
+				<t:if test="${feb}">
+					<tr>
+						<th>Feb</th>
+						<td>${totalFeb}</td>
+						<td>${totalFemaleFeb}</td>
+						<td>${totalImpFeb}</td>
+					</tr>
+				</t:if>
+				<t:if test="${mar}">
+					<tr>
+						<th>Mar</th>
+						<td>${totalMar}</td>
+						<td>${totalFemaleMar}</td>
+						<td>${totalImpMar}</td>
+					</tr>
+				</t:if>
+				<t:if test="${apr}">
+					<tr>
+						<th>Apr</th>
+						<td>${totalApr}</td>
+						<td>${totalFemaleApr}</td>
+						<td>${totalImpApr}</td>
+					</tr>
+				</t:if>
+				<t:if test="${may}">
+					<tr>
+						<th>May</th>
+						<td>${totalMay}</td>
+						<td>${totalFemaleMay}</td>
+						<td>${totalImpMay}</td>
+					</tr>
+				</t:if>
+				<t:if test="${jun}">
+					<tr>
+						<th>Jun</th>
+						<td>${totalJun}</td>
+						<td>${totalFemaleJun}</td>
+						<td>${totalImpJun}</td>
+					</tr>
+				</t:if>
+				<t:if test="${jul}">
+					<tr>
+						<th>Jul</th>
+						<td>${totalJul}</td>
+						<td>${totalFemaleJul}</td>
+						<td>${totalImpJul}</td>
+					</tr>
+				</t:if>
+				<t:if test="${aug}">
+					<tr>
+						<th>Aug</th>
+						<td>${totalAug}</td>
+						<td>${totalFemaleAug}</td>
+						<td>${totalImpAug}</td>
+					</tr>
+				</t:if>
+				<t:if test="${sep}">
+					<tr>
+						<th>Sep</th>
+						<td>${totalSep}</td>
+						<td>${totalFemaleSep}</td>
+						<td>${totalImpSep}</td>
+					</tr>
+				</t:if>
+				<t:if test="${oct}">
+					<tr>
+						<th>Oct</th>
+						<td>${totalOct}</td>
+						<td>${totalFemaleOct}</td>
+						<td>${totalImpOct}</td>
+					</tr>
+				</t:if>
+				<t:if test="${nov}">
+					<tr>
+						<th>Nov</th>
+						<td>${totalNov}</td>
+						<td>${totalFemaleNov}</td>
+						<td>${totalImpNov}</td>
+					</tr>
+				</t:if>
+				<t:if test="${dec}">
+					<tr>
+						<th>Dec</th>
+						<td>${totalDec}</td>
+						<td>${totalFemaleDec}</td>
+						<td>${totalImpDec}</td>
+					</tr>
+				</t:if>
+			</tbody>
+		</table>
+		<script>
+			$(function () {
+			$('#container').highcharts({
+			data: {
+			table: 'datatable'
+			},
+			chart: {
+			type: 'column'
+			},
+			title: {
+			text: '${message:haritsaa}'
+			},
+			yAxis: {
+			allowDecimals: false,
+			title: {
+			text: ''
+			}
+			},
+			tooltip: {
+			formatter: function () {
+			return '<b>' + this.series.name + '</b><br />' +
+			this.point.y + ' ' + this.point.name.toLowerCase();
+			}
+			}
+			});
+			});
 
-$(function () {
-    $('#jobchart').highcharts({
-        chart: {
-            type: 'area'
-        },
-        title: {
-            text: '${message:barChartDashboard}'
-        },
-        subtitle: {
-            text: ''
-        },
-        xAxis: {
-            categories: ${test},
-            tickmarkPlacement: 'on',
-            title: {
-                enabled: false
-            }
-        },
-        yAxis: {
-            title: {
-                text: ''
-            },
-            labels: {
-                formatter: function () {
-                    return this.value / 1000;
-                }
-            }
-        },
-        tooltip: {
-            shared: true,
-            valueSuffix: ' '
-        },
-        plotOptions: {
-            area: {
-                stacking: 'normal',
-                lineColor: '#666666',
-                lineWidth: 1,
-                marker: {
-                    lineWidth: 1,
-                    lineColor: '#666666'
-                }
-            }
-        },
-        series: [{
-            name: '${message:ajliinBairniiToo}',
-            data: [5, 6, 9, 7, 10, 6, 2]
-        }, {
-            name: '${message:newJobs}',
-            data: [2, 3, 1, 6, 13, 0, 6]
-        }]
-    });
-});
+			$(function () {
+			$('#jobchart').highcharts({
+			chart: {
+			type: 'area'
+			},
+			title: {
+			text: '${message:barChartDashboard}'
+			},
+			subtitle: {
+			text: ''
+			},
+			xAxis: {
+			categories: ${test},
+			tickmarkPlacement: 'on',
+			title: {
+			enabled: false
+			}
+			},
+			yAxis: {
+			title: {
+			text: ''
+			},
+			labels: {
+			formatter: function () {
+			return this.value / 1000;
+			}
+			}
+			},
+			tooltip: {
+			shared: true,
+			valueSuffix: ' '
+			},
+			plotOptions: {
+			area: {
+			stacking: 'normal',
+			lineColor: '#666666',
+			lineWidth: 1,
+			marker: {
+			lineWidth: 1,
+			lineColor: '#666666'
+			}
+			}
+			},
+			series: [{
+			name: '${message:ajliinBairniiToo}',
+			data: [5, 6, 9, 7, 10, 6, 2]
+			}, {
+			name: '${message:newJobs}',
+			data: [2, 3, 1, 6, 13, 0, 6]
+			}]
+			});
+			});
 
-</script>
+		</script>
 	</body>
 </html>
