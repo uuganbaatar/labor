@@ -8,28 +8,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.apache.tapestry5.alerts.AlertManager;
-import org.apache.tapestry5.alerts.Duration;
-import org.apache.tapestry5.alerts.Severity;
-import org.apache.tapestry5.annotations.SessionState;
-import org.apache.tapestry5.hibernate.annotations.CommitAfter;
-import org.apache.tapestry5.ioc.Messages;
-import org.apache.tapestry5.ioc.internal.OperationException;
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.ejb.criteria.expression.function.AggregationFunction.SUM;
-import org.hibernate.transform.Transformers;
-import org.hibernate.type.IntegerType;
-import org.hibernate.type.LongType;
-import org.hibernate.type.StringType;
-
 import mn.odi.labor.aso.LoginState;
 import mn.odi.labor.dao.SccDAO;
 import mn.odi.labor.entities.admin.AjiliinBairHurungu;
@@ -55,6 +33,27 @@ import mn.odi.labor.enums.GenderEnum;
 import mn.odi.labor.enums.JobTypeEnum;
 import mn.odi.labor.enums.OrgTypeEnum;
 import mn.odi.labor.enums.ReportDetailType;
+
+import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.alerts.Duration;
+import org.apache.tapestry5.alerts.Severity;
+import org.apache.tapestry5.annotations.SessionState;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
+import org.apache.tapestry5.ioc.Messages;
+import org.apache.tapestry5.ioc.internal.OperationException;
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
+import org.hibernate.type.IntegerType;
+import org.hibernate.type.LongType;
+import org.hibernate.type.StringType;
 
 public class SccDAOHibernate implements SccDAO {
 
@@ -134,13 +133,14 @@ public class SccDAOHibernate implements SccDAO {
 					messages.get("success"));
 		}
 	}
-	
+
 	public void saveOrUpdate(BaseObject object, boolean hasMessage) {
-		//object.setCreatedDate(new Date());
+		// object.setCreatedDate(new Date());
 		session.saveOrUpdate(object);
 
 		if (hasMessage) {
-			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS, messages.get("success"));
+			alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,
+					messages.get("success"));
 		}
 	}
 
@@ -163,7 +163,6 @@ public class SccDAOHibernate implements SccDAO {
 		try {
 			session.delete(obj);
 		} catch (OperationException e) {
-			System.out.println("[ERROR DELETE:]" + e);
 		}
 	}
 
@@ -243,7 +242,6 @@ public class SccDAOHibernate implements SccDAO {
 				return crit.list();
 			else
 				return null;
-
 		} catch (HibernateException e) {
 			// Critical errors : database unreachable, etc.
 			return null;
@@ -1076,20 +1074,6 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-	public List<BigDecimal> getInfoBar() {
-		// int year = Calendar.getInstance().get(Calendar.YEAR);
-		try {
-			String sql = "select count(job.id) from job left join general_type gt on gt.id=job.generaltype_id group by gt.name";
-			// sql += " group by fg.name";
-			SQLQuery query = session.createSQLQuery(sql);
-			// query.setParameter("tYear", year);
-			return query.list();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-			return (new ArrayList<BigDecimal>());
-		}
-	}
-
 	public GeneralType getGeneralTypeByName(String name) {
 		try {
 			Criteria crit = session.createCriteria(GeneralType.class);
@@ -1915,7 +1899,6 @@ public class SccDAOHibernate implements SccDAO {
 		}
 	}
 
-
 	public List<Job> getJobSearch(GeneralType generalType, String name,
 			boolean check, Date d1, Date d2, AjiliinBairHurungu fundSource,
 			JobTypeEnum type, Organization org) {
@@ -2722,9 +2705,9 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
-	
-	public List<Organization> getOrgListSearchWithSum(String name, Date d1, Date d2,
-			Boolean b, SumDuureg sum) {
+
+	public List<Organization> getOrgListSearchWithSum(String name, Date d1,
+			Date d2, Boolean b, SumDuureg sum) {
 		try {
 			Criteria crit = session.createCriteria(Organization.class);
 
@@ -2737,11 +2720,11 @@ public class SccDAOHibernate implements SccDAO {
 
 			if (b != null)
 				crit.add(Restrictions.eq("isActive", b));
-			
-			if(sum!=null){
+
+			if (sum != null) {
 				crit.add(Restrictions.eq("sumId", sum));
 			}
-			
+
 			if (crit.list().size() > 0)
 				return crit.list();
 			else
@@ -2752,4 +2735,38 @@ public class SccDAOHibernate implements SccDAO {
 			return null;
 		}
 	}
+
+	public List<String> getInfoDate() {
+		try {
+			String sql = "select created_date from job  group by created_date order by created_date asc";
+			SQLQuery query = session.createSQLQuery(sql);
+			return query.list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return (new ArrayList<String>());
+		}
+	}
+
+	public List<String> getInfoTotal() {
+		try {
+			String sql = "select count(job.id) from job group by created_date order by created_date asc";
+			SQLQuery query = session.createSQLQuery(sql);
+			return query.list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return (new ArrayList<String>());
+		}
+	}
+
+	public List<String> getInfoNew() {
+		try {
+			String sql = "select count(job.id) from job where isnew=1 group by created_date order by created_date asc";
+			SQLQuery query = session.createSQLQuery(sql);
+			return query.list();
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			return (new ArrayList<String>());
+		}
+	}
+
 }

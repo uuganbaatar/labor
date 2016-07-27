@@ -99,6 +99,7 @@ public class CompanyStatus extends BaseObject {
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("id", this.id).append("uuid", this.uuid).toString();
+		return new ToStringBuilder(this).append("id", this.id)
+				.append("uuid", this.uuid).toString();
 	}
 }

@@ -13,7 +13,7 @@
  * ------------------------------------------------------------------------------
  * 
  * ALL RIGHTS RESERVED COPYRIGHT (C) 2014 Od Innovation CO.,LTD SOFTWARE DIVSION
-*/
+ */
 package mn.odi.labor.util;
 
 import java.util.ArrayList;
@@ -34,9 +34,9 @@ public class StatisticUtil {
 	 */
 
 	private String name;
-	
+
 	private String title;
-	
+
 	private String subTitle;
 
 	private Map<String, List<String>> rows;
@@ -82,9 +82,10 @@ public class StatisticUtil {
 	}
 
 	public Map<String, List<String>> getRows() {
-		
-		//Map<String, List<String>> treeMap = new TreeMap<String, List<String>>(rows);
-		
+
+		// Map<String, List<String>> treeMap = new TreeMap<String,
+		// List<String>>(rows);
+
 		return rows;
 	}
 

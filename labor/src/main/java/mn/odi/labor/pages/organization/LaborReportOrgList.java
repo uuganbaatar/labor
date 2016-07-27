@@ -5,6 +5,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import mn.odi.labor.aso.LoginState;
+import mn.odi.labor.dao.SccDAO;
+import mn.odi.labor.entities.common.Organization;
+import mn.odi.labor.entities.labor.Report;
+import mn.odi.labor.entities.labor.ReportStatus;
+import mn.odi.labor.models.FormYearSM;
+
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
@@ -12,13 +19,6 @@ import org.apache.tapestry5.annotations.SessionState;
 import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
-
-import mn.odi.labor.aso.LoginState;
-import mn.odi.labor.dao.SccDAO;
-import mn.odi.labor.entities.common.Organization;
-import mn.odi.labor.entities.labor.Report;
-import mn.odi.labor.entities.labor.ReportStatus;
-import mn.odi.labor.models.FormYearSM;
 
 public class LaborReportOrgList {
 
@@ -78,7 +78,8 @@ public class LaborReportOrgList {
 		if (obj != null)
 			org = obj;
 		else {
-			if (loginState.getUser() != null && loginState.getUser().getOrg() != null)
+			if (loginState.getUser() != null
+					&& loginState.getUser().getOrg() != null)
 				org = loginState.getUser().getOrg();
 			else
 				org = null;
@@ -101,7 +102,8 @@ public class LaborReportOrgList {
 		}
 
 		if (org == null) {
-			if (loginState.getUser() != null && loginState.getUser().getOrg() != null)
+			if (loginState.getUser() != null
+					&& loginState.getUser().getOrg() != null)
 				org = loginState.getUser().getOrg();
 			else
 				org = null;
@@ -335,7 +337,7 @@ public class LaborReportOrgList {
 	}
 
 	@CommitAfter
-	public Object onActionFromSepAction(Report r) {
+	Object onActionFromSepAction(Report r) {
 		if (dao.getReportStatusList(r, year, 9, org) != null)
 			insertPage.onActivate(dao.getReportStatusList(r, year, 9, org));
 		else {

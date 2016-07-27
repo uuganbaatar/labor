@@ -109,10 +109,12 @@ public class LavlahEmpGarsan {
 	@CommitAfter
 	public void onSuccessFromSave() {
 		if (LavlahEmpGarsan.containsWhiteSpace(name)) {
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("hoosonzai"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("hoosonzai"));
 		} else {
 			if (dao.getGarsanByName(name) != null) {
-				alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("burtgeltei"));
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
 			} else {
 				LavlahGarsan obj = new LavlahGarsan();
 				obj.setName(name);
@@ -130,7 +132,8 @@ public class LavlahEmpGarsan {
 			dao.deleteObject(obj);
 		} catch (Exception e) {
 			System.out.println("[ERROR DELETE:]" + e);
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("deleteerror"));
 		}
 
 		return LavlahEmpGarsan.class;
@@ -140,7 +143,6 @@ public class LavlahEmpGarsan {
 		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
 
-	
 	@CommitAfter
 	public Object onActionFromEnable(LavlahGarsan type) {
 		if (type.getIsActive() == true) {

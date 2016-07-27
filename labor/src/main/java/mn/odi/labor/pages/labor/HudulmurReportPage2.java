@@ -80,15 +80,20 @@ public class HudulmurReportPage2 {
 	void beginRender() {
 		loginState.setActiveMenu("heltes2");
 		loginState.setPageTitle(message.get("heltes"));
-		
+
 		if (list == null) {
 			if (loginState.getUser().getCurrentrole().equals(RoleEnum.ADMIN))
-				list = new ArrayList<AimagNiislelEnum>(Arrays.asList(AimagNiislelEnum.values()));
-			if (loginState.getUser().getCurrentrole().equals(RoleEnum.LABORUSER)) {
+				list = new ArrayList<AimagNiislelEnum>(
+						Arrays.asList(AimagNiislelEnum.values()));
+			if (loginState.getUser().getCurrentrole()
+					.equals(RoleEnum.LABORUSER)) {
 				list = new ArrayList<AimagNiislelEnum>();
-				if (loginState.getUser().getOrg() != null && loginState.getUser().getOrg().getSumId() != null
-						&& loginState.getUser().getOrg().getSumId().getAimagId() != null)
-					list.add(loginState.getUser().getOrg().getSumId().getAimagId());
+				if (loginState.getUser().getOrg() != null
+						&& loginState.getUser().getOrg().getSumId() != null
+						&& loginState.getUser().getOrg().getSumId()
+								.getAimagId() != null)
+					list.add(loginState.getUser().getOrg().getSumId()
+							.getAimagId());
 			}
 
 		}
@@ -110,33 +115,38 @@ public class HudulmurReportPage2 {
 			month = Calendar.getInstance().get(Calendar.MONTH) + 1;
 		}
 
-		System.out.println("FIRST DAY:" + CalendarUtil.getFirstDate(year, month));
+		System.out.println("FIRST DAY:"
+				+ CalendarUtil.getFirstDate(year, month));
 		System.out.println("LAST DAY:" + CalendarUtil.getLastDate(year, month));
 	}
 
 	public int getAllJobs() {
 		int i = 0;
-		i = dao.getAllJobsSum(row, CalendarUtil.getFirstDate(year, month), CalendarUtil.getLastDate(year, month));
+		i = dao.getAllJobsSum(row, CalendarUtil.getFirstDate(year, month),
+				CalendarUtil.getLastDate(year, month));
 		return i;
 	}
 
 	public Integer getEzval() {
 		int i = 0;
-		i = dao.getRestJobsSum(row, valueEZ, null, null, CalendarUtil.getFirstDate(year, month),
+		i = dao.getRestJobsSum(row, valueEZ, null, null,
+				CalendarUtil.getFirstDate(year, month),
 				CalendarUtil.getLastDate(year, month));
 		return i;
 	}
 
 	public Integer getHelval() {
 		int i = 0;
-		i = dao.getRestJobsSum(row, null, valueHel, null, CalendarUtil.getFirstDate(year, month),
+		i = dao.getRestJobsSum(row, null, valueHel, null,
+				CalendarUtil.getFirstDate(year, month),
 				CalendarUtil.getLastDate(year, month));
 		return i;
 	}
 
 	public Integer getProval() {
 		int i = 0;
-		i = dao.getRestJobsSum(row, null, null, valuePro, CalendarUtil.getFirstDate(year, month),
+		i = dao.getRestJobsSum(row, null, null, valuePro,
+				CalendarUtil.getFirstDate(year, month),
 				CalendarUtil.getLastDate(year, month));
 		return i;
 	}

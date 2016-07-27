@@ -13,7 +13,7 @@
  * ------------------------------------------------------------------------------
  * 
  * ALL RIGHTS RESERVED COPYRIGHT (C) 2014 Od Innovation CO.,LTD SOFTWARE DIVSION
-*/
+ */
 package mn.odi.labor.util;
 
 import java.util.Calendar;
@@ -99,7 +99,8 @@ public class CalendarUtil {
 		} else if (cal1.get(Calendar.MONTH) == cal2.get(Calendar.MONTH)) {
 			yearMonth[1] = 0;
 		} else {
-			yearMonth[1] = (12 - cal1.get(Calendar.MONTH) + cal2.get(Calendar.MONTH));
+			yearMonth[1] = (12 - cal1.get(Calendar.MONTH) + cal2
+					.get(Calendar.MONTH));
 		}
 
 		cal1.add(Calendar.MONTH, yearMonth[1]);

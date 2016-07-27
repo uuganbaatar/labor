@@ -13,24 +13,25 @@
  * ------------------------------------------------------------------------------
  * 
  * ALL RIGHTS RESERVED COPYRIGHT (C) 2014 Od Innovation CO.,LTD SOFTWARE DIVSION
-*/
+ */
 package mn.odi.labor.util;
 
 import com.activescript.GUID.GUIDException;
 import com.activescript.GUID.GUIDGenerator;
 
 public class UUIDUtil {
-    //~ Methods ================================================================
-    public static String getUUID() {
+	// ~ Methods
+	// ================================================================
+	public static String getUUID() {
 		String uuid = null;
-    	try {
+		try {
 			GUIDGenerator gen = new GUIDGenerator();
 			uuid = gen.getUnformatedUUID();
 		} catch (GUIDException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 		return uuid;
-    }
+	}
 }

@@ -31,7 +31,8 @@ public class Constants {
 
 	public static final String FILE_SEP = System.getProperty("file.separator");
 
-	public static final String USER_HOME = System.getProperty("user.home") + FILE_SEP;
+	public static final String USER_HOME = System.getProperty("user.home")
+			+ FILE_SEP;
 
 	public static final String CONFIG = "appConfig";
 
@@ -141,7 +142,7 @@ public class Constants {
 	public static int CURRENT_MILLIS = now.get(Calendar.MILLISECOND);
 	public static int HALF_YEAR_MONTH = Integer.valueOf(6);
 	public static int YEAR_MONTH = Integer.valueOf(12);
-	
+
 	public static final String TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 	/**
@@ -165,7 +166,8 @@ public class Constants {
 	/**
 	 * LIBRARY CONSTANTS
 	 */
-	public static final String[] FORM_LIBRARIES = { "context:js/plugins/handsontable/handsontable.js",
+	public static final String[] FORM_LIBRARIES = {
+			"context:js/plugins/handsontable/handsontable.js",
 			"context:js/plugins/handsontable/dist/lib/lodash/lodash.js",
 			"context:js/plugins/handsontable/dist/lib/underscore.string/underscore.string.js",
 			"context:js/plugins/handsontable/dist/lib/moment/moment.js",
@@ -174,16 +176,16 @@ public class Constants {
 			"context:js/plugins/handsontable/dist/lib/js-md5/md5.js",
 			"context:js/plugins/handsontable/dist/lib/jstat/jstat.js",
 			"context:js/plugins/handsontable/dist/lib/formulajs/formula.js",
-			"context:js/plugins/handsontable/dist/js/parser.js", "context:js/plugins/handsontable/dist/js/ruleJS.js",
+			"context:js/plugins/handsontable/dist/js/parser.js",
+			"context:js/plugins/handsontable/dist/js/ruleJS.js",
 			"context:js/plugins/handsontable/handsontable.formula.js" };
 
-	public static final String[] FORM_LAST_LIBRARIES = {
-			"context:js/plugins/handsontable-master/dist/handontable.full.min.js" };
+	public static final String[] FORM_LAST_LIBRARIES = { "context:js/plugins/handsontable-master/dist/handontable.full.min.js" };
 
-	public static final String[] FORM_STYLESHEETS = { "context:js/plugins/handsontable/handsontable.full.min.css",
+	public static final String[] FORM_STYLESHEETS = {
+			"context:js/plugins/handsontable/handsontable.full.min.css",
 			"context:js/plugins/handsontable/handsontable.formula.css" };
 
-	public static final String[] FORM_LAST_STYLESHEETS = {
-			"context:js/plugins/handsontable-master/dist/handsontable.full.min.css" };
+	public static final String[] FORM_LAST_STYLESHEETS = { "context:js/plugins/handsontable-master/dist/handsontable.full.min.css" };
 
 }

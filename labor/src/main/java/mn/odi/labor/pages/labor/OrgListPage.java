@@ -94,10 +94,11 @@ public class OrgListPage {
 		if (active == null) {
 			active = true;
 		}
-		if(loginState.getUser().getCurrentrole()==RoleEnum.ADMIN){
-		orgList = dao.getOrgListSearch(gname, d1, d2, active);
-		}else{
-			orgList = dao.getOrgListSearchWithSum(gname, d1, d2, active,loginState.getUser().getOrg().getSumId());
+		if (loginState.getUser().getCurrentrole() == RoleEnum.ADMIN) {
+			orgList = dao.getOrgListSearch(gname, d1, d2, active);
+		} else {
+			orgList = dao.getOrgListSearchWithSum(gname, d1, d2, active,
+					loginState.getUser().getOrg().getSumId());
 		}
 
 		if (org == null) {
@@ -114,7 +115,7 @@ public class OrgListPage {
 				"getName");
 	}
 
-	public Object onActionFromReportAction(Organization o) {
+	Object onActionFromReportAction(Organization o) {
 		page.onActivate(o);
 		return page;
 	}

@@ -67,12 +67,17 @@ public class HudulmurReportPage4 {
 		loginState.setPageTitle(message.get("heltes"));
 		if (list == null) {
 			if (loginState.getUser().getCurrentrole().equals(RoleEnum.ADMIN))
-				list = new ArrayList<AimagNiislelEnum>(Arrays.asList(AimagNiislelEnum.values()));
-			if (loginState.getUser().getCurrentrole().equals(RoleEnum.LABORUSER)) {
+				list = new ArrayList<AimagNiislelEnum>(
+						Arrays.asList(AimagNiislelEnum.values()));
+			if (loginState.getUser().getCurrentrole()
+					.equals(RoleEnum.LABORUSER)) {
 				list = new ArrayList<AimagNiislelEnum>();
-				if (loginState.getUser().getOrg() != null && loginState.getUser().getOrg().getSumId() != null
-						&& loginState.getUser().getOrg().getSumId().getAimagId() != null)
-					list.add(loginState.getUser().getOrg().getSumId().getAimagId());
+				if (loginState.getUser().getOrg() != null
+						&& loginState.getUser().getOrg().getSumId() != null
+						&& loginState.getUser().getOrg().getSumId()
+								.getAimagId() != null)
+					list.add(loginState.getUser().getOrg().getSumId()
+							.getAimagId());
 			}
 
 		}
@@ -88,34 +93,39 @@ public class HudulmurReportPage4 {
 			month = Calendar.getInstance().get(Calendar.MONTH) + 1;
 		}
 
-		System.out.println("FIRST DAY:" + CalendarUtil.getFirstDate(year, month));
+		System.out.println("FIRST DAY:"
+				+ CalendarUtil.getFirstDate(year, month));
 		System.out.println("LAST DAY:" + CalendarUtil.getLastDate(year, month));
 	}
 
 	public int getAllJobs() {
 		int i = 0;
-		i = dao.getJobsSumGender(row, null, null, CalendarUtil.getFirstDate(year, month),
+		i = dao.getJobsSumGender(row, null, null,
+				CalendarUtil.getFirstDate(year, month),
 				CalendarUtil.getLastDate(year, month));
 		return i;
 	}
 
 	public int getAllJobsFem() {
 		int i = 0;
-		i = dao.getJobsSumGender(row, null, GenderEnum.FEMALE, CalendarUtil.getFirstDate(year, month),
+		i = dao.getJobsSumGender(row, null, GenderEnum.FEMALE,
+				CalendarUtil.getFirstDate(year, month),
 				CalendarUtil.getLastDate(year, month));
 		return i;
 	}
 
 	public Integer getEzval() {
 		int i = 0;
-		i = dao.getJobsTrendSumGender(row, valueEZ, null, CalendarUtil.getFirstDate(year, month),
+		i = dao.getJobsTrendSumGender(row, valueEZ, null,
+				CalendarUtil.getFirstDate(year, month),
 				CalendarUtil.getLastDate(year, month));
 		return i;
 	}
 
 	public Integer getEzvalfem() {
 		int i = 0;
-		i = dao.getJobsTrendSumGender(row, valueEZ, GenderEnum.FEMALE, CalendarUtil.getFirstDate(year, month),
+		i = dao.getJobsTrendSumGender(row, valueEZ, GenderEnum.FEMALE,
+				CalendarUtil.getFirstDate(year, month),
 				CalendarUtil.getLastDate(year, month));
 		return i;
 	}

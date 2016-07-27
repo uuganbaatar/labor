@@ -99,7 +99,8 @@ public class EmpListPage {
 			isAdmin = true;
 			empList = dao.getEmpListSearch(org, job, phone, surName, empName);
 		} else {
-			empList = dao.getEmpListSearchUserRole(loginState.getUser().getOrg(), job, phone, surName, empName);
+			empList = dao.getEmpListSearchUserRole(loginState.getUser()
+					.getOrg(), job, phone, surName, empName);
 			isUser = true;
 		}
 

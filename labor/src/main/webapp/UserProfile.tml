@@ -14,7 +14,6 @@
 			<div class="clearfix"></div>
 			<div class="clearfix"></div>
 			<t:form t:id="ChangePass" class="form clear">
-				<!-- <p style="color:red;">${errMsg}</p> -->
 				<div class="slidingDiv row main-contents">
 					<div class="col-md-12">
 						<div class="card-box">
@@ -100,9 +99,6 @@
 					<div class="clearfix"></div>
 					<div class="hairly-line"></div>
 					<div class="col-md-12 text-center">
-						<!-- <a t:type="eventlink" t:event="cancel"> <button type="button" 
-							class="btn btn-padding btn-grey waves-effect waves-light">${message:back}</button> 
-							</a> -->
 						<t:Submit class="btn btn-padding btn-success" value="${message:save}" />
 					</div>
 					<div class="clearfix"></div>

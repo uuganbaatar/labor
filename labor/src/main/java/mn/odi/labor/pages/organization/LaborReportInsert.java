@@ -68,7 +68,8 @@ public class LaborReportInsert {
 
 	public void onActivate(ReportStatus rt) {
 		reportStatus = rt;
-		System.out.println("Report:" + reportStatus.getId() + reportStatus.getUuid());
+		System.out.println("Report:" + reportStatus.getId()
+				+ reportStatus.getUuid());
 	}
 
 	@CommitAfter
@@ -86,12 +87,14 @@ public class LaborReportInsert {
 	}
 
 	public SelectModel getGeneralTypeSM() {
-		CommonSM<GeneralType> sm = new CommonSM<GeneralType>(GeneralType.class, dao.getGeneralTypeList(), "getName");
+		CommonSM<GeneralType> sm = new CommonSM<GeneralType>(GeneralType.class,
+				dao.getGeneralTypeList(), "getName");
 		return sm;
 	}
 
 	public SelectModel getReportTypeEnum() {
-		EnumSelectModel sm = new EnumSelectModel(ReportDetailType.class, message);
+		EnumSelectModel sm = new EnumSelectModel(ReportDetailType.class,
+				message);
 		return sm;
 	}
 
@@ -104,8 +107,9 @@ public class LaborReportInsert {
 	public Object onSuccess() {
 		reportStatus.setReportStatus(ReportStatusEnum.DRAFT);
 		dao.saveOrUpdateObject(reportStatus);
-		ReportDetail rt = dao.getReportDetailListWithParameter(reportDetail.getGeneralType(),
-				reportDetail.getDetailType(), reportDetail.getJobType(), reportStatus.getYear(),
+		ReportDetail rt = dao.getReportDetailListWithParameter(
+				reportDetail.getGeneralType(), reportDetail.getDetailType(),
+				reportDetail.getJobType(), reportStatus.getYear(),
 				reportStatus.getMonth());
 		if (rt != null) {
 			rt.setValue(reportDetail.getValue());
@@ -129,8 +133,9 @@ public class LaborReportInsert {
 				en = null;
 				break;
 			}
-			ReportDetail rtd = dao.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.DUN,
-					en, reportStatus.getYear(), reportStatus.getMonth());
+			ReportDetail rtd = dao.getReportDetailListWithParameter(
+					reportDetail.getGeneralType(), ReportDetailType.DUN, en,
+					reportStatus.getYear(), reportStatus.getMonth());
 			if (rtd == null) {
 				rtd = new ReportDetail();
 			}
@@ -143,66 +148,99 @@ public class LaborReportInsert {
 			int removed = 0;
 			switch (en) {
 			case PERMANENT:
-				if (dao.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.NEMEGDSEN,
-						JobTypeEnum.PERMANENT, reportStatus.getYear(), reportStatus.getMonth()) != null)
-					added = dao
-							.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.NEMEGDSEN,
-									JobTypeEnum.PERMANENT, reportStatus.getYear(), reportStatus.getMonth())
+				if (dao.getReportDetailListWithParameter(
+						reportDetail.getGeneralType(),
+						ReportDetailType.NEMEGDSEN, JobTypeEnum.PERMANENT,
+						reportStatus.getYear(), reportStatus.getMonth()) != null)
+					added = dao.getReportDetailListWithParameter(
+							reportDetail.getGeneralType(),
+							ReportDetailType.NEMEGDSEN, JobTypeEnum.PERMANENT,
+							reportStatus.getYear(), reportStatus.getMonth())
 							.getValue();
-				if (dao.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.HASAGDSAN,
-						JobTypeEnum.PERMANENT, reportStatus.getYear(), reportStatus.getMonth()) != null)
+				if (dao.getReportDetailListWithParameter(
+						reportDetail.getGeneralType(),
+						ReportDetailType.HASAGDSAN, JobTypeEnum.PERMANENT,
+						reportStatus.getYear(), reportStatus.getMonth()) != null)
+					removed = dao.getReportDetailListWithParameter(
+							reportDetail.getGeneralType(),
+							ReportDetailType.HASAGDSAN, JobTypeEnum.PERMANENT,
+							reportStatus.getYear(), reportStatus.getMonth())
+							.getValue();
+				if (dao.getReportDetailListWithParameter(
+						reportDetail.getGeneralType(), ReportDetailType.DUN,
+						JobTypeEnum.PERMANENT, reportStatus.getYear(),
+						reportStatus.getMonth() - 1) != null)
 					removed = dao
-							.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.HASAGDSAN,
-									JobTypeEnum.PERMANENT, reportStatus.getYear(), reportStatus.getMonth())
-							.getValue();
-				if (dao.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.DUN,
-						JobTypeEnum.PERMANENT, reportStatus.getYear(), reportStatus.getMonth() - 1) != null)
-					removed = dao
-							.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.DUN,
-									JobTypeEnum.PERMANENT, reportStatus.getYear(), reportStatus.getMonth() - 1)
-							.getValue();
+							.getReportDetailListWithParameter(
+									reportDetail.getGeneralType(),
+									ReportDetailType.DUN,
+									JobTypeEnum.PERMANENT,
+									reportStatus.getYear(),
+									reportStatus.getMonth() - 1).getValue();
 				rtd.setValue(pre + added - removed);
 				break;
 			case QUARTERLY:
-				if (dao.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.NEMEGDSEN,
-						JobTypeEnum.QUARTERLY, reportStatus.getYear(), reportStatus.getMonth()) != null)
-					added = dao
-							.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.NEMEGDSEN,
-									JobTypeEnum.QUARTERLY, reportStatus.getYear(), reportStatus.getMonth())
+				if (dao.getReportDetailListWithParameter(
+						reportDetail.getGeneralType(),
+						ReportDetailType.NEMEGDSEN, JobTypeEnum.QUARTERLY,
+						reportStatus.getYear(), reportStatus.getMonth()) != null)
+					added = dao.getReportDetailListWithParameter(
+							reportDetail.getGeneralType(),
+							ReportDetailType.NEMEGDSEN, JobTypeEnum.QUARTERLY,
+							reportStatus.getYear(), reportStatus.getMonth())
 							.getValue();
-				if (dao.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.HASAGDSAN,
-						JobTypeEnum.QUARTERLY, reportStatus.getYear(), reportStatus.getMonth()) != null)
+				if (dao.getReportDetailListWithParameter(
+						reportDetail.getGeneralType(),
+						ReportDetailType.HASAGDSAN, JobTypeEnum.QUARTERLY,
+						reportStatus.getYear(), reportStatus.getMonth()) != null)
+					removed = dao.getReportDetailListWithParameter(
+							reportDetail.getGeneralType(),
+							ReportDetailType.HASAGDSAN, JobTypeEnum.QUARTERLY,
+							reportStatus.getYear(), reportStatus.getMonth())
+							.getValue();
+				if (dao.getReportDetailListWithParameter(
+						reportDetail.getGeneralType(), ReportDetailType.DUN,
+						JobTypeEnum.QUARTERLY, reportStatus.getYear(),
+						reportStatus.getMonth() - 1) != null)
 					removed = dao
-							.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.HASAGDSAN,
-									JobTypeEnum.QUARTERLY, reportStatus.getYear(), reportStatus.getMonth())
-							.getValue();
-				if (dao.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.DUN,
-						JobTypeEnum.QUARTERLY, reportStatus.getYear(), reportStatus.getMonth() - 1) != null)
-					removed = dao
-							.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.DUN,
-									JobTypeEnum.QUARTERLY, reportStatus.getYear(), reportStatus.getMonth() - 1)
-							.getValue();
+							.getReportDetailListWithParameter(
+									reportDetail.getGeneralType(),
+									ReportDetailType.DUN,
+									JobTypeEnum.QUARTERLY,
+									reportStatus.getYear(),
+									reportStatus.getMonth() - 1).getValue();
 				rtd.setValue(pre + added - removed);
 				break;
 			case TEMPORARAY:
-				if (dao.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.NEMEGDSEN,
-						JobTypeEnum.TEMPORARAY, reportStatus.getYear(), reportStatus.getMonth()) != null)
-					added = dao
-							.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.NEMEGDSEN,
-									JobTypeEnum.TEMPORARAY, reportStatus.getYear(), reportStatus.getMonth())
+				if (dao.getReportDetailListWithParameter(
+						reportDetail.getGeneralType(),
+						ReportDetailType.NEMEGDSEN, JobTypeEnum.TEMPORARAY,
+						reportStatus.getYear(), reportStatus.getMonth()) != null)
+					added = dao.getReportDetailListWithParameter(
+							reportDetail.getGeneralType(),
+							ReportDetailType.NEMEGDSEN, JobTypeEnum.TEMPORARAY,
+							reportStatus.getYear(), reportStatus.getMonth())
 							.getValue();
-				if (dao.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.HASAGDSAN,
-						JobTypeEnum.TEMPORARAY, reportStatus.getYear(), reportStatus.getMonth()) != null)
+				if (dao.getReportDetailListWithParameter(
+						reportDetail.getGeneralType(),
+						ReportDetailType.HASAGDSAN, JobTypeEnum.TEMPORARAY,
+						reportStatus.getYear(), reportStatus.getMonth()) != null)
+					removed = dao.getReportDetailListWithParameter(
+							reportDetail.getGeneralType(),
+							ReportDetailType.HASAGDSAN, JobTypeEnum.TEMPORARAY,
+							reportStatus.getYear(), reportStatus.getMonth())
+							.getValue();
+				if (dao.getReportDetailListWithParameter(
+						reportDetail.getGeneralType(), ReportDetailType.DUN,
+						JobTypeEnum.TEMPORARAY, reportStatus.getYear(),
+						reportStatus.getMonth() - 1) != null)
 					removed = dao
-							.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.HASAGDSAN,
-									JobTypeEnum.TEMPORARAY, reportStatus.getYear(), reportStatus.getMonth())
-							.getValue();
-				if (dao.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.DUN,
-						JobTypeEnum.TEMPORARAY, reportStatus.getYear(), reportStatus.getMonth() - 1) != null)
-					removed = dao
-							.getReportDetailListWithParameter(reportDetail.getGeneralType(), ReportDetailType.DUN,
-									JobTypeEnum.TEMPORARAY, reportStatus.getYear(), reportStatus.getMonth() - 1)
-							.getValue();
+							.getReportDetailListWithParameter(
+									reportDetail.getGeneralType(),
+									ReportDetailType.DUN,
+									JobTypeEnum.TEMPORARAY,
+									reportStatus.getYear(),
+									reportStatus.getMonth() - 1).getValue();
 				rtd.setValue(pre + added - removed);
 				break;
 			default:
@@ -216,7 +254,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getAddedPer() {
-		ReportDetail rt = dao.getReportDetailListWithParameter(row, ReportDetailType.NEMEGDSEN, JobTypeEnum.PERMANENT,
+		ReportDetail rt = dao.getReportDetailListWithParameter(row,
+				ReportDetailType.NEMEGDSEN, JobTypeEnum.PERMANENT,
 				reportStatus.getYear(), reportStatus.getMonth());
 		if (rt != null && rt.getValue() != null)
 			return rt.getValue();
@@ -225,7 +264,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getAddedQua() {
-		ReportDetail rt = dao.getReportDetailListWithParameter(row, ReportDetailType.NEMEGDSEN, JobTypeEnum.QUARTERLY,
+		ReportDetail rt = dao.getReportDetailListWithParameter(row,
+				ReportDetailType.NEMEGDSEN, JobTypeEnum.QUARTERLY,
 				reportStatus.getYear(), reportStatus.getMonth());
 		if (rt != null && rt.getValue() != null)
 			return rt.getValue();
@@ -234,7 +274,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getAddedTemp() {
-		ReportDetail rt = dao.getReportDetailListWithParameter(row, ReportDetailType.NEMEGDSEN, JobTypeEnum.TEMPORARAY,
+		ReportDetail rt = dao.getReportDetailListWithParameter(row,
+				ReportDetailType.NEMEGDSEN, JobTypeEnum.TEMPORARAY,
 				reportStatus.getYear(), reportStatus.getMonth());
 		if (rt != null && rt.getValue() != null)
 			return rt.getValue();
@@ -243,8 +284,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getAddedTotal() {
-		Long rt = dao.getReportDetailAddRemove(row, ReportDetailType.NEMEGDSEN, reportStatus.getYear(),
-				reportStatus.getMonth());
+		Long rt = dao.getReportDetailAddRemove(row, ReportDetailType.NEMEGDSEN,
+				reportStatus.getYear(), reportStatus.getMonth());
 		if (rt != null)
 			return rt.intValue();
 		else
@@ -252,7 +293,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getRemovedPer() {
-		ReportDetail rt = dao.getReportDetailListWithParameter(row, ReportDetailType.HASAGDSAN, JobTypeEnum.PERMANENT,
+		ReportDetail rt = dao.getReportDetailListWithParameter(row,
+				ReportDetailType.HASAGDSAN, JobTypeEnum.PERMANENT,
 				reportStatus.getYear(), reportStatus.getMonth());
 		if (rt != null && rt.getValue() != null)
 			return rt.getValue();
@@ -261,7 +303,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getRemovedQua() {
-		ReportDetail rt = dao.getReportDetailListWithParameter(row, ReportDetailType.HASAGDSAN, JobTypeEnum.QUARTERLY,
+		ReportDetail rt = dao.getReportDetailListWithParameter(row,
+				ReportDetailType.HASAGDSAN, JobTypeEnum.QUARTERLY,
 				reportStatus.getYear(), reportStatus.getMonth());
 		if (rt != null && rt.getValue() != null)
 			return rt.getValue();
@@ -270,7 +313,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getRemovedTemp() {
-		ReportDetail rt = dao.getReportDetailListWithParameter(row, ReportDetailType.HASAGDSAN, JobTypeEnum.TEMPORARAY,
+		ReportDetail rt = dao.getReportDetailListWithParameter(row,
+				ReportDetailType.HASAGDSAN, JobTypeEnum.TEMPORARAY,
 				reportStatus.getYear(), reportStatus.getMonth());
 		if (rt != null && rt.getValue() != null)
 			return rt.getValue();
@@ -279,8 +323,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getRemovedTotal() {
-		Long rt = dao.getReportDetailAddRemove(row, ReportDetailType.HASAGDSAN, reportStatus.getYear(),
-				reportStatus.getMonth());
+		Long rt = dao.getReportDetailAddRemove(row, ReportDetailType.HASAGDSAN,
+				reportStatus.getYear(), reportStatus.getMonth());
 		if (rt != null)
 			return rt.intValue();
 		else
@@ -288,7 +332,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getPrePer() {
-		ReportDetail rt = dao.getReportDetailListWithParameter(row, ReportDetailType.DUN, JobTypeEnum.PERMANENT,
+		ReportDetail rt = dao.getReportDetailListWithParameter(row,
+				ReportDetailType.DUN, JobTypeEnum.PERMANENT,
 				reportStatus.getYear(), reportStatus.getMonth() - 1);
 		if (rt != null && rt.getValue() != null)
 			return rt.getValue();
@@ -297,7 +342,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getPreQua() {
-		ReportDetail rt = dao.getReportDetailListWithParameter(row, ReportDetailType.DUN, JobTypeEnum.QUARTERLY,
+		ReportDetail rt = dao.getReportDetailListWithParameter(row,
+				ReportDetailType.DUN, JobTypeEnum.QUARTERLY,
 				reportStatus.getYear(), reportStatus.getMonth() - 1);
 		if (rt != null && rt.getValue() != null)
 			return rt.getValue();
@@ -306,7 +352,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getPreTemp() {
-		ReportDetail rt = dao.getReportDetailListWithParameter(row, ReportDetailType.DUN, JobTypeEnum.TEMPORARAY,
+		ReportDetail rt = dao.getReportDetailListWithParameter(row,
+				ReportDetailType.DUN, JobTypeEnum.TEMPORARAY,
 				reportStatus.getYear(), reportStatus.getMonth() - 1);
 		if (rt != null && rt.getValue() != null)
 			return rt.getValue();
@@ -315,8 +362,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getPreTotal() {
-		Long rt = dao.getReportDetailAddRemove(row, ReportDetailType.DUN, reportStatus.getYear(),
-				reportStatus.getMonth() - 1);
+		Long rt = dao.getReportDetailAddRemove(row, ReportDetailType.DUN,
+				reportStatus.getYear(), reportStatus.getMonth() - 1);
 		if (rt != null)
 			return rt.intValue();
 		else
@@ -324,7 +371,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getPer() {
-		ReportDetail rt = dao.getReportDetailListWithParameter(row, ReportDetailType.DUN, JobTypeEnum.PERMANENT,
+		ReportDetail rt = dao.getReportDetailListWithParameter(row,
+				ReportDetailType.DUN, JobTypeEnum.PERMANENT,
 				reportStatus.getYear(), reportStatus.getMonth());
 		if (rt != null && rt.getValue() != null)
 			return rt.getValue();
@@ -333,7 +381,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getQua() {
-		ReportDetail rt = dao.getReportDetailListWithParameter(row, ReportDetailType.DUN, JobTypeEnum.QUARTERLY,
+		ReportDetail rt = dao.getReportDetailListWithParameter(row,
+				ReportDetailType.DUN, JobTypeEnum.QUARTERLY,
 				reportStatus.getYear(), reportStatus.getMonth());
 		if (rt != null && rt.getValue() != null)
 			return rt.getValue();
@@ -342,7 +391,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getTemp() {
-		ReportDetail rt = dao.getReportDetailListWithParameter(row, ReportDetailType.DUN, JobTypeEnum.TEMPORARAY,
+		ReportDetail rt = dao.getReportDetailListWithParameter(row,
+				ReportDetailType.DUN, JobTypeEnum.TEMPORARAY,
 				reportStatus.getYear(), reportStatus.getMonth());
 		if (rt != null && rt.getValue() != null)
 			return rt.getValue();
@@ -351,8 +401,8 @@ public class LaborReportInsert {
 	}
 
 	public Integer getTotal() {
-		Long rt = dao.getReportDetailAddRemove(row, ReportDetailType.DUN, reportStatus.getYear(),
-				reportStatus.getMonth());
+		Long rt = dao.getReportDetailAddRemove(row, ReportDetailType.DUN,
+				reportStatus.getYear(), reportStatus.getMonth());
 		if (rt != null)
 			return rt.intValue();
 		else

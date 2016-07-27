@@ -147,8 +147,6 @@ public class LavlahSumDuureg {
 		return em;
 	}
 
-
-	
 	@CommitAfter
 	public Object onActionFromEnable(SumDuureg type) {
 		if (type.getIsActive() == true) {

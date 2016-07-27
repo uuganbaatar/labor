@@ -1,6 +1,5 @@
 package mn.odi.labor.dao;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -36,8 +35,6 @@ public interface SccDAO {
 	public void saveObject(BaseObject obj);
 
 	public void updateObject(BaseObject obj);
-
-	// public void saveOrUpdateObject(BaseObject obj);
 
 	public void saveObject(Object obj);
 
@@ -170,8 +167,6 @@ public interface SccDAO {
 
 	public List<Organization> getOrgListSearch(String name, Date d1, Date d2,
 			Boolean b);
-
-	public List<BigDecimal> getInfoBar();
 
 	public GeneralType getGeneralTypeByName(String name);
 
@@ -319,5 +314,11 @@ public interface SccDAO {
 
 	public List<Organization> getOrgListSearchWithSum(String name, Date d1,
 			Date d2, Boolean b, SumDuureg sum);
+	
+	public List<String> getInfoDate();
+	
+	public List<String> getInfoTotal();
+	
+	public List<String> getInfoNew();
 
 }

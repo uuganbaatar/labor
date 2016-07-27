@@ -75,7 +75,8 @@ public class UserCreate {
 	}
 
 	public SelectModel getOrgSelectModel() {
-		CommonSM<Organization> sm = new CommonSM<Organization>(Organization.class, dao.getOrgList(), "getName");
+		CommonSM<Organization> sm = new CommonSM<Organization>(
+				Organization.class, dao.getOrgList(), "getName");
 		return sm;
 	}
 

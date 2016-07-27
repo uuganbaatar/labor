@@ -13,7 +13,7 @@
  * ------------------------------------------------------------------------------
  * 
  * ALL RIGHTS RESERVED COPYRIGHT (C) 2014 Od Innovation CO.,LTD SOFTWARE DIVSION
-*/
+ */
 package mn.odi.labor.util;
 
 import java.util.ArrayList;
@@ -89,7 +89,6 @@ public class TableRow {
 
 		return cols.add(tCol);
 	}
-
 
 	public TableColumn getTableColumn(String name) {
 		TableColumn retCol = null;

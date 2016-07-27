@@ -23,7 +23,6 @@ public class Charts {
 
 	void setupRender() {
 
-		// jsSupport.require("chart").with(chartType, getData());
 		jsSupport.addScript("chart", chartType, getData());
 
 	}

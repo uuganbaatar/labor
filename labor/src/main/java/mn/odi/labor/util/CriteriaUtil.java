@@ -13,7 +13,7 @@
  * ------------------------------------------------------------------------------
  * 
  * ALL RIGHTS RESERVED COPYRIGHT (C) 2014 Od Innovation CO.,LTD SOFTWARE DIVSION
-*/
+ */
 package mn.odi.labor.util;
 
 import java.util.List;
@@ -35,7 +35,7 @@ public class CriteriaUtil {
 	private Map<String, String> alias;
 
 	private List<Order> orders;
-	
+
 	private String[] joinColumns;
 
 	private String[] properties;
@@ -43,13 +43,13 @@ public class CriteriaUtil {
 	private int pageStart;
 
 	private int rowsPerPage;
-	
+
 	/*
 	 * CONSTRUCTOR
 	 */
 
 	public CriteriaUtil() {
-		
+
 	}
 
 	/*

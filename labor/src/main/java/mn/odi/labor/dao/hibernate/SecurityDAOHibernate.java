@@ -43,6 +43,8 @@ public class SecurityDAOHibernate extends HibernateDaoSupport implements UserDet
 				login, user.getPassword(), user.isEnabled(), user.isAccountNonExpired(), user.isCredentialsNonExpired(),
 				user.isAccountNonLocked(), user.getAuthorities());
 
+		//TODO Ene heseg AccessLog burtgene.
+		
 		logger.info("user with login: " + login + " authenticated");
 		logger.info(acegiUser.getAuthorities());
 		logger.info(acegiUser.isCredentialsNonExpired());

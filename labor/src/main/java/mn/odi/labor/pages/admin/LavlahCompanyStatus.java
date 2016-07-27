@@ -96,10 +96,12 @@ public class LavlahCompanyStatus {
 	@CommitAfter
 	public void onSuccessFromSave() {
 		if (LavlahGeneralType.containsWhiteSpace(name)) {
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("hoosonzai"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("hoosonzai"));
 		} else {
 			if (dao.getStatusByName(name) != null) {
-				alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("burtgeltei"));
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
 			} else {
 				CompanyStatus obj = new CompanyStatus();
 				obj.setName(name);
@@ -118,7 +120,8 @@ public class LavlahCompanyStatus {
 			dao.deleteObject(obj);
 		} catch (Exception e) {
 			System.out.println("[ERROR DELETE:]" + e);
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("deleteerror"));
 		}
 
 		return LavlahCompanyStatus.class;

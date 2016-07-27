@@ -28,7 +28,6 @@ public class CommonSM<T> extends AbstractSelectModel implements Serializable {
 	public CommonSM(Class<T> _clazz, List<T> _list, String titleField) {
 		this.list = _list;
 		this.clazz = _clazz;
-
 		try {
 			this.method = clazz.getMethod(titleField.trim());
 			this.setModel();
@@ -36,8 +35,10 @@ public class CommonSM<T> extends AbstractSelectModel implements Serializable {
 			System.err.println(nsme.getMessage());
 		}
 
-		if (method == null || method.getReturnType() == null
-				|| !method.getReturnType().getCanonicalName().equals("java.lang.String")) {
+		if (method == null
+				|| method.getReturnType() == null
+				|| !method.getReturnType().getCanonicalName()
+						.equals("java.lang.String")) {
 			throw new IllegalArgumentException("Wrong titleField argument");
 		}
 	}
@@ -46,7 +47,8 @@ public class CommonSM<T> extends AbstractSelectModel implements Serializable {
 		if (list != null && this.list.size() > 0) {
 			for (T type : list) {
 				try {
-					options.add(new OptionModelImpl((String) method.invoke(type), type));
+					options.add(new OptionModelImpl((String) method
+							.invoke(type), type));
 				} catch (IllegalAccessException e) {
 					log.error("context", e);
 				} catch (IllegalArgumentException e) {

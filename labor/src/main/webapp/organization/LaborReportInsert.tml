@@ -133,7 +133,6 @@
 						<button class="btn btn-primary waves-effect waves-light"
 							style="float:right">${message:send}</button>
 					</t:ActionLink>
-					<!-- </button> -->
 				</div>
 			</div>
 		</div>

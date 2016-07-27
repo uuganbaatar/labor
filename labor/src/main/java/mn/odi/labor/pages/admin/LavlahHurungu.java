@@ -109,10 +109,12 @@ public class LavlahHurungu {
 	@CommitAfter
 	public void onSuccessFromSave() {
 		if (LavlahHurungu.containsWhiteSpace(name)) {
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("hoosonzai"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("hoosonzai"));
 		} else {
 			if (dao.getHurunguByName(name) != null) {
-				alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("burtgeltei"));
+				alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+						message.get("burtgeltei"));
 			} else {
 				AjiliinBairHurungu obj = new AjiliinBairHurungu();
 				obj.setName(name);
@@ -130,7 +132,8 @@ public class LavlahHurungu {
 			dao.deleteObject(obj);
 		} catch (Exception e) {
 			System.out.println("[ERROR DELETE:]" + e);
-			alertManager.alert(Duration.TRANSIENT, Severity.ERROR, message.get("deleteerror"));
+			alertManager.alert(Duration.TRANSIENT, Severity.ERROR,
+					message.get("deleteerror"));
 		}
 
 		return LavlahEmpGarsan.class;
@@ -140,7 +143,6 @@ public class LavlahHurungu {
 		return (grid.getCurrentPage() - 1) * grid.getRowsPerPage() + ++number;
 	}
 
-	
 	@CommitAfter
 	public Object onActionFromEnable(AjiliinBairHurungu type) {
 		if (type.getIsActive() == true) {

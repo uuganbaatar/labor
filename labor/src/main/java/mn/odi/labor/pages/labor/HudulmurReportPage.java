@@ -65,15 +65,16 @@ public class HudulmurReportPage {
 		loginState.setActiveMenu("heltes");
 		loginState.setPageTitle(message.get("heltes"));
 		if (list == null) {
+			list = new ArrayList<AimagNiislelEnum>();
 			if (loginState.getUser().getCurrentrole().equals(RoleEnum.ADMIN))
-				list = new ArrayList<AimagNiislelEnum>(Arrays.asList(AimagNiislelEnum.values()));
-			if (loginState.getUser().getCurrentrole().equals(RoleEnum.LABORUSER)) {
-				list = new ArrayList<AimagNiislelEnum>();
-				if (loginState.getUser().getOrg() != null && loginState.getUser().getOrg().getSumId() != null
-						&& loginState.getUser().getOrg().getSumId().getAimagId() != null)
-					list.add(loginState.getUser().getOrg().getSumId().getAimagId());
+				list.addAll(Arrays.asList(AimagNiislelEnum.values()));
+			if (loginState.getUser().getCurrentrole()
+					.equals(RoleEnum.LABORUSER)
+					&& loginState.getUser().getOrg() != null
+					&& loginState.getUser().getOrg().getSumId() != null
+					&& loginState.getUser().getOrg().getSumId().getAimagId() != null) {
+				list.add(loginState.getUser().getOrg().getSumId().getAimagId());
 			}
-
 		}
 
 		if (headerEz == null)
@@ -87,19 +88,22 @@ public class HudulmurReportPage {
 			month = Calendar.getInstance().get(Calendar.MONTH) + 1;
 		}
 
-		System.out.println("FIRST DAY:" + CalendarUtil.getFirstDate(year, month));
+		System.out.println("FIRST DAY:"
+				+ CalendarUtil.getFirstDate(year, month));
 		System.out.println("LAST DAY:" + CalendarUtil.getLastDate(year, month));
 	}
 
 	public int getAllJobs() {
 		int i = 0;
-		i = dao.getAllJobsSum(row, CalendarUtil.getFirstDate(year, month), CalendarUtil.getLastDate(year, month));
+		i = dao.getAllJobsSum(row, CalendarUtil.getFirstDate(year, month),
+				CalendarUtil.getLastDate(year, month));
 		return i;
 	}
 
 	public Integer getEzval() {
 		int i = 0;
-		i = dao.getEZJobsSum(row, valueEZ, CalendarUtil.getFirstDate(year, month),
+		i = dao.getEZJobsSum(row, valueEZ,
+				CalendarUtil.getFirstDate(year, month),
 				CalendarUtil.getLastDate(year, month));
 		return i;
 	}
@@ -121,7 +125,6 @@ public class HudulmurReportPage {
 		List<Integer> formYears = new ArrayList<Integer>();
 		for (int i = d.getYear() + 1900; i >= 2015; i--) {
 			formYears.add(i);
-
 		}
 		if (year == null) {
 			year = formYears.get(0);
@@ -137,7 +140,5 @@ public class HudulmurReportPage {
 			s = message.get(row.name());
 
 		return s;
-
 	}
-
 }

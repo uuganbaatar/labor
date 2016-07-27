@@ -109,7 +109,8 @@
 									<table t:type="grid" t:id="grid"
 										class="table table-striped table-bordered dataTable no-footer table-actions-bar"
 										t:source="orgList" t:row="orgRow"
-										t:exclude="uuid,code,fax,web,mobilePhone,createddate,orgType" t:add="number, report"
+										t:exclude="uuid,code,fax,web,mobilePhone,createddate,orgType"
+										t:add="number, report"
 										t:reorder="number, name, regNum, phone, createddateformated, modifieddateformated">
 										<p:numberCell>${number}</p:numberCell>
 										<p:ReportCell>

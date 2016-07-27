@@ -34,10 +34,6 @@ public class UserProfile {
 	@SessionState
 	private LoginState loginState;
 
-	/*
-	 * INJECTS
-	 */
-
 	@Inject
 	private SccDAO sccDAO;
 
@@ -121,6 +117,11 @@ public class UserProfile {
 		return name;
 	}
 
+	/**
+	 * nuuts ug solih
+	 * 
+	 * @return
+	 */
 	@CommitAfter
 	Object onSuccessFromChangePass() {
 
